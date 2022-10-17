@@ -8,4 +8,9 @@ public class Gaurdian extends Person{
         PriorityBehavior behavior = new PriorityBehavior(username,password,phone,email);
         this.setAuthBehavior(behavior);
     }
+
+    public boolean pay(double amount){
+        // to do
+        return false;
+    }
 }

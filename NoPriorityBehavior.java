@@ -9,5 +9,10 @@ public class NoPriorityBehavior implements AuthBehavior{
     public boolean logout() {
         return false;
     }
+
+    public boolean canLogin() {
+        // cannot login
+        return false;
+    }
      
 }

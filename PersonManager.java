@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class PersonManager {
     private ArrayList<CampAdmin> admins = new ArrayList<CampAdmin>(); 
@@ -10,4 +11,96 @@ public class PersonManager {
         this.gaurdians = gaurdians;
         this.dependents = dependents;
     }
+
+    public String getFullName(Person p){
+        return p.getFirstName() + " " + p.getLastName();
+    }
+
+    public String getFirstName(Person p){
+        return p.getFirstName();
+    }
+
+    public String getLastName(Person p){
+        return p.getLastName();
+    }
+
+    public String getAddress(Person p){
+        return p.getAddress();
+    }
+
+    public UUID getId(Person p){
+        return p.getId();
+    }
+
+    public boolean getHasLoginBehavior(Person p){
+        return p.getHasLoginBehavior();    
+    }
+
+
+    public void seeCoordinators(){
+        // to do
+    }
+
+    public void seeAdmins(){
+        // todo
+    }
+
+    public boolean registerGuardian(){
+        // to do
+        return false;
+    }
+    public boolean registerDependent(){
+        // to do
+        return false;
+    }
+    public boolean removeDependent(String firstName, String lastName){
+        // to do
+        return false;
+    }
+
+    public boolean removeGuardian(String firstName, String lastName){
+        // to do
+        return false;
+    }
+
+    public boolean removeCamper(String firstName, String lastName){
+        // to do
+        return false;
+    }
+    public boolean payForCamper(String camperFirstName, String camperLastName){
+        // to do
+        return false;
+    }
+    public boolean refundGaurdian(String camperFirstName, String camperLastName){
+        // to do
+        return false;
+    }
+    public boolean signUpDependentForCabin(String guardianUsername, String guardianPassword){
+        // to do
+        return false;
+    }
+    public void viewDependents(String guardianUsername, String guardianPassword){
+        // to do
+    }
+    public boolean addDependent(String guardianUsername, String guardianPassword){
+        // to do
+        return false;
+    }
+    public boolean getDependentCabin(String firstName, String lastName){
+        // to do
+        return false;
+    }
+    public boolean showDependentContacts(String firstName, String lastName){
+        // to do
+        return false;
+    }
+    public boolean hasPaid(String firstName, String lastName){
+        // to do
+        return false;
+    }
+    public boolean updateLoginInfo(String curUsername, String curPassword){
+        // to do
+        return false;
+    }
+    
 }

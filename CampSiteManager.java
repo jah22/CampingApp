@@ -6,7 +6,7 @@ public class CampSiteManager{
   private String name;
   private String address;
   private float pricePerCamperPerDay;
-  private ArrayList<String> frequentlyAskedQuestions;
+  private ArrayList<String> frequentlyAskedQuestions = new ArrayList<String>();
 
   private static CampSiteManager campSiteManager;
   private String authcode;

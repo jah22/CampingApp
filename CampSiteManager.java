@@ -21,7 +21,7 @@ public class CampSiteManager{
     //To-Do
     return name;
   }
-  public String getddress() {
+  public String getAddress() {
     //To-Do
     return address;
   }

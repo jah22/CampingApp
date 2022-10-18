@@ -101,7 +101,15 @@ public class PersonManager {
         // to do
         return false;
     }
-    public boolean hasPaid(String firstName, String lastName){
+    public boolean getHasBeenPaidFor(String firstName, String lastName){
+        /*
+         * Assumes that all dependents have unique names
+         */
+        for(Dependent d:this.dependents){
+            if(d.checkFullName(firstName, lastName)){
+                return d.getHasBeenPaidFor();
+            }
+        }
         return false;
     }
     public boolean updateLoginInfo(String curUsername, String curPassword){

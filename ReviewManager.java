@@ -7,6 +7,9 @@ public class ReviewManager {
     public ReviewManager(ArrayList<Review> reviews){
         this.reviews = reviews;
     }
+    public ReviewManager(){
+        // param ctor
+    }
 
     public void seeAvgReview(){
         if(this.avgReview == 0){

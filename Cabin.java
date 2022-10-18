@@ -1,7 +1,8 @@
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Cabin {
-    private String cabinId; 
+    private UUID cabinId; 
     private ArrayList<Dependent> coordinators = new ArrayList<Dependent>();
     private ArrayList<Dependent> campers = new ArrayList<Dependent>();
     private ArrayList<Schedule>  schedules= new ArrayList<Schedule>();
@@ -9,7 +10,8 @@ public class Cabin {
     private int coordinatorCapacity;
 
     public String getCabinId(){
-        return this.cabinId;
+
+        return this.cabinId.toString();
     }
 
     public ArrayList<Dependent> getCoordinators(){
@@ -22,11 +24,19 @@ public class Cabin {
     public ArrayList<Schedule> getSchedules(){
         return this.schedules;
     }
-    public Cabin(String cabinId){
+    public Cabin(UUID cabinId){
         this.cabinId = cabinId;
     }
-    public Cabin(String cabinId,ArrayList<Dependent>coordinators, ArrayList<Dependent> campers,ArrayList<Schedule> schedules, int camperCapacity, int coordinatorCapacity){
+    public Cabin(UUID cabinId,ArrayList<Dependent>coordinators, ArrayList<Dependent> campers,ArrayList<Schedule> schedules, int camperCapacity, int coordinatorCapacity){
         this.cabinId = cabinId;
+        this.coordinators = coordinators;
+        this.campers = campers;
+        this.schedules = schedules;
+        this.camperCapacity = camperCapacity;
+        this.coordinatorCapacity = coordinatorCapacity;
+    }
+    public Cabin(ArrayList<Dependent>coordinators, ArrayList<Dependent> campers,ArrayList<Schedule> schedules, int camperCapacity, int coordinatorCapacity){
+        this.cabinId = UUID.randomUUID();
         this.coordinators = coordinators;
         this.campers = campers;
         this.schedules = schedules;

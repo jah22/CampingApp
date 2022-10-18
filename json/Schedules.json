@@ -1,0 +1,23 @@
+[
+    {
+        "id":2,
+        "schedules":{
+            "Monday":[{
+                "8":"WAKE_UP",
+                "9":"BREAKFAST",
+                "10":"WALK",
+                "11":"WALK",
+                "12":"LUNCH",
+                "13":"ART_CRAFTS",
+                "14":"ART_CRAFTS",
+                "15":"TUBING",
+                "16":"TUBING",
+                "17":"ROCK_CLIMBING",
+                "18":"ROCK_CLIMBONG",
+                "19":"WALK",
+                "20":"ARCHERY",
+                "21":"ARCHERY",
+                "22":"SLEEp"
+                }]}
+    }
+]

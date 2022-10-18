@@ -5,8 +5,13 @@ public class Cabin {
     private ArrayList<Dependent> coordinators = new ArrayList<Dependent>();
     private ArrayList<Dependent> campers = new ArrayList<Dependent>();
     private ArrayList<Schedule>  schedules= new ArrayList<Schedule>();
-    private int camperCapacity;
-    private int coordinatorCapacity;
+    // portia says that all camps have up to 8 campers
+    private int camperCapacity = 8;
+    // portia says that all camps have up to 1 coordinator
+    private int coordinatorCapacity = 1;
+    // portia says we need an age range
+    private int lowerAgeBound;
+    private int upperAgeBound;
 
     public String getCabinId(){
         return this.cabinId;
@@ -52,6 +57,7 @@ public class Cabin {
         out += division +"\n";
         out += "Campers: " + this.campers.size() +"/"+ this.camperCapacity+ "\n";
         out += division +"\n";
+        out += "Age range: " + this.lowerAgeBound + "-" + this.upperAgeBound +"\n";
 
         return out;
     }
@@ -75,6 +81,23 @@ public class Cabin {
     }
     public int getCoordinatorCapacity(){
         return this.coordinatorCapacity;
+    }
+
+    public boolean addCamperToCabin(Dependent camper){
+        if(
+            (this.lowerAgeBound <= camper.getAgeInt())
+            &&
+            (camper.getAgeInt() <= this.upperAgeBound)
+            &&
+            this.campers.size() < this.camperCapacity
+            ){
+            // call add function
+            this.campers.add(camper);
+            return true;
+        }
+        // else the camper either is not in age range or there are too many campers
+        return false;
+
     }
 
 }

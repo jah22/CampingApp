@@ -1,6 +1,10 @@
 import java.util.UUID;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 
-public abstract class Person {
+public class Person {
     protected String firstName;    
     protected String lastName;
     // to do: change string to date 
@@ -16,6 +20,13 @@ public abstract class Person {
         this.birthDate = birthDate;
         this.address = address;
         this.id = id;
+    }
+    public Person(String firstName, String lastName, String birthDate, String address, String id){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.address = address;
+        this.id = UUID.fromString(id);
     }
 
     public void setAuthBehavior(AuthBehavior behavior){
@@ -42,6 +53,29 @@ public abstract class Person {
         return this.birthDate;
     }
 
+    public int getAgeInt(){
+        /*
+         * IMPORTANT NOTE:
+         * LocalDate assumes dates of form:
+         * yyyy-mm-dd
+         * For example, October 18, 2022 is
+         * 2022-10-18
+         */
+        // returns an integer based on the age of the user
+        int yearsAlive = -1;
+
+        LocalDate now = LocalDate.now();
+        
+        try{
+            LocalDate birthLocalDate = LocalDate.parse(this.birthDate);
+            yearsAlive = (int) ChronoUnit.YEARS.between(birthLocalDate,now);
+        }
+        catch(DateTimeParseException e){
+            e.printStackTrace();
+        }
+        return yearsAlive;
+    }
+
     public UUID getId(){
         return this.id;
     }
@@ -52,5 +86,10 @@ public abstract class Person {
 
     public boolean checkFullName(String firstName, String lastName){
         return this.firstName == firstName && this.lastName == lastName;
+    }
+
+    public static void main(String args[]){
+        Person p = new Person("Jim","John","2001-11-11","asdf","f3c0c496-9031-45de-a9d8-5e407bfc7403");
+        System.out.println(p.getAgeInt());
     }
 }

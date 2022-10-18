@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class CampSiteManager{
   private String name;
   private String address;
-  private float pricePerCamperPerDay;
+  // portia said 7 dollars is fine 
+  private float pricePerCamperPerDay = 7.0F;
   private ArrayList<String> frequentlyAskedQuestions = new ArrayList<String>();
 
   private static CampSiteManager campSiteManager;

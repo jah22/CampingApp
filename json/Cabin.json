@@ -1,0 +1,9 @@
+[
+    {
+        "id":2,
+        "coordinators":[{"id":24},{"id":25}],
+        "campers":[{"id":7},{"id":8}],
+        "camperCapacity":8,
+        "coordinatorCapacity":1
+    }
+]

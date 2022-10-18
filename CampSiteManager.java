@@ -22,7 +22,7 @@ public class CampSiteManager{
      * init the managers
      */
   }
-  private static CampSiteManager getInstance() {
+  public static CampSiteManager getInstance() {
     //To-Do
     if(campSiteManager == null){
       return new CampSiteManager();
@@ -38,8 +38,7 @@ public class CampSiteManager{
     return address;
   }
   public void seeCoordinators() {
-    //To-Do
-
+    this.personManager.seeCoordinators();
   }
   public String toString() {
       String out = "Cabin: " + this.name;
@@ -164,9 +163,8 @@ public class CampSiteManager{
     //To-Do
     return false;
   }
-  public boolean hasPaid(Dependent camper) {
-    //To-Do
-    return false;
+  public boolean hasPaid(String firstName, String lastName) {
+    return personManager.getHasBeenPaidFor(firstName,lastName);
   }
   public boolean writeReview(Gaurdian author, String text, int rating) {
     //To-Do

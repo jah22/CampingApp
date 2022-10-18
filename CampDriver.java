@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class CampDriver {
     public void runCampDriver(){
+        // read the files (to do: this should be in CampSiteManager)
+
         Scanner userInput = new Scanner(System.in);
 
         // running the program

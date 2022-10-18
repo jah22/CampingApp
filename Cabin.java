@@ -22,6 +22,15 @@ public class Cabin {
     public ArrayList<Schedule> getSchedules(){
         return this.schedules;
     }
+    public void seeActivities(){
+        // to do:
+        System.out.println("SEE ACTIVITIES");
+    }
+    public void seeCoordinators(){
+        for(Dependent c : this.coordinators){
+            System.out.println(c);
+        }
+    }
     public Cabin(String cabinId){
         this.cabinId = cabinId;
     }
@@ -35,11 +44,19 @@ public class Cabin {
     }
     public String toString(){
         // to do
-        return "";
+        String division = "------------";
+        String out = division +"\n";
+        out += "Cabin: " + this.cabinId + "\n";
+        out += division +"\n";
+        out += "Coordinators: " + this.coordinators.size() +"/"+ this.coordinatorCapacity + "\n";
+        out += division +"\n";
+        out += "Campers: " + this.campers.size() +"/"+ this.camperCapacity+ "\n";
+        out += division +"\n";
+
+        return out;
     }
-    public boolean addSchedule(Schedule schedule){
-        // to do
-        return false;
+    public void addSchedule(Schedule schedule){
+        this.schedules.add(schedule);
     }
     public int getTotalCampers(){
         return this.campers.size();

@@ -8,20 +8,32 @@ public class CampSiteManager{
   private float pricePerCamperPerDay;
   private ArrayList<String> frequentlyAskedQuestions;
 
-  private static Campsite campsite;
+  private static CampSiteManager campSiteManager;
   private String authcode;
 
-  private Campsite() {
-    //To-Do
+  // managers
+  PersonManager personManager;
+  ReviewManager reviewManager;
+  CabinManager cabinManager;
+
+  private CampSiteManager() {
+    /*
+     * TODO:
+     * init the managers
+     */
   }
-  private static Campsite getInstance() {
+  private static CampSiteManager getInstance() {
     //To-Do
+    if(campSiteManager == null){
+      return new CampSiteManager();
+    }
+    return campSiteManager;
   }
   public String getName() {
     //To-Do
     return name;
   }
-  public String getddress() {
+  public String getAddress() {
     //To-Do
     return address;
   }
@@ -30,28 +42,39 @@ public class CampSiteManager{
 
   }
   public String toString() {
-    //To-Do
-    return null;
+      String out = "Cabin: " + this.name;
+
+      // to do:
+      // be more fancy 
+
+      return out;
   }
   public void seeAdmins() {
-//To-Do
+    this.personManager.seeAdmins();; 
   }
   public void seeCabins() {
-//To-Do
+    this.cabinManager.seeCabins();
   }
   public void seeAllActivities() {
-//To-Do
+    /*
+     * TO DO:
+     * Loop thru all activities
+     */
   }
-  public boolean seeAllCabinActivities(String cabinId) {
-    //To-Do
-    return false;
+  public void seeAllCabinActivities(String cabinId) {
+    if(!this.cabinManager.seeCabinActivities(cabinId)){
+      System.out.println("A cabin with that ID cannot be found.");
+    }
   }
-  public boolean seeCabinCoordinators(String cabinID) {
-    //To-Do
-    return false;
+  public void seeCabinCoordinators(String cabinID) {
+    if(!this.cabinManager.seeCabinCoordinators(cabinID)){
+      System.out.println("A cabin with that ID cannot be found.");
+    }
   }
   public boolean addCamperToCabin(Dependent camper) {
-    //To-Do
+    /*
+     * TODO this function
+     */
     return false;
   }
   public boolean removeCamperFromCabin(Dependent camper) {

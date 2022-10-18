@@ -49,4 +49,8 @@ public abstract class Person {
     public String toString(){
         return this.firstName + " " + this.lastName;
     }
+
+    public boolean checkFullName(String firstName, String lastName){
+        return this.firstName == firstName && this.lastName == lastName;
+    }
 }

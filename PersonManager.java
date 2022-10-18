@@ -39,10 +39,17 @@ public class PersonManager {
 
     public void seeCoordinators(){
         // to do
+        for(Dependent d:dependents){
+            if(d.getIsCoordinator()){
+                System.out.println(d);
+            }
+        }
     }
 
     public void seeAdmins(){
-        // todo
+        for(CampAdmin c: admins){
+            System.out.println(c);
+        }
     }
 
     public boolean registerGuardian(){
@@ -95,7 +102,6 @@ public class PersonManager {
         return false;
     }
     public boolean hasPaid(String firstName, String lastName){
-        // to do
         return false;
     }
     public boolean updateLoginInfo(String curUsername, String curPassword){

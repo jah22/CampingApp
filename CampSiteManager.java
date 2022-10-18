@@ -6,22 +6,26 @@ public class CampSiteManager{
   private String name;
   private String address;
   private float pricePerCamperPerDay;
-  private ArrayList<String> frequentlyAskedQuestions;
+  private ArrayList<String> frequentlyAskedQuestions = new ArrayList<String>();
 
-  private static Campsite campsite;
+  private static CampSiteManager campSiteManager;
   private String authcode;
 
-  private Campsite() {
+  private CampSiteManager() {
     //To-Do
   }
-  private static Campsite getInstance() {
-    //To-Do
+  public static CampSiteManager getInstance() {
+    // singleton
+    if(campSiteManager == null){
+      return new CampSiteManager();
+    }
+    return campSiteManager;
   }
   public String getName() {
     //To-Do
     return name;
   }
-  public String getddress() {
+  public String getAddress() {
     //To-Do
     return address;
   }

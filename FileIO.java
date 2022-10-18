@@ -1,23 +1,28 @@
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class FileIO {
-    private String guardianJsonPath = "./json/gaurdians.json";
-    private String adminJsonPath = "./json/admins.json";
-    private String dependentJsonPath = "./json/dependents.json";
-    private String cabinJsonPath = "./json/cabins.json";
+    static String guardianJsonPath = "./json/Gaurdian.json";
+    static String adminJsonPath = "./json/admins.json";
+    static String dependentJsonPath = "./json/dependents.json";
+    static String cabinJsonPath = "./json/cabins.json";
 
     public static ArrayList<Gaurdian> readGaurdians() { ArrayList<Gaurdian> guardians = new ArrayList<Gaurdian>();
+        ArrayList<Gaurdian> gaurdians = new ArrayList<>();
         JSONParser jsonP = new JSONParser();
-        try(FileReader reader = new FileReader("./json/test.json")){
+        try(FileReader reader = new FileReader(guardianJsonPath)){
             Object obj = jsonP.parse(reader);
-            JSONArray empList = (JSONArray) obj;
-            System.out.println(empList);
+            JSONArray guardianList = (JSONArray) obj;
+            guardianList.forEach(guardian ->
+                guardians.add(parseGaurdianObj((JSONObject)guardian))
+            );
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
@@ -25,12 +30,21 @@ public class FileIO {
         catch(IOException e){
             e.printStackTrace();
         } catch (org.json.simple.parser.ParseException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
         // to do
         return guardians;
+    }
+    private static Gaurdian parseGaurdianObj(JSONObject guardian){
+        // get attributes
+        String firstName = (String) guardian.get("firstName");
+        String lastName = (String) guardian.get("lastName");
+        String address = (String) guardian.get("address");
+        UUID id = UUID.fromString((String)guardian.get("id"));
+        String birthDate = (String) guardian.get("birthDate");
+
+        return(new Gaurdian(firstName, lastName, birthDate, address, id, firstName, lastName, address, birthDate));
     }
     public static ArrayList<Dependent> readDependents(){
         ArrayList<Dependent> dependents = new ArrayList<Dependent>();
@@ -70,7 +84,5 @@ public class FileIO {
 
     }
     public static void main(String[] args){
-        readGaurdians();
     }
-
 }

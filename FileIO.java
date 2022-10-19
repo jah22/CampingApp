@@ -2,17 +2,23 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import com.google.gson.Gson;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
 
 public class FileIO {
     static String guardianJsonPath = "./json/Guardian.json";
-    static String adminJsonPath = "./json/admins.json";
-    static String dependentJsonPath = "./json/dependents.json";
-    static String cabinJsonPath = "./json/cabins.json";
+    static String adminJsonPath = "./json/CampAdmin.json";
+    static String dependentJsonPath = "./json/Dependent.json";
+    static String cabinJsonPath = "./json/Cabin.json";
+    static String campJsonPath= "./json/Camp.json";
+    static String faqJsonPath= "./json/FAQ.json";
+    static String scheduleJsonPath= "./json/Schedule.json";
 
     public static ArrayList<Guardian> readGuardians() { 
         ArrayList<Guardian> guardians = new ArrayList<Guardian>();
@@ -95,14 +101,69 @@ public class FileIO {
 
         return(new Cabin(cabinId, coordinators, campers, schedules, camperCapacity, coordinatorCapacity));
     }
-    public static void writeGuardian(Guardian Guardian) {
+    /*
+     * JSON Getters
+     */
 
+    public static JSONObject getPersonJson(Person p){
+        JSONObject jP = new JSONObject();
+        jP.put("id",p.getId().toString());
+        jP.put("firstName",p.getFirstName());
+        jP.put("lastName",p.getLastName());
+        jP.put("address",p.getAddress());
+        jP.put("birthDate",p.getBirthDate());
+
+        return jP;
+    }
+    public static JSONObject getPriorityPersonJson(Person p){
+        PriorityBehavior pB = (PriorityBehavior) p.getAuthBehavior();
+        JSONObject jP = getPersonJson(p);
+        jP.put("password",pB.getPassword());
+        jP.put("email",pB.getEmail());
+        jP.put("phone",pB.getPhone());
+        jP.put("username",pB.getUsername());
+
+        return jP;
+    }
+    public static JSONObject getGuardianJson(Guardian g){
+        JSONObject jsonG = getPriorityPersonJson(g);
+        return jsonG;
+    }
+    public static JSONObject getCampAdminJson(CampAdmin cA){
+        JSONObject jO = getPriorityPersonJson(cA);
+        return jO;
+    }
+    public static JSONObject getDependentJson(Dependent d){
+        JSONObject jO = getPersonJson(d);
+        jO.put("hasBeenPaidFor",d.getHasBeenPaidFor());
+        jO.put("isCoordinator",d.getIsCoordinator());
+        String jsonMedNotes = new Gson().toJson(d.getMedicalNotes());
+        String jsonEmContacts = new Gson().toJson(d.getMedicalNotes());
+        jO.put("medicalNotes",jsonMedNotes);
+        jO.put("emergencyContacts",jsonEmContacts);
+
+        return jO;
+    }
+
+    /*
+     * Writers
+     */
+    // write a JSON object to file
+    public static void writeToJson(JSONObject jO,String filePath){
+        try(FileWriter fW = new FileWriter(filePath)){
+            fW.write(jO.toJSONString());
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    public static void writeGuardian(Guardian guardian) {
+        writeToJson(getGuardianJson(guardian),guardianJsonPath);
     }
     public static void writeCampAdmin(CampAdmin admin) {
-
+        writeToJson(getCampAdminJson(admin),adminJsonPath);
     }
-    public static void writeCamper(Dependent dependent) {
-
+    public static void writeDependent(Dependent dependent) {
+        writeToJson(getDependentJson(dependent),dependentJsonPath);
     }
     public static void writeCabin(Cabin cabin) {
 
@@ -131,8 +192,7 @@ public class FileIO {
         return new JSONArray();
     }
     public static void main(String[] args){
-        ArrayList<Cabin> test = new ArrayList<>();
-        test = readCabins();
-        System.out.println("hi");
+        Guardian g = readGuardians().get(0);
+        System.out.println(g);
     }
 }

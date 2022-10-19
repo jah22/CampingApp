@@ -8,11 +8,4 @@ public class Guardian extends Person{
         PriorityBehavior behavior = new PriorityBehavior(username,password,phone,email);
         this.setAuthBehavior(behavior);
     }
-
-    public void pay(double amount){
-        System.out.println("Charging for " + "$"+amount);
-        System.out.println("Successfully charged.");
-        System.out.println("Thank you!");
-    }
-
 }

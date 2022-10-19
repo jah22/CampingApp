@@ -6,12 +6,15 @@ public class Dependent extends Person{
     private ArrayList<Person> emergencyContacts = new ArrayList<Person>();
     private ArrayList<String> medicalNotes = new ArrayList<String>();
 
-    private ArrayList<Cabin> cabins = new ArrayList<Cabin>();
     private boolean hasBeenPaidFor = false;
     private boolean isCoordinator = false;
 
     public Dependent(String firstName, String lastName, String birthDate, String address, UUID id) {
         super(firstName, lastName, birthDate, address, id);
+    }
+
+    public ArrayList<String> getMedicalNotes(){
+        return this.medicalNotes;
     }
 
     public ArrayList<Person> getEmergencyContacts(){

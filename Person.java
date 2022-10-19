@@ -1,6 +1,5 @@
 import java.util.UUID;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 
@@ -88,8 +87,8 @@ public class Person {
         return this.firstName == firstName && this.lastName == lastName;
     }
 
-    public static void main(String args[]){
-        Person p = new Person("Jim","John","2001-11-11","asdf","f3c0c496-9031-45de-a9d8-5e407bfc7403");
-        System.out.println(p.getAgeInt());
+    public AuthBehavior getAuthBehavior(){
+        return this.authBehavior;
     }
+
 }

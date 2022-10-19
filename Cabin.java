@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Cabin {
-    private String cabinId; 
+    private String name; 
     private ArrayList<Dependent> coordinators = new ArrayList<Dependent>();
     private ArrayList<Dependent> campers = new ArrayList<Dependent>();
     private ArrayList<Schedule>  schedules= new ArrayList<Schedule>();
@@ -13,8 +13,8 @@ public class Cabin {
     private int lowerAgeBound;
     private int upperAgeBound;
 
-    public String getCabinId(){
-        return this.cabinId;
+    public String getCabinName(){
+        return this.name;
     }
 
     public ArrayList<Dependent> getCoordinators(){
@@ -36,11 +36,11 @@ public class Cabin {
             System.out.println(c);
         }
     }
-    public Cabin(String cabinId){
-        this.cabinId = cabinId;
+    public Cabin(String name){
+        this.name = name;
     }
-    public Cabin(String cabinId,ArrayList<Dependent>coordinators, ArrayList<Dependent> campers,ArrayList<Schedule> schedules, int camperCapacity, int coordinatorCapacity){
-        this.cabinId = cabinId;
+    public Cabin(String name,ArrayList<Dependent>coordinators, ArrayList<Dependent> campers,ArrayList<Schedule> schedules, int camperCapacity, int coordinatorCapacity){
+        this.name = name;
         this.coordinators = coordinators;
         this.campers = campers;
         this.schedules = schedules;
@@ -51,7 +51,7 @@ public class Cabin {
         // to do
         String division = "------------";
         String out = division +"\n";
-        out += "Cabin: " + this.cabinId + "\n";
+        out += "Cabin: " + this.name + "\n";
         out += division +"\n";
         out += "Coordinators: " + this.coordinators.size() +"/"+ this.coordinatorCapacity + "\n";
         out += division +"\n";

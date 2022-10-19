@@ -6,8 +6,8 @@ public class CampSiteManager{
   private String name;
   private String address;
   // portia said 7 dollars is fine 
-  private float pricePerCamperPerDay = 7.0F;
-  private ArrayList<String> frequentlyAskedQuestions = new ArrayList<String>();
+  private double pricePerCamperPerDay;
+  private ArrayList<FAQ> frequentlyAskedQuestions;
 
   private static CampSiteManager campSiteManager;
   private String authcode;
@@ -17,16 +17,25 @@ public class CampSiteManager{
   ReviewManager reviewManager;
   CabinManager cabinManager;
 
-  private CampSiteManager() {
+  private CampSiteManager(String name, String address, double pricePerCamperPerDay, String authCode) {
     /*
      * TODO:
      * init the managers
      */
+    this.personManager = new PersonManager(FileIO.readAdmins(),FileIO.readGuardians(),FileIO.readDependents());
+    this.reviewManager = new ReviewManager(FileIO.readReviews());
+    this.cabinManager = new CabinManager(FileIO.readCabins());
+
+    this.name = name;
+    this.address = address;
+    this.pricePerCamperPerDay = pricePerCamperPerDay;
+    this.frequentlyAskedQuestions = FileIO.readFaqs();
+    this.authcode = authCode;
   }
-  public static CampSiteManager getInstance() {
+  public static CampSiteManager getInstance(String name, String address, double pricePerCamperPerDay,String authCode) {
     //To-Do
     if(campSiteManager == null){
-      return new CampSiteManager();
+      return new CampSiteManager(name,address,pricePerCamperPerDay,authCode);
     }
     return campSiteManager;
   }

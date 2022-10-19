@@ -47,5 +47,8 @@ public class PriorityBehavior implements AuthBehavior{
     public boolean canLogin() {
         return true;
     }
+    public String getPassword(){
+        return this.password;
+    }
      
 }

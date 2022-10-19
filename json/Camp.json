@@ -1,7 +1,8 @@
 [
     {
-        "author":"Johnny Smith",
-        "rating":4,
-        "text":"You Know, it wasn't that bad. I've sent my kid to worse and felt fine."
+        "name":"Camp 247",
+        "address":"1423 Greene, Columbia SC",
+        "pricePerCamperPerDay": 7.00,
+        "authcode":"superCoolCampSiteCodeOnlyUsAdminsKnow!"
     }
 ]

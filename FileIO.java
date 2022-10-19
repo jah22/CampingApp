@@ -10,7 +10,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.UUID;
 
 public class FileIO {
@@ -63,6 +62,8 @@ public class FileIO {
         String address = (String) dependent.get("address");
         UUID id = UUID.fromString((String) dependent.get("id"));
         String birthDate = (String) dependent.get("birthDate");
+        boolean hasBeenPaidFor = (boolean) dependent.get("hasBeenPaidFor");
+        boolean isCoordinator = (boolean) dependent.get("isCoordinator");
 
         return(new Dependent(firstName, lastName, birthDate, address, id));
     }
@@ -82,14 +83,19 @@ public class FileIO {
     }
     private static Cabin parseCabinObj(JSONObject cabin){
         // get attributes
-        String cabinId = (String) cabin.get("id");
-        ArrayList<Dependent> coordinators = (ArrayList<Dependent>) cabin.get("coordinators");
-        ArrayList<Dependent> campers = (ArrayList<Dependent>) cabin.get("campers");
-        ArrayList<Schedule> schedules = (ArrayList<Schedule>) cabin.get("schedules");
-        int camperCapacity = (int) cabin.get("camperCapacity");
-        int coordinatorCapacity = (int) cabin.get("coordinatorCapacity");
+        String cabinName = (String) cabin.get("name");
+        // to do: fix this
+        // ArrayList<Dependent> coordinators = (ArrayList<Dependent>) cabin.get("coordinators");
+        // ArrayList<Dependent> campers = (ArrayList<Dependent>) cabin.get("campers");
+        // ArrayList<Schedule> schedules = (ArrayList<Schedule>) cabin.get("schedules");
+        ArrayList<Dependent> coordinators = new ArrayList<>();
+        ArrayList<Dependent> campers = new ArrayList<>();
+        ArrayList<Schedule> schedules= new ArrayList<>();
 
-        return(new Cabin(cabinId, coordinators, campers, schedules, camperCapacity, coordinatorCapacity));
+        int camperCapacity = Math.toIntExact((long)cabin.get("camperCapacity")) ;
+        int coordinatorCapacity= Math.toIntExact((long)cabin.get("coordinatorCapacity")) ;
+
+        return(new Cabin(cabinName,coordinators,campers,schedules, camperCapacity, coordinatorCapacity));
     }
     private static CampSiteManager parseCampObj(JSONObject camp){
 
@@ -98,7 +104,7 @@ public class FileIO {
         double price = (double) camp.get("pricePerCamperPerDay");
         String authCode = (String) camp.get("authCode");
 
-        return CampSiteManager.getInstance(name,address, price,readFaqs(),readReviews(),authCode);
+        return CampSiteManager.getInstance(name,address, price,authCode);
     }
 
     /*
@@ -147,9 +153,9 @@ public class FileIO {
     }
     public static ArrayList<Cabin> readCabins(){
         ArrayList<Cabin> cabins = new ArrayList<Cabin>();
-        JSONArray cabinList = parseJsonFileArr(adminJsonPath);
+        JSONArray cabinList = parseJsonFileArr(cabinJsonPath);
         cabinList.forEach(cabin ->
-        cabins.add(parseCabinObj((JSONObject)cabin))
+            cabins.add(parseCabinObj((JSONObject)cabin))
         );
         return cabins;
     }

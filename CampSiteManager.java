@@ -17,25 +17,25 @@ public class CampSiteManager{
   ReviewManager reviewManager;
   CabinManager cabinManager;
 
-  private CampSiteManager(String name, String address, double pricePerCamperPerDay, ArrayList<FAQ> faqs,ArrayList<Review> revs, String authCode) {
+  private CampSiteManager(String name, String address, double pricePerCamperPerDay, String authCode) {
     /*
      * TODO:
      * init the managers
      */
-    this.personManager = new PersonManager(null, null, null);
-    this.reviewManager = new ReviewManager(revs);
-    this.cabinManager = new CabinManager(null);
+    this.personManager = new PersonManager(FileIO.readAdmins(),FileIO.readGuardians(),FileIO.readDependents());
+    this.reviewManager = new ReviewManager(FileIO.readReviews());
+    this.cabinManager = new CabinManager(FileIO.readCabins());
 
     this.name = name;
     this.address = address;
     this.pricePerCamperPerDay = pricePerCamperPerDay;
-    this.frequentlyAskedQuestions = frequentlyAskedQuestions;
+    this.frequentlyAskedQuestions = FileIO.readFaqs();
     this.authcode = authCode;
   }
-  public static CampSiteManager getInstance(String name, String address, double pricePerCamperPerDay,ArrayList<FAQ>faqs,ArrayList<Review>revs,String authCode) {
+  public static CampSiteManager getInstance(String name, String address, double pricePerCamperPerDay,String authCode) {
     //To-Do
     if(campSiteManager == null){
-      return new CampSiteManager(name,address,pricePerCamperPerDay,faqs,revs,authCode);
+      return new CampSiteManager(name,address,pricePerCamperPerDay,authCode);
     }
     return campSiteManager;
   }

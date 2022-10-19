@@ -13,6 +13,14 @@ public class Dependent extends Person{
         super(firstName, lastName, birthDate, address, id);
     }
 
+    public Dependent(String firstName, String lastName, String birthDate, String address, UUID id, boolean isCoordinator, boolean hasBeenPaidFor,ArrayList<Person> emergencyContacts, ArrayList<String> medNotes){
+        super(firstName, lastName, birthDate, address,id);
+        this.hasBeenPaidFor = hasBeenPaidFor;
+        this.isCoordinator = isCoordinator;
+        this.medicalNotes = medNotes;
+        this.emergencyContacts = emergencyContacts;
+    }
+
     public ArrayList<String> getMedicalNotes(){
         return this.medicalNotes;
     }

@@ -1,8 +1,8 @@
 [
     {
-        "id":2,
-        "coordinators":[{"id":24},{"id":25}],
-        "campers":[{"id":7},{"id":8}],
+        "name":"Salty City Cabin",
+        "coordinators":[{"id":"81c7ae99-247f-4c80-950a-4a41e767e84"}],
+        "campers":[],
         "camperCapacity":8,
         "coordinatorCapacity":1
     }

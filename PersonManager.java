@@ -2,12 +2,12 @@ import java.util.ArrayList;
 
 public class PersonManager {
     private ArrayList<CampAdmin> admins = new ArrayList<CampAdmin>(); 
-    private ArrayList<Gaurdian>  gaurdians = new ArrayList<Gaurdian>(); 
+    private ArrayList<Guardian>  guardians = new ArrayList<Guardian>(); 
     private ArrayList<Dependent>  dependents = new ArrayList<Dependent>(); 
     
-    public PersonManager(ArrayList<CampAdmin> admins, ArrayList<Gaurdian> gaurdians, ArrayList<Dependent> dependents){
+    public PersonManager(ArrayList<CampAdmin> admins, ArrayList<Guardian> guardians, ArrayList<Dependent> dependents){
         this.admins = admins;
-        this.gaurdians = gaurdians;
+        this.guardians = guardians;
         this.dependents = dependents;
     }
 }

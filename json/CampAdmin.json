@@ -1,0 +1,13 @@
+[
+    {
+        "id":"65c7ae99-247f-4c80-950a-4a41e767e84c",
+        "firstName":"Jane",
+        "lastName":"Doe",
+        "birthDate":"1991-11-10",
+        "address":"10 Green Street, Columbia, SC",
+        "password":"password",
+        "username":"JD141",
+        "email":"janedoe@gmail.com",
+        "phoneNumber":"803-222-2222"
+    }
+]

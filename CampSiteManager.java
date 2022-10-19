@@ -92,7 +92,7 @@ public class CampSiteManager{
   public void seeAvgReviews() {
     //To-Do
   }
-  public boolean seeReviewsByGaurdian(String firstName, String lastName) {
+  public boolean seeReviewsByGuardian(String firstName, String lastName) {
     //To-Do
     return false;
   }
@@ -104,7 +104,7 @@ public class CampSiteManager{
     //To-Do
     return false;
   }
-  public boolean registerGaurdian() {
+  public boolean registerGuardian() {
     //To-Do
     return false;
   }
@@ -116,7 +116,7 @@ public class CampSiteManager{
     //To-Do
     return false;
   }
-  public boolean removeGaurdian(String firstName, String lastName) {
+  public boolean removeGuardian(String firstName, String lastName) {
     //To-Do
     return false;
   }
@@ -140,11 +140,11 @@ public class CampSiteManager{
     //To-Do
     return false;
   }
-  public boolean refundGaurdian(String camperFirstName, String capmerLastName) {
+  public boolean refundGuardian(String camperFirstName, String capmerLastName) {
     //To-Do
     return false;
   }
-  public boolean signUpDependentForCabin(String gaurdianUserName, String gaurdianPassword) {
+  public boolean signUpDependentForCabin(String guardianUserName, String guardianPassword) {
     //To-Do
     return false;
   }
@@ -152,7 +152,7 @@ public class CampSiteManager{
     //To-Do
     return false;
   }
-  public boolean addDependent(String gaurdianUsername, String guardianPassword) {
+  public boolean addDependent(String guardianUsername, String guardianPassword) {
     //To-Do
     return false;
   }
@@ -167,11 +167,11 @@ public class CampSiteManager{
   public boolean hasPaid(String firstName, String lastName) {
     return personManager.getHasBeenPaidFor(firstName,lastName);
   }
-  public boolean writeReview(Gaurdian author, String text, int rating) {
+  public boolean writeReview(Guardian author, String text, int rating) {
     //To-Do
     return false;
   }
-  public boolean removeReview(Gaurdian author, String text, int rating) {
+  public boolean removeReview(Guardian author, String text, int rating) {
     //To-Do
     return false;
   }

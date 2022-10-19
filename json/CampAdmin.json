@@ -1,0 +1,14 @@
+[
+    {
+        "id":2,
+        "firstName":"Jimmothy",
+        "lastName":"Smith",
+        "birthDate":"2001-10-20",
+        "address":"429 Sycamore Drive, Columbia, SC",
+        "guardians":[{"id":24},{"id":25}],
+        "medicalNotes":["severe peanut allergy, scared of heeights"],
+        "hasBeenPaidFor":true,
+        "isCoordinator":false,
+        "numberOfDaysStayed":4
+    }
+]

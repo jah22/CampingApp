@@ -9,8 +9,10 @@ public class Guardian extends Person{
         this.setAuthBehavior(behavior);
     }
 
-    public boolean pay(double amount){
-        // to do
-        return false;
+    public void pay(double amount){
+        System.out.println("Charging for " + "$"+amount);
+        System.out.println("Successfully charged.");
+        System.out.println("Thank you!");
     }
+
 }

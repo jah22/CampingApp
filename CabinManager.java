@@ -7,12 +7,28 @@ public class CabinManager {
         this.cabins = cabins;
     }
 
+    public void seeCabins(){
+        for(Cabin c: this.cabins){
+            System.out.println(c);
+        }
+    }
+
     public boolean seeCabinActivities(String cabinId){
-        // to do
+        for(Cabin c: this.cabins){
+            if(c.getCabinId().equals(cabinId)){
+                c.seeActivities();
+                return true;
+            }
+        }
         return false;
     }
     public boolean seeCabinCoordinators(String cabinId){
-        // to do
+        for(Cabin c: this.cabins){
+            if(c.getCabinId().equals(cabinId)){
+                c.seeCoordinators();
+                return true;
+            }
+        }
         return false;
     }
     public boolean addCamperToCabin(Dependent camper,String cabinId){

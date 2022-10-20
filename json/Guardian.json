@@ -8,6 +8,10 @@
         "password":"12345",
         "username":"JS221",
         "email":"johnsmith@gmail.com",
-        "phoneNumber":"803-111-1111"
+        "phoneNumber":"803-111-1111",
+        "registeredDependents":[
+            {"id":"81c7ae99-247f-4c80-950a-4a41e767e84c"},
+            {"id":"81c7ae99-247f-4c80-950a-4a41e767e84d"}
+        ]
     }
 ]

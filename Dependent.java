@@ -48,6 +48,10 @@ public class Dependent extends Person{
     }
 
     public String toString(){
-        return super.toString() + " | Age: " + this.getAgeInt();
+        String out = super.toString() + " | Age: " + this.getAgeInt();
+        for (Person person : emergencyContacts) {
+            out += person.toString();
+        }
+        return out;
     }
 }

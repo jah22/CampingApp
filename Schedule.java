@@ -19,4 +19,7 @@ public class Schedule {
         // to do
         return "";
     }
+    public static void main(String args[]){
+        
+    }
 }

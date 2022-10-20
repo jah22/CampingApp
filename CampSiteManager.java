@@ -22,7 +22,7 @@ public class CampSiteManager{
      * TODO:
      * init the managers
      */
-    this.personManager = new PersonManager(FileIO.getAdmins(),FileIO.getGuardians(),FileIO.getDependents());
+    this.personManager = new PersonManager(FileIO.getAdmins(),FileIO.getGuardians(),FileIO.getDependents(),FileIO.getEmergencyContacts());
     this.reviewManager = new ReviewManager(FileIO.getReviews());
     this.cabinManager = new CabinManager(FileIO.getCabins());
 

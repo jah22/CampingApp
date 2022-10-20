@@ -5,10 +5,24 @@ public class PersonManager {
     private ArrayList<CampAdmin> admins = new ArrayList<CampAdmin>(); 
     private ArrayList<Guardian>  guardians = new ArrayList<Guardian>(); 
     private ArrayList<Dependent>  dependents = new ArrayList<Dependent>(); 
-    
-    public PersonManager(ArrayList<CampAdmin> admins, ArrayList<Guardian> guardians, ArrayList<Dependent> dependents){
+    private ArrayList<Person> emergencyContacts = new ArrayList<Person>();
+
+    public PersonManager(ArrayList<CampAdmin> admins, ArrayList<Guardian> guardians, ArrayList<Dependent> dependents,ArrayList<Person> emergencyContacts){
         this.admins = admins;
         this.guardians = guardians;
+        this.dependents = dependents;
+        this.emergencyContacts = emergencyContacts;
+    }
+    public PersonManager(ArrayList<CampAdmin> admins, ArrayList<Guardian> guardians, ArrayList<Person>emergencyContacts){
+        this.admins = admins;
+        this.guardians = guardians;
+        this.emergencyContacts = emergencyContacts;
+    }
+
+    public void setEmergencyContacts(ArrayList<Person> emergencyContacts){
+        this.emergencyContacts = emergencyContacts;
+    }
+    public void setDependents(ArrayList<Dependent> dependents){
         this.dependents = dependents;
     }
 
@@ -125,6 +139,14 @@ public class PersonManager {
         }
         return null;
     }
+    public Person getEmergencyContactById(UUID id){
+        for (Person p:this.emergencyContacts) {
+            if(p.getId().equals(id)) {
+                return p;
+            }
+        }
+        return null;
+    }
     public Guardian getGuardianById(UUID id){
         for (Guardian g:this.guardians) {
             if(g.getId().equals(id)) {
@@ -133,5 +155,5 @@ public class PersonManager {
         }
         return null;
     }
-    
+
 }

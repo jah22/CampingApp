@@ -1,14 +1,13 @@
 [
     {
-        "id":2,
-        "firstName":"Jimmothy",
-        "lastName":"Smith",
-        "birthDate":"2001-10-20",
-        "address":"429 Sycamore Drive, Columbia, SC",
-        "guardians":[{"id":24},{"id":25}],
-        "medicalNotes":["severe peanut allergy, scared of heeights"],
-        "hasBeenPaidFor":true,
-        "isCoordinator":false,
-        "numberOfDaysStayed":4
+        "id":"65c7ae99-247f-4c80-950a-4a41e767e84c",
+        "firstName":"Jane",
+        "lastName":"Doe",
+        "birthDate":"1991-11-10",
+        "address":"10 Green Street, Columbia, SC",
+        "password":"password",
+        "username":"JD141",
+        "email":"janedoe@gmail.com",
+        "phoneNumber":"803-222-2222"
     }
 ]

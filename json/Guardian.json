@@ -1,0 +1,13 @@
+[
+    {
+        "id":"79c7ae99-247f-4c80-950a-4a41e767e84c",
+        "firstName":"John",
+        "lastName":"Smith",
+        "birthDate":"1982-10-20",
+        "address":"429 Sycamore Drive, Columbia, SC",
+        "password":"12345",
+        "username":"JS221",
+        "email":"johnsmith@gmail.com",
+        "phoneNumber":"803-111-1111"
+    }
+]

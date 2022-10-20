@@ -5,53 +5,85 @@ import java.util.ArrayList;
 public class CampSiteManager{
   private String name;
   private String address;
-  private float pricePerCamperPerDay;
-  private ArrayList<String> frequentlyAskedQuestions;
+  // portia said 7 dollars is fine 
+  private double pricePerCamperPerDay;
+  private ArrayList<FAQ> frequentlyAskedQuestions;
 
-  private static Campsite campsite;
+  private static CampSiteManager campSiteManager;
   private String authcode;
 
-  private Campsite() {
-    //To-Do
+  // managers
+  PersonManager personManager;
+  ReviewManager reviewManager;
+  CabinManager cabinManager;
+
+  private CampSiteManager(String name, String address, double pricePerCamperPerDay, String authCode) {
+    /*
+     * TODO:
+     * init the managers
+     */
+    this.personManager = new PersonManager(FileIO.getAdmins(),FileIO.getGuardians(),FileIO.getDependents());
+    this.reviewManager = new ReviewManager(FileIO.getReviews());
+    this.cabinManager = new CabinManager(FileIO.getCabins());
+
+    this.name = name;
+    this.address = address;
+    this.pricePerCamperPerDay = pricePerCamperPerDay;
+    this.frequentlyAskedQuestions = FileIO.getFaqs();
+    this.authcode = authCode;
   }
-  private static Campsite getInstance() {
+  public static CampSiteManager getInstance(String name, String address, double pricePerCamperPerDay,String authCode) {
     //To-Do
+    if(campSiteManager == null){
+      return new CampSiteManager(name,address,pricePerCamperPerDay,authCode);
+    }
+    return campSiteManager;
   }
   public String getName() {
     //To-Do
     return name;
   }
-  public String getddress() {
+  public String getAddress() {
     //To-Do
     return address;
   }
   public void seeCoordinators() {
-    //To-Do
-
+    this.personManager.seeCoordinators();
   }
   public String toString() {
-    //To-Do
-    return null;
+      String out = "Cabin: " + this.name;
+
+      // to do:
+      // be more fancy 
+
+      return out;
   }
   public void seeAdmins() {
-//To-Do
+    this.personManager.seeAdmins();; 
   }
   public void seeCabins() {
-//To-Do
+    this.cabinManager.seeCabins();
   }
   public void seeAllActivities() {
-//To-Do
+    /*
+     * TO DO:
+     * Loop thru all activities
+     */
   }
-  public boolean seeAllCabinActivities(String cabinId) {
-    //To-Do
-    return false;
+  public void seeAllCabinActivities(String cabinId) {
+    if(!this.cabinManager.seeCabinActivities(cabinId)){
+      System.out.println("A cabin with that ID cannot be found.");
+    }
   }
-  public boolean seeCabinCoordinators(String cabinID) {
-    //To-Do
-    return false;
+  public void seeCabinCoordinators(String cabinID) {
+    if(!this.cabinManager.seeCabinCoordinators(cabinID)){
+      System.out.println("A cabin with that ID cannot be found.");
+    }
   }
   public boolean addCamperToCabin(Dependent camper) {
-    //To-Do
+    /*
+     * TODO this function
+     */
     return false;
   }
   public boolean removeCamperFromCabin(Dependent camper) {
@@ -69,7 +101,7 @@ public class CampSiteManager{
   public void seeAvgReviews() {
     //To-Do
   }
-  public boolean seeReviewsByGaurdian(String firstName, String lastName) {
+  public boolean seeReviewsByGuardian(String firstName, String lastName) {
     //To-Do
     return false;
   }
@@ -81,7 +113,7 @@ public class CampSiteManager{
     //To-Do
     return false;
   }
-  public boolean registerGaurdian() {
+  public boolean registerGuardian() {
     //To-Do
     return false;
   }
@@ -93,7 +125,7 @@ public class CampSiteManager{
     //To-Do
     return false;
   }
-  public boolean removeGaurdian(String firstName, String lastName) {
+  public boolean removeGuardian(String firstName, String lastName) {
     //To-Do
     return false;
   }
@@ -117,11 +149,11 @@ public class CampSiteManager{
     //To-Do
     return false;
   }
-  public boolean refundGaurdian(String camperFirstName, String capmerLastName) {
+  public boolean refundGuardian(String camperFirstName, String capmerLastName) {
     //To-Do
     return false;
   }
-  public boolean signUpDependentForCabin(String gaurdianUserName, String gaurdianPassword) {
+  public boolean signUpDependentForCabin(String guardianUserName, String guardianPassword) {
     //To-Do
     return false;
   }
@@ -129,7 +161,7 @@ public class CampSiteManager{
     //To-Do
     return false;
   }
-  public boolean addDependent(String gaurdianUsername, String guardianPassword) {
+  public boolean addDependent(String guardianUsername, String guardianPassword) {
     //To-Do
     return false;
   }
@@ -141,15 +173,14 @@ public class CampSiteManager{
     //To-Do
     return false;
   }
-  public boolean hasPaid(Dependent camper) {
+  public boolean hasPaid(String firstName, String lastName) {
+    return personManager.getHasBeenPaidFor(firstName,lastName);
+  }
+  public boolean writeReview(Guardian author, String text, int rating) {
     //To-Do
     return false;
   }
-  public boolean writeReview(Gaurdian author, String text, int rating) {
-    //To-Do
-    return false;
-  }
-  public boolean removeReview(Gaurdian author, String text, int rating) {
+  public boolean removeReview(Guardian author, String text, int rating) {
     //To-Do
     return false;
   }

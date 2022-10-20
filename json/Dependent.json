@@ -1,13 +1,74 @@
 [
     {
-        "id":2,
-        "firstName":"Jimmothy",
+        "id":"81c7ae99-247f-4c80-950a-4a41e767e84c",
+        "firstName":"Jane",
         "lastName":"Smith",
-        "birthDate":"2001-10-20",
-        "address":"429 Sycamore",
-        "guardians":[{"id":24},{"id":25}],
-        "medicalNotes":["severe peanut allergy, scared of heights"],
+        "birthDate":"2009-05-14",
+        "address":"429 Sycamore Drive, Columbia, SC",
         "hasBeenPaidFor":true,
-        "isCoordinator":false
+        "isCoordinator":true,
+        "emergencyContacts":[
+            {"firstName":"ec FirstName",
+            "lastName":"ec LastName",
+            "address":"ec Address"
+            }
+        ],
+        "medicalNotes":[
+            ["allergy 1","allergy 2"]
+        ]
+    },
+    {
+        "id":"81c7ae99-247f-4c80-950a-4a41e767e84d",
+        "firstName":"Billy",
+        "lastName":"Joel",
+        "birthDate":"2011-03-21",
+        "address":"429 Sycamore Drive, Columbia, SC",
+        "hasBeenPaidFor":true,
+        "isCoordinator":false,
+        "emergencyContacts":[
+            {"firstName":"ec FirstName",
+            "lastName":"ec LastName",
+            "address":"ec Address"
+            }
+        ],
+        "medicalNotes":[
+            ["allergy 1","allergy 2"]
+        ]
+    },
+    {
+        "id":"81c7ae99-247f-4c80-950a-4a41e767e84e",
+        "firstName":"Sue",
+        "lastName":"Smith",
+        "birthDate":"2012-03-21",
+        "address":"429 Sycamore Drive, Columbia, SC",
+        "hasBeenPaidFor":true,
+        "isCoordinator":false,
+        "emergencyContacts":[
+            {"firstName":"ec FirstName",
+            "lastName":"ec LastName",
+            "address":"ec Address"
+            }
+        ],
+        "medicalNotes":[
+            ["allergy 1","allergy 2"]
+        ]
+    },
+    {
+        "id":"81c7ae99-247f-4c80-950a-4a41e767e84f",
+        "firstName":"Sam",
+        "lastName":"Brown",
+        "birthDate":"2012-03-21",
+        "address":"429 Sycamore Drive, Columbia, SC",
+        "hasBeenPaidFor":false,
+        "isCoordinator":false,
+        "emergencyContacts":[
+            {"firstName":"ec FirstName",
+            "lastName":"ec LastName",
+            "address":"ec Address"
+            }
+        ],
+        "medicalNotes":[
+            ["allergy 1","allergy 2"]
+        ]
     }
 ]

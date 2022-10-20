@@ -22,14 +22,14 @@ public class CampSiteManager{
      * TODO:
      * init the managers
      */
-    this.personManager = new PersonManager(FileIO.readAdmins(),FileIO.readGuardians(),FileIO.readDependents());
-    this.reviewManager = new ReviewManager(FileIO.readReviews());
-    this.cabinManager = new CabinManager(FileIO.readCabins());
+    this.personManager = new PersonManager(FileIO.getAdmins(),FileIO.getGuardians(),FileIO.getDependents());
+    this.reviewManager = new ReviewManager(FileIO.getReviews());
+    this.cabinManager = new CabinManager(FileIO.getCabins());
 
     this.name = name;
     this.address = address;
     this.pricePerCamperPerDay = pricePerCamperPerDay;
-    this.frequentlyAskedQuestions = FileIO.readFaqs();
+    this.frequentlyAskedQuestions = FileIO.getFaqs();
     this.authcode = authCode;
   }
   public static CampSiteManager getInstance(String name, String address, double pricePerCamperPerDay,String authCode) {

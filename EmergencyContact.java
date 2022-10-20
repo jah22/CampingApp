@@ -6,5 +6,9 @@ public class EmergencyContact extends Person {
         super(firstName, lastName, birthDate, address, id);
         //TODO Auto-generated constructor stub
     }
+    public EmergencyContact(String firstName, String lastName, String birthDate, String address) {
+        super(firstName, lastName, birthDate, address, UUID.randomUUID());
+        //TODO Auto-generated constructor stub
+    }
     
 }

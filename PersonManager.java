@@ -127,7 +127,7 @@ public class PersonManager {
     }
     public Guardian getGuardianById(UUID id){
         for (Guardian g:this.guardians) {
-            if(g.getId() == id) {
+            if(g.getId().equals(id)) {
                 return g;
             }
         }

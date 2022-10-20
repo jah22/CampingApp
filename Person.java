@@ -86,6 +86,9 @@ public class Person {
     public boolean checkFullName(String firstName, String lastName){
         return this.firstName == firstName && this.lastName == lastName;
     }
+    public String getFullName(){
+        return this.firstName + " " + this.lastName;
+    }
 
     public AuthBehavior getAuthBehavior(){
         return this.authBehavior;

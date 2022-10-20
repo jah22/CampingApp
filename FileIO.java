@@ -12,84 +12,87 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 
+import javax.xml.crypto.Data;
+
 public class FileIO {
-    static String guardianJsonPath = "./json/Guardian.json";
-    static String adminJsonPath = "./json/CampAdmin.json";
-    static String dependentJsonPath = "./json/Dependent.json";
-    static String cabinJsonPath = "./json/Cabin.json";
-    static String campJsonPath= "./json/Camp.json";
-    static String faqJsonPath= "./json/Faq.json";
-    static String scheduleJsonPath= "./json/Schedule.json";
-    static String reviewJsonPath = "./json/Review.json";
-    static String emergencyContactsPath = "./json/EmergencyContact.json";
+    /*
+     * Arrays of class objects
+     */
+    private static ArrayList<Guardian> guardians;
+    private static ArrayList<CampAdmin> admins;
+    private static ArrayList<Cabin> cabins;
+    private static ArrayList<FAQ> faqs;
+    private static ArrayList<Review> reviews;
+    private static ArrayList<Schedule> schedules;
+    private static ArrayList<Dependent> dependents;
+    private static ArrayList<Person> emergencyContacts;
+    private static CampSiteManager campSiteManager;
 
-    static ArrayList<Guardian> guardians;
-    static ArrayList<CampAdmin> admins;
-    static ArrayList<Cabin> cabins;
-    static ArrayList<FAQ> faqs;
-    static ArrayList<Review> reviews;
-    static ArrayList<Schedule> schedules;
-    static ArrayList<Dependent> dependents;
-    static ArrayList<Person> emergencyContacts;
+    /*
+     * Managers
+     */
+    private PersonManager pM;
 
-    static PersonManager pM;
+    // singleton
+    private static FileIO fileIO;
 
-    static boolean isInitiated = false;
-
-    public static void populateData(){
+    private void populateData(){
         /*
          * Populates all arraylists of data
          * ORDER MATTERS! DEPENDENCIES FIRST!
          */
-        faqs = readFaqs();
-        reviews = readReviews();
-        pM = new PersonManager();
+        this.faqs = readFaqs();
+        this.reviews = readReviews();
+        this.pM = new PersonManager();
 
-        admins = readAdmins();
-        pM.setAdmins(admins);
-        emergencyContacts = readEmergencyContacts();
-        pM.setEmergencyContacts(emergencyContacts);
-        dependents = readDependents();
-        pM.setDependents(dependents);
+        this.admins = readAdmins();
+        this.pM.setAdmins(this.admins);
+        this.emergencyContacts = readEmergencyContacts();
+        this.pM.setEmergencyContacts(this.emergencyContacts);
+        this.dependents = readDependents();
+        this.pM.setDependents(this.dependents);
 
-        guardians = readGuardians();
+        this.guardians = readGuardians();
 
         // add dependents
         // to do: read schedules
-        cabins = readCabins();
+        this.cabins = readCabins();
+
+        this.campSiteManager = readCamp();
     }
-    private static void checkIfInitiated(){
-        if(!isInitiated){
-            populateData();
+    private FileIO(){
+        populateData();
+    }
+    public static FileIO getInstance(){
+        if(fileIO == null){
+            fileIO = new FileIO();
+            return fileIO;
         }
-        isInitiated = true;
+        return fileIO;
     }
+
     public static ArrayList<CampAdmin> getAdmins(){
-        checkIfInitiated();
         return admins;
     }
     public static ArrayList<Dependent> getDependents(){
-        checkIfInitiated();
         return dependents;
     }
     public static ArrayList<Guardian> getGuardians(){
-        checkIfInitiated();
         return guardians;
     }
     public static ArrayList<Review> getReviews(){
-        checkIfInitiated();
         return reviews;
     }
     public static ArrayList<FAQ> getFaqs(){
-        checkIfInitiated();
         return faqs;
     }
     public static ArrayList<Cabin> getCabins(){
-        checkIfInitiated();
         return cabins;
     }
+    public static CampSiteManager getCamp(){
+        return campSiteManager;
+    }
     public static ArrayList<Person> getEmergencyContacts(){
-        checkIfInitiated();
         return emergencyContacts;
     }
 
@@ -99,72 +102,72 @@ public class FileIO {
      * ***************************
      */
     private static FAQ parseFaqObj(JSONObject jFaq){
-        String question = (String) jFaq.get("question");
-        String answer = (String) jFaq.get("answer");
+        String question = (String) jFaq.get(DataConstants.FAQ_QUESTION);
+        String answer = (String) jFaq.get(DataConstants.FAQ_ANSWER);
         return new FAQ(question,answer);
     }
-    private static Review parseReviewObj(JSONObject rev){
+    private Review parseReviewObj(JSONObject rev){
         
-        String author= (String) rev.get("author");
-        int rating= Math.toIntExact((Long)rev.get("rating"));
-        String title= (String) rev.get("title");
-        String body= (String) rev.get("body");
+        String author= (String) rev.get(DataConstants.REVIEW_AUTHOR);
+        int rating= Math.toIntExact((Long)rev.get(DataConstants.REVIEW_RATING));
+        String title= (String) rev.get(DataConstants.REVIEW_TITLE);
+        String body= (String) rev.get(DataConstants.REVIEW_BODY);
 
         return new Review(author,rating,title,body);
     }
-    private static Person parsePersonObj(JSONObject jPer){
+    private Person parsePersonObj(JSONObject jPer){
         // get attributes
-        String firstName = (String) jPer.get("firstName");
-        String lastName = (String) jPer.get("lastName");
-        String address = (String) jPer.get("address");
-        UUID id = UUID.fromString((String)jPer.get("id"));
-        String birthDate = (String) jPer.get("birthDate");
+        String firstName = (String) jPer.get(DataConstants.PERSON_FIRST_NAME);
+        String lastName = (String) jPer.get(DataConstants.PERSON_LAST_NAME);
+        String address = (String) jPer.get(DataConstants.PERSON_ADDRESS);
+        UUID id = UUID.fromString((String)jPer.get(DataConstants.PERSON_ID));
+        String birthDate = (String) jPer.get(DataConstants.PERSON_BIRTHDATE);
         
         return (new Person(firstName, lastName, birthDate, address,id));
     }
-    private static Guardian parseGuardianObj(JSONObject guardian){
-        // get attributes
-        String firstName = (String) guardian.get("firstName");
-        String lastName = (String) guardian.get("lastName");
-        String address = (String) guardian.get("address");
-        UUID id = UUID.fromString((String)guardian.get("id"));
-        String birthDate = (String) guardian.get("birthDate");
-        String password = (String) guardian.get("password");
-        String username = (String) guardian.get("username");
-        String email = (String) guardian.get("email");
-        String phoneNumber = (String) guardian.get("username");
+    private Guardian parseGuardianObj(JSONObject guardian){
+        String firstName = (String) guardian.get(DataConstants.PERSON_FIRST_NAME);
+        String lastName = (String) guardian.get(DataConstants.PERSON_LAST_NAME);
+        String address = (String) guardian.get(DataConstants.PERSON_ADDRESS);
+        UUID id = UUID.fromString((String)guardian.get(DataConstants.PERSON_ID));
+        String birthDate = (String) guardian.get(DataConstants.PERSON_BIRTHDATE);
+
+        String password = (String) guardian.get(DataConstants.GUARDIAN_PASSWORD);
+        String username = (String) guardian.get(DataConstants.GUARDIAN_USERNAME);
+        String email = (String) guardian.get(DataConstants.GUARDIAN_EMAIL);
+        String phoneNumber = (String) guardian.get(DataConstants.GUARDIAN_PHONE_NUMBER);
+
         ArrayList<Dependent> deps = new ArrayList<Dependent>();
 
-        JSONArray jaDependents = (JSONArray) guardian.get("registeredDependents");
+        JSONArray jaDependents = (JSONArray) guardian.get(DataConstants.GUARDIAN_REGISTERED_DEPENDENTS);
         jaDependents.forEach(jaDependent ->{
             JSONObject jDep = (JSONObject) jaDependent;
-            UUID jDepId = UUID.fromString((String)jDep.get("id"));
+            UUID jDepId = UUID.fromString((String)jDep.get(DataConstants.GUARDIAN_ID));
             Dependent dep = pM.getDependentById(jDepId);
             if(dep != null){
                 deps.add(dep);
             }
         });
-
-        return(new Guardian(firstName, lastName, birthDate, address, id, password, username, email, phoneNumber,deps));
+        return new Guardian(firstName, lastName, birthDate, address, id, password, username, email, phoneNumber,deps);
     }
-    private static Dependent parseDependentObj(JSONObject dependent){
+    private Dependent parseDependentObj(JSONObject dependent){
         // get attributes
-        String firstName = (String) dependent.get("firstName");
-        String lastName = (String) dependent.get("lastName");
-        String address = (String) dependent.get("address");
-        UUID id = UUID.fromString((String) dependent.get("id"));
-        String birthDate = (String) dependent.get("birthDate");
-        boolean hasBeenPaidFor = (boolean) dependent.get("hasBeenPaidFor");
-        boolean isCoordinator = (boolean) dependent.get("isCoordinator");
+        String firstName = (String) dependent.get(DataConstants.DEPENDENT_FIRST_NAME);
+        String lastName = (String) dependent.get(DataConstants.DEPENDENT_LAST_NAME);
+        String address = (String) dependent.get(DataConstants.DEPENDENT_ADDRESS);
+        UUID id = UUID.fromString((String) dependent.get(DataConstants.DEPENDENT_ID));
+        String birthDate = (String) dependent.get(DataConstants.DEPENDENT_BIRTH_DATE);
+        boolean hasBeenPaidFor = (boolean) dependent.get(DataConstants.DEPENDENT_HAS_BEEN_PAID_FOR);
+        boolean isCoordinator = (boolean) dependent.get(DataConstants.DEPENDENT_IS_COORDINATOR);
 
         ArrayList<Person> emContacts = new ArrayList<Person>();
         ArrayList<String> medNotes = new ArrayList<String>();
 
         // parse the contacts
-        JSONArray jEmContacts = (JSONArray) dependent.get("emergencyContacts");
+        JSONArray jEmContacts = (JSONArray) dependent.get(DataConstants.DEPENDENT_EMERGENCY_CONTACTS);
         jEmContacts.forEach(jContact->{
             JSONObject jEm =(JSONObject) jContact;
-            UUID jEmId= UUID.fromString((String) jEm.get("id"));
+            UUID jEmId= UUID.fromString((String) jEm.get(DataConstants.EMERGENCY_CONTACT_ID));
             Person emContact = pM.getEmergencyContactById(jEmId);
             if(emContact != null){
                 emContacts.add(emContact);
@@ -172,7 +175,7 @@ public class FileIO {
         });
 
         // parse the medical notes
-        JSONArray jMedNotes = (JSONArray) dependent.get("medicalNotes");
+        JSONArray jMedNotes = (JSONArray) dependent.get(DataConstants.DEPENDENT_MEDICAL_NOTES);
         jMedNotes.forEach(
             jMedNote->{
                 String [] split = ((String) jMedNote).split(",");
@@ -183,7 +186,7 @@ public class FileIO {
         
         return  new Dependent(firstName, lastName, birthDate, address, id,isCoordinator,hasBeenPaidFor,emContacts,medNotes);
     }
-    private static CampAdmin parseAdminObj(JSONObject admin){
+    private CampAdmin parseAdminObj(JSONObject admin){
         // get attributes
         String firstName = (String) admin.get("firstName");
         String lastName = (String) admin.get("lastName");
@@ -197,7 +200,7 @@ public class FileIO {
 
         return(new CampAdmin(firstName, lastName, birthDate, address, id, password, username, email, phone));
     }
-    private static Cabin parseCabinObj(JSONObject cabin){
+    private Cabin parseCabinObj(JSONObject cabin){
         // get attributes
         String cabinName = (String) cabin.get("name");
 
@@ -237,7 +240,7 @@ public class FileIO {
 
         return(new Cabin(cabinName,coordinators,campers,schedules, camperCapacity, coordinatorCapacity,lowerAgeBound,upperAgeBound));
     }
-    private static CampSiteManager parseCampObj(JSONObject camp){
+    private CampSiteManager parseCampObj(JSONObject camp){
 
         String name = (String) camp.get("name");
         String address = (String) camp.get("address");
@@ -252,65 +255,65 @@ public class FileIO {
      * Json Readers
      * ***************************
      */
-    private static ArrayList<Review> readReviews(){
+    private ArrayList<Review> readReviews(){
         ArrayList<Review> revs=  new ArrayList<Review>();
-        JSONArray revList = parseJsonFileArr(reviewJsonPath);
+        JSONArray revList = parseJsonFileArr(DataConstants.REVIEW_FILE_NAME);
         revList.forEach(rev ->{
             revs.add(parseReviewObj((JSONObject)rev));
         });
         return revs;
     }
-    private static ArrayList<FAQ> readFaqs(){
+    private ArrayList<FAQ> readFaqs(){
         ArrayList<FAQ> faqs=  new ArrayList<FAQ>();
-        JSONArray faqList= parseJsonFileArr(faqJsonPath);
+        JSONArray faqList= parseJsonFileArr(DataConstants.FAQ_FILE_NAME);
         faqList.forEach(faq->{
             faqs.add(parseFaqObj((JSONObject)faq));
         });
         return faqs;
     }
-    private static CampSiteManager readCamp(){
-        JSONArray campObject = parseJsonFileArr(campJsonPath);
+    private CampSiteManager readCamp(){
+        JSONArray campObject = parseJsonFileArr(DataConstants.CAMP_FILE_NAME);
 
         // only deal with one camp for now
         return parseCampObj((JSONObject) campObject.get(0));
     }
-    private static ArrayList<Person> readEmergencyContacts(){
+    private ArrayList<Person> readEmergencyContacts(){
         ArrayList<Person> persons = new ArrayList<Person>();
-        JSONArray personList = parseJsonFileArr(emergencyContactsPath);
+        JSONArray personList = parseJsonFileArr(DataConstants.EMERGENCY_CONTACT_FILE_NAME);
         personList.forEach(person->{
             persons.add(parsePersonObj((JSONObject) person));
         });
         return persons;
     }
 
-    private static ArrayList<Guardian> readGuardians() { 
+    private ArrayList<Guardian> readGuardians() { 
         ArrayList<Guardian> guardians = new ArrayList<Guardian>();
-        JSONArray guardianList = parseJsonFileArr(guardianJsonPath);
+        JSONArray guardianList = parseJsonFileArr(DataConstants.GUARDIAN_FILE_NAME);
         guardianList.forEach(guardian ->
             guardians.add(parseGuardianObj((JSONObject)guardian))
         );
         return guardians;
     }   
-    private static ArrayList<CampAdmin> readAdmins(){
+    private ArrayList<CampAdmin> readAdmins(){
         ArrayList<CampAdmin> admins = new ArrayList<CampAdmin>();
-        JSONArray adminList = parseJsonFileArr(adminJsonPath);
+        JSONArray adminList = parseJsonFileArr(DataConstants.CAMP_ADMIN_FILE_NAME);
         adminList.forEach(admin ->
             admins.add(parseAdminObj((JSONObject)admin))
         );
         return admins;
     }
-    private static ArrayList<Cabin> readCabins(){
+    private ArrayList<Cabin> readCabins(){
         // cabins hold dependents, so need to read those in first
         ArrayList<Cabin> cabins = new ArrayList<Cabin>();
-        JSONArray cabinList = parseJsonFileArr(cabinJsonPath);
+        JSONArray cabinList = parseJsonFileArr(DataConstants.CABIN_FILE_NAME);
         cabinList.forEach(cabin ->
             cabins.add(parseCabinObj((JSONObject)cabin))
         );
         return cabins;
     }
-    private static ArrayList<Dependent> readDependents() {
+    private ArrayList<Dependent> readDependents() {
         ArrayList<Dependent> deps = new ArrayList<Dependent>();
-        JSONArray dependentList = parseJsonFileArr(dependentJsonPath);
+        JSONArray dependentList = parseJsonFileArr(DataConstants.DEPENDENT_FILE_NAME);
             dependentList.forEach(dependent ->{
                 deps.add(parseDependentObj((JSONObject)dependent));
             }
@@ -323,7 +326,7 @@ public class FileIO {
      * ***************************
      */
 
-    private static JSONObject getPersonJson(Person p){
+    private JSONObject getPersonJson(Person p){
         JSONObject jP = new JSONObject();
         jP.put("id",p.getId().toString());
         jP.put("firstName",p.getFirstName());
@@ -333,7 +336,7 @@ public class FileIO {
 
         return jP;
     }
-    private static JSONObject getPriorityPersonJson(Person p){
+    private JSONObject getPriorityPersonJson(Person p){
         PriorityBehavior pB = (PriorityBehavior) p.getAuthBehavior();
         JSONObject jP = getPersonJson(p);
         jP.put("password",pB.getPassword());
@@ -343,15 +346,15 @@ public class FileIO {
 
         return jP;
     }
-    private static JSONObject getGuardianJson(Guardian g){
+    private JSONObject getGuardianJson(Guardian g){
         JSONObject jsonG = getPriorityPersonJson(g);
         return jsonG;
     }
-    private static JSONObject getCampAdminJson(CampAdmin cA){
+    private JSONObject getCampAdminJson(CampAdmin cA){
         JSONObject jO = getPriorityPersonJson(cA);
         return jO;
     }
-    private static JSONObject getDependentJson(Dependent d){
+    private JSONObject getDependentJson(Dependent d){
         JSONObject jO = getPersonJson(d);
         jO.put("hasBeenPaidFor",d.getHasBeenPaidFor());
         jO.put("isCoordinator",d.getIsCoordinator());
@@ -369,32 +372,32 @@ public class FileIO {
      * ***************************
      */
     // write a JSON object to file
-    private static void writeToJson(JSONObject jO,String filePath){
+    private void writeToJson(JSONObject jO,String filePath){
         try(FileWriter fW = new FileWriter(filePath)){
             fW.write(jO.toJSONString());
         }catch(IOException e){
             e.printStackTrace();
         }
     }
-    private static void writeGuardian(Guardian guardian) {
-        writeToJson(getGuardianJson(guardian),guardianJsonPath);
+    private void writeGuardian(Guardian guardian) {
+        writeToJson(getGuardianJson(guardian),DataConstants.GUARDIAN_FILE_NAME);
     }
-    private static void writeCampAdmin(CampAdmin admin) {
-        writeToJson(getCampAdminJson(admin),adminJsonPath);
+    private void writeCampAdmin(CampAdmin admin) {
+        writeToJson(getCampAdminJson(admin),DataConstants.CAMP_ADMIN_FILE_NAME);
     }
-    private static void writeDependent(Dependent dependent) {
-        writeToJson(getDependentJson(dependent),dependentJsonPath);
+    private void writeDependent(Dependent dependent) {
+        writeToJson(getDependentJson(dependent),DataConstants.DEPENDENT_FILE_NAME);
     }
-    private static void writeCabin(Cabin cabin) {
+    private void writeCabin(Cabin cabin) {
 
     }
-    private static void writeReview(Review review) {
+    private void writeReview(Review review) {
 
     }
-    private static void writeCoordinator(Dependent coordinator){
+    private void writeCoordinator(Dependent coordinator){
 
     }
-    private static JSONArray parseJsonFileArr(String filename) {
+    private JSONArray parseJsonFileArr(String filename) {
         JSONParser jsonP = new JSONParser();
         try(FileReader reader = new FileReader(filename)){
             Object obj = jsonP.parse(reader);
@@ -410,11 +413,5 @@ public class FileIO {
             e.printStackTrace();
         }
         return new JSONArray();
-    }
-    public static void main(String[] args){
-        // CampSiteManager cSM = readCamp();
-        // cSM.seeCabins();
-        populateData();
-        guardians.get(0).viewDependents();
     }
 }

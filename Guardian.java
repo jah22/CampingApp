@@ -22,6 +22,14 @@ public class Guardian extends Person{
         PriorityBehavior behavior = new PriorityBehavior(username,password,phone,email);
         this.setAuthBehavior(behavior);
     }
+    public void setAuthBehavior(AuthBehavior behavior) {
+        // TODO Auto-generated method stub
+        super.setAuthBehavior(behavior);
+    }
+    public void setRegisteredDependents(ArrayList<Dependent> registeredDependents) {
+        this.registeredDependents = registeredDependents;
+    }
+
     
     public void viewDependents(){
         for(Dependent d: this.registeredDependents){

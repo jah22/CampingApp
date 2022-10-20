@@ -12,6 +12,14 @@ public class CabinManager {
             System.out.println(c);
         }
     }
+    public Cabin getCabinByName(String name){
+        for(Cabin c: this.cabins){
+            if(c.getCabinName().equals(name)){
+                return c;
+            }
+        }
+        return null;
+    }
 
     public boolean seeCabinActivities(String cabinName){
         for(Cabin c: this.cabins){

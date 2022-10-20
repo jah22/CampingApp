@@ -35,6 +35,11 @@ public class Dependent extends Person{
     public ArrayList<Person> getEmergencyContacts(){
         return this.emergencyContacts;
     }
+    public void viewEmergencyContacts(){
+        for (Person emergencyContact: this.emergencyContacts) {
+            System.out.println(emergencyContact) ;
+        }
+    }
     public boolean inCabin(Cabin cabin){
         // todo
         return false;
@@ -48,13 +53,19 @@ public class Dependent extends Person{
     }
 
     public String toString(){
-        String out = super.toString() + " | Age: " + this.getAgeInt() + "\n";
+        String div = "------------\n";
+        String out = div;
+        out += (isCoordinator) ? "Coordinator\n":"Camper\n";
+        out += super.toString() + " | Age: " + this.getAgeInt() + "\n";
+        out += "Emergency Contacts: \n";
         for (Person person : emergencyContacts) {
             out += person.toString()+"\n";
         }
+        out += "Medical Notes:\n";
         for(String note: medicalNotes){
             out += note +"\n";
         }
+        out += div;
 
         return out;
     }

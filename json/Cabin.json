@@ -1,8 +1,12 @@
 [
     {
         "name":"Salty City Cabin",
-        "coordinators":[{"id":"81c7ae99-247f-4c80-950a-4a41e767e84"}],
-        "campers":[],
+        "coordinators":[{"id":"81c7ae99-247f-4c80-950a-4a41e767e84c"}],
+        "campers":[
+            {"id":"81c7ae99-247f-4c80-950a-4a41e767e84d"},
+            {"id":"81c7ae99-247f-4c80-950a-4a41e767e84e"},
+            {"id":"81c7ae99-247f-4c80-950a-4a41e767e84f"}
+            ],
         "camperCapacity":8,
         "coordinatorCapacity":1
     }

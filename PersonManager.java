@@ -78,7 +78,7 @@ public class PersonManager {
         // to do
         return false;
     }
-    public boolean refundGaurdian(String camperFirstName, String camperLastName){
+    public boolean refundGuardian(String camperFirstName, String camperLastName){
         // to do
         return false;
     }
@@ -115,6 +115,23 @@ public class PersonManager {
     public boolean updateLoginInfo(String curUsername, String curPassword){
         // to do
         return false;
+    }
+
+    public Dependent getDependentById(UUID id){
+        for (Dependent dep :this.dependents) {
+            if(dep.getId().equals(id)) {
+                return dep;
+            }
+        }
+        return null;
+    }
+    public Guardian getGuardianById(UUID id){
+        for (Guardian g:this.guardians) {
+            if(g.getId() == id) {
+                return g;
+            }
+        }
+        return null;
     }
     
 }

@@ -54,8 +54,14 @@ public class Cabin {
         out += "Cabin: " + this.name + "\n";
         out += division +"\n";
         out += "Coordinators: " + this.coordinators.size() +"/"+ this.coordinatorCapacity + "\n";
+        for (Dependent dependent :this.coordinators) {
+            out += dependent.toString()  + "\n";
+        }
         out += division +"\n";
         out += "Campers: " + this.campers.size() +"/"+ this.camperCapacity+ "\n";
+        for (Dependent dependent :this.campers) {
+            out += dependent.toString()  + "\n";
+        }
         out += division +"\n";
         out += "Age range: " + this.lowerAgeBound + "-" + this.upperAgeBound +"\n";
 

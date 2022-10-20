@@ -1,7 +1,6 @@
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
 
@@ -21,6 +20,64 @@ public class FileIO {
     static String faqJsonPath= "./json/Faq.json";
     static String scheduleJsonPath= "./json/Schedule.json";
     static String reviewJsonPath = "./json/Review.json";
+
+    static ArrayList<Guardian> guardians;
+    static ArrayList<CampAdmin> admins;
+    static ArrayList<Cabin> cabins;
+    static ArrayList<FAQ> faqs;
+    static ArrayList<Review> reviews;
+    static ArrayList<Schedule> schedules;
+    static ArrayList<Dependent> dependents;
+
+    static PersonManager pM;
+
+    static boolean isInitiated = false;
+
+    public static void populateData(){
+        /*
+         * Populates all arraylists of data
+         * ORDER MATTERS! DEPENDENCIES FIRST!
+         */
+        faqs = readFaqs();
+        reviews = readReviews();
+        admins = readAdmins();
+        guardians = readGuardians();
+        dependents = readDependents();
+        // init person manager
+        pM = new PersonManager(admins, guardians, dependents);
+        // to do: read schedules
+        cabins = readCabins();
+    }
+    private static void checkIfInitiated(){
+        if(!isInitiated){
+            populateData();
+        }
+        isInitiated = true;
+    }
+    public static ArrayList<CampAdmin> getAdmins(){
+        checkIfInitiated();
+        return admins;
+    }
+    public static ArrayList<Dependent> getDependents(){
+        checkIfInitiated();
+        return dependents;
+    }
+    public static ArrayList<Guardian> getGuardians(){
+        checkIfInitiated();
+        return guardians;
+    }
+    public static ArrayList<Review> getReviews(){
+        checkIfInitiated();
+        return reviews;
+    }
+    public static ArrayList<FAQ> getFaqs(){
+        checkIfInitiated();
+        return faqs;
+    }
+    public static ArrayList<Cabin> getCabins(){
+        checkIfInitiated();
+        return cabins;
+    }
 
     /*
      * ***************************
@@ -84,16 +141,37 @@ public class FileIO {
     private static Cabin parseCabinObj(JSONObject cabin){
         // get attributes
         String cabinName = (String) cabin.get("name");
+
+        int camperCapacity = Math.toIntExact((long)cabin.get("camperCapacity")) ;
+        int coordinatorCapacity= Math.toIntExact((long)cabin.get("coordinatorCapacity")) ;
         // to do: fix this
-        // ArrayList<Dependent> coordinators = (ArrayList<Dependent>) cabin.get("coordinators");
-        // ArrayList<Dependent> campers = (ArrayList<Dependent>) cabin.get("campers");
-        // ArrayList<Schedule> schedules = (ArrayList<Schedule>) cabin.get("schedules");
         ArrayList<Dependent> coordinators = new ArrayList<>();
         ArrayList<Dependent> campers = new ArrayList<>();
         ArrayList<Schedule> schedules= new ArrayList<>();
 
-        int camperCapacity = Math.toIntExact((long)cabin.get("camperCapacity")) ;
-        int coordinatorCapacity= Math.toIntExact((long)cabin.get("coordinatorCapacity")) ;
+
+        // parse coordinators
+        JSONArray jCoordinators = (JSONArray) cabin.get("coordinators");
+        jCoordinators.forEach(jCoord->{
+            JSONObject jO = (JSONObject) jCoord;
+            UUID id = UUID.fromString((String) jO.get("id"));
+            // find coordinator
+            Dependent c = pM.getDependentById(id);
+            if(c != null){
+                coordinators.add(pM.getDependentById(id));
+            }
+        });
+        // parse campers
+        JSONArray jCampers = (JSONArray) cabin.get("campers");
+        jCampers.forEach(jCamper ->{
+            JSONObject jO = (JSONObject) jCamper;
+            UUID id = UUID.fromString((String) jO.get("id"));
+            // find camper
+            Dependent c = pM.getDependentById(id);
+            if(c != null){
+                campers.add(pM.getDependentById(id));
+            }
+        });
 
         return(new Cabin(cabinName,coordinators,campers,schedules, camperCapacity, coordinatorCapacity));
     }
@@ -112,7 +190,7 @@ public class FileIO {
      * Json Readers
      * ***************************
      */
-    public static ArrayList<Review> readReviews(){
+    private static ArrayList<Review> readReviews(){
         ArrayList<Review> revs=  new ArrayList<Review>();
         JSONArray revList = parseJsonFileArr(reviewJsonPath);
         revList.forEach(rev ->{
@@ -120,7 +198,7 @@ public class FileIO {
         });
         return revs;
     }
-    public static ArrayList<FAQ> readFaqs(){
+    private static ArrayList<FAQ> readFaqs(){
         ArrayList<FAQ> faqs=  new ArrayList<FAQ>();
         JSONArray faqList= parseJsonFileArr(faqJsonPath);
         faqList.forEach(faq->{
@@ -128,14 +206,14 @@ public class FileIO {
         });
         return faqs;
     }
-    public static CampSiteManager readCamp(){
+    private static CampSiteManager readCamp(){
         JSONArray campObject = parseJsonFileArr(campJsonPath);
 
         // only deal with one camp for now
         return parseCampObj((JSONObject) campObject.get(0));
     }
 
-    public static ArrayList<Guardian> readGuardians() { 
+    private static ArrayList<Guardian> readGuardians() { 
         ArrayList<Guardian> guardians = new ArrayList<Guardian>();
         JSONArray guardianList = parseJsonFileArr(guardianJsonPath);
         guardianList.forEach(guardian ->
@@ -143,7 +221,7 @@ public class FileIO {
         );
         return guardians;
     }   
-    public static ArrayList<CampAdmin> readAdmins(){
+    private static ArrayList<CampAdmin> readAdmins(){
         ArrayList<CampAdmin> admins = new ArrayList<CampAdmin>();
         JSONArray adminList = parseJsonFileArr(adminJsonPath);
         adminList.forEach(admin ->
@@ -151,7 +229,8 @@ public class FileIO {
         );
         return admins;
     }
-    public static ArrayList<Cabin> readCabins(){
+    private static ArrayList<Cabin> readCabins(){
+        // cabins hold dependents, so need to read those in first
         ArrayList<Cabin> cabins = new ArrayList<Cabin>();
         JSONArray cabinList = parseJsonFileArr(cabinJsonPath);
         cabinList.forEach(cabin ->
@@ -159,12 +238,13 @@ public class FileIO {
         );
         return cabins;
     }
-    public static ArrayList<Dependent> readDependents() {
-        ArrayList<Dependent> dependents = new ArrayList<Dependent>();
+    private static ArrayList<Dependent> readDependents() {
+        ArrayList<Dependent> deps= new ArrayList<Dependent>();
         JSONArray dependentList = parseJsonFileArr(dependentJsonPath);
-        dependentList.forEach(dependent ->
-        dependents.add(parseDependentObj((JSONObject)dependent))
+            dependentList.forEach(dependent ->
+                deps.add(parseDependentObj((JSONObject)dependent))
         );
+        dependents =deps;
         return dependents;
     }
     /*
@@ -173,7 +253,7 @@ public class FileIO {
      * ***************************
      */
 
-    public static JSONObject getPersonJson(Person p){
+    private static JSONObject getPersonJson(Person p){
         JSONObject jP = new JSONObject();
         jP.put("id",p.getId().toString());
         jP.put("firstName",p.getFirstName());
@@ -183,7 +263,7 @@ public class FileIO {
 
         return jP;
     }
-    public static JSONObject getPriorityPersonJson(Person p){
+    private static JSONObject getPriorityPersonJson(Person p){
         PriorityBehavior pB = (PriorityBehavior) p.getAuthBehavior();
         JSONObject jP = getPersonJson(p);
         jP.put("password",pB.getPassword());
@@ -193,15 +273,15 @@ public class FileIO {
 
         return jP;
     }
-    public static JSONObject getGuardianJson(Guardian g){
+    private static JSONObject getGuardianJson(Guardian g){
         JSONObject jsonG = getPriorityPersonJson(g);
         return jsonG;
     }
-    public static JSONObject getCampAdminJson(CampAdmin cA){
+    private static JSONObject getCampAdminJson(CampAdmin cA){
         JSONObject jO = getPriorityPersonJson(cA);
         return jO;
     }
-    public static JSONObject getDependentJson(Dependent d){
+    private static JSONObject getDependentJson(Dependent d){
         JSONObject jO = getPersonJson(d);
         jO.put("hasBeenPaidFor",d.getHasBeenPaidFor());
         jO.put("isCoordinator",d.getIsCoordinator());
@@ -219,29 +299,29 @@ public class FileIO {
      * ***************************
      */
     // write a JSON object to file
-    public static void writeToJson(JSONObject jO,String filePath){
+    private static void writeToJson(JSONObject jO,String filePath){
         try(FileWriter fW = new FileWriter(filePath)){
             fW.write(jO.toJSONString());
         }catch(IOException e){
             e.printStackTrace();
         }
     }
-    public static void writeGuardian(Guardian guardian) {
+    private static void writeGuardian(Guardian guardian) {
         writeToJson(getGuardianJson(guardian),guardianJsonPath);
     }
-    public static void writeCampAdmin(CampAdmin admin) {
+    private static void writeCampAdmin(CampAdmin admin) {
         writeToJson(getCampAdminJson(admin),adminJsonPath);
     }
-    public static void writeDependent(Dependent dependent) {
+    private static void writeDependent(Dependent dependent) {
         writeToJson(getDependentJson(dependent),dependentJsonPath);
     }
-    public static void writeCabin(Cabin cabin) {
+    private static void writeCabin(Cabin cabin) {
 
     }
-    public static void writeReview(Review review) {
+    private static void writeReview(Review review) {
 
     }
-    public static void writeCoordinator(Dependent coordinator){
+    private static void writeCoordinator(Dependent coordinator){
 
     }
     private static JSONArray parseJsonFileArr(String filename) {
@@ -263,6 +343,6 @@ public class FileIO {
     }
     public static void main(String[] args){
         CampSiteManager cSM = readCamp();
-        System.out.println(cSM);
+        cSM.seeCabins();
     }
 }

@@ -10,9 +10,9 @@
         "emergencyContacts":[
             {"id":"71c7ae99-247f-4c80-950a-4a41e767e84d"}
         ],
-        "medicalNotes":[
+        "medicalNotes":
             ["allergy 1","allergy 2"]
-        ]
+        
     },
     {
         "id":"81c7ae99-247f-4c80-950a-4a41e767e84d",
@@ -25,9 +25,9 @@
         "emergencyContacts":[
             {"id":"61c7ae99-247f-4c80-950a-4a41e767e84d"}
         ],
-        "medicalNotes":[
+        "medicalNotes":
             ["allergy 1","allergy 2"]
-        ]
+        
     },
     {
         "id":"81c7ae99-247f-4c80-950a-4a41e767e84e",
@@ -40,9 +40,9 @@
         "emergencyContacts":[
             {"id":"61c7ae99-247f-4c80-950a-4a41e767e84d"}
         ],
-        "medicalNotes":[
+        "medicalNotes":
             ["allergy 1","allergy 2"]
-        ]
+        
     },
     {
         "id":"81c7ae99-247f-4c80-950a-4a41e767e84f",
@@ -55,8 +55,8 @@
         "emergencyContacts":[
             {"id":"61c7ae99-247f-4c80-950a-4a41e767e84d"}
         ],
-        "medicalNotes":[
+        "medicalNotes":
             ["allergy 1","allergy 2"]
-        ]
+        
     }
 ]

@@ -48,10 +48,14 @@ public class Dependent extends Person{
     }
 
     public String toString(){
-        String out = super.toString() + " | Age: " + this.getAgeInt();
+        String out = super.toString() + " | Age: " + this.getAgeInt() + "\n";
         for (Person person : emergencyContacts) {
-            out += person.toString();
+            out += person.toString()+"\n";
         }
+        for(String note: medicalNotes){
+            out += note +"\n";
+        }
+
         return out;
     }
 }

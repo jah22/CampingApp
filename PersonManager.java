@@ -18,6 +18,12 @@ public class PersonManager {
         this.guardians = guardians;
         this.emergencyContacts = emergencyContacts;
     }
+    public PersonManager(){
+
+    }
+    public void setAdmins(ArrayList<CampAdmin> admins){
+        this.admins = admins;
+    }
 
     public void setEmergencyContacts(ArrayList<Person> emergencyContacts){
         this.emergencyContacts = emergencyContacts;

@@ -43,15 +43,18 @@ public class FileIO {
          */
         faqs = readFaqs();
         reviews = readReviews();
-        admins = readAdmins();
-        guardians = readGuardians();
-        emergencyContacts = readEmergencyContacts();
-        // init person manager
-        pM = new PersonManager(admins, guardians,emergencyContacts);
+        pM = new PersonManager();
 
+        admins = readAdmins();
+        pM.setAdmins(admins);
+        emergencyContacts = readEmergencyContacts();
+        pM.setEmergencyContacts(emergencyContacts);
         dependents = readDependents();
-        // add dependents
         pM.setDependents(dependents);
+
+        guardians = readGuardians();
+
+        // add dependents
         // to do: read schedules
         cabins = readCabins();
     }
@@ -130,8 +133,19 @@ public class FileIO {
         String username = (String) guardian.get("username");
         String email = (String) guardian.get("email");
         String phoneNumber = (String) guardian.get("username");
+        ArrayList<Dependent> deps = new ArrayList<Dependent>();
 
-        return(new Guardian(firstName, lastName, birthDate, address, id, password, username, email, phoneNumber));
+        JSONArray jaDependents = (JSONArray) guardian.get("registeredDependents");
+        jaDependents.forEach(jaDependent ->{
+            JSONObject jDep = (JSONObject) jaDependent;
+            UUID jDepId = UUID.fromString((String)jDep.get("id"));
+            Dependent dep = pM.getDependentById(jDepId);
+            if(dep != null){
+                deps.add(dep);
+            }
+        });
+
+        return(new Guardian(firstName, lastName, birthDate, address, id, password, username, email, phoneNumber,deps));
     }
     private static Dependent parseDependentObj(JSONObject dependent){
         // get attributes
@@ -398,7 +412,9 @@ public class FileIO {
         return new JSONArray();
     }
     public static void main(String[] args){
-        CampSiteManager cSM = readCamp();
-        cSM.seeCabins();
+        // CampSiteManager cSM = readCamp();
+        // cSM.seeCabins();
+        populateData();
+        guardians.get(0).viewDependents();
     }
 }

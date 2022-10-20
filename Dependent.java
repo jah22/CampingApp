@@ -39,4 +39,8 @@ public class Dependent extends Person{
     public boolean getIsCoordinator(){
         return this.isCoordinator;
     }
+
+    public String toString(){
+        return super.toString() + " | Age: " + this.getAgeInt();
+    }
 }

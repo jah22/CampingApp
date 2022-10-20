@@ -144,7 +144,10 @@ public class FileIO {
 
         int camperCapacity = Math.toIntExact((long)cabin.get("camperCapacity")) ;
         int coordinatorCapacity= Math.toIntExact((long)cabin.get("coordinatorCapacity")) ;
-        // to do: fix this
+
+        int lowerAgeBound = Math.toIntExact((long)cabin.get("lowerAgeBound"));
+        int upperAgeBound = Math.toIntExact((long)cabin.get("upperAgeBound"));
+
         ArrayList<Dependent> coordinators = new ArrayList<>();
         ArrayList<Dependent> campers = new ArrayList<>();
         ArrayList<Schedule> schedules= new ArrayList<>();
@@ -173,7 +176,7 @@ public class FileIO {
             }
         });
 
-        return(new Cabin(cabinName,coordinators,campers,schedules, camperCapacity, coordinatorCapacity));
+        return(new Cabin(cabinName,coordinators,campers,schedules, camperCapacity, coordinatorCapacity,lowerAgeBound,upperAgeBound));
     }
     private static CampSiteManager parseCampObj(JSONObject camp){
 

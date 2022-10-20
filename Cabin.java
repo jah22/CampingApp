@@ -39,19 +39,23 @@ public class Cabin {
     public Cabin(String name){
         this.name = name;
     }
-    public Cabin(String name,ArrayList<Dependent>coordinators, ArrayList<Dependent> campers,ArrayList<Schedule> schedules, int camperCapacity, int coordinatorCapacity){
+    public Cabin(String name,ArrayList<Dependent>coordinators, ArrayList<Dependent> campers,ArrayList<Schedule> schedules, int camperCapacity, int coordinatorCapacity,int lowerAgeBound, int upperAgeBound){
         this.name = name;
         this.coordinators = coordinators;
         this.campers = campers;
         this.schedules = schedules;
         this.camperCapacity = camperCapacity;
         this.coordinatorCapacity = coordinatorCapacity;
+        this.lowerAgeBound = lowerAgeBound;
+        this.upperAgeBound = upperAgeBound;
     }
     public String toString(){
         // to do
-        String division = "------------";
+        String division = "----------------------";
         String out = division +"\n";
         out += "Cabin: " + this.name + "\n";
+        out += division +"\n";
+        out += "Age range: " + this.lowerAgeBound + "-" + this.upperAgeBound +"\n";
         out += division +"\n";
         out += "Coordinators: " + this.coordinators.size() +"/"+ this.coordinatorCapacity + "\n";
         for (Dependent dependent :this.coordinators) {
@@ -63,7 +67,6 @@ public class Cabin {
             out += dependent.toString()  + "\n";
         }
         out += division +"\n";
-        out += "Age range: " + this.lowerAgeBound + "-" + this.upperAgeBound +"\n";
 
         return out;
     }

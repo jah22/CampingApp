@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
 
 public class FileIO {
@@ -155,6 +156,17 @@ public class FileIO {
                 emContacts.add(emContact);
             }
         });
+
+        // parse the medical notes
+        JSONArray jMedNotes = (JSONArray) dependent.get("medicalNotes");
+        jMedNotes.forEach(
+            jMedNote->{
+                String [] split = ((String) jMedNote).split(",");
+                ArrayList<String> notes = new ArrayList<String>(Arrays.asList(split));
+                medNotes.addAll(notes);
+            }
+        );
+        
         return  new Dependent(firstName, lastName, birthDate, address, id,isCoordinator,hasBeenPaidFor,emContacts,medNotes);
     }
     private static CampAdmin parseAdminObj(JSONObject admin){

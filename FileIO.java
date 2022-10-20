@@ -20,6 +20,7 @@ public class FileIO {
     static String faqJsonPath= "./json/Faq.json";
     static String scheduleJsonPath= "./json/Schedule.json";
     static String reviewJsonPath = "./json/Review.json";
+    static String emergencyContactsPath = "./json/EmergencyContact.json";
 
     static ArrayList<Guardian> guardians;
     static ArrayList<CampAdmin> admins;
@@ -28,6 +29,7 @@ public class FileIO {
     static ArrayList<Review> reviews;
     static ArrayList<Schedule> schedules;
     static ArrayList<Dependent> dependents;
+    static ArrayList<Person> emergencyContacts;
 
     static PersonManager pM;
 
@@ -42,9 +44,13 @@ public class FileIO {
         reviews = readReviews();
         admins = readAdmins();
         guardians = readGuardians();
-        dependents = readDependents();
+        emergencyContacts = readEmergencyContacts();
         // init person manager
-        pM = new PersonManager(admins, guardians, dependents);
+        pM = new PersonManager(admins, guardians,emergencyContacts);
+
+        dependents = readDependents();
+        // add dependents
+        pM.setDependents(dependents);
         // to do: read schedules
         cabins = readCabins();
     }
@@ -78,6 +84,10 @@ public class FileIO {
         checkIfInitiated();
         return cabins;
     }
+    public static ArrayList<Person> getEmergencyContacts(){
+        checkIfInitiated();
+        return emergencyContacts;
+    }
 
     /*
      * ***************************
@@ -97,6 +107,16 @@ public class FileIO {
         String body= (String) rev.get("body");
 
         return new Review(author,rating,title,body);
+    }
+    private static Person parsePersonObj(JSONObject jPer){
+        // get attributes
+        String firstName = (String) jPer.get("firstName");
+        String lastName = (String) jPer.get("lastName");
+        String address = (String) jPer.get("address");
+        UUID id = UUID.fromString((String)jPer.get("id"));
+        String birthDate = (String) jPer.get("birthDate");
+        
+        return (new Person(firstName, lastName, birthDate, address,id));
     }
     private static Guardian parseGuardianObj(JSONObject guardian){
         // get attributes
@@ -122,7 +142,20 @@ public class FileIO {
         boolean hasBeenPaidFor = (boolean) dependent.get("hasBeenPaidFor");
         boolean isCoordinator = (boolean) dependent.get("isCoordinator");
 
-        return(new Dependent(firstName, lastName, birthDate, address, id));
+        ArrayList<Person> emContacts = new ArrayList<Person>();
+        ArrayList<String> medNotes = new ArrayList<String>();
+
+        // parse the contacts
+        JSONArray jEmContacts = (JSONArray) dependent.get("emergencyContacts");
+        jEmContacts.forEach(jContact->{
+            JSONObject jEm =(JSONObject) jContact;
+            UUID jEmId= UUID.fromString((String) jEm.get("id"));
+            Person emContact = pM.getEmergencyContactById(jEmId);
+            if(emContact != null){
+                emContacts.add(emContact);
+            }
+        });
+        return  new Dependent(firstName, lastName, birthDate, address, id,isCoordinator,hasBeenPaidFor,emContacts,medNotes);
     }
     private static CampAdmin parseAdminObj(JSONObject admin){
         // get attributes
@@ -161,7 +194,7 @@ public class FileIO {
             // find coordinator
             Dependent c = pM.getDependentById(id);
             if(c != null){
-                coordinators.add(pM.getDependentById(id));
+                coordinators.add(c);
             }
         });
         // parse campers
@@ -215,6 +248,14 @@ public class FileIO {
         // only deal with one camp for now
         return parseCampObj((JSONObject) campObject.get(0));
     }
+    private static ArrayList<Person> readEmergencyContacts(){
+        ArrayList<Person> persons = new ArrayList<Person>();
+        JSONArray personList = parseJsonFileArr(emergencyContactsPath);
+        personList.forEach(person->{
+            persons.add(parsePersonObj((JSONObject) person));
+        });
+        return persons;
+    }
 
     private static ArrayList<Guardian> readGuardians() { 
         ArrayList<Guardian> guardians = new ArrayList<Guardian>();
@@ -242,13 +283,13 @@ public class FileIO {
         return cabins;
     }
     private static ArrayList<Dependent> readDependents() {
-        ArrayList<Dependent> deps= new ArrayList<Dependent>();
+        ArrayList<Dependent> deps = new ArrayList<Dependent>();
         JSONArray dependentList = parseJsonFileArr(dependentJsonPath);
-            dependentList.forEach(dependent ->
-                deps.add(parseDependentObj((JSONObject)dependent))
+            dependentList.forEach(dependent ->{
+                deps.add(parseDependentObj((JSONObject)dependent));
+            }
         );
-        dependents =deps;
-        return dependents;
+        return deps;
     }
     /*
      * ***************************

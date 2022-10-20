@@ -8,10 +8,7 @@
         "hasBeenPaidFor":true,
         "isCoordinator":true,
         "emergencyContacts":[
-            {"firstName":"ec FirstName",
-            "lastName":"ec LastName",
-            "address":"ec Address"
-            }
+            {"id":"71c7ae99-247f-4c80-950a-4a41e767e84d"}
         ],
         "medicalNotes":[
             ["allergy 1","allergy 2"]
@@ -26,10 +23,7 @@
         "hasBeenPaidFor":true,
         "isCoordinator":false,
         "emergencyContacts":[
-            {"firstName":"ec FirstName",
-            "lastName":"ec LastName",
-            "address":"ec Address"
-            }
+            {"id":"61c7ae99-247f-4c80-950a-4a41e767e84d"}
         ],
         "medicalNotes":[
             ["allergy 1","allergy 2"]
@@ -44,10 +38,7 @@
         "hasBeenPaidFor":true,
         "isCoordinator":false,
         "emergencyContacts":[
-            {"firstName":"ec FirstName",
-            "lastName":"ec LastName",
-            "address":"ec Address"
-            }
+            {"id":"61c7ae99-247f-4c80-950a-4a41e767e84d"}
         ],
         "medicalNotes":[
             ["allergy 1","allergy 2"]
@@ -62,10 +53,7 @@
         "hasBeenPaidFor":false,
         "isCoordinator":false,
         "emergencyContacts":[
-            {"firstName":"ec FirstName",
-            "lastName":"ec LastName",
-            "address":"ec Address"
-            }
+            {"id":"61c7ae99-247f-4c80-950a-4a41e767e84d"}
         ],
         "medicalNotes":[
             ["allergy 1","allergy 2"]

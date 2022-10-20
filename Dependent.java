@@ -20,6 +20,13 @@ public class Dependent extends Person{
         this.medicalNotes = medNotes;
         this.emergencyContacts = emergencyContacts;
     }
+    public Dependent(String firstName, String lastName, String birthDate, String address, boolean isCoordinator, boolean hasBeenPaidFor,ArrayList<Person> emergencyContacts, ArrayList<String> medNotes){
+        super(firstName, lastName, birthDate, address,UUID.randomUUID());
+        this.hasBeenPaidFor = hasBeenPaidFor;
+        this.isCoordinator = isCoordinator;
+        this.medicalNotes = medNotes;
+        this.emergencyContacts = emergencyContacts;
+    }
 
     public ArrayList<String> getMedicalNotes(){
         return this.medicalNotes;

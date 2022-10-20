@@ -91,6 +91,11 @@ public class Cabin {
     public int getCoordinatorCapacity(){
         return this.coordinatorCapacity;
     }
+    public void viewCabinCouncelors(){
+        for(Dependent d: coordinators){
+            System.out.println(d.toString() + "\n");
+        }
+    }
 
     public boolean addCamperToCabin(Dependent camper){
         if(

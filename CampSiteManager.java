@@ -1,6 +1,7 @@
 //Copyright @jordansfowler
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class CampSiteManager{
   private String name;
@@ -29,22 +30,29 @@ public class CampSiteManager{
     this.name = name;
     this.address = address;
     this.pricePerCamperPerDay = pricePerCamperPerDay;
-    this.frequentlyAskedQuestions = FileIO.getFaqs();
+    this.frequentlyAskedQuestions =FileIO.getFaqs();
     this.authcode = authCode;
   }
-  public static CampSiteManager getInstance(String name, String address, double pricePerCamperPerDay,String authCode) {
+  public static CampSiteManager getInstance() {
     //To-Do
     if(campSiteManager == null){
-      return new CampSiteManager(name,address,pricePerCamperPerDay,authCode);
+      campSiteManager = FileIO.getCamp();
+      return campSiteManager;
+    }
+    return campSiteManager;
+  }
+  public static CampSiteManager getInstance(String name, String address, double price, String authCode) {
+    //To-Do
+    if(campSiteManager == null){
+      campSiteManager = new CampSiteManager(name, address, price, authCode);
+      return campSiteManager;
     }
     return campSiteManager;
   }
   public String getName() {
-    //To-Do
     return name;
   }
   public String getAddress() {
-    //To-Do
     return address;
   }
   public void seeCoordinators() {
@@ -157,20 +165,30 @@ public class CampSiteManager{
     //To-Do
     return false;
   }
-  public boolean viewDependents(String username, String password) {
-    //To-Do
+  public boolean viewDependentsFromGuardian(String guardianId){
+    UUID id = UUID.fromString(guardianId);
+    Guardian g = this.personManager.getGuardianById(id);
+    if(g!=null){
+      g.viewDependents();
+      return true;
+    }
+    return false;
+  }
+  public boolean viewCabinCouncelors(String cabinName) {
+    Cabin cabin = this.cabinManager.getCabinByName(cabinName);
+    if(cabin != null){
+      System.out.println("Cabin: " + cabin.getCabinName() + "'s councelors\n");
+      cabin.viewCabinCouncelors();
+      return true;
+    }
     return false;
   }
   public boolean addDependent(String guardianUsername, String guardianPassword) {
     //To-Do
     return false;
   }
-  public boolean getDependentCabin(Dependent dept) {
-    //To-Do
-    return false;
-  }
-  public boolean showDependentContacts(Dependent dept) {
-    //To-Do
+  public boolean getDependentCabin(String id) {
+
     return false;
   }
   public boolean hasPaid(String firstName, String lastName) {
@@ -188,20 +206,36 @@ public class CampSiteManager{
     //To-Do
     return false;
   }
-  public boolean getMedicalNotes(String username, String password) {
+  public boolean viewDependent(String id) {
+    UUID uuid = UUID.fromString(id);
+    Dependent dep = this.personManager.getDependentById(uuid);
+    if(dep!=null){
+      System.out.println(dep);
+      return true;
+    }
+    return false;
+  }
+  public boolean viewContactInformation(String id) {
+    UUID uuid = UUID.fromString(id);
+    Dependent dep = this.personManager.getDependentById(uuid);
+    if(dep!=null){
+      System.out.println("Contacts for: " + dep.getFullName());
+      dep.viewEmergencyContacts();
+    }
     //To-Do
     return false;
   }
-  public boolean getContactInformation(String authUsername, String authPassword) {
-    //To-Do
-    return false;
-  }
-  public boolean login() {
+  public boolean login(String username, String password) {
     //To-Do
     return false;
   }
   public boolean logout() {
     //To-Do
     return false;
+  }
+  public static void main(String args[]){
+    CampSiteManager csm = FileIO.getInstance().getCamp();
+    // csm.viewCabinCouncelors("Salty City Cabin");
+    csm.viewDependentsFromGuardian("79c7ae99-247f-4c80-950a-4a41e767e84c");
   }
 }

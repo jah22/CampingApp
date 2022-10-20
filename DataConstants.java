@@ -52,6 +52,7 @@ public abstract class DataConstants {
     protected static final String GUARDIAN_USERNAME = "username";
     protected static final String GUARDIAN_EMAIL = "email";
     protected static final String GUARDIAN_PHONE_NUMBER = "phoneNumber";
+    protected static final String GUARDIAN_REGISTERED_DEPENDENTS = "registeredDependents";
 
     protected static final String REVIEW_FILE_NAME = "./json/Review.json";
     protected static final String REVIEW_TITLE = "title";
@@ -63,6 +64,17 @@ public abstract class DataConstants {
     protected static final String SCHEDULE_ID = "id";
     protected static final String SCHEDULE_SCHEDULES = "schedules";
 
+    protected static final String EMERGENCY_CONTACT_FILE_NAME = "./json/EmergencyContact.json";
+    protected static final String EMERGENCY_CONTACT_FIRST_NAME = "firstName";
+    protected static final String EMERGENCY_CONTACT_LAST_NAME = "lastName";
+    protected static final String EMERGENCY_CONTACT_ADDRESS = "address";
+    protected static final String EMERGENCY_CONTACT_BIRTHDATE= "birthDate";
+    protected static final String EMERGENCY_CONTACT_ID= "id";
 
+    protected static final String PERSON_FIRST_NAME = "firstName";
+    protected static final String PERSON_LAST_NAME = "lastName";
+    protected static final String PERSON_ADDRESS = "address";
+    protected static final String PERSON_ID = "id";
+    protected static final String PERSON_BIRTHDATE = "birthDate";
 
 }

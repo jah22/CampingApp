@@ -60,9 +60,6 @@ public abstract class DataConstants {
     protected static final String REVIEW_BODY = "body";
     protected static final String REVIEW_RATING = "rating";
 
-    protected static final String SCHEDULE_FILE_NAME = "./json/Schedule.json";
-    protected static final String SCHEDULE_ID = "id";
-    protected static final String SCHEDULE_SCHEDULES = "schedules";
 
     protected static final String EMERGENCY_CONTACT_FILE_NAME = "./json/EmergencyContact.json";
     protected static final String EMERGENCY_CONTACT_FIRST_NAME = "firstName";
@@ -77,4 +74,15 @@ public abstract class DataConstants {
     protected static final String PERSON_ID = "id";
     protected static final String PERSON_BIRTHDATE = "birthDate";
 
+
+    protected static final String SCHEDULE_SCHEDULE = "schedule";
+    protected static final String SCHEDULE_DAY_OF_WEEK = "dayOfWeek";
+    protected static final String SCHEDULE_SCHEDULES = "schedules";
+    protected static final String SCHEDULE_FILE_NAME = "./json/Schedule.json";
+    protected static final String SCHEDULE_MONDAY = "Monday";
+    protected static final String SCHEDULE_TUESDAY = "Tuesday";
+    protected static final String SCHEDULE_WEDNESDAY = "Wednesday";
+    protected static final String SCHEDULE_THURSDAY = "Thursday";
+    protected static final String SCHEDULE_FRIDAY = "Friday";
+    protected static final String SCHEDULE_ID = "id";
 }

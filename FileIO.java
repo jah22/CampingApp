@@ -10,9 +10,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.UUID;
-
-import javax.xml.crypto.Data;
+import java.util.function.Consumer;
 
 public class FileIO {
     /*
@@ -43,8 +43,10 @@ public class FileIO {
          */
         this.faqs = readFaqs();
         this.reviews = readReviews();
+        // read schedules
+        this.schedules = readSchedules();
+        // start dealing with people
         this.pM = new PersonManager();
-
         this.admins = readAdmins();
         this.pM.setAdmins(this.admins);
         this.emergencyContacts = readEmergencyContacts();
@@ -52,7 +54,9 @@ public class FileIO {
         this.dependents = readDependents();
         this.pM.setDependents(this.dependents);
 
+        // read guardians after dependents since guardians depend on them
         this.guardians = readGuardians();
+
 
         // add dependents
         // to do: read schedules
@@ -95,12 +99,40 @@ public class FileIO {
     public static ArrayList<Person> getEmergencyContacts(){
         return emergencyContacts;
     }
+    public static ArrayList<Schedule> getSchedules(){
+        return schedules;
+    }
 
     /*
      * ***************************
      * Json Parsers
      * ***************************
      */
+    private static Schedule parseScheduleObj(JSONObject jSchedule){
+        UUID id = UUID.fromString((String)jSchedule.get(DataConstants.SCHEDULE_ID));
+        JSONArray jSchedules = (JSONArray)jSchedule.get(DataConstants.SCHEDULE_SCHEDULES);
+        // create the hash
+        HashMap<String,ActivityManager> hash = new HashMap<String,ActivityManager>();
+
+
+        jSchedules.forEach(jSubSchedule->{
+            JSONObject jO = (JSONObject) jSubSchedule;
+            // start an activitiy manager
+            ActivityManager aM = new ActivityManager();
+            // get day of week    
+            String dayOfWeek = (String) jO.get(DataConstants.SCHEDULE_DAY_OF_WEEK);
+            // get schedules
+            JSONArray jsonArrScheds = (JSONArray) jO.get(DataConstants.SCHEDULE_SCHEDULE);
+            jsonArrScheds.forEach(jsonActivity->{
+                String activity = (String)  jsonActivity;
+                aM.addActivityToEnd(activity);
+            });
+            hash.put(dayOfWeek,aM);
+        });
+
+        return new Schedule(hash,id);
+    }
+
     private static FAQ parseFaqObj(JSONObject jFaq){
         String question = (String) jFaq.get(DataConstants.FAQ_QUESTION);
         String answer = (String) jFaq.get(DataConstants.FAQ_ANSWER);
@@ -255,6 +287,14 @@ public class FileIO {
      * Json Readers
      * ***************************
      */
+    private ArrayList<Schedule> readSchedules(){
+        ArrayList<Schedule> scheds = new ArrayList<Schedule>();
+        JSONArray jScheds = parseJsonFileArr(DataConstants.SCHEDULE_FILE_NAME);
+        jScheds.forEach(jSched->{
+            scheds.add(parseScheduleObj((JSONObject)jSched));
+        });
+        return scheds; 
+    }
     private ArrayList<Review> readReviews(){
         ArrayList<Review> revs=  new ArrayList<Review>();
         JSONArray revList = parseJsonFileArr(DataConstants.REVIEW_FILE_NAME);
@@ -413,5 +453,12 @@ public class FileIO {
             e.printStackTrace();
         }
         return new JSONArray();
+    }
+    public static void main(String args[]){
+        FileIO fiO= FileIO.getInstance();
+        ArrayList<Schedule> scheds = fiO.getSchedules();
+        for (Schedule schedule : scheds) {
+            System.out.println(schedule) ;
+        }
     }
 }

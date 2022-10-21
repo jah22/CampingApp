@@ -10,6 +10,9 @@ public class ReviewManager {
     public ReviewManager(){
         // param ctor
     }
+    public void setReviews(ArrayList<Review> revs){
+        this.reviews = revs;
+    }
 
     public void seeAvgReview(){
         if(this.avgReview == 0){
@@ -19,6 +22,9 @@ public class ReviewManager {
         System.out.println("Average rating: " + this.avgReview);
     }
     public void seeReviewsByAuthor(String author){
+        /*
+         * Author is first name last name
+         */
         for(Review r : this.reviews){
             if(r.getAuthor().equals(author)){
                 System.out.println(r);
@@ -28,6 +34,13 @@ public class ReviewManager {
     public void seeReviewsByRating(int rating){
         for(Review r: this.reviews){
             if(r.getRating() == rating){
+                System.out.println(r);
+            }
+        }
+    }
+    public void seeReviewsByTitle(String title){
+        for(Review r: this.reviews){
+            if(r.getTitle().equals(title)){
                 System.out.println(r);
             }
         }

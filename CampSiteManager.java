@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class CampSiteManager{
+  // to do: add themes
+  private String theme;
+
   private String name;
   private String address;
   // portia said 7 dollars is fine 
@@ -234,8 +237,8 @@ public class CampSiteManager{
     return false;
   }
   public static void main(String args[]){
-    CampSiteManager csm = FileIO.getInstance().getCamp();
+    // CampSiteManager csm = FileIO.getInstance().getCamp();
     // csm.viewCabinCouncelors("Salty City Cabin");
-    csm.viewDependentsFromGuardian("79c7ae99-247f-4c80-950a-4a41e767e84c");
+    // csm.viewDependentsFromGuardian("79c7ae99-247f-4c80-950a-4a41e767e84c");
   }
 }

@@ -1,23 +1,41 @@
 [
     {
-        "id":2,
-        "schedules":{
-            "Monday":[{
-                "8":"WAKE_UP",
-                "9":"BREAKFAST",
-                "10":"WALK",
-                "11":"WALK",
-                "12":"LUNCH",
-                "13":"ART_CRAFTS",
-                "14":"ART_CRAFTS",
-                "15":"TUBING",
-                "16":"TUBING",
-                "17":"ROCK_CLIMBING",
-                "18":"ROCK_CLIMBONG",
-                "19":"WALK",
-                "20":"ARCHERY",
-                "21":"ARCHERY",
-                "22":"SLEEp"
-                }]}
-    }
+        "id":"ddd86dd0-0335-4e37-a6ef-e416c897c532",
+        "schedules":[
+            {
+                "dayOfWeek":"Monday",
+                "schedule":[
+                    "WAKE_UP",
+                    "BREAKFAST",
+                    "WALK #1",
+                    "WALK #2",
+                    "LUNCH",
+                    "ART_CRAFTS #1",
+                    "ART_CRAFTS #2",
+                    "TUBING",
+                    "TUBING",
+                    "ARCHERY #1",
+                    "ARCHERY #2",
+                    "NIGHT"
+                ]
+            },
+            {
+                "dayOfWeek":"Tuesday",
+                "schedule":[
+                    "WAKE_UP",
+                    "BREAKFAST",
+                    "WALK #1",
+                    "WALK #2",
+                    "LUNCH",
+                    "ART_CRAFTS #1",
+                    "ART_CRAFTS #2",
+                    "TUBING",
+                    "TUBING",
+                    "ROCK_CLIMBING #1",
+                    "ROCK_CLIMBING #2",
+                    "NIGHT"
+                ]
+        }
+    ]
+}
 ]

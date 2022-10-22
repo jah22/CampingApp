@@ -63,5 +63,15 @@ public class PriorityBehavior implements AuthBehavior{
     public void setPhone(String phone){
         this.phone = phone;
     }
+
+    public String toString(){
+        String out = "Priority user.\n";
+        out += "Username: " + this.username +"\n";
+        out += "Password: " + this.password + "\n";
+        out += "Email: " + this.email + "\n";
+        out += "Phone: " + this.phone + "\n";
+
+        return out;
+    }
      
 }

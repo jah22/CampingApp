@@ -14,5 +14,9 @@ public class NoPriorityBehavior implements AuthBehavior{
         // cannot login
         return false;
     }
+
+    public String toString(){
+        return "Non-priority user.";
+    }
      
 }

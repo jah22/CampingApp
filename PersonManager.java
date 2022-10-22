@@ -5,15 +5,15 @@ public class PersonManager {
     private ArrayList<CampAdmin> admins = new ArrayList<CampAdmin>(); 
     private ArrayList<Guardian>  guardians = new ArrayList<Guardian>(); 
     private ArrayList<Dependent>  dependents = new ArrayList<Dependent>(); 
-    private ArrayList<Person> emergencyContacts = new ArrayList<Person>();
+    private ArrayList<EmergencyContact> emergencyContacts = new ArrayList<EmergencyContact>();
 
-    public PersonManager(ArrayList<CampAdmin> admins, ArrayList<Guardian> guardians, ArrayList<Dependent> dependents,ArrayList<Person> emergencyContacts){
+    public PersonManager(ArrayList<CampAdmin> admins, ArrayList<Guardian> guardians, ArrayList<Dependent> dependents,ArrayList<EmergencyContact> emergencyContacts){
         this.admins = admins;
         this.guardians = guardians;
         this.dependents = dependents;
         this.emergencyContacts = emergencyContacts;
     }
-    public PersonManager(ArrayList<CampAdmin> admins, ArrayList<Guardian> guardians, ArrayList<Person>emergencyContacts){
+    public PersonManager(ArrayList<CampAdmin> admins, ArrayList<Guardian> guardians, ArrayList<EmergencyContact>emergencyContacts){
         this.admins = admins;
         this.guardians = guardians;
         this.emergencyContacts = emergencyContacts;
@@ -25,7 +25,7 @@ public class PersonManager {
         this.admins = admins;
     }
 
-    public void setEmergencyContacts(ArrayList<Person> emergencyContacts){
+    public void setEmergencyContacts(ArrayList<EmergencyContact> emergencyContacts){
         this.emergencyContacts = emergencyContacts;
     }
     public void setDependents(ArrayList<Dependent> dependents){
@@ -145,8 +145,8 @@ public class PersonManager {
         }
         return null;
     }
-    public Person getEmergencyContactById(UUID id){
-        for (Person p:this.emergencyContacts) {
+    public EmergencyContact getEmergencyContactById(UUID id){
+        for (EmergencyContact p:this.emergencyContacts) {
             if(p.getId().equals(id)) {
                 return p;
             }

@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.UUID;
-import java.util.function.Consumer;
 
 
 public class FileIO {
@@ -196,7 +195,7 @@ public class FileIO {
         });
         return new Guardian(firstName, lastName, birthDate, address, id, password, username, email, phoneNumber,deps);
     }
-    private Dependent parseDependentObj(JSONObject dependent){
+    private Dependent parseCamperObj(JSONObject dependent){
         // get attributes
         String firstName = (String) dependent.get(DataConstants.DEPENDENT_FIRST_NAME);
         String lastName = (String) dependent.get(DataConstants.DEPENDENT_LAST_NAME);
@@ -229,8 +228,23 @@ public class FileIO {
                 medNotes.addAll(notes);
             }
         );
+        NoPriorityBehavior npB = new NoPriorityBehavior();
         
-        return  new Dependent(firstName, lastName, birthDate, address, id,isCoordinator,hasBeenPaidFor,emContacts,medNotes);
+        return  new Dependent(firstName, lastName, birthDate, address, id,isCoordinator,hasBeenPaidFor,emContacts,medNotes,npB);
+    }
+    private Dependent parseCoordinatorObj(JSONObject jObject){
+        Dependent coordinator = parseCamperObj(jObject) ;
+
+        // now read auth stuff
+        String username = (String) jObject.get("username");
+        String email = (String) jObject.get("email");
+        String phone = (String) jObject.get("phoneNumber");
+        String password = (String) jObject.get("password");
+
+        PriorityBehavior pB = new PriorityBehavior(username,password,phone,email);
+        coordinator.setAuthBehavior(pB);
+
+        return coordinator;
     }
     private CampAdmin parseAdminObj(JSONObject admin){
         // get attributes
@@ -367,11 +381,18 @@ public class FileIO {
     }
     private ArrayList<Dependent> readDependents() {
         ArrayList<Dependent> deps = new ArrayList<Dependent>();
-        JSONArray dependentList = parseJsonFileArr(DataConstants.DEPENDENT_FILE_NAME);
-            dependentList.forEach(dependent ->{
-                deps.add(parseDependentObj((JSONObject)dependent));
-            }
+        // read campers
+        JSONArray jCamperList = parseJsonFileArr(DataConstants.CAMPER_FILE_NAME);
+        jCamperList.forEach(jDependent ->{
+            deps.add(parseCamperObj((JSONObject)jDependent));
+        }
         );
+        // read coordinators
+        JSONArray jCoordinatorList = parseJsonFileArr(DataConstants.COORDINATOR_FILE_NAME);
+        jCoordinatorList.forEach(jDependent->{
+            deps.add(parseCoordinatorObj((JSONObject)jDependent));
+        });
+        
         return deps;
     }
     /*
@@ -415,19 +436,16 @@ public class FileIO {
         JSONObject jO = getPriorityPersonJson(cA);
         return jO;
     }
-    private JSONObject getDependentJson(Dependent d){
-        JSONObject jsonD = getPersonJson(d);
-        ArrayList<JSONObject> ids = new ArrayList<>();
-        for(EmergencyContact regEC : d.getEmergencyContacts()) {
-            JSONObject dependent = new JSONObject();
-            dependent.put("id", regEC.id);
-            ids.add(dependent);
-        }
-        jsonD.put("isCoordinator", d.getIsCoordinator());
-        jsonD.put("hasBeenPaidFor", d.getHasBeenPaidFor());
-        jsonD.put("medicalNotes", d.getMedicalNotes());
-        jsonD.put("emergencyContacts", ids);
-        return jsonD;
+    private JSONObject getCamperJson(Dependent d){
+        JSONObject jO = getPersonJson(d);
+        jO.put("hasBeenPaidFor",d.getHasBeenPaidFor());
+        jO.put("isCoordinator",d.getIsCoordinator());
+        String jsonMedNotes = new Gson().toJson(d.getMedicalNotes());
+        String jsonEmContacts = new Gson().toJson(d.getMedicalNotes());
+        jO.put("medicalNotes",jsonMedNotes);
+        jO.put("emergencyContacts",jsonEmContacts);
+
+        return jO;
     }
     // private JSONObject getCabinJson(Cabin c) {
     //     JSONObject jsonC = 
@@ -471,45 +489,14 @@ public class FileIO {
         String finalGuardString = jsonFormatter(guardJsonList);
         writeToJson(finalGuardString,DataConstants.GUARDIAN_FILE_NAME);
     }
-    private void writeCampAdmin(ArrayList<CampAdmin> admin) {
-        String adminJsonList = "";
-        boolean isFirst = true;
-        for(CampAdmin newAdmin : admin) {
-            JSONObject adminInfo = getCampAdminJson(newAdmin);
-            String adminInfoString = adminInfo.toJSONString();
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            JsonElement je = JsonParser.parseString(adminInfoString);
-            String formattedJsonString = gson.toJson(je);
-            if(isFirst) {
-                adminJsonList = adminJsonList+formattedJsonString;
-                isFirst = false;
-            }
-            else {
-                adminJsonList = adminJsonList+",\n"+formattedJsonString;
-            }
-        }
-        String finalAdminString = jsonFormatter(adminJsonList);
-        writeToJson(finalAdminString,DataConstants.CAMP_ADMIN_FILE_NAME);
+    private void writeCabin(Cabin cabin) {
+
     }
-    private void writeDependent(ArrayList<Dependent> dependent) {
-        String dependJsonList = "";
-        boolean isFirst = true;
-        for(Dependent newDepend : dependent) {
-            JSONObject dependInfo = getDependentJson(newDepend);
-            String dependInfoString = dependInfo.toJSONString();
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            JsonElement je = JsonParser.parseString(dependInfoString);
-            String formattedJsonString = gson.toJson(je);
-            if(isFirst) {
-                dependJsonList = dependJsonList+formattedJsonString;
-                isFirst = false;
-            }
-            else {
-                dependJsonList = dependJsonList+",\n"+formattedJsonString;
-            }
-        }
-        String finalDependentString = jsonFormatter(dependJsonList);
-        writeToJson(finalDependentString,DataConstants.DEPENDENT_FILE_NAME);
+    private void writeReview(Review review) {
+
+    }
+    private void writeCoordinator(Dependent coordinator){
+
     }
     // private void writeCabin(Cabin cabin) {
     //     writeToJson(getCabinJson(cabin),DataConstants.CABIN_FILE_NAME);
@@ -538,9 +525,13 @@ public class FileIO {
         return new JSONArray();
     }
     public static void main(String args[]){
-        FileIO fiO = FileIO.getInstance();
-        ArrayList<CampAdmin> test = fiO.readAdmins();
-        fiO.writeCampAdmin(test);
-        System.out.println("here");
+        FileIO fiO= FileIO.getInstance();
+        // ArrayList<Schedule> scheds = fiO.getSchedules();
+        // for (Schedule schedule : scheds) {
+        //     System.out.println(schedule) ;
+        // }
+        for(Dependent dep: fiO.getDependents()){
+            System.out.println(dep);
+        }
     }
 }

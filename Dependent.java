@@ -20,6 +20,14 @@ public class Dependent extends Person{
         this.medicalNotes = medNotes;
         this.emergencyContacts = emergencyContacts;
     }
+    public Dependent(String firstName, String lastName, String birthDate, String address, UUID id, boolean isCoordinator, boolean hasBeenPaidFor,ArrayList<EmergencyContact> emergencyContacts, ArrayList<String> medNotes,AuthBehavior auth){
+        super(firstName, lastName, birthDate, address,id);
+        this.hasBeenPaidFor = hasBeenPaidFor;
+        this.isCoordinator = isCoordinator;
+        this.medicalNotes = medNotes;
+        this.emergencyContacts = emergencyContacts;
+        this.authBehavior = auth;
+    }
     public Dependent(String firstName, String lastName, String birthDate, String address, boolean isCoordinator, boolean hasBeenPaidFor,ArrayList<EmergencyContact> emergencyContacts, ArrayList<String> medNotes){
         super(firstName, lastName, birthDate, address,UUID.randomUUID());
         this.hasBeenPaidFor = hasBeenPaidFor;
@@ -65,6 +73,8 @@ public class Dependent extends Person{
         for(String note: medicalNotes){
             out += note +"\n";
         }
+        out += "Auth Information:\n";
+        out += this.authBehavior.toString() +"\n";
         out += div;
 
         return out;

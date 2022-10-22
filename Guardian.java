@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Guardian extends Person{
+public class Guardian extends Person {
 
     private ArrayList<Dependent> registeredDependents = new ArrayList<Dependent>();
 
@@ -29,12 +29,12 @@ public class Guardian extends Person{
     public void setRegisteredDependents(ArrayList<Dependent> registeredDependents) {
         this.registeredDependents = registeredDependents;
     }
-
-    
+    public ArrayList<Dependent> getRegisteredDependents() {
+        return this.registeredDependents;
+    }
     public void viewDependents(){
         for(Dependent d: this.registeredDependents){
             System.out.println(d);
         }
     }
-
 }

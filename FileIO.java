@@ -3,6 +3,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -12,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.UUID;
+
 
 public class FileIO {
     /*
@@ -24,7 +28,7 @@ public class FileIO {
     private static ArrayList<Review> reviews;
     private static ArrayList<Schedule> schedules;
     private static ArrayList<Dependent> dependents;
-    private static ArrayList<Person> emergencyContacts;
+    private static ArrayList<EmergencyContact> emergencyContacts;
     private static CampSiteManager campSiteManager;
 
     /*
@@ -95,7 +99,7 @@ public class FileIO {
     public static CampSiteManager getCamp(){
         return campSiteManager;
     }
-    public static ArrayList<Person> getEmergencyContacts(){
+    public static ArrayList<EmergencyContact> getEmergencyContacts(){
         return emergencyContacts;
     }
     public static ArrayList<Schedule> getSchedules(){
@@ -156,6 +160,16 @@ public class FileIO {
         
         return (new Person(firstName, lastName, birthDate, address,id));
     }
+    private EmergencyContact parseEmergencyContactObj(JSONObject jEM){
+        // get attributes
+        String firstName = (String) jEM.get(DataConstants.PERSON_FIRST_NAME);
+        String lastName = (String) jEM.get(DataConstants.PERSON_LAST_NAME);
+        String address = (String) jEM.get(DataConstants.PERSON_ADDRESS);
+        UUID id = UUID.fromString((String)jEM.get(DataConstants.PERSON_ID));
+        String birthDate = (String) jEM.get(DataConstants.PERSON_BIRTHDATE);
+        
+        return (new EmergencyContact(firstName, lastName, birthDate, address,id));
+    }
     private Guardian parseGuardianObj(JSONObject guardian){
         String firstName = (String) guardian.get(DataConstants.PERSON_FIRST_NAME);
         String lastName = (String) guardian.get(DataConstants.PERSON_LAST_NAME);
@@ -191,7 +205,7 @@ public class FileIO {
         boolean hasBeenPaidFor = (boolean) dependent.get(DataConstants.DEPENDENT_HAS_BEEN_PAID_FOR);
         boolean isCoordinator = (boolean) dependent.get(DataConstants.DEPENDENT_IS_COORDINATOR);
 
-        ArrayList<Person> emContacts = new ArrayList<Person>();
+        ArrayList<EmergencyContact> emContacts = new ArrayList<EmergencyContact>();
         ArrayList<String> medNotes = new ArrayList<String>();
 
         // parse the contacts
@@ -199,7 +213,7 @@ public class FileIO {
         jEmContacts.forEach(jContact->{
             JSONObject jEm =(JSONObject) jContact;
             UUID jEmId= UUID.fromString((String) jEm.get(DataConstants.EMERGENCY_CONTACT_ID));
-            Person emContact = pM.getEmergencyContactById(jEmId);
+            EmergencyContact emContact = pM.getEmergencyContactById(jEmId);
             if(emContact != null){
                 emContacts.add(emContact);
             }
@@ -331,13 +345,13 @@ public class FileIO {
         // only deal with one camp for now
         return parseCampObj((JSONObject) campObject.get(0));
     }
-    private ArrayList<Person> readEmergencyContacts(){
-        ArrayList<Person> persons = new ArrayList<Person>();
-        JSONArray personList = parseJsonFileArr(DataConstants.EMERGENCY_CONTACT_FILE_NAME);
-        personList.forEach(person->{
-            persons.add(parsePersonObj((JSONObject) person));
+    private ArrayList<EmergencyContact> readEmergencyContacts(){
+        ArrayList<EmergencyContact> emContacts = new ArrayList<EmergencyContact>();
+        JSONArray emList = parseJsonFileArr(DataConstants.EMERGENCY_CONTACT_FILE_NAME);
+        emList.forEach(person->{
+            emContacts.add(parseEmergencyContactObj((JSONObject) person));
         });
-        return persons;
+        return emContacts;
     }
 
     private ArrayList<Guardian> readGuardians() { 
@@ -409,6 +423,13 @@ public class FileIO {
     }
     private JSONObject getGuardianJson(Guardian g){
         JSONObject jsonG = getPriorityPersonJson(g);
+        ArrayList<JSONObject> ids = new ArrayList<>();
+        for(Dependent regDependent : g.getRegisteredDependents()) {
+            JSONObject dependent = new JSONObject();
+            dependent.put("id", regDependent.id);
+            ids.add(dependent);
+        }
+        jsonG.put("registeredDependents", ids);
         return jsonG;
     }
     private JSONObject getCampAdminJson(CampAdmin cA){
@@ -426,6 +447,10 @@ public class FileIO {
 
         return jO;
     }
+    // private JSONObject getCabinJson(Cabin c) {
+    //     JSONObject jsonC = 
+    //     return jsonC;
+    // }
 
     /*
      * ***************************
@@ -433,18 +458,36 @@ public class FileIO {
      * ***************************
      */
     // write a JSON object to file
-    private void writeToJson(JSONObject jO,String filePath){
+    private void writeToJson(String jO,String filePath){
         try(FileWriter fW = new FileWriter(filePath)){
-            fW.write(jO.toJSONString());
+            fW.write(jO);
         }catch(IOException e){
             e.printStackTrace();
         }
     }
-    private void writeGuardian(Guardian guardian) {
-        writeToJson(getGuardianJson(guardian),DataConstants.GUARDIAN_FILE_NAME);
+    private String jsonFormatter(String jsonFile) {
+        String fixedFormat = "[\n"+jsonFile+"\n]";
+        return fixedFormat;
     }
-    private void writeCampAdmin(CampAdmin admin) {
-        writeToJson(getCampAdminJson(admin),DataConstants.CAMP_ADMIN_FILE_NAME);
+    private void writeGuardian(ArrayList<Guardian> guardian) {
+        String guardJsonList = "";
+        boolean isFirst = true;
+        for(Guardian newGuard : guardian) {
+            JSONObject guardInfo = getGuardianJson(newGuard);
+            String guardInfoString = guardInfo.toJSONString();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            JsonElement je = JsonParser.parseString(guardInfoString);
+            String formattedJsonString = gson.toJson(je);
+            if(isFirst) {
+                guardJsonList = guardJsonList+formattedJsonString;
+                isFirst = false;
+            }
+            else {
+                guardJsonList = guardJsonList+",\n"+formattedJsonString;
+            }
+        }
+        String finalGuardString = jsonFormatter(guardJsonList);
+        writeToJson(finalGuardString,DataConstants.GUARDIAN_FILE_NAME);
     }
     private void writeCabin(Cabin cabin) {
 
@@ -455,6 +498,15 @@ public class FileIO {
     private void writeCoordinator(Dependent coordinator){
 
     }
+    // private void writeCabin(Cabin cabin) {
+    //     writeToJson(getCabinJson(cabin),DataConstants.CABIN_FILE_NAME);
+    // }
+    //private void writeReview(Review review) {
+    //    writeToJson(getReviewJson(review),DataConstants.REVIEW_FILE_NAME);
+    //}
+    // private void writeCoordinator(Dependent coordinator){
+    //     writeToJson(getCampAdminJson(coordinator),DataConstants.CAMP_ADMIN_FILE_NAME);
+    // }
     private JSONArray parseJsonFileArr(String filename) {
         JSONParser jsonP = new JSONParser();
         try(FileReader reader = new FileReader(filename)){

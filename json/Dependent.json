@@ -1,62 +1,62 @@
 [
-    {
-        "id":"81c7ae99-247f-4c80-950a-4a41e767e84c",
-        "firstName":"Jane",
-        "lastName":"Smith",
-        "birthDate":"2009-05-14",
-        "address":"429 Sycamore Drive, Columbia, SC",
-        "hasBeenPaidFor":true,
-        "isCoordinator":true,
-        "emergencyContacts":[
-            {"id":"71c7ae99-247f-4c80-950a-4a41e767e84d"}
-        ],
-        "medicalNotes":
-            ["allergy 1","allergy 2"]
-        
-    },
-    {
-        "id":"81c7ae99-247f-4c80-950a-4a41e767e84d",
-        "firstName":"Billy",
-        "lastName":"Joel",
-        "birthDate":"2011-03-21",
-        "address":"429 Sycamore Drive, Columbia, SC",
-        "hasBeenPaidFor":true,
-        "isCoordinator":false,
-        "emergencyContacts":[
-            {"id":"61c7ae99-247f-4c80-950a-4a41e767e84d"}
-        ],
-        "medicalNotes":
-            ["allergy 1","allergy 2"]
-        
-    },
-    {
-        "id":"81c7ae99-247f-4c80-950a-4a41e767e84e",
-        "firstName":"Sue",
-        "lastName":"Smith",
-        "birthDate":"2012-03-21",
-        "address":"429 Sycamore Drive, Columbia, SC",
-        "hasBeenPaidFor":true,
-        "isCoordinator":false,
-        "emergencyContacts":[
-            {"id":"61c7ae99-247f-4c80-950a-4a41e767e84d"}
-        ],
-        "medicalNotes":
-            ["allergy 1","allergy 2"]
-        
-    },
-    {
-        "id":"81c7ae99-247f-4c80-950a-4a41e767e84f",
-        "firstName":"Sam",
-        "lastName":"Brown",
-        "birthDate":"2012-03-21",
-        "address":"429 Sycamore Drive, Columbia, SC",
-        "hasBeenPaidFor":false,
-        "isCoordinator":false,
-        "emergencyContacts":[
-            {"id":"61c7ae99-247f-4c80-950a-4a41e767e84d"}
-        ],
-        "medicalNotes":
-            ["allergy 1","allergy 2"]
-        
-    }
+  {
+      "id":"81c7ae99-247f-4c80-950a-4a41e767e84c",
+      "firstName":"Jane",
+      "lastName":"Smith",
+      "birthDate":"2009-05-14",
+      "address":"429 Sycamore Drive, Columbia, SC",
+      "hasBeenPaidFor":true,
+      "isCoordinator":true,
+      "emergencyContacts":[
+          {"id":"71c7ae99-247f-4c80-950a-4a41e767e84d"}
+      ],
+      "medicalNotes":
+          ["allergy 1","allergy 2"]
+      
+  },
+  {
+      "id":"81c7ae99-247f-4c80-950a-4a41e767e84d",
+      "firstName":"Billy",
+      "lastName":"Joel",
+      "birthDate":"2011-03-21",
+      "address":"429 Sycamore Drive, Columbia, SC",
+      "hasBeenPaidFor":true,
+      "isCoordinator":false,
+      "emergencyContacts":[
+          {"id":"61c7ae99-247f-4c80-950a-4a41e767e84d"}
+      ],
+      "medicalNotes":
+          ["allergy 1","allergy 2"]
+      
+  },
+  {
+      "id":"81c7ae99-247f-4c80-950a-4a41e767e84e",
+      "firstName":"Sue",
+      "lastName":"Smith",
+      "birthDate":"2012-03-21",
+      "address":"429 Sycamore Drive, Columbia, SC",
+      "hasBeenPaidFor":true,
+      "isCoordinator":false,
+      "emergencyContacts":[
+          {"id":"61c7ae99-247f-4c80-950a-4a41e767e84d"}
+      ],
+      "medicalNotes":
+          ["allergy 1","allergy 2"]
+      
+  },
+  {
+      "id":"81c7ae99-247f-4c80-950a-4a41e767e84f",
+      "firstName":"Sam",
+      "lastName":"Brown",
+      "birthDate":"2012-03-21",
+      "address":"429 Sycamore Drive, Columbia, SC",
+      "hasBeenPaidFor":false,
+      "isCoordinator":false,
+      "emergencyContacts":[
+          {"id":"61c7ae99-247f-4c80-950a-4a41e767e84d"}
+      ],
+      "medicalNotes":
+          ["allergy 1","allergy 2"]
+      
+  }
 ]

@@ -161,5 +161,29 @@ public class PersonManager {
         }
         return null;
     }
+    public Dependent GetCoordinatorByUserNamePassword(String username, String password) {
+		for (Dependent dependent : dependents) {
+			if(dependent.authBehavior.login(username,password)) {
+				return dependent;
+			}
+		}
+		return null;
+	}
+    public Guardian GetGuardianByUserNamePassword(String username, String password) {
+		for (Guardian guardian :guardians) {
+			if(guardian.authBehavior.login(username,password)) {
+				return guardian;
+			}
+		}
+		return null;
+	}
+    public CampAdmin GetCampAdminByUserNamePassword(String username, String password) {
+		for (CampAdmin campAdmin : admins) {
+            if(campAdmin.authBehavior.login(username,password)) {
+                return campAdmin;
+            }
+        }
+        return null;
+	}
 
 }

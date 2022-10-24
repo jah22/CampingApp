@@ -57,8 +57,8 @@ public class CampSiteManager{
   public String getAddress() {
     return address;
   }
-  public void seeCoordinators() {
-    this.personManager.seeCoordinators();
+  public void viewCoordinators() {
+    this.personManager.viewCoordinators();
   }
   public String toString() {
       String out = "Cabin: " + this.name;
@@ -68,33 +68,36 @@ public class CampSiteManager{
 
       return out;
   }
-  public void seeAdmins() {
-    this.personManager.seeAdmins();; 
+  public void viewAdmins() {
+    this.personManager.viewAdmins();; 
   }
-  public void seeCabins() {
-    this.cabinManager.seeCabins();
+  public void viewCabins() {
+    this.cabinManager.viewCabins();
   }
-  public void seeAllActivities() {
+  public void viewAllActivities() {
     /*
      * TO DO:
      * Loop thru all activities
      */
   }
-  public void seeAllCabinActivities(String cabinId) {
-    if(!this.cabinManager.seeCabinActivities(cabinId)){
+  public void viewAllCabinActivities(String cabinId) {
+    if(!this.cabinManager.viewCabinActivities(cabinId)){
       System.out.println("A cabin with that ID cannot be found.");
     }
   }
-  public void seeCabinCoordinators(String cabinID) {
-    if(!this.cabinManager.seeCabinCoordinators(cabinID)){
+  public void viewCabinCoordinators(String cabinID) {
+    if(!this.cabinManager.viewCabinCoordinators(cabinID)){
       System.out.println("A cabin with that ID cannot be found.");
     }
   }
-  public boolean addCamperToCabin(Dependent camper) {
-    /*
-     * TODO this function
-     */
-    return false;
+  public boolean checkCabinsForDependents(Guardian g){
+    return this.cabinManager.checkCabinsForDependents(g);
+  }
+  public Cabin getCabinByIndex(int index){
+    return this.cabinManager.getCabinByIndex(index);
+  }
+  public boolean addCamperToCabin(Dependent camper,Cabin cabin) {
+    return this.cabinManager.addCamperToCabin(camper,cabin);
   }
   public boolean removeCamperFromCabin(Dependent camper) {
     //To-Do
@@ -108,17 +111,17 @@ public class CampSiteManager{
     //To-Do
     return false;
   }
-  public void seeAvgReviews() {
-    //To-Do
+  public void viewAllReviews(){
+    this.reviewManager.viewAllReviews();
   }
-  public void seeReviewsByAuthor(String firstName, String lastName) {
-    this.reviewManager.seeReviewsByAuthor(firstName + " " + lastName);
+  public void viewReviewsByAuthor(String author) {
+    this.reviewManager.viewReviewsByAuthor(author);
   }
-  public void seeReviewsByRating(int rating) {
-    this.reviewManager.seeReviewsByRating(rating);
+  public void viewReviewsByRating(int rating) {
+    this.reviewManager.viewReviewsByRating(rating);
   }
-  public void addReview(String firstName, String lastName, int rating, String text) {
-    this.reviewManager.addReview(firstName, rating, lastName, text);
+  public void addReview(String authorFullName, int rating,String title, String body){
+    this.reviewManager.addReview(authorFullName, rating,title,body);
   }
   public boolean registerGuardian() {
     //To-Do
@@ -172,8 +175,8 @@ public class CampSiteManager{
     }
     return false;
   }
-  public boolean viewCabinCouncelors(String cabinName) {
-    Cabin cabin = this.cabinManager.getCabinByName(cabinName);
+  public boolean viewCabinCouncelors(int cabinIndex) {
+    Cabin cabin = this.cabinManager.getCabinByIndex(cabinIndex);
     if(cabin != null){
       System.out.println("Cabin: " + cabin.getCabinName() + "'s councelors\n");
       cabin.viewCabinCouncelors();
@@ -181,8 +184,8 @@ public class CampSiteManager{
     }
     return false;
   }
-  public void addDependent(Guardian user,String firstName, String lastName, String birthDate, String address,ArrayList<String> medNotes, ArrayList<EmergencyContact> ems) {
-    this.personManager.addDependent(user, firstName, lastName, birthDate, address,medNotes,ems);
+  public void addDependent(UUID guardianId,String firstName, String lastName, String birthDate, String address,ArrayList<String> medNotes, ArrayList<EmergencyContact> ems) {
+    this.personManager.addDependent(guardianId, firstName, lastName, birthDate, address,medNotes,ems);
   }
   public boolean getDependentCabin(String id) {
 
@@ -235,5 +238,24 @@ public class CampSiteManager{
   }
   public void viewCamp(){
     System.out.println(this.toString());
+  }
+  public boolean guardianHasDependents(Guardian g){
+    return this.personManager.guardianHasDependents(g);
+  }
+  public boolean guardianHasCampersRegistered(Guardian g){
+    return this.cabinManager.guardianHasCampersRegistered(g);
+  }
+  public void viewGuardianRegisteredCabins(Guardian g){
+    // view the cabins that you have registered
+    this.cabinManager.viewGuardianRegisteredCabins(g);
+  }
+  public void viewCabinNames(){
+    this.cabinManager.viewCabinNames();
+  }
+  public void viewCamperNamesByGuardian(UUID guardianId){
+    this.personManager.viewCamperNamesByGuardian(guardianId);
+  }
+  public Dependent getDependentByName(UUID guardianId,String firstName, String lastName){
+    return this.personManager.getDependentByName(guardianId,firstName, lastName);
   }
 }

@@ -17,6 +17,41 @@ public class PersonManager {
     public PersonManager(){
 
     }
+    public void viewCamperNamesByGuardian(UUID id){
+        Guardian g = this.getGuardianById(id);
+        ArrayList<Dependent> reg = g.getRegisteredDependents();
+        for(int i=0;i<reg.size();i++){
+            if(!reg.get(i).getIsCoordinator()){
+                System.out.println(reg.get(i).getFullName());
+            }
+        }
+    }
+    public Dependent getDependentByName(UUID guardianId,String firstName, String lastName){
+        for(Dependent d: this.dependents){
+            if(d.getFirstName().equals(firstName) && (d.getLastName().equals(lastName))){
+                return d;
+            }
+        }
+
+        return null;
+    }
+
+    public Dependent guardianGetDependentByInt(UUID guardianId, int dependentIndex){
+        Guardian g = this.getGuardianById(guardianId);
+        ArrayList<Dependent> reg = g.getRegisteredDependents();
+        if(dependentIndex >= reg.size()){
+            return null;
+        }
+        return reg.get(dependentIndex);
+    }
+    public int guardianGetNumberDependents(UUID gId){
+        Guardian g = this.getGuardianById(gId);
+        return g.getRegisteredDependents().size();
+    }
+
+    public boolean guardianHasDependents(Guardian g){
+        return g.getRegisteredDependents().size() > 0;
+    }
 
 
     public String getFullName(Person p){
@@ -44,7 +79,7 @@ public class PersonManager {
     }
 
 
-    public void seeCoordinators(){
+    public void viewCoordinators(){
         for(Dependent d: this.dependents){
             if(d.getIsCoordinator()){
                 System.out.println(d);
@@ -52,7 +87,7 @@ public class PersonManager {
         }
     }
 
-    public void seeAdmins(){
+    public void viewAdmins(){
         for(CampAdmin a: this.admins){
             System.out.println(a);
         }
@@ -121,9 +156,16 @@ public class PersonManager {
         }
         return false;
     }
-    public void addDependent(Guardian g, String depFirstName, String depLastName, String birthDate, String address,ArrayList<String>medNotes, ArrayList<EmergencyContact> ems){
+    public void addDependent(UUID guardianID, String depFirstName, String depLastName, String birthDate, String address,ArrayList<String>medNotes, ArrayList<EmergencyContact> ems){
+        // need to be by reference
         Dependent newDep = new Dependent(depFirstName, depLastName, birthDate, address,medNotes,ems) ;
-        g.addDependent(newDep);
+        for(int i=0;i<this.gaurdians.size();i++){
+            if(this.gaurdians.get(i).getId().equals(guardianID)){
+                this.gaurdians.get(i).addDependent(newDep);
+            }
+        }
+        // dont forget to add the dependent
+        this.dependents.add(newDep);
     }
     public boolean getDependentCabin(String firstName, String lastName){
         // to do

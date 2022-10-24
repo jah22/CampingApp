@@ -48,16 +48,136 @@ public class exampleDriver {
                 break;
             case 3:
                 // view cabins
-                this.csm.seeCabins();
+                this.csm.viewCabins();
                 break;
             case 4:
                 // add camper to cabin
-                this.csm.addCamperToCabin(null);
+                handleAddDependentToCabin(user);
                 break;
             case 5:
+                // review
+                handleReviewSection(user);
+                break;
+            case 6:
                 this.exit();
                 break;
         }
+    }
+    public void handleReviewSection(Guardian guardian){
+        while(true){
+            System.out.println("[1] Add review");
+            System.out.println("[2] See your reviews");
+            System.out.println("[3] See all reviews");
+            System.out.println("[4] See reviews by rating");
+            System.out.println("[5] Exit");
+            int selection = -1; 
+            while(!isValidIntInput(selection,1,5)){
+                System.out.println("Enter your selection: ");
+                selection = promptForIntResponse();
+                if(!isValidIntInput(selection,1,5)){
+                    System.out.println("Please try again.");
+                }
+            }
+            switch(selection){
+                case 1:
+                    this.handleReviewCamp(guardian);
+                    break;
+                case 2:
+                    this.csm.viewAllReviews();
+                    break;
+                case 3:
+                    this.csm.viewReviewsByAuthor(guardian.getFullName());
+                    break;
+                case 4:
+                    handleViewReviewsByRating();
+                    break;
+                case 5:
+                    System.out.println("Returning to main screen...");
+                    return;
+            }
+        }
+    }
+    public void handleViewReviewsByRating(){
+        System.out.println("Enter rating: ");
+        int rating = -1;
+        while(!isValidIntInput(rating,1,5)){
+            rating = promptForIntResponse();
+            if(!isValidIntInput(rating,1,5)){
+                System.out.println("Please try again.");
+            }
+        }
+        this.csm.viewReviewsByRating(rating);
+    }
+    public void handleReviewCamp(Guardian guardian){
+        if(!this.csm.guardianHasDependents(guardian)){
+            System.out.println("No dependents found. You cannot review if you have no campers.");
+            return;
+        }
+        if(!this.csm.guardianHasCampersRegistered(guardian)){
+            System.out.println("None of your dependents are registered. You cannot register a camper for a cabin that they have not been to.");
+            return;
+        }
+        System.out.println("You are able to review this camp.");
+        int rating = -1;
+        while(!isValidIntInput(rating,1,5)){
+
+            System.out.println("Please enter the rating for your review (1 to 5): ");
+            rating = this.promptForIntResponse();
+            if(!isValidIntInput(rating,1,5)){
+                System.out.println("Invalid rating.");
+            }
+        }
+        System.out.println("Please enter a title for your review: ");
+        String title = promptForStringResponse();
+        System.out.println("Please enter the body of your review. Type \"done\" when complete.");
+        String body = "";
+        String userString = "";
+        // TO DO: 
+        // FIX THIS. PRINTS TOO MANY >
+        while(!userString.equals("done")){
+            userString = promptForStringResponse();
+            body += userString + "\n";
+        }
+        this.csm.addReview(guardian.getFullName(),rating,title,body);
+    }
+    public void handleAddDependentToCabin(Guardian guardian){
+        // check if dependents
+        if(!this.csm.guardianHasDependents(guardian)){
+            System.out.println("No dependents found. Please first add a dependent.");
+            return;
+        }
+        // check if space
+        if(!this.csm.checkCabinsForDependents(guardian)){
+            System.out.println("There is either no space for your camper, or your campers are not in the age ranges.") ;
+            return;
+        }
+        Cabin cabinToBeAddedTo = null;
+        while(cabinToBeAddedTo == null){
+            System.out.println("Which cabin? ");
+            this.csm.viewCabinNames();
+            System.out.println("Select a cabin by entering it's number: ");
+            int cabinIndex = this.promptForIntResponse();
+            cabinToBeAddedTo = this.csm.getCabinByIndex(cabinIndex);
+            if(cabinToBeAddedTo == null){
+                System.out.println("Sorry, please enter the cabin name correctly.");
+            }
+        }
+
+        Dependent camperToAdd = null;
+        while(camperToAdd == null){
+            System.out.println("Which camper? ");
+            this.csm.viewCamperNamesByGuardian(guardian.getId());
+            System.out.println("Type the first name of the camper: ");
+            String camperNameFN = this.promptForStringResponse();
+            System.out.println("Type last name of camper: ");
+            String camperNameLN = this.promptForStringResponse();
+            camperToAdd = this.csm.getDependentByName(guardian.getId(),camperNameFN,camperNameLN);
+            if(camperToAdd == null){
+                System.out.println("Invalid name. Try again.");
+            }
+        }
+        this.csm.addCamperToCabin(camperToAdd,cabinToBeAddedTo);
+        System.out.println("Successfully added camper to cabin.");
     }
     public void promptNewDependent(Guardian user){
         System.out.println("First name: ");
@@ -76,7 +196,7 @@ public class exampleDriver {
         }
         ArrayList<String> medNotes = promptMedNotes();
         ArrayList<EmergencyContact> emContacts = promptEmContacts();
-        this.csm.addDependent(user, firstName, lastName, birthDate, address,medNotes,emContacts);
+        this.csm.addDependent(user.getId(), firstName, lastName, birthDate, address,medNotes,emContacts);
     }
     public ArrayList<EmergencyContact> promptEmContacts(){
         ArrayList<EmergencyContact> ems = new ArrayList<>();
@@ -125,9 +245,9 @@ public class exampleDriver {
     public int getGuardianOptionSelection(){
         showGuardianOptions();
         int intUserChoice = -1;
-        while(!isValidIntInput(intUserChoice,1,5)){
+        while(!isValidIntInput(intUserChoice,1,6)){
             intUserChoice = promptForIntResponse();
-            if(!isValidIntInput(intUserChoice,1,5)){
+            if(!isValidIntInput(intUserChoice,1,6)){
                 showGuardianOptions();
             }
         }
@@ -138,7 +258,8 @@ public class exampleDriver {
         System.out.println("[2] Register new dependent");
         System.out.println("[3] View cabins");
         System.out.println("[4] Add camper to cabin");
-        System.out.println("[5] Exit");
+        System.out.println("[5] Reviews");
+        System.out.println("[6] Exit");
     }
     public boolean isValidIntInput(int input,int lower, int upper){
         // if between lower and upper, valid

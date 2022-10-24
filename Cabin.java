@@ -1,3 +1,4 @@
+import java.security.Guard;
 import java.util.ArrayList;
 
 public class Cabin {
@@ -16,6 +17,27 @@ public class Cabin {
     public String getCabinName(){
         return this.name;
     }
+    public boolean hasGuardianDependents(Guardian g){
+        for(Dependent dep: this.campers){
+            if(g.hasDependent(dep)){
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean hasDependent(Dependent d){
+        for(Dependent dep: this.campers){
+            if(d.equals(dep)){
+                return true;
+            }
+        }
+        for(Dependent dep: this.coordinators){
+            if(d.equals(dep)){
+                return true;
+            }
+        }
+        return false;
+    }
 
     public ArrayList<Dependent> getCoordinators(){
         return this.coordinators;
@@ -27,11 +49,11 @@ public class Cabin {
     public ArrayList<Schedule> getSchedules(){
         return this.schedules;
     }
-    public void seeActivities(){
+    public void viewActivities(){
         // to do:
-        System.out.println("SEE ACTIVITIES");
+        System.out.println("view ACTIVITIES");
     }
-    public void seeCoordinators(){
+    public void viewCoordinators(){
         for(Dependent c : this.coordinators){
             System.out.println(c);
         }
@@ -59,13 +81,10 @@ public class Cabin {
         out += division +"\n";
         out += "Coordinators: " + this.coordinators.size() +"/"+ this.coordinatorCapacity + "\n";
         for (Dependent dependent :this.coordinators) {
-            out += dependent.toString()  + "\n";
+            out += dependent.getFullName() + "\n";
         }
         out += division +"\n";
         out += "Campers: " + this.campers.size() +"/"+ this.camperCapacity+ "\n";
-        for (Dependent dependent :this.campers) {
-            out += dependent.toString()  + "\n";
-        }
         out += division +"\n";
 
         return out;
@@ -99,11 +118,9 @@ public class Cabin {
 
     public boolean addCamperToCabin(Dependent camper){
         if(
-            (this.lowerAgeBound <= camper.getAgeInt())
+            this.inAgeRange(camper.getAgeInt())
             &&
-            (camper.getAgeInt() <= this.upperAgeBound)
-            &&
-            this.campers.size() < this.camperCapacity
+            this.hasSpace()
             ){
             // call add function
             this.campers.add(camper);
@@ -112,6 +129,15 @@ public class Cabin {
         // else the camper either is not in age range or there are too many campers
         return false;
 
+    }
+    public boolean hasSpace(){
+        return this.campers.size() < this.camperCapacity;
+    }
+    public boolean inAgeRange(int age){
+        return ((this.lowerAgeBound <= age) && (this.upperAgeBound >= age));
+    }
+    public boolean checkCanAddDependent(Dependent d){
+        return(hasSpace() && inAgeRange(d.getAgeInt()));
     }
 
 }

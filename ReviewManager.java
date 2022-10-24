@@ -22,14 +22,14 @@ public class ReviewManager {
         return null;
     }
 
-    public void seeAvgReview(){
+    public void viewAvgReview(){
         if(this.avgReview == 0){
             System.out.println("No reviews yet");
             return;
         }
         System.out.println("Average rating: " + this.avgReview);
     }
-    public void seeReviewsByAuthor(String author){
+    public void viewReviewsByAuthor(String author){
         /*
          * Author is first name last name
          */
@@ -42,7 +42,7 @@ public class ReviewManager {
         }
         System.out.println("Total reviews by " + author + ": " + reviewCount + "\n");
     }
-    public void seeReviewsByRating(int rating){
+    public void viewReviewsByRating(int rating){
         int reviewCount = 0;
         for(Review r: this.reviews){
             if(r.getRating() == rating){
@@ -52,7 +52,7 @@ public class ReviewManager {
         }
         System.out.println("Total reviews with rating of " + rating + ": " + reviewCount +"\n");
     }
-    public void seeReviewsByTitle(String title){
+    public void viewReviewsByTitle(String title){
         for(Review r: this.reviews){
             if(r.getTitle().equals(title)){
                 System.out.println(r);

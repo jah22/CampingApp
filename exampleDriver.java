@@ -48,16 +48,55 @@ public class exampleDriver {
                 break;
             case 3:
                 // view cabins
-                this.csm.seeCabins();
+                this.csm.viewCabins();
                 break;
             case 4:
                 // add camper to cabin
-                this.csm.addCamperToCabin(null);
+                handleAddDependentToCabin(user);
                 break;
             case 5:
                 this.exit();
                 break;
         }
+    }
+    public void handleAddDependentToCabin(Guardian guardian){
+        // check if dependents
+        if(!this.csm.guardianHasDependents(guardian)){
+            System.out.println("No dependents found. Please first add a dependent.");
+            return;
+        }
+        // check if space
+        if(!this.csm.checkCabinsForDependents(guardian)){
+            System.out.println("There is either no space for your camper, or your campers are not in the age ranges.") ;
+            return;
+        }
+        Cabin cabinToBeAddedTo = null;
+        while(cabinToBeAddedTo == null){
+            System.out.println("Which cabin? ");
+            this.csm.viewCabinNames();
+            System.out.println("Select a cabin by entering it's number: ");
+            int cabinIndex = this.promptForIntResponse();
+            cabinToBeAddedTo = this.csm.getCabinByIndex(cabinIndex);
+            if(cabinToBeAddedTo == null){
+                System.out.println("Sorry, please enter the cabin name correctly.");
+            }
+        }
+
+
+        Dependent camperToAdd = null;
+        while(camperToAdd == null){
+            System.out.println("Which camper? ");
+            this.csm.viewCamperNamesByGuardian(guardian.getId());
+            System.out.println("Type the first name of the camper: ");
+            String camperNameFN = this.promptForStringResponse();
+            System.out.println("Type last name of camper: ");
+            String camperNameLN = this.promptForStringResponse();
+            camperToAdd = this.csm.getDependentByName(camperNameFN,camperNameLN);
+            if(camperToAdd == null){
+                System.out.println("Invalid name. Try again.");
+            }
+        }
+        this.csm.addCamperToCabin(camperToAdd,cabinToBeAddedTo);
     }
     public void promptNewDependent(Guardian user){
         System.out.println("First name: ");

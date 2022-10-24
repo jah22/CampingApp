@@ -176,8 +176,12 @@ public class exampleDriver {
                 System.out.println("Invalid name. Try again.");
             }
         }
-        this.csm.addCamperToCabin(camperToAdd,cabinToBeAddedTo);
-        System.out.println("Successfully added camper to cabin.");
+        if(this.csm.addCamperToCabin(camperToAdd,cabinToBeAddedTo)){
+            System.out.println("Successfully added camper to cabin.");
+        }
+        else{
+            System.out.println("Could not add camper to cabin.");
+        }
     }
     public void promptNewDependent(Guardian user){
         System.out.println("First name: ");
@@ -222,7 +226,7 @@ public class exampleDriver {
         String firstName = promptForStringResponse();
         System.out.println("Last name: ");
         String lastName = promptForStringResponse();
-        System.out.println("Birthdate: ");
+        System.out.println("Birthdate: [YYYY-MM-DD]");
         String birthdate = promptForStringResponse();
         System.out.println("Address: ");
         String address = promptForStringResponse();

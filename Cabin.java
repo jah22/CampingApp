@@ -121,6 +121,8 @@ public class Cabin {
             this.inAgeRange(camper.getAgeInt())
             &&
             this.hasSpace()
+            &&
+            !this.inCabin(camper)
             ){
             // call add function
             this.campers.add(camper);
@@ -129,6 +131,9 @@ public class Cabin {
         // else the camper either is not in age range or there are too many campers
         return false;
 
+    }
+    public boolean inCabin(Dependent dep){
+        return (this.campers.contains(dep) || this.coordinators.contains(dep));
     }
     public boolean hasSpace(){
         return this.campers.size() < this.camperCapacity;

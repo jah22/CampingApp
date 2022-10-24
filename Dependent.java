@@ -11,6 +11,13 @@ public class Dependent extends Person{
 
     public Dependent(String firstName, String lastName, String birthDate, String address, UUID id) {
         super(firstName, lastName, birthDate, address, id);
+        this.authBehavior = new NoPriorityBehavior();
+    }
+    public Dependent(String firstName, String lastName, String birthDate, String address,ArrayList<String> medNotes, ArrayList<EmergencyContact> ems) {
+        super(firstName, lastName, birthDate, address,UUID.randomUUID());
+        this.authBehavior = new NoPriorityBehavior();
+        this.medicalNotes = medNotes;
+        this.emergencyContacts = ems;
     }
 
     public Dependent(String firstName, String lastName, String birthDate, String address, UUID id, boolean isCoordinator, boolean hasBeenPaidFor,ArrayList<EmergencyContact> emergencyContacts, ArrayList<String> medNotes){
@@ -19,6 +26,7 @@ public class Dependent extends Person{
         this.isCoordinator = isCoordinator;
         this.medicalNotes = medNotes;
         this.emergencyContacts = emergencyContacts;
+        this.authBehavior = new NoPriorityBehavior();
     }
     public Dependent(String firstName, String lastName, String birthDate, String address, UUID id, boolean isCoordinator, boolean hasBeenPaidFor,ArrayList<EmergencyContact> emergencyContacts, ArrayList<String> medNotes,AuthBehavior auth){
         super(firstName, lastName, birthDate, address,id);
@@ -65,18 +73,26 @@ public class Dependent extends Person{
         String out = div;
         out += (isCoordinator) ? "Coordinator\n":"Camper\n";
         out += super.toString() + " | Age: " + this.getAgeInt() + "\n";
-        out += "Emergency Contacts: \n";
-        for (Person person : emergencyContacts) {
-            out += person.toString()+"\n";
+        if(this.emergencyContacts != null){
+            out += "Emergency Contacts: \n";
+            for (Person person : emergencyContacts) {
+                out += person.toString()+"\n";
+            }
         }
-        out += "Medical Notes:\n";
-        for(String note: medicalNotes){
-            out += note +"\n";
+        if(this.medicalNotes != null){
+            out += "Medical Notes:\n";
+            for(String note: medicalNotes){
+                out += note +"\n";
+            }
         }
         out += "Auth Information:\n";
         out += this.authBehavior.toString() +"\n";
         out += div;
+        System.out.println(out);
 
         return out;
+    }
+    public String getPersonType(){
+        return "Dependent";
     }
 }

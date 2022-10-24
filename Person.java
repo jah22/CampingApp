@@ -94,4 +94,8 @@ public class Person {
         return this.authBehavior;
     }
 
+    public String getPersonType(){
+        return "Person";
+    }
+
 }

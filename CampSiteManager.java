@@ -111,17 +111,17 @@ public class CampSiteManager{
     //To-Do
     return false;
   }
-  public void viewAvgReviews() {
-    //To-Do
+  public void viewAllReviews(){
+    this.reviewManager.viewAllReviews();
   }
-  public void viewReviewsByAuthor(String firstName, String lastName) {
-    this.reviewManager.viewReviewsByAuthor(firstName + " " + lastName);
+  public void viewReviewsByAuthor(String author) {
+    this.reviewManager.viewReviewsByAuthor(author);
   }
   public void viewReviewsByRating(int rating) {
     this.reviewManager.viewReviewsByRating(rating);
   }
-  public void addReview(String firstName, String lastName, int rating, String text) {
-    this.reviewManager.addReview(firstName, rating, lastName, text);
+  public void addReview(String authorFullName, int rating,String title, String body){
+    this.reviewManager.addReview(authorFullName, rating,title,body);
   }
   public boolean registerGuardian() {
     //To-Do

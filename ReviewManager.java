@@ -44,6 +44,7 @@ public class ReviewManager {
     }
     public void viewReviewsByRating(int rating){
         int reviewCount = 0;
+        System.out.println("SEARCHING FOR REVIEWS...\n");
         for(Review r: this.reviews){
             if(r.getRating() == rating){
                 System.out.println(r);
@@ -86,5 +87,14 @@ public class ReviewManager {
         // else you have the review
         this.reviews.remove(rev);
         return true;
+    }
+    public void viewAllReviews(){
+        if(this.reviews.size() == 0){
+            System.out.println("No reviews present.");
+            return;
+        }
+        for(Review r: this.reviews){
+            System.out.println(r);
+        }
     }
 }

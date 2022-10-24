@@ -56,14 +56,59 @@ public class exampleDriver {
                 break;
             case 5:
                 // review
-                handleReviewCabin(user);
+                handleReviewSection(user);
                 break;
             case 6:
                 this.exit();
                 break;
         }
     }
-    public void handleReviewCabin(Guardian guardian){
+    public void handleReviewSection(Guardian guardian){
+        while(true){
+            System.out.println("[1] Add review");
+            System.out.println("[2] See your reviews");
+            System.out.println("[3] See all reviews");
+            System.out.println("[4] See reviews by rating");
+            System.out.println("[5] Exit");
+            int selection = -1; 
+            while(!isValidIntInput(selection,1,5)){
+                System.out.println("Enter your selection: ");
+                selection = promptForIntResponse();
+                if(!isValidIntInput(selection,1,5)){
+                    System.out.println("Please try again.");
+                }
+            }
+            switch(selection){
+                case 1:
+                    this.handleReviewCamp(guardian);
+                    break;
+                case 2:
+                    this.csm.viewAllReviews();
+                    break;
+                case 3:
+                    this.csm.viewReviewsByAuthor(guardian.getFullName());
+                    break;
+                case 4:
+                    handleViewReviewsByRating();
+                    break;
+                case 5:
+                    System.out.println("Returning to main screen...");
+                    return;
+            }
+        }
+    }
+    public void handleViewReviewsByRating(){
+        System.out.println("Enter rating: ");
+        int rating = -1;
+        while(!isValidIntInput(rating,1,5)){
+            rating = promptForIntResponse();
+            if(!isValidIntInput(rating,1,5)){
+                System.out.println("Please try again.");
+            }
+        }
+        this.csm.viewReviewsByRating(rating);
+    }
+    public void handleReviewCamp(Guardian guardian){
         if(!this.csm.guardianHasDependents(guardian)){
             System.out.println("No dependents found. You cannot review if you have no campers.");
             return;
@@ -72,12 +117,28 @@ public class exampleDriver {
             System.out.println("None of your dependents are registered. You cannot register a camper for a cabin that they have not been to.");
             return;
         }
-        // else review
-        System.out.println("List of cabins you can review: ");
-        this.csm.viewGuardianRegisteredCabins(guardian);
-        System.out.println("Please enter the number of the cabin: ");
-        int cabinIndex = -1;
-        cabinIndex = promptForIntResponse();
+        System.out.println("You are able to review this camp.");
+        int rating = -1;
+        while(!isValidIntInput(rating,1,5)){
+
+            System.out.println("Please enter the rating for your review (1 to 5): ");
+            rating = this.promptForIntResponse();
+            if(!isValidIntInput(rating,1,5)){
+                System.out.println("Invalid rating.");
+            }
+        }
+        System.out.println("Please enter a title for your review: ");
+        String title = promptForStringResponse();
+        System.out.println("Please enter the body of your review. Type \"done\" when complete.");
+        String body = "";
+        String userString = "";
+        // TO DO: 
+        // FIX THIS. PRINTS TOO MANY >
+        while(!userString.equals("done")){
+            userString = promptForStringResponse();
+            body += userString + "\n";
+        }
+        this.csm.addReview(guardian.getFullName(),rating,title,body);
     }
     public void handleAddDependentToCabin(Guardian guardian){
         // check if dependents
@@ -197,7 +258,7 @@ public class exampleDriver {
         System.out.println("[2] Register new dependent");
         System.out.println("[3] View cabins");
         System.out.println("[4] Add camper to cabin");
-        System.out.println("[5] Review a cabin");
+        System.out.println("[5] Reviews");
         System.out.println("[6] Exit");
     }
     public boolean isValidIntInput(int input,int lower, int upper){

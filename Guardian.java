@@ -37,4 +37,10 @@ public class Guardian extends Person {
             System.out.println(d);
         }
     }
+    public String getPersonType(){
+        return "Guardian";
+    }
+    public void addDependent(Dependent dep){
+        this.registeredDependents.add(dep);
+    }
 }

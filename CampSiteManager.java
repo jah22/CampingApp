@@ -1,4 +1,3 @@
-//Copyright @jordansfowler
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -112,17 +111,14 @@ public class CampSiteManager{
   public void seeAvgReviews() {
     //To-Do
   }
-  public boolean seeReviewsByGuardian(String firstName, String lastName) {
-    //To-Do
-    return false;
+  public void seeReviewsByAuthor(String firstName, String lastName) {
+    this.reviewManager.seeReviewsByAuthor(firstName + " " + lastName);
   }
-  public boolean seeReviewsByRating(int rating) {
-    //To-Do
-    return false;
+  public void seeReviewsByRating(int rating) {
+    this.reviewManager.seeReviewsByRating(rating);
   }
-  public boolean addReview(String firstName, String lastName, int rating, String text) {
-    //To-Do
-    return false;
+  public void addReview(String firstName, String lastName, int rating, String text) {
+    this.reviewManager.addReview(firstName, rating, lastName, text);
   }
   public boolean registerGuardian() {
     //To-Do
@@ -168,9 +164,8 @@ public class CampSiteManager{
     //To-Do
     return false;
   }
-  public boolean viewDependentsFromGuardian(String guardianId){
-    UUID id = UUID.fromString(guardianId);
-    Guardian g = this.personManager.getGuardianById(id);
+  public boolean viewDependentsFromGuardian(UUID guardianId){
+    Guardian g = this.personManager.getGuardianById(guardianId);
     if(g!=null){
       g.viewDependents();
       return true;
@@ -186,24 +181,22 @@ public class CampSiteManager{
     }
     return false;
   }
-  public boolean addDependent(String guardianUsername, String guardianPassword) {
-    //To-Do
-    return false;
+  public void addDependent(Guardian user,String firstName, String lastName, String birthDate, String address,ArrayList<String> medNotes, ArrayList<EmergencyContact> ems) {
+    this.personManager.addDependent(user, firstName, lastName, birthDate, address,medNotes,ems);
   }
   public boolean getDependentCabin(String id) {
 
     return false;
   }
-  public boolean hasPaid(String firstName, String lastName) {
-    return personManager.getHasBeenPaidFor(firstName,lastName);
+  public void writeReview(String firstName,String lastName,int rating, String title, String text) {
+    this.reviewManager.addReview(firstName + " " + lastName,rating,title,text);
   }
-  public boolean writeReview(Guardian author, String text, int rating) {
-    //To-Do
-    return false;
-  }
-  public boolean removeReview(Guardian author, String text, int rating) {
-    //To-Do
-    return false;
+  public void removeReview(Guardian author, String title) {
+    if(!this.reviewManager.removeReview(title, author)){
+      System.out.println("Cannot remove review. Check the title or the permissions.\n");
+      return;
+    }
+    System.out.println("Review successfully removed.\n");
   }
   public boolean updateLoginInformation(String curUsername, String curPassword) {
     //To-Do
@@ -228,17 +221,19 @@ public class CampSiteManager{
     //To-Do
     return false;
   }
-  public boolean login(String username, String password) {
-    //To-Do
-    return false;
+  public Guardian loginGuardian(String username, String password){
+    return this.personManager.loginGuardian(username, password);
   }
-  public boolean logout() {
-    //To-Do
-    return false;
+  public Dependent loginDependent(String username, String password){
+    return this.personManager.loginDependent(username,password);
   }
-  public static void main(String args[]){
-    // CampSiteManager csm = FileIO.getInstance().getCamp();
-    // csm.viewCabinCouncelors("Salty City Cabin");
-    // csm.viewDependentsFromGuardian("79c7ae99-247f-4c80-950a-4a41e767e84c");
+  public CampAdmin loginAdmin(String username, String password){
+    return this.personManager.loginAdmin(username,password);
+  }
+  public boolean logout(String username, String password) {
+    return this.personManager.logout(username,password);
+  }
+  public void viewCamp(){
+    System.out.println(this.toString());
   }
 }

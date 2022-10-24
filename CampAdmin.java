@@ -19,4 +19,7 @@ public class CampAdmin extends Person{
         return this.authCode == authCode;
     }
      
+    public String getPersonType(){
+        return "CampAdmin";
+    }
 }

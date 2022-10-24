@@ -13,7 +13,7 @@ public class PriorityBehavior implements AuthBehavior{
     }
 
     public boolean login(String username, String password) {
-        if((this.username == username) && (this.password == password)){
+        if((this.username.equals(username)) && (this.password.equals(password))){
             // can log in
             this.isLoggedIn = true;
             return true;

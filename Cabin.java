@@ -1,3 +1,4 @@
+import java.security.Guard;
 import java.util.ArrayList;
 
 public class Cabin {
@@ -15,6 +16,27 @@ public class Cabin {
 
     public String getCabinName(){
         return this.name;
+    }
+    public boolean hasGuardianDependents(Guardian g){
+        for(Dependent dep: this.campers){
+            if(g.hasDependent(dep)){
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean hasDependent(Dependent d){
+        for(Dependent dep: this.campers){
+            if(d.equals(dep)){
+                return true;
+            }
+        }
+        for(Dependent dep: this.coordinators){
+            if(d.equals(dep)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public ArrayList<Dependent> getCoordinators(){

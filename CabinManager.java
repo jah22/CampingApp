@@ -6,6 +6,14 @@ public class CabinManager {
     public CabinManager(ArrayList<Cabin> cabins){
         this.cabins = cabins;
     }
+    public void viewGuardianRegisteredCabins(Guardian g){
+        // the indices of the cabins that the gaurdians has ov
+        for(int i=0;i<this.cabins.size();i++){
+            if(this.cabins.get(i).hasGuardianDependents(g)){
+                System.out.println("["+i+"]: " + this.cabins.get(i).getCabinName());
+            }
+        }
+    }
 
     public void viewCabins(){
         for(Cabin c: this.cabins){
@@ -45,6 +53,16 @@ public class CabinManager {
         for(Cabin c: this.cabins){
             for(Dependent d: g.getRegisteredDependents()){
                 if(c.checkCanAddDependent(d)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public boolean guardianHasCampersRegistered(Guardian g){
+        for(Cabin c: this.cabins){
+            for(Dependent d: g.getRegisteredDependents()){
+                if(c.hasDependent(d)){
                     return true;
                 }
             }

@@ -55,9 +55,29 @@ public class exampleDriver {
                 handleAddDependentToCabin(user);
                 break;
             case 5:
+                // review
+                handleReviewCabin(user);
+                break;
+            case 6:
                 this.exit();
                 break;
         }
+    }
+    public void handleReviewCabin(Guardian guardian){
+        if(!this.csm.guardianHasDependents(guardian)){
+            System.out.println("No dependents found. You cannot review if you have no campers.");
+            return;
+        }
+        if(!this.csm.guardianHasCampersRegistered(guardian)){
+            System.out.println("None of your dependents are registered. You cannot register a camper for a cabin that they have not been to.");
+            return;
+        }
+        // else review
+        System.out.println("List of cabins you can review: ");
+        this.csm.viewGuardianRegisteredCabins(guardian);
+        System.out.println("Please enter the number of the cabin: ");
+        int cabinIndex = -1;
+        cabinIndex = promptForIntResponse();
     }
     public void handleAddDependentToCabin(Guardian guardian){
         // check if dependents
@@ -164,9 +184,9 @@ public class exampleDriver {
     public int getGuardianOptionSelection(){
         showGuardianOptions();
         int intUserChoice = -1;
-        while(!isValidIntInput(intUserChoice,1,5)){
+        while(!isValidIntInput(intUserChoice,1,6)){
             intUserChoice = promptForIntResponse();
-            if(!isValidIntInput(intUserChoice,1,5)){
+            if(!isValidIntInput(intUserChoice,1,6)){
                 showGuardianOptions();
             }
         }
@@ -177,7 +197,8 @@ public class exampleDriver {
         System.out.println("[2] Register new dependent");
         System.out.println("[3] View cabins");
         System.out.println("[4] Add camper to cabin");
-        System.out.println("[5] Exit");
+        System.out.println("[5] Review a cabin");
+        System.out.println("[6] Exit");
     }
     public boolean isValidIntInput(int input,int lower, int upper){
         // if between lower and upper, valid

@@ -242,6 +242,13 @@ public class CampSiteManager{
   public boolean guardianHasDependents(Guardian g){
     return this.personManager.guardianHasDependents(g);
   }
+  public boolean guardianHasCampersRegistered(Guardian g){
+    return this.cabinManager.guardianHasCampersRegistered(g);
+  }
+  public void viewGuardianRegisteredCabins(Guardian g){
+    // view the cabins that you have registered
+    this.cabinManager.viewGuardianRegisteredCabins(g);
+  }
   public void viewCabinNames(){
     this.cabinManager.viewCabinNames();
   }

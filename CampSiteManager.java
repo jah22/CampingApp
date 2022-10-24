@@ -184,8 +184,8 @@ public class CampSiteManager{
     }
     return false;
   }
-  public void addDependent(Guardian user,String firstName, String lastName, String birthDate, String address,ArrayList<String> medNotes, ArrayList<EmergencyContact> ems) {
-    this.personManager.addDependent(user, firstName, lastName, birthDate, address,medNotes,ems);
+  public void addDependent(UUID guardianId,String firstName, String lastName, String birthDate, String address,ArrayList<String> medNotes, ArrayList<EmergencyContact> ems) {
+    this.personManager.addDependent(guardianId, firstName, lastName, birthDate, address,medNotes,ems);
   }
   public boolean getDependentCabin(String id) {
 
@@ -248,7 +248,7 @@ public class CampSiteManager{
   public void viewCamperNamesByGuardian(UUID guardianId){
     this.personManager.viewCamperNamesByGuardian(guardianId);
   }
-  public Dependent getDependentByName(String firstName, String lastName){
-    return this.personManager.getDependentByName(firstName, lastName);
+  public Dependent getDependentByName(UUID guardianId,String firstName, String lastName){
+    return this.personManager.getDependentByName(guardianId,firstName, lastName);
   }
 }

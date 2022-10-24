@@ -26,12 +26,13 @@ public class PersonManager {
             }
         }
     }
-    public Dependent getDependentByName(String firstName, String lastName){
+    public Dependent getDependentByName(UUID guardianId,String firstName, String lastName){
         for(Dependent d: this.dependents){
             if(d.getFirstName().equals(firstName) && (d.getLastName().equals(lastName))){
                 return d;
             }
         }
+
         return null;
     }
 
@@ -155,9 +156,16 @@ public class PersonManager {
         }
         return false;
     }
-    public void addDependent(Guardian g, String depFirstName, String depLastName, String birthDate, String address,ArrayList<String>medNotes, ArrayList<EmergencyContact> ems){
+    public void addDependent(UUID guardianID, String depFirstName, String depLastName, String birthDate, String address,ArrayList<String>medNotes, ArrayList<EmergencyContact> ems){
+        // need to be by reference
         Dependent newDep = new Dependent(depFirstName, depLastName, birthDate, address,medNotes,ems) ;
-        g.addDependent(newDep);
+        for(int i=0;i<this.gaurdians.size();i++){
+            if(this.gaurdians.get(i).getId().equals(guardianID)){
+                this.gaurdians.get(i).addDependent(newDep);
+            }
+        }
+        // dont forget to add the dependent
+        this.dependents.add(newDep);
     }
     public boolean getDependentCabin(String firstName, String lastName){
         // to do

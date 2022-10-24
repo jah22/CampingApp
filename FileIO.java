@@ -195,21 +195,20 @@ public class FileIO {
         });
         return new Guardian(firstName, lastName, birthDate, address, id, password, username, email, phoneNumber,deps);
     }
-    private Dependent parseCamperObj(JSONObject dependent){
+    private Dependent parseCamperObj(JSONObject jsonDep){
         // get attributes
-        String firstName = (String) dependent.get(DataConstants.DEPENDENT_FIRST_NAME);
-        String lastName = (String) dependent.get(DataConstants.DEPENDENT_LAST_NAME);
-        String address = (String) dependent.get(DataConstants.DEPENDENT_ADDRESS);
-        UUID id = UUID.fromString((String) dependent.get(DataConstants.DEPENDENT_ID));
-        String birthDate = (String) dependent.get(DataConstants.DEPENDENT_BIRTH_DATE);
-        boolean hasBeenPaidFor = (boolean) dependent.get(DataConstants.DEPENDENT_HAS_BEEN_PAID_FOR);
-        boolean isCoordinator = (boolean) dependent.get(DataConstants.DEPENDENT_IS_COORDINATOR);
+        String firstName = (String) jsonDep.get(DataConstants.DEPENDENT_FIRST_NAME);
+        String lastName = (String) jsonDep.get(DataConstants.DEPENDENT_LAST_NAME);
+        String address = (String) jsonDep.get(DataConstants.DEPENDENT_ADDRESS);
+        UUID id = UUID.fromString((String) jsonDep.get(DataConstants.DEPENDENT_ID));
+        String birthDate = (String) jsonDep.get(DataConstants.DEPENDENT_BIRTH_DATE);
+        boolean isCoordinator = (boolean) jsonDep.get(DataConstants.DEPENDENT_IS_COORDINATOR);
 
         ArrayList<EmergencyContact> emContacts = new ArrayList<EmergencyContact>();
         ArrayList<String> medNotes = new ArrayList<String>();
 
         // parse the contacts
-        JSONArray jEmContacts = (JSONArray) dependent.get(DataConstants.DEPENDENT_EMERGENCY_CONTACTS);
+        JSONArray jEmContacts = (JSONArray) jsonDep.get(DataConstants.DEPENDENT_EMERGENCY_CONTACTS);
         jEmContacts.forEach(jContact->{
             JSONObject jEm =(JSONObject) jContact;
             UUID jEmId= UUID.fromString((String) jEm.get(DataConstants.EMERGENCY_CONTACT_ID));
@@ -220,7 +219,7 @@ public class FileIO {
         });
 
         // parse the medical notes
-        JSONArray jMedNotes = (JSONArray) dependent.get(DataConstants.DEPENDENT_MEDICAL_NOTES);
+        JSONArray jMedNotes = (JSONArray) jsonDep.get(DataConstants.DEPENDENT_MEDICAL_NOTES);
         jMedNotes.forEach(
             jMedNote->{
                 String [] split = ((String) jMedNote).split(",");
@@ -230,7 +229,7 @@ public class FileIO {
         );
         NoPriorityBehavior npB = new NoPriorityBehavior();
         
-        return  new Dependent(firstName, lastName, birthDate, address, id,isCoordinator,hasBeenPaidFor,emContacts,medNotes,npB);
+        return new Dependent(firstName, lastName, birthDate, address, id,isCoordinator,emContacts,medNotes,npB);
     }
     private Dependent parseCoordinatorObj(JSONObject jObject){
         Dependent coordinator = parseCamperObj(jObject) ;
@@ -385,7 +384,7 @@ public class FileIO {
         JSONArray jCamperList = parseJsonFileArr(DataConstants.CAMPER_FILE_NAME);
         jCamperList.forEach(jDependent ->{
             deps.add(parseCamperObj((JSONObject)jDependent));
-        }
+            }
         );
         // read coordinators
         JSONArray jCoordinatorList = parseJsonFileArr(DataConstants.COORDINATOR_FILE_NAME);
@@ -438,7 +437,6 @@ public class FileIO {
     }
     private JSONObject getCamperJson(Dependent d){
         JSONObject jO = getPersonJson(d);
-        jO.put("hasBeenPaidFor",d.getHasBeenPaidFor());
         jO.put("isCoordinator",d.getIsCoordinator());
         String jsonMedNotes = new Gson().toJson(d.getMedicalNotes());
         String jsonEmContacts = new Gson().toJson(d.getMedicalNotes());
@@ -530,8 +528,8 @@ public class FileIO {
         // for (Schedule schedule : scheds) {
         //     System.out.println(schedule) ;
         // }
-        for(Dependent dep: fiO.getDependents()){
-            System.out.println(dep);
-        }
+        // for(Dependent dep: fiO.getDependents()){
+        //     System.out.println(dep);
+        // }
     }
 }

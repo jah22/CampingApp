@@ -82,7 +82,6 @@ public class exampleDriver {
             }
         }
 
-
         Dependent camperToAdd = null;
         while(camperToAdd == null){
             System.out.println("Which camper? ");
@@ -91,12 +90,13 @@ public class exampleDriver {
             String camperNameFN = this.promptForStringResponse();
             System.out.println("Type last name of camper: ");
             String camperNameLN = this.promptForStringResponse();
-            camperToAdd = this.csm.getDependentByName(camperNameFN,camperNameLN);
+            camperToAdd = this.csm.getDependentByName(guardian.getId(),camperNameFN,camperNameLN);
             if(camperToAdd == null){
                 System.out.println("Invalid name. Try again.");
             }
         }
         this.csm.addCamperToCabin(camperToAdd,cabinToBeAddedTo);
+        System.out.println("Successfully added camper to cabin.");
     }
     public void promptNewDependent(Guardian user){
         System.out.println("First name: ");
@@ -115,7 +115,7 @@ public class exampleDriver {
         }
         ArrayList<String> medNotes = promptMedNotes();
         ArrayList<EmergencyContact> emContacts = promptEmContacts();
-        this.csm.addDependent(user, firstName, lastName, birthDate, address,medNotes,emContacts);
+        this.csm.addDependent(user.getId(), firstName, lastName, birthDate, address,medNotes,emContacts);
     }
     public ArrayList<EmergencyContact> promptEmContacts(){
         ArrayList<EmergencyContact> ems = new ArrayList<>();

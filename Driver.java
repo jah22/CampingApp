@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 // just for testing
-public class exampleDriver {
+public class Driver {
     CampSiteManager csm = FileIO.getInstance().getCamp();
     Scanner USER_INPUT = new Scanner(System.in);
 
@@ -753,9 +753,19 @@ public class exampleDriver {
         System.out.println("[4] Exit");
     }
     public int promptForIntResponse(){
-        System.out.print("> ");
-        int command = USER_INPUT.nextInt();
-        USER_INPUT.nextLine();
+        boolean running = true;
+        int command = -1;
+        while(running){
+            try{
+                System.out.print("> ");
+                command = USER_INPUT.nextInt();
+                running = false;
+            }catch(java.util.InputMismatchException e){
+                System.out.println("Please input an integer.");
+            }
+            USER_INPUT.nextLine();
+        }
+
         return command;
     }
     public String promptForStringResponse(){
@@ -781,7 +791,7 @@ public class exampleDriver {
         System.out.println("Welcome to the camp system! ");
     }
     public static void main(String[] args) {
-        exampleDriver driver = new exampleDriver();
+        Driver driver = new Driver();
         driver.runDriver();
     }
 }

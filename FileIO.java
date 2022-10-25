@@ -457,6 +457,14 @@ public class FileIO {
         jCo.put("emergencyContacts",jsonEmContacts);
         return jCo;
     }
+    private JSONObject getReviewJson(Review r) {
+        JSONObject jR = new JSONObject();
+        jR.put("title", r.getTitle());
+        jR.put("author", r.getAuthor());
+        jR.put("body", r.getbody());
+        jR.put("rating", r.getRating());
+        return jR;
+    }
     // private JSONObject getCabinJson(Cabin c) {
     //     JSONObject jsonC = 
     //     return jsonC;
@@ -562,9 +570,40 @@ public class FileIO {
     private void writeCabin(Cabin cabin) {
 
     }
-    private void writeReview(Review review) {
-
+    private void writeReview(ArrayList<Review> review) {
+        String reviewJsonList = "";
+        boolean isFirst = true;
+        for(Review newReview : review) {
+            JSONObject revInfo = getReviewJson(newReview);
+            String reviewInfoString = revInfo.toJSONString();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            JsonElement je = JsonParser.parseString(reviewInfoString);
+            String formattedJsonString = gson.toJson(je);
+            if(isFirst) {
+                reviewJsonList = reviewJsonList+formattedJsonString;
+                isFirst = false;
+            }
+            else {
+                reviewJsonList = reviewJsonList+",\n"+formattedJsonString;
+            }
+        }
+        String finalCoordinatorString = jsonFormatter(reviewJsonList);
+        writeToJson(finalCoordinatorString, DataConstants.REVIEW_FILE_NAME);
     }
+    private void writeEmergencyContact(ArrayList<EmergencyContact> emergencyC) {
+        String emcJsonList = "";
+        boolean isFirst = true;
+        for(EmergencyContact newEMC : emergencyC) {
+            //JSONObject emcInfo 
+            // ^ get emergencyContactJson
+        }
+    }
+    /*
+     * TODO:
+     *  - write EmergencyContact
+     *  - write Cabin
+     *  - write Schedule
+     */
     private JSONArray parseJsonFileArr(String filename) {
         JSONParser jsonP = new JSONParser();
         try(FileReader reader = new FileReader(filename)){
@@ -584,8 +623,8 @@ public class FileIO {
     }
     public static void main(String args[]){
         FileIO fiO = FileIO.getInstance();
-        ArrayList<Dependent> test = fiO.readDependents();
-        fiO.writeDependent(test);
+        ArrayList<Review> test = fiO.readReviews();
+        fiO.writeReview(test);
         System.out.println("here");
     }
 }

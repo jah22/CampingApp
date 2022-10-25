@@ -41,7 +41,7 @@ public class CampDriver {
                             System.out.println("Please enter your first name");
                             String userFirstName = userInput.nextLine();
 
-                            System.out.print("Please enter your last name");
+                            System.out.println("Please enter your last name");
                             String userLastName = userInput.nextLine();
 
                             System.out.println("Please enter your birthdate");
@@ -54,7 +54,8 @@ public class CampDriver {
                             while(birthYear) {
                                 System.out.println("Please enter the Year [####]");
                                 int userBirthYear = userInput.nextInt();
-                                if(userBirthYear >= 1900 || userBirthYear < 2022) {
+                                userInput.nextLine();
+                                if((userBirthYear > 1900) && (userBirthYear < 2022)) {
                                     userBirthYearString = String.valueOf(userBirthYear);
                                     break;
                                 } else {
@@ -65,7 +66,8 @@ public class CampDriver {
                             while(birthMonth) {
                                 System.out.println("Please enter the Month [##]");
                                 int userBirthMonth = userInput.nextInt();
-                                if(userBirthMonth > 0 || userBirthMonth <= 12) {
+                                userInput.nextLine();
+                                if(userBirthMonth > 0 && userBirthMonth <= 12) {
                                     userBirthMonthString = String.valueOf(userBirthMonth);
                                     break;
                                 } else {
@@ -74,23 +76,26 @@ public class CampDriver {
                             }
                             boolean birthDay = true;
                             while(birthDay) {
-                                System.out.println("Please enter the Month [##]");
+                                System.out.println("Please enter the Day [##]");
                                 int userBirthDay = userInput.nextInt();
-                                if(userBirthDay > 0 || userBirthDay <= 31) {
+                                userInput.nextLine();
+                                if(userBirthDay > 0 && userBirthDay <= 31) {
                                     userBirthDayString = String.valueOf(userBirthDay);
                                     break;
                                 } else {
                                     System.out.println("Try Again");
                                 }
                             }
+                            //Date dNow = new Date();
                             //SimpleDateFormat ft = new SimpleDateFormat("yyyy.MM.dd");
-                            String combinedDate = userBirthYearString + '.' + userBirthMonthString + '.' + userBirthDayString;
+                            String combinedDate = userBirthYearString + '-' + userBirthMonthString + '-' + userBirthDayString;
+                            //Set Person date to Combined Date
 
                             System.out.println("Please enter your home address");
                             String userAddress = userInput.nextLine();
 
                             System.out.println("Please enter your phone number");
-                            String phoneNumber = userInput.nextLine();
+                            
 
                             System.out.println("Please enter your email address");
                             String email = userInput.nextLine();
@@ -125,7 +130,8 @@ public class CampDriver {
                             while(birthYear) {
                                 System.out.println("Please enter the Year [####]");
                                 int userBirthYear = userInput.nextInt();
-                                if(userBirthYear >= 1900 || userBirthYear < 2022) {
+                                userInput.nextLine();
+                                if(userBirthYear >= 1900 && userBirthYear < 2022) {
                                     userBirthYearString = String.valueOf(userBirthYear);
                                     break;
                                 } else {
@@ -136,7 +142,8 @@ public class CampDriver {
                             while(birthMonth) {
                                 System.out.println("Please enter the Month [##]");
                                 int userBirthMonth = userInput.nextInt();
-                                if(userBirthMonth > 0 || userBirthMonth <= 12) {
+                                userInput.nextLine();
+                                if(userBirthMonth > 0 && userBirthMonth <= 12) {
                                     userBirthMonthString = String.valueOf(userBirthMonth);
                                     break;
                                 } else {
@@ -147,7 +154,8 @@ public class CampDriver {
                             while(birthDay) {
                                 System.out.println("Please enter the Month [##]");
                                 int userBirthDay = userInput.nextInt();
-                                if(userBirthDay > 0 || userBirthDay <= 31) {
+                                userInput.nextLine();
+                                if(userBirthDay > 0 && userBirthDay <= 31) {
                                     userBirthDayString = String.valueOf(userBirthDay);
                                     break;
                                 } else {

@@ -382,7 +382,7 @@ public class FileIO {
     private ArrayList<Dependent> readDependents() {
         ArrayList<Dependent> deps = new ArrayList<Dependent>();
         // read campers
-        JSONArray jCamperList = parseJsonFileArr(DataConstants.CAMPER_FILE_NAME);
+        JSONArray jCamperList = parseJsonFileArr(DataConstants.CAMPER2_FILE_NAME);
         jCamperList.forEach(jDependent ->{
             deps.add(parseCamperObj((JSONObject)jDependent));
         }
@@ -441,11 +441,21 @@ public class FileIO {
         jO.put("hasBeenPaidFor",d.getHasBeenPaidFor());
         jO.put("isCoordinator",d.getIsCoordinator());
         String jsonMedNotes = new Gson().toJson(d.getMedicalNotes());
-        String jsonEmContacts = new Gson().toJson(d.getMedicalNotes());
+        String jsonEmContacts = new Gson().toJson(d.getEmergencyContacts());
         jO.put("medicalNotes",jsonMedNotes);
         jO.put("emergencyContacts",jsonEmContacts);
 
         return jO;
+    }
+    private JSONObject getCoordinatorJson(Dependent c) {
+        JSONObject jCo = getPriorityPersonJson(c);
+        jCo.put("hasBeenPaidFor",c.getHasBeenPaidFor());
+        jCo.put("isCoordinator",c.getIsCoordinator());
+        String jsonMedNotes = new Gson().toJson(c.getMedicalNotes());
+        String jsonEmContacts = new Gson().toJson(c.getEmergencyContacts());
+        jCo.put("medicalNotes",jsonMedNotes);
+        jCo.put("emergencyContacts",jsonEmContacts);
+        return jCo;
     }
     // private JSONObject getCabinJson(Cabin c) {
     //     JSONObject jsonC = 
@@ -510,15 +520,49 @@ public class FileIO {
         writeToJson(finalAdminString,DataConstants.CAMP_ADMIN_FILE_NAME);
     }
     private void writeDependent(ArrayList<Dependent> dependent) {
-      
+        String dependJsonList = "";
+        boolean isFirst = true;
+        for(Dependent newDepend : dependent) {
+            JSONObject dependInfo = getCamperJson(newDepend);
+            String dependInfoString = dependInfo.toJSONString();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            JsonElement je = JsonParser.parseString(dependInfoString);
+            String formattedJsonString = gson.toJson(je);
+            if(isFirst) {
+                dependJsonList = dependJsonList+formattedJsonString;
+                isFirst = false;
+            }
+            else {
+                dependJsonList = dependJsonList+",\n"+formattedJsonString;
+            }
+        }
+        String finalDependentString = jsonFormatter(dependJsonList);
+        writeToJson(finalDependentString,DataConstants.CAMPER2_FILE_NAME);
+    }
+    private void writeCoordinator(ArrayList<Dependent> coordinator){
+        String coordJsonList = "";
+        boolean isFirst = true;
+        for(Dependent newCoord : coordinator) {
+            JSONObject coordInfo = getCoordinatorJson(newCoord);
+            String coordInfoString = coordInfo.toJSONString();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            JsonElement je = JsonParser.parseString(coordInfoString);
+            String formattedJsonString = gson.toJson(je);
+            if(isFirst) {
+                coordJsonList = coordJsonList+formattedJsonString;
+                isFirst = false;
+            }
+            else {
+                coordJsonList = coordJsonList+",\n"+formattedJsonString;
+            }
+        }
+        String finalCoordinatorString = jsonFormatter(coordJsonList);
+        writeToJson(finalCoordinatorString,DataConstants.COORDINATOR_FILE_NAME);
     }
     private void writeCabin(Cabin cabin) {
 
     }
     private void writeReview(Review review) {
-
-    }
-    private void writeCoordinator(Dependent coordinator){
 
     }
     private JSONArray parseJsonFileArr(String filename) {
@@ -539,13 +583,9 @@ public class FileIO {
         return new JSONArray();
     }
     public static void main(String args[]){
-        FileIO fiO= FileIO.getInstance();
-        // ArrayList<Schedule> scheds = fiO.getSchedules();
-        // for (Schedule schedule : scheds) {
-        //     System.out.println(schedule) ;
-        // }
-        for(Dependent dep: fiO.getDependents()){
-            System.out.println(dep);
-        }
+        FileIO fiO = FileIO.getInstance();
+        ArrayList<Dependent> test = fiO.readDependents();
+        fiO.writeDependent(test);
+        System.out.println("here");
     }
 }

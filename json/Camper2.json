@@ -1,0 +1,13 @@
+[
+{
+  "firstName": "Jane",
+  "lastName": "Smith",
+  "isCoordinator": true,
+  "address": "429 Sycamore Drive, Columbia, SC",
+  "emergencyContacts": "[{\"firstName\":\"E First\",\"lastName\":\"E Last\",\"birthDate\":\"1990-11-20\",\"address\":\"E address\",\"id\":\"71c7ae99-247f-4c80-950a-4a41e767e84d\"}]",
+  "id": "81c7ae99-247f-4c80-950a-4a41e767e84c",
+  "hasBeenPaidFor": true,
+  "medicalNotes": "[\"allergy 1\",\"allergy 2\"]",
+  "birthDate": "2009-05-14"
+}
+]

@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.*;
+import java.text.*;
 
 public class CampDriver {
     public void runCampDriver(){
@@ -20,7 +22,7 @@ public class CampDriver {
                     System.out.println("Please enter your username.");
                     String username = userInput.nextLine();
 
-                    System.out.print("Please enter your password.");
+                    System.out.println("Please enter your password.");
                     String password = userInput.nextLine();
 
                     //Implment to campsite manager login when ready
@@ -42,7 +44,7 @@ public class CampDriver {
                             System.out.print("Please enter your last name");
                             String userLastName = userInput.nextLine();
 
-                            System.out.println("Please enter your birthdate [input format]");
+                            System.out.println("Please enter your birthdate [yyyy]");
                             String userBirthDate = userInput.nextLine();
 
                             System.out.println("Please enter your home address");
@@ -74,9 +76,48 @@ public class CampDriver {
                             System.out.print("Please enter your last name");
                             String userLastName = userInput.nextLine();
 
-                            System.out.println("Please enter your birthdate [input format]");
-                            String userBirthDate = userInput.nextLine();
+                            System.out.println("Please enter your birthdate");
+                            
+                            String userBirthYearString = "";
+                            String userBirthMonthString = "";
+                            String userBirthDayString = "";
 
+                            boolean birthYear = true;
+                            while(birthYear) {
+                                System.out.println("Please enter the Year [####]");
+                                int userBirthYear = userInput.nextInt();
+                                if(userBirthYear >= 1900 || userBirthYear < 2022) {
+                                    userBirthYearString = String.valueOf(userBirthYear);
+                                    break;
+                                } else {
+                                    System.out.println("Try Again");
+                                }
+                            }
+                            boolean birthMonth = true;
+                            while(birthMonth) {
+                                System.out.println("Please enter the Month [##]");
+                                int userBirthMonth = userInput.nextInt();
+                                if(userBirthMonth > 0 || userBirthMonth <= 12) {
+                                    userBirthMonthString = String.valueOf(userBirthMonth);
+                                    break;
+                                } else {
+                                    System.out.println("Try Again");
+                                }
+                            }
+                            boolean birthDay = true;
+                            while(birthDay) {
+                                System.out.println("Please enter the Month [##]");
+                                int userBirthDay = userInput.nextInt();
+                                if(userBirthDay > 0 || userBirthDay <= 31) {
+                                    userBirthDayString = String.valueOf(userBirthDay);
+                                    break;
+                                } else {
+                                    System.out.println("Try Again");
+                                }
+                            }
+                            //SimpleDateFormat ft = new SimpleDateFormat("yyyy.MM.dd");
+                            String combinedDate = userBirthYearString + '.' + userBirthMonthString + '.' + userBirthDayString;
+                            
                             System.out.println("Please enter your home address");
                             String userAddress = userInput.nextLine();
 
@@ -98,10 +139,32 @@ public class CampDriver {
                             while(ECBool) {
                                 System.out.println("Do you want to add an Emergency Contact \n Select: [Y]es or [N]o");
                                 String EC = userInput.nextLine();
+
+                                if(EC.equalsIgnoreCase("Y")) {
+
+                                    //The class person does not contain all of the neccessary infometion for an EC
+
+                                    System.out.println("Please enter the contact's first name");
+                                    String ECFirstName = userInput.nextLine();
+
+                                    System.out.println("Please enter the contact's last name");
+                                    String ECLastName = userInput.nextLine();
+
+                                    System.out.println("Please enter the contact's birthdate");
+                                    String ECBirthDate = userInput.nextLine();
+
+                                    System.out.println("Please enter the contact's address");
+                                    String ECAddress = userInput.nextLine();
+
+                                    //ID
+                                }
+                                else if(EC.equalsIgnoreCase("N")) {
+                                    ECBool = false;
+                                }
+                                else {
+                                    System.out.println("Try again.");
+                                }
                             }
-                            
-
-
                         }
                         else if(registerInput.equals("3")) {
                             registerQuit = false;

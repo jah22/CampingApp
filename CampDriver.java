@@ -44,8 +44,47 @@ public class CampDriver {
                             System.out.print("Please enter your last name");
                             String userLastName = userInput.nextLine();
 
-                            System.out.println("Please enter your birthdate [yyyy]");
-                            String userBirthDate = userInput.nextLine();
+                            System.out.println("Please enter your birthdate");
+                            
+                            String userBirthYearString = "";
+                            String userBirthMonthString = "";
+                            String userBirthDayString = "";
+
+                            boolean birthYear = true;
+                            while(birthYear) {
+                                System.out.println("Please enter the Year [####]");
+                                int userBirthYear = userInput.nextInt();
+                                if(userBirthYear >= 1900 || userBirthYear < 2022) {
+                                    userBirthYearString = String.valueOf(userBirthYear);
+                                    break;
+                                } else {
+                                    System.out.println("Try Again");
+                                }
+                            }
+                            boolean birthMonth = true;
+                            while(birthMonth) {
+                                System.out.println("Please enter the Month [##]");
+                                int userBirthMonth = userInput.nextInt();
+                                if(userBirthMonth > 0 || userBirthMonth <= 12) {
+                                    userBirthMonthString = String.valueOf(userBirthMonth);
+                                    break;
+                                } else {
+                                    System.out.println("Try Again");
+                                }
+                            }
+                            boolean birthDay = true;
+                            while(birthDay) {
+                                System.out.println("Please enter the Month [##]");
+                                int userBirthDay = userInput.nextInt();
+                                if(userBirthDay > 0 || userBirthDay <= 31) {
+                                    userBirthDayString = String.valueOf(userBirthDay);
+                                    break;
+                                } else {
+                                    System.out.println("Try Again");
+                                }
+                            }
+                            //SimpleDateFormat ft = new SimpleDateFormat("yyyy.MM.dd");
+                            String combinedDate = userBirthYearString + '.' + userBirthMonthString + '.' + userBirthDayString;
 
                             System.out.println("Please enter your home address");
                             String userAddress = userInput.nextLine();

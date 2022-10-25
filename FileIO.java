@@ -489,6 +489,29 @@ public class FileIO {
         String finalGuardString = jsonFormatter(guardJsonList);
         writeToJson(finalGuardString,DataConstants.GUARDIAN_FILE_NAME);
     }
+    private void writeCampAdmin(ArrayList<CampAdmin> admin) {
+        String adminJsonList = "";
+        boolean isFirst = true;
+        for(CampAdmin newAdmin : admin) {
+            JSONObject adminInfo = getCampAdminJson(newAdmin);
+            String adminInfoString = adminInfo.toJSONString();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            JsonElement je = JsonParser.parseString(adminInfoString);
+            String formattedJsonString = gson.toJson(je);
+            if(isFirst) {
+                adminJsonList = adminJsonList+formattedJsonString;
+                isFirst = false;
+            }
+            else {
+                adminJsonList = adminJsonList+",\n"+formattedJsonString;
+            }
+        }
+        String finalAdminString = jsonFormatter(adminJsonList);
+        writeToJson(finalAdminString,DataConstants.CAMP_ADMIN_FILE_NAME);
+    }
+    private void writeDependent(ArrayList<Dependent> dependent) {
+      
+    }
     private void writeCabin(Cabin cabin) {
 
     }
@@ -498,15 +521,6 @@ public class FileIO {
     private void writeCoordinator(Dependent coordinator){
 
     }
-    // private void writeCabin(Cabin cabin) {
-    //     writeToJson(getCabinJson(cabin),DataConstants.CABIN_FILE_NAME);
-    // }
-    //private void writeReview(Review review) {
-    //    writeToJson(getReviewJson(review),DataConstants.REVIEW_FILE_NAME);
-    //}
-    // private void writeCoordinator(Dependent coordinator){
-    //     writeToJson(getCampAdminJson(coordinator),DataConstants.CAMP_ADMIN_FILE_NAME);
-    // }
     private JSONArray parseJsonFileArr(String filename) {
         JSONParser jsonP = new JSONParser();
         try(FileReader reader = new FileReader(filename)){

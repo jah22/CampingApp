@@ -1,4 +1,3 @@
-import java.sql.Time;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -19,14 +18,12 @@ public class Schedule {
         return this.scheduledActivities;
     }
     public String toString(){
+        System.out.println("HERE");
         String out = "Schedule: " + this.id.toString() + "\n";
         for(Map.Entry<String,ActivityManager> set: this.scheduledActivities.entrySet()){
             out += set.getKey() + "\n";
             out += set.getValue().toString();
         }
         return out;
-    }
-    public static void main(String args[]){
-
     }
 }

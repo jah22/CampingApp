@@ -74,11 +74,11 @@ public class CampSiteManager{
   public void viewCabins() {
     this.cabinManager.viewCabins();
   }
-  public void viewAllActivities() {
-    /*
-     * TO DO:
-     * Loop thru all activities
-     */
+  public void viewCabinByCoordinator(Dependent coordinator){
+    this.cabinManager.viewCabinByCoordinator(coordinator);
+  }
+  public void viewCabinSchedulesByCoordinator(Dependent coordinator){
+    this.cabinManager.viewCabinSchedulesByCoordinator(coordinator);
   }
   public void viewAllCabinActivities(String cabinId) {
     if(!this.cabinManager.viewCabinActivities(cabinId)){
@@ -254,5 +254,8 @@ public class CampSiteManager{
   }
   public Dependent getDependentByName(UUID guardianId,String firstName, String lastName){
     return this.personManager.getDependentByName(guardianId,firstName, lastName);
+  }
+  public void viewEmergencyContacts(Dependent dep){
+    this.personManager.viewEmergencyContacts(dep) ;
   }
 }

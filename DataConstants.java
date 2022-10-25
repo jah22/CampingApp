@@ -85,6 +85,7 @@ public abstract class DataConstants {
 
 
     protected static final String SCHEDULE_SCHEDULE = "schedule";
+    protected static final String SCHEDULE_CABIN_NAME = "cabinName";
     protected static final String SCHEDULE_DAY_OF_WEEK = "dayOfWeek";
     protected static final String SCHEDULE_SCHEDULES = "schedules";
     protected static final String SCHEDULE_FILE_NAME = "./json/Schedule.json";

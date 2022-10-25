@@ -13,6 +13,8 @@ public class Cabin {
     // portia says we need an age range
     private int lowerAgeBound;
     private int upperAgeBound;
+    private int campYear;
+    private ArrayList<String> themes = new ArrayList<String>();
 
     public String getCabinName(){
         return this.name;
@@ -70,6 +72,18 @@ public class Cabin {
         this.coordinatorCapacity = coordinatorCapacity;
         this.lowerAgeBound = lowerAgeBound;
         this.upperAgeBound = upperAgeBound;
+    }
+    public Cabin(String name,ArrayList<Dependent>coordinators, ArrayList<Dependent> campers,ArrayList<Schedule> schedules, int camperCapacity, int coordinatorCapacity,int lowerAgeBound, int upperAgeBound, ArrayList<String> themes, int campYear ){
+        this.name = name;
+        this.coordinators = coordinators;
+        this.campers = campers;
+        this.schedules = schedules;
+        this.camperCapacity = camperCapacity;
+        this.coordinatorCapacity = coordinatorCapacity;
+        this.lowerAgeBound = lowerAgeBound;
+        this.upperAgeBound = upperAgeBound;
+        this.themes = themes;
+        this.campYear = campYear; 
     }
     public String toString(){
         // to do

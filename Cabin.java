@@ -50,8 +50,10 @@ public class Cabin {
         return this.schedules;
     }
     public void viewActivities(){
-        // to do:
-        System.out.println("view ACTIVITIES");
+        System.out.println(this.schedules.size());
+        for(Schedule s:this.schedules){
+            System.out.println(s);
+        }
     }
     public void viewCoordinators(){
         for(Dependent c : this.coordinators){

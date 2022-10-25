@@ -1,6 +1,7 @@
 [
     {
         "id":"ddd86dd0-0335-4e37-a6ef-e416c897c532",
+        "cabinName":"Salty City Cabin",
         "schedules":[
             {
                 "dayOfWeek":"Monday",

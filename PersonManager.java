@@ -277,4 +277,12 @@ public class PersonManager {
         }
         return false;
     }
+    public void viewEmergencyContacts(Dependent dep){
+        for(Dependent d: this.dependents){
+            if(d.equals(dep)){
+                d.viewEmergencyContacts();
+                return;
+            }
+        }
+    }
 }

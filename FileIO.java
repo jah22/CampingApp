@@ -46,8 +46,6 @@ public class FileIO {
          */
         this.faqs = readFaqs();
         this.reviews = readReviews();
-        // read schedules
-        this.schedules = readSchedules();
         // start dealing with people
         this.pM = new PersonManager();
         this.admins = readAdmins();
@@ -60,10 +58,9 @@ public class FileIO {
         // read guardians after dependents since guardians depend on them
         this.guardians = readGuardians();
 
-
-        // add dependents
-        // to do: read schedules
+        // read cabins and THEN schedules
         this.cabins = readCabins();
+        this.schedules = readSchedules();
 
         this.campSiteManager = readCamp();
     }
@@ -113,6 +110,7 @@ public class FileIO {
      */
     private static Schedule parseScheduleObj(JSONObject jSchedule){
         UUID id = UUID.fromString((String)jSchedule.get(DataConstants.SCHEDULE_ID));
+        String cabinName = (String) jSchedule.get(DataConstants.SCHEDULE_CABIN_NAME);
         JSONArray jSchedules = (JSONArray)jSchedule.get(DataConstants.SCHEDULE_SCHEDULES);
         // create the hash
         HashMap<String,ActivityManager> hash = new HashMap<String,ActivityManager>();
@@ -132,8 +130,14 @@ public class FileIO {
             });
             hash.put(dayOfWeek,aM);
         });
-
-        return new Schedule(hash,id);
+        Schedule sched = new Schedule(hash, id);
+        // add to cabin
+        for(Cabin c: cabins){
+            if(c.getCabinName().equals(cabinName)){
+                c.addSchedule(sched);
+            }
+        }
+        return sched;
     }
 
     private static FAQ parseFaqObj(JSONObject jFaq){

@@ -14,6 +14,20 @@ public class CabinManager {
             }
         }
     }
+    public void viewCabinByCoordinator(Dependent coordinator){
+        for(Cabin c: this.cabins){
+            if(c.hasDependent(coordinator)){
+                System.out.println(c);
+            }
+        }
+    }
+    public void viewCabinSchedulesByCoordinator(Dependent coordinator){
+        for(Cabin c: this.cabins){
+            if(c.hasDependent(coordinator)){
+                c.viewActivities();
+            }
+        }
+    }
 
     public void viewCabins(){
         for(Cabin c: this.cabins){

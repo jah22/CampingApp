@@ -9,6 +9,8 @@ public abstract class DataConstants {
     protected static final String CABIN_CAMPER_CAPACITY = "camperCapacity";
     protected static final String CABIN_LOWER_AGE_BOUND = "lowerAgeBound";
     protected static final String CABIN_UPEER_AGE_BOUND = "upperAgeBound";
+    protected static final String CABIN_CAMP_YEAR = "campYear";
+    protected static final String CABIN_THEMES = "themes";
 
     protected static final String CAMP_FILE_NAME = "./json/Camp.json";
     protected static final String CAMP_NAME = "name";
@@ -73,6 +75,7 @@ public abstract class DataConstants {
     protected static final String EMERGENCY_CONTACT_ADDRESS = "address";
     protected static final String EMERGENCY_CONTACT_BIRTHDATE= "birthDate";
     protected static final String EMERGENCY_CONTACT_ID= "id";
+    protected static final String EMERGENCY_CONTACT_PHONE_NUMBER = "phoneNumber";
 
     protected static final String PERSON_FIRST_NAME = "firstName";
     protected static final String PERSON_LAST_NAME = "lastName";

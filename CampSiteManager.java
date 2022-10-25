@@ -123,17 +123,15 @@ public class CampSiteManager{
   public void addReview(String authorFullName, int rating,String title, String body){
     this.reviewManager.addReview(authorFullName, rating,title,body);
   }
-  public boolean registerGuardian() {
-    //To-Do
-    return false;
+  public Guardian registerGuardian(String firstName, String lastName, String birthDate, String username, String password, String email, String phone,String address) {
+    return this.personManager.registerGuardian(firstName, lastName, birthDate, username, password, email, phone,address) ;
   }
   public boolean registerDependent() {
     //To-Do
     return false;
   }
-  public boolean removeDependent(Dependent dept) {
-    //To-Do
-    return false;
+  public boolean removeDependent(Guardian g, Dependent dept) {
+    return this.personManager.removeDependent(g,dept);
   }
   public boolean removeGuardian(String firstName, String lastName) {
     //To-Do
@@ -143,9 +141,8 @@ public class CampSiteManager{
     //To-Do
     return false;
   }
-  public boolean registerCoordinator(Dependent coord) {
-    //To-Do
-    return false;
+  public Dependent registerCoordinator(String firstName, String lastName, String username, String password, String birthDate, String phone, String email) {
+    return this.personManager.registerCoordinator(firstName, lastName, username, password, birthDate, phone, email);
   }
   public boolean removeCoordinator(Dependent coord) {
     //To-Do

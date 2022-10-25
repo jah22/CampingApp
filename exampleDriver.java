@@ -15,6 +15,7 @@ public class exampleDriver {
             case "Dependent":
                 // coordinator
                 user = (Dependent) user;
+                runCoordinator((Dependent)user);
                 break;
             case "Guardian":
                 user = (Guardian) user;
@@ -25,6 +26,24 @@ public class exampleDriver {
                 break;
             
         }
+    }
+    public void runCoordinator(Dependent user){
+        showCoordinatorOptions();    
+        int selection = getValidSelection(1, 3);
+        switch(selection){
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                exit();
+                break;
+        }
+    }
+    public void showCoordinatorOptions(){
+        System.out.println("[1] Cabins");
+        System.out.println("[2] Emergency Contacts");
+        System.out.println("[3] Exit");
     }
     public void welcomeAuthUser(Person user){
         System.out.println("Welcome, " + user.getFirstName() +"\n");
@@ -40,28 +59,39 @@ public class exampleDriver {
         switch(option) {
             case 1:
                 // show dependents
-                this.csm.viewDependentsFromGuardian(user.id);
+                this.handleGuardianDependentSection(user);
                 break;
             case 2:
                 // register new dependent
-                this.promptNewDependent(user);
+                this.handleGuardianCabinSection(user);
                 break;
             case 3:
-                // view cabins
-                this.csm.viewCabins();
-                break;
-            case 4:
-                // add camper to cabin
-                handleAddDependentToCabin(user);
-                break;
-            case 5:
-                // review
                 handleReviewSection(user);
                 break;
-            case 6:
+            case 4:
                 this.exit();
                 break;
         }
+    }
+    public void handleGuardianCabinSection(Guardian user){
+        showGuardianCabinSectionOptions();
+        int selection = getValidSelection(1,3);
+        switch(selection){
+            case 1:
+                this.csm.viewCabins();
+                break;
+            case 2:
+                this.handleAddDependentToCabin(user);
+                break;
+            case 3:
+                System.out.println("Returning to main menu...");
+                return;
+        }
+    }
+    public void showGuardianCabinSectionOptions(){
+        System.out.println("[1] View cabins");
+        System.out.println("[2] Add dependent to cabin");
+        System.out.println("[3] Exit");
     }
     public void handleReviewSection(Guardian guardian){
         while(true){
@@ -70,23 +100,16 @@ public class exampleDriver {
             System.out.println("[3] See all reviews");
             System.out.println("[4] See reviews by rating");
             System.out.println("[5] Exit");
-            int selection = -1; 
-            while(!isValidIntInput(selection,1,5)){
-                System.out.println("Enter your selection: ");
-                selection = promptForIntResponse();
-                if(!isValidIntInput(selection,1,5)){
-                    System.out.println("Please try again.");
-                }
-            }
+            int selection = getValidSelection(1,5);
             switch(selection){
                 case 1:
                     this.handleReviewCamp(guardian);
                     break;
                 case 2:
-                    this.csm.viewAllReviews();
+                    this.csm.viewReviewsByAuthor(guardian.getFullName());
                     break;
                 case 3:
-                    this.csm.viewReviewsByAuthor(guardian.getFullName());
+                    this.csm.viewAllReviews();
                     break;
                 case 4:
                     handleViewReviewsByRating();
@@ -99,13 +122,7 @@ public class exampleDriver {
     }
     public void handleViewReviewsByRating(){
         System.out.println("Enter rating: ");
-        int rating = -1;
-        while(!isValidIntInput(rating,1,5)){
-            rating = promptForIntResponse();
-            if(!isValidIntInput(rating,1,5)){
-                System.out.println("Please try again.");
-            }
-        }
+        int rating = getValidSelection(1,5);
         this.csm.viewReviewsByRating(rating);
     }
     public void handleReviewCamp(Guardian guardian){
@@ -118,15 +135,8 @@ public class exampleDriver {
             return;
         }
         System.out.println("You are able to review this camp.");
-        int rating = -1;
-        while(!isValidIntInput(rating,1,5)){
-
-            System.out.println("Please enter the rating for your review (1 to 5): ");
-            rating = this.promptForIntResponse();
-            if(!isValidIntInput(rating,1,5)){
-                System.out.println("Invalid rating.");
-            }
-        }
+        System.out.println("Enter the rating (1-5)");
+        int rating = getValidSelection(1,5);
         System.out.println("Please enter a title for your review: ");
         String title = promptForStringResponse();
         System.out.println("Please enter the body of your review. Type \"done\" when complete.");
@@ -136,9 +146,60 @@ public class exampleDriver {
         // FIX THIS. PRINTS TOO MANY >
         while(!userString.equals("done")){
             userString = promptForStringResponse();
-            body += userString + "\n";
+            if(!userString.equals("done")){
+                body += userString + "\n";
+            }
         }
         this.csm.addReview(guardian.getFullName(),rating,title,body);
+    }
+    public void handleGuardianDependentSection(Guardian user){
+        while(true){
+            showGuardianDependentSectionOptions();
+            int selection = getValidSelection(1,4);
+            switch(selection){
+                case 1:
+                    this.csm.viewDependentsFromGuardian(user.getId());
+                    break;
+                case 2:
+                    this.handleAddNewDependent(user);
+                    break;
+                case 3:
+                    this.handleRemoveDependentFromGuardian(user);
+                    break;
+                case 4:
+                    return;
+            }
+        }
+    }
+    public void handleRemoveDependentFromGuardian(Guardian user){
+        System.out.println("Here are your dependents: ");
+        this.csm.viewDependentsFromGuardian(user.getId());
+        System.out.println("Would you like to remove one?");
+        int response = getYesNoResponse();
+        if(response == 2){
+            System.out.println("Canceling removal.");
+            return;
+        }
+        System.out.println("Enter the first name of the dependent: ");
+        String firstName = promptForStringResponse();
+        System.out.println("Enter the last name of the dependent: ");
+        String lastName = promptForStringResponse();
+        if(this.csm.removeDependent(user,this.csm.getDependentByName(user.getId(), firstName, lastName))){
+            System.out.println("Successfully removed camper.");
+            return;
+        }
+        System.out.println("No camper with that name present.");
+    }
+    public int getYesNoResponse(){
+        System.out.println("[1] Yes");
+        System.out.println("[2] No");
+        return getValidSelection(1, 2);
+    }
+    public void showGuardianDependentSectionOptions(){
+        System.out.println("[1] View your dependents");
+        System.out.println("[2] Add new dependent");
+        System.out.println("[3] Remove dependent");
+        System.out.println("[4] Exit");
     }
     public void handleAddDependentToCabin(Guardian guardian){
         // check if dependents
@@ -183,7 +244,7 @@ public class exampleDriver {
             System.out.println("Could not add camper to cabin.");
         }
     }
-    public void promptNewDependent(Guardian user){
+    public void handleAddNewDependent(Guardian user){
         System.out.println("First name: ");
         String firstName = this.promptForStringResponse();
         System.out.println("Last name (or \"same\"if your last name): ");
@@ -249,21 +310,20 @@ public class exampleDriver {
     public int getGuardianOptionSelection(){
         showGuardianOptions();
         int intUserChoice = -1;
-        while(!isValidIntInput(intUserChoice,1,6)){
+        while(!isValidIntInput(intUserChoice,1,4)){
             intUserChoice = promptForIntResponse();
-            if(!isValidIntInput(intUserChoice,1,6)){
+            if(!isValidIntInput(intUserChoice,1,4)){
                 showGuardianOptions();
             }
         }
         return intUserChoice;
     }
+
     public void showGuardianOptions(){
-        System.out.println("[1] Show your dependents");
-        System.out.println("[2] Register new dependent");
-        System.out.println("[3] View cabins");
-        System.out.println("[4] Add camper to cabin");
-        System.out.println("[5] Reviews");
-        System.out.println("[6] Exit");
+        System.out.println("[1] Dependents");
+        System.out.println("[2] Cabins");
+        System.out.println("[3] Reviews");
+        System.out.println("[4] Exit");
     }
     public boolean isValidIntInput(int input,int lower, int upper){
         // if between lower and upper, valid
@@ -315,9 +375,88 @@ public class exampleDriver {
         ret.add(password);
         return ret;
     }
+    public Guardian handleRegisterGuardian(){
+        // register a guardian
+        System.out.println("Enter your first name: ");
+        String firstName = promptForStringResponse();
+        System.out.println("Enter your last name: ");
+        String lastName= promptForStringResponse();
+        System.out.println("Create your username: ");
+        String username= promptForStringResponse();
+        String password = createPassword();
+        String birthDate = promptForBirthDate();
+        String phone = promptForPhone();
+        String email = promptForEmail();
+        String address = promptForAddress();
+
+        return this.csm.registerGuardian(firstName,lastName,birthDate,username,password,email,phone, address);
+    }
+    public String promptForPhone(){
+        // to do: perform checks here
+        System.out.println("Enter your phone number [XXX-XXX-XXXX]: ");
+        return promptForStringResponse();
+    }
+    public String promptForBirthDate(){
+        // to do: perform checks here
+        System.out.println("Enter your birth date [YYYY-MM-DD]: ");
+        return promptForStringResponse();
+    }
+    public String promptForAddress(){
+        System.out.println("Enter your address: ");
+        return promptForStringResponse();
+    }
+    public String promptForEmail(){
+        // to do: perform checks here
+        System.out.println("Enter your email: ");
+        return promptForStringResponse();
+    }
+    public String createPassword(){
+        String password = "";
+        boolean isPasswordMatch = false;
+        while(!isPasswordMatch){
+            System.out.println("Create your password: ");
+            String pass1 = promptForStringResponse();
+            System.out.println("Enter your password again: ");
+            password = promptForStringResponse();
+            isPasswordMatch = (pass1.equals(password));
+            if(!isPasswordMatch){
+                System.out.println("Passwords didn't match. Try again.");
+            }
+        }
+        return password;
+    }
+    public Dependent handleRegisterCoordinator(){
+        // register a guardian
+        System.out.println("Enter your first name: ");
+        String firstName = promptForStringResponse();
+        System.out.println("Enter your last name: ");
+        String lastName= promptForStringResponse();
+        System.out.println("Create your username: ");
+        String username= promptForStringResponse();
+        String password = createPassword();
+        String birthDate = promptForBirthDate();
+        String phone = promptForPhone();
+        String email = promptForEmail();
+
+        return this.csm.registerCoordinator(firstName, lastName, username, password, birthDate, phone, email);
+    }
+
     public Person handleRegister(){
         Person user = null;
-        System.out.println("Are you a\n[1] Guardian\n[2] Coordinator\n[3] Camp Admin\nOr [4] to exit.\n");
+        System.out.println("Are you a");
+        System.out.println("[1] Guardian");
+        System.out.println("[2] Coordinator");
+        int response = getValidSelection(1, 4);
+        switch(response){
+            case 1:
+                user = handleRegisterGuardian();
+                break;
+            case 2:
+                user = handleRegisterCoordinator();
+                break;
+            case 3:
+                this.exit();
+        }
         return user;
     }
     public Person handleLoginRegView(){
@@ -351,17 +490,35 @@ public class exampleDriver {
     }
     public void printLoginRegViewOptions(){
         // prints options for login, register, or view
-        System.out.println("Would you like to \n[1] Register \n[2] Login \n[3] View Camp Site\n[4] Exit\n");
+        System.out.println("Would you like to");
+        System.out.println("[1] Register");
+        System.out.println("[2] Login");
+        System.out.println("[3] View Camp Site");
+        System.out.println("[4] Exit");
     }
     public int promptForIntResponse(){
         System.out.print("> ");
         int command = USER_INPUT.nextInt();
+        USER_INPUT.nextLine();
         return command;
     }
     public String promptForStringResponse(){
+        // TO DO: 
+        // READ SPACES TOO
         System.out.print("> ");
-        String response = USER_INPUT.next();
+        String response = USER_INPUT.nextLine();
+        response = response.trim();
         return response;
+    }
+    public int getValidSelection(int lower, int upper){
+        int selection = -1;
+        while(!isValidIntInput(selection, lower, upper)){
+            selection = promptForIntResponse();
+            if(!isValidIntInput(selection, lower, upper)){
+                System.out.println("Please try again.");
+            }
+        }
+        return selection;
     }
 
     public void printWelcome(){

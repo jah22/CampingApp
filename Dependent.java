@@ -12,6 +12,10 @@ public class Dependent extends Person{
         super(firstName, lastName, birthDate, address, id);
         this.authBehavior = new NoPriorityBehavior();
     }
+    public Dependent(String firstName, String lastName, String birthdate, String address, String username, String password, String email, String phone){
+        super(firstName, lastName, birthdate, address, UUID.randomUUID());
+        this.authBehavior = new PriorityBehavior(username,password, phone, email);
+    }
     public Dependent(String firstName, String lastName, String birthDate, String address,ArrayList<String> medNotes, ArrayList<EmergencyContact> ems) {
         super(firstName, lastName, birthDate, address,UUID.randomUUID());
         this.authBehavior = new NoPriorityBehavior();

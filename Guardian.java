@@ -51,4 +51,7 @@ public class Guardian extends Person {
     public void addDependent(Dependent dep){
         this.registeredDependents.add(dep);
     }
+    public void removeDependent(Dependent dep){
+        this.registeredDependents.remove(dep);
+    }
 }

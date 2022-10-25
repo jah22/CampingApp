@@ -7,28 +7,121 @@ public class exampleDriver {
     Scanner USER_INPUT = new Scanner(System.in);
 
     public void runDriver(){
-        printWelcome();
-        Person user = null;
-        while(user == null){
-            printLoginRegViewOptions();
-            user = handleLoginRegView(); 
+        boolean running = true;
+        while(running){
+            printWelcome();
+            Person user = null;
+            while(user == null){
+                printLoginRegViewOptions();
+                user = handleLoginRegView(); 
+            }
+            welcomeAuthUser(user);
+            switch(user.getPersonType()){
+                case "Dependent":
+                    // coordinator
+                    user = (Dependent) user;
+                    runCoordinator((Dependent)user);
+                    break;
+                case "Guardian":
+                    user = (Guardian) user;
+                    runAuthorizedGuardian((Guardian)user);
+                    break;
+                case "CampAdmin":
+                    user = (CampAdmin) user;
+                    runCampAdmin((CampAdmin)user);
+                    break;
+
+            }
         }
-        welcomeAuthUser(user);
-        switch(user.getPersonType()){
-            case "Dependent":
-                // coordinator
-                user = (Dependent) user;
-                runCoordinator((Dependent)user);
-                break;
-            case "Guardian":
-                user = (Guardian) user;
-                runAuthorizedGuardian((Guardian)user);
-                break;
-            case "CampAdmin":
-                user = (CampAdmin) user;
-                break;
-            
+    }
+    public void runCampAdmin(CampAdmin user){
+        boolean running = true;
+        while(running){
+            viewCampAdminOptions();
+            int selection = getValidSelection(1,3);
+            switch(selection){
+                case 1:
+                    // view camp site info
+                    this.handleViewCampSection();
+                    break;
+                case 2:
+                    this.handleEditCampSection();
+                    break;
+                case 3:
+                    return;
+            }
         }
+    }
+    public void handleEditCampSection(){
+        boolean running = true;
+        while(running){
+            viewHandleEditCampSectionOptions();
+            int selection = getValidSelection(1, 4);
+            switch(selection){
+                case 1:
+                    // camp name 
+                    this.handleEditCampName();
+                    break;
+                case 2:
+                    // camp themes
+                    this.handleEditCampThemes();
+                    break;
+                case 3:
+                    // camp year
+                    this.handleEditCampYear();
+                    break;
+                case 4:
+                    System.out.println("Returning to main menu...");
+                    return;
+            }
+        }
+    }
+    public void handleEditCampThemes(){
+        System.out.println("The current themes are: ");
+        this.csm.viewCampThemes();
+        System.out.println("Would you like to edit any themes?");
+    }
+    public void handleEditCampName(){
+        System.out.println("The current name is: " + this.csm.getName());
+        System.out.println("Would you like to edit the name?");
+        int response = getYesNoResponse();
+        switch(response){
+            case 1:
+                System.out.println("Enter a name: ");
+                this.csm.setName(promptForStringResponse());
+                break;
+            case 2:
+                System.out.println("Returning to edit camp menu...");
+                return;
+        }
+    }
+    public void handleEditCampYear(){
+        System.out.println("The current year for this camp is: "+ this.csm.getYear());
+        System.out.println("Would you like to edit the year?");
+        int response = getYesNoResponse();
+        switch(response){
+            case 1:
+                System.out.println("Enter a year: ");
+                this.csm.setYear(promptForIntResponse());
+                break;
+            case 2:
+                System.out.println("Returning to edit camp menu...");
+                return;
+        }
+
+
+    }
+
+    public void viewHandleEditCampSectionOptions(){
+        System.out.println("[1] Edit camp name");
+        System.out.println("[2] Edit camp themes");
+        System.out.println("[3] Edit camp year");
+        System.out.println("[4] Exit");
+    }
+    public void viewCampAdminOptions(){
+        System.out.println("[1] View Camp Site Information");
+        System.out.println("[2] Edit Camp Site Information");
+        System.out.println("[3] Exit");
     }
     public void runCoordinator(Dependent user){
         boolean running = true;
@@ -52,16 +145,12 @@ public class exampleDriver {
         boolean running = true;
         while(running){
             printEmergencyContactsCoordinatorOptions();
-            int selection = getValidSelection(1, 4);
+            int selection = getValidSelection(1, 2);
             switch(selection){
                 case 1:
                     this.csm.viewEmergencyContacts(user);
                     break;
                 case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
                     System.out.println("Returning to main menu...");
                     return;
             }
@@ -69,10 +158,8 @@ public class exampleDriver {
     }
     public void printEmergencyContactsCoordinatorOptions(){
         System.out.println("Emergency Contacts Menu");
-        System.out.println("[1] Show your emergency contacts");
-        System.out.println("[2] Remove an emergency contact");
-        System.out.println("[3] Add an emergency contact");
-        System.out.println("[4] Exit");
+        System.out.println("[1] view your emergency contacts");
+        System.out.println("[2] Exit");
     }
     public void handleCabinsCoordinator(Dependent coordinator){
         boolean running = true;
@@ -127,7 +214,6 @@ public class exampleDriver {
                 handleReviewSection(user);
                 break;
             case 4:
-                this.exit();
                 break;
         }
     }
@@ -389,18 +475,17 @@ public class exampleDriver {
         return (input >= lower && input <= upper);
     }
     public Person handleLogin(){
+        boolean running = true;
+        int userChoice = -1;
         System.out.println("Are you a\n[1] Guardian\n[2] Coordinator\n[3] Camp Admin\nOr [4] to exit.");
-        int intUserChoice = -1;
-        while(!isValidIntInput(intUserChoice,1,4)){
-            intUserChoice = promptForIntResponse();
-            if(!isValidIntInput(intUserChoice,1,4)){
-                System.out.println("Are you a\n[1] Guardian\n[2] Coordinator\n[3] Camp Admin\nOr [4] to exit.\n");
-            }
+        userChoice = getValidSelection(1, 4);
+        if(userChoice == 4){
+            return null;
         }
         Person retPerson = null;
         while(retPerson == null){
             ArrayList<String> userPassCombo = promptLoginInfo();
-            switch(intUserChoice){
+            switch(userChoice){
                 case 1:
                     retPerson = this.csm.loginGuardian(userPassCombo.get(0),userPassCombo.get(1));
                     break;
@@ -410,8 +495,6 @@ public class exampleDriver {
                 case 3:
                     retPerson = this.csm.loginAdmin(userPassCombo.get(0),userPassCombo.get(1));
                     break;
-                case 4:
-                    this.exit();
             }
             if(retPerson == null){
                 System.out.println("Incorrect login credentials. Please try again.\n");
@@ -505,6 +588,8 @@ public class exampleDriver {
         System.out.println("Are you a");
         System.out.println("[1] Guardian");
         System.out.println("[2] Coordinator");
+        System.out.println("[3] Camp Admin");
+        System.out.println("Or [4] to exit.");
         int response = getValidSelection(1, 4);
         switch(response){
             case 1:
@@ -514,9 +599,26 @@ public class exampleDriver {
                 user = handleRegisterCoordinator();
                 break;
             case 3:
-                this.exit();
+                user = handleRegisterCampAdmin();
+                break;
         }
         return user;
+    }
+    public CampAdmin handleRegisterCampAdmin(){
+        // register a guardian
+        System.out.println("Enter your first name: ");
+        String firstName = promptForStringResponse();
+        System.out.println("Enter your last name: ");
+        String lastName= promptForStringResponse();
+        System.out.println("Create your username: ");
+        String username= promptForStringResponse();
+        String password = createPassword();
+        String birthDate = promptForBirthDate();
+        String phone = promptForPhone();
+        String email = promptForEmail();
+        String address = promptForAddress();
+        CampAdmin admin = new CampAdmin(firstName, lastName, birthDate, address, password, username, email, phone);
+        return this.csm.registerAdmin(admin);
     }
     public Person handleLoginRegView(){
         int command = -1;
@@ -554,6 +656,7 @@ public class exampleDriver {
                     this.handleReviewSectionNonAuth();
                     break;
                 case 3:
+                    this.handleCabinSectionNonAuth();
                     break;
                 case 4:
                     running = false;
@@ -561,6 +664,47 @@ public class exampleDriver {
                     break;
             }
         }
+    }
+    public void handleCabinSectionNonAuth(){
+        boolean running = false;
+        while(running){
+            printCabinSectionNonAuthOptions(); 
+            int selection = getValidSelection(1,3);
+            switch(selection){
+                case 1:
+                    this.csm.viewCabins();
+                    break;
+                case 2:
+                    this.handleCabinSpecificSectionNonAuth();
+                    break;
+                case 3:
+                    System.out.println("Returning to camp menu.");
+                    return;
+            }
+        }
+    }
+    public void handleCabinSpecificSectionNonAuth(){
+        boolean running = true;
+        int upperBoundCabinIndex = this.csm.getCabinCount();
+        while(running){
+            printCabinSpecificSectionNonAuthOptions();
+            int selection = getValidSelection(-1,upperBoundCabinIndex);
+            if(selection == -1){
+                System.out.println("Returning to cabin section...");
+                return;
+            }
+            this.csm.viewCabinByIndex(selection);
+        }
+    }
+    public void printCabinSpecificSectionNonAuthOptions(){
+        System.out.println("Below are the available cabins: ");
+        this.csm.viewCabinNames();
+        System.out.println("Or [-1] to exit.");
+    }
+    public void printCabinSectionNonAuthOptions(){
+        System.out.println("[1] View all Cabins");
+        System.out.println("[2] View specific Cabin");
+        System.out.println("[3] Exit");
     }
     public void handleReviewSectionNonAuth(){
         boolean running = true;

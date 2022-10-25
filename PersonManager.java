@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.UUID;
 
-import javax.swing.text.GapContent;
-
 public class PersonManager {
     private ArrayList<CampAdmin> admins = new ArrayList<CampAdmin>(); 
     private ArrayList<Guardian>  guardians = new ArrayList<Guardian>(); 
@@ -284,5 +282,9 @@ public class PersonManager {
                 return;
             }
         }
+    }
+    public CampAdmin registerAdmin(CampAdmin admin){
+        this.admins.add(admin);
+        return admin;
     }
 }

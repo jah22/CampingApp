@@ -303,14 +303,20 @@ public class FileIO {
 
         return(new Cabin(cabinName,coordinators,campers,schedules, camperCapacity, coordinatorCapacity,lowerAgeBound,upperAgeBound));
     }
-    private CampSiteManager parseCampObj(JSONObject camp){
+    private CampSiteManager parseCampObj(JSONObject jCamp){
 
-        String name = (String) camp.get("name");
-        String address = (String) camp.get("address");
-        double price = (double) camp.get("pricePerCamperPerDay");
-        String authCode = (String) camp.get("authCode");
+        String name = (String) jCamp.get("name");
+        String address = (String) jCamp.get("address");
+        double price = (double) jCamp.get("pricePerCamperPerDay");
+        String authCode = (String) jCamp.get("authCode");
+        int year = Math.toIntExact((Long) jCamp.get("year"));
+        ArrayList<String> themes = new ArrayList<String>();
+        JSONArray jThemes = (JSONArray) jCamp.get("themes");;
+        jThemes.forEach(jTheme->{
+            themes.add((String) jTheme);
+        });
 
-        return CampSiteManager.getInstance(name,address, price,authCode);
+        return CampSiteManager.getInstance(name,address, price,year,themes,authCode);
     }
 
     /*
@@ -525,15 +531,5 @@ public class FileIO {
             e.printStackTrace();
         }
         return new JSONArray();
-    }
-    public static void main(String args[]){
-        FileIO fiO= FileIO.getInstance();
-        // ArrayList<Schedule> scheds = fiO.getSchedules();
-        // for (Schedule schedule : scheds) {
-        //     System.out.println(schedule) ;
-        // }
-        // for(Dependent dep: fiO.getDependents()){
-        //     System.out.println(dep);
-        // }
     }
 }

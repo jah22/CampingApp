@@ -4,7 +4,8 @@ import java.util.UUID;
 
 public class CampSiteManager{
   // to do: add themes
-  private String theme;
+  private ArrayList<String> themes;
+  private int year;
 
   private String name;
   private String address;
@@ -20,7 +21,7 @@ public class CampSiteManager{
   ReviewManager reviewManager;
   CabinManager cabinManager;
 
-  private CampSiteManager(String name, String address, double pricePerCamperPerDay, String authCode) {
+  private CampSiteManager(String name, String address, double pricePerCamperPerDay, int year,ArrayList<String> themes,String authCode) {
     /*
      * TODO:
      * init the managers
@@ -34,6 +35,8 @@ public class CampSiteManager{
     this.pricePerCamperPerDay = pricePerCamperPerDay;
     this.frequentlyAskedQuestions =FileIO.getFaqs();
     this.authcode = authCode;
+    this.year = year;
+    this.themes = themes;
   }
   public static CampSiteManager getInstance() {
     //To-Do
@@ -43,16 +46,19 @@ public class CampSiteManager{
     }
     return campSiteManager;
   }
-  public static CampSiteManager getInstance(String name, String address, double price, String authCode) {
+  public static CampSiteManager getInstance(String name, String address, double price, int year,ArrayList<String> themes,String authCode) {
     //To-Do
     if(campSiteManager == null){
-      campSiteManager = new CampSiteManager(name, address, price, authCode);
+      campSiteManager = new CampSiteManager(name, address, price, year,themes,authCode);
       return campSiteManager;
     }
     return campSiteManager;
   }
   public String getName() {
     return name;
+  }
+  public void setName(String name){
+    this.name = name;
   }
   public String getAddress() {
     return address;
@@ -61,7 +67,9 @@ public class CampSiteManager{
     this.personManager.viewCoordinators();
   }
   public String toString() {
-      String out = "Cabin: " + this.name;
+      String out = "Cabin: " + this.name +"\n";
+      out += "Year: " + this.year + "\n";
+      out += "Rating: " + this.getAvgRating() +"\n";
 
       // to do:
       // be more fancy 
@@ -137,9 +145,9 @@ public class CampSiteManager{
     //To-Do
     return false;
   }
-  public boolean registerAdmin(CampAdmin admin) {
+  public CampAdmin registerAdmin(CampAdmin admin) {
     //To-Do
-    return false;
+    return this.personManager.registerAdmin(admin);
   }
   public Dependent registerCoordinator(String firstName, String lastName, String username, String password, String birthDate, String phone, String email) {
     return this.personManager.registerCoordinator(firstName, lastName, username, password, birthDate, phone, email);
@@ -249,13 +257,36 @@ public class CampSiteManager{
   public void viewCabinNames(){
     this.cabinManager.viewCabinNames();
   }
+  public void viewCabinByIndex(int index){
+    this.cabinManager.viewCabinByIndex(index);
+  }
   public void viewCamperNamesByGuardian(UUID guardianId){
     this.personManager.viewCamperNamesByGuardian(guardianId);
   }
   public Dependent getDependentByName(UUID guardianId,String firstName, String lastName){
     return this.personManager.getDependentByName(guardianId,firstName, lastName);
   }
+  public int getCabinCount(){
+    return this.cabinManager.getCabinCount();
+  }
   public void viewEmergencyContacts(Dependent dep){
     this.personManager.viewEmergencyContacts(dep) ;
+  }
+  public int getYear(){
+    return this.year;
+  }
+  public void setYear(int year){
+    this.year = year; 
+  }
+  public double getAvgRating(){
+    return this.reviewManager.getAvgRating();
+  }
+  public ArrayList<String> getThemes(){
+    return this.themes;
+  }
+  public void viewCampThemes(){
+    for(int i=0;i<this.themes.size();i++){
+      System.out.println("[" + i + "] " + this.themes.get(i));
+    }
   }
 }

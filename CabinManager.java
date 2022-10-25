@@ -21,6 +21,9 @@ public class CabinManager {
             }
         }
     }
+    public int getCabinCount(){
+        return this.cabins.size();
+    }
     public void viewCabinSchedulesByCoordinator(Dependent coordinator){
         for(Cabin c: this.cabins){
             if(c.hasDependent(coordinator)){
@@ -87,6 +90,12 @@ public class CabinManager {
         for(int i=0;i<this.cabins.size();i++){
             System.out.println("[" + i + "]: " + this.cabins.get(i).getCabinName());
         }
+    }
+    public void viewCabinByIndex(int index){
+        if(index <=0 || index >= this.cabins.size()){
+            return;
+        }
+        System.out.println(this.cabins.get(index));
     }
     public boolean removeCamperFromCabin(Dependent camper,String cabinName){
         // to do

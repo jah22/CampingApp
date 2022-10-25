@@ -6,12 +6,21 @@ public class ReviewManager {
 
     public ReviewManager(ArrayList<Review> reviews){
         this.reviews = reviews;
+        updateAvgReview(reviews);
     }
     public ReviewManager(){
         // param ctor
     }
     public void setReviews(ArrayList<Review> revs){
         this.reviews = revs;
+        updateAvgReview(revs);
+    }
+    public void updateAvgReview(ArrayList<Review> revs){
+        // add to avg
+        for(Review rev: revs){
+            this.avgReview += rev.getRating();
+        }
+        this.avgReview = (this.avgReview/revs.size());
     }
     public Review getReviewByTitle(String title){
         for(Review r:this.reviews){
@@ -21,8 +30,10 @@ public class ReviewManager {
         }
         return null;
     }
-
-    public void viewAvgReview(){
+    public double getAvgRating(){
+        return this.avgReview;
+    }
+    public void viewAvgRating(){
         if(this.avgReview == 0){
             System.out.println("No reviews yet");
             return;

@@ -19,7 +19,7 @@
 - same as 2
 - show their both there
 
-4. 
+4. DONE
 - councelor 
 - logs in prints out roster for cabin
 - 8 children between 11-12 yo

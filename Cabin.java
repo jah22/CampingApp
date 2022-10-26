@@ -1,4 +1,3 @@
-import java.security.Guard;
 import java.util.ArrayList;
 
 public class Cabin {
@@ -158,6 +157,7 @@ public class Cabin {
     }
     public String getCabinRoster(){
         String out = "Roster for \"" + this.name + "\"\n";
+        out += "Age range: " + this.lowerAgeBound + " to " + this.upperAgeBound +" years old\n";
         out += "Coordinator count: " + this.coordinators.size()+ "/" + this.coordinatorCapacity + "\n";
         out += "Camper count: " + this.campers.size()+ "/" + this.camperCapacity +"\n";
         out += "Coordinator(s): \n";
@@ -194,5 +194,11 @@ public class Cabin {
             out += s.toString() + "\n";
         }
         return out;
+    }
+    public void setLowerAgeBound(int bound){
+        this.lowerAgeBound = bound;
+    }
+    public void setUpperAgeBound(int bound){
+        this.upperAgeBound = bound;
     }
 }

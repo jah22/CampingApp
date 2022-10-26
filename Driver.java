@@ -24,7 +24,7 @@ public class Driver {
                     break;
                 case "Guardian":
                     user = (Guardian) user;
-                    runAuthorizedGuardian((Guardian)user);
+                    runGuardian((Guardian)user);
                     break;
                 case "CampAdmin":
                     user = (CampAdmin) user;
@@ -63,7 +63,7 @@ public class Driver {
                     this.handleEditCampName();
                     break;
                 case 2:
-                    // camp themes
+                    // camp themeu
                     this.handleEditCampThemes();
                     break;
                 case 3:
@@ -300,7 +300,7 @@ public class Driver {
     public void welcomeAuthUser(Person user){
         System.out.println("Welcome, " + user.getFirstName() +"\n");
     }
-    public void runAuthorizedGuardian(Guardian user){
+    public void runGuardian(Guardian user){
         boolean running = true;
         while(running){
             printGuardianOptions();
@@ -542,11 +542,10 @@ public class Driver {
         String firstName = promptForStringResponse();
         System.out.println("Last name: ");
         String lastName = promptForStringResponse();
-        System.out.println("Birthdate: [YYYY-MM-DD]");
-        String birthdate = promptForStringResponse();
-        System.out.println("Address: ");
-        String address = promptForStringResponse();
-        return new EmergencyContact(firstName, lastName, birthdate, address);
+        String birthdate =promptForBirthDate();
+        String address = promptForAddress();
+        String phone = promptForPhone();
+        return new EmergencyContact(firstName, lastName, birthdate, address,phone);
     }
     public ArrayList<String> promptMedNotes(){
         ArrayList<String> notes = new ArrayList<>();

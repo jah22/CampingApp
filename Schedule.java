@@ -18,8 +18,7 @@ public class Schedule {
         return this.scheduledActivities;
     }
     public String toString(){
-        System.out.println("HERE");
-        String out = "Schedule: " + this.id.toString() + "\n";
+        String out = "";
         for(Map.Entry<String,ActivityManager> set: this.scheduledActivities.entrySet()){
             out += set.getKey() + "\n";
             out += set.getValue().toString();

@@ -11,6 +11,7 @@ public class CampSiteManager{
   private String address;
   // portia said 7 dollars is fine 
   private double pricePerCamperPerDay;
+
   private ArrayList<FAQ> frequentlyAskedQuestions;
 
   private static CampSiteManager campSiteManager;
@@ -70,6 +71,10 @@ public class CampSiteManager{
       String out = "Cabin: " + this.name +"\n";
       out += "Year: " + this.year + "\n";
       out += "Rating: " + this.getAvgRating() +"\n";
+      out += "Themes: "+"\n";
+      for(int i=0;i<this.themes.size();i++){
+        out += "[" + i + "] "  + this.themes.get(i) + "\n";
+      }
 
       // to do:
       // be more fancy 
@@ -82,8 +87,8 @@ public class CampSiteManager{
   public void viewCabins() {
     this.cabinManager.viewCabins();
   }
-  public void viewCabinByCoordinator(Dependent coordinator){
-    this.cabinManager.viewCabinByCoordinator(coordinator);
+  public void viewCabinsByCoordinator(Dependent coordinator){
+    this.cabinManager.viewCabinsByCoordinator(coordinator);
   }
   public void viewCabinSchedulesByCoordinator(Dependent coordinator){
     this.cabinManager.viewCabinSchedulesByCoordinator(coordinator);
@@ -289,4 +294,17 @@ public class CampSiteManager{
       System.out.println("[" + i + "] " + this.themes.get(i));
     }
   }
+  public String getCampRosters(Dependent coordinator){
+    return this.cabinManager.getCampRosters(coordinator);
+  }
+  public ArrayList<Cabin> getDependentCabins(Dependent user){
+    return this.cabinManager.getDependentCabins(user);
+  }
+  public int getCabinCountByDependent(Dependent user){
+    return this.cabinManager.getCabinCountByDependent(user);
+  }
+  public String getCabinRoster(Cabin c){
+    return this.cabinManager.getCabinRoster(c);
+  }
+
 }

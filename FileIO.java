@@ -11,6 +11,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -531,5 +533,12 @@ public class FileIO {
             e.printStackTrace();
         }
         return new JSONArray();
+    }
+    public static void writeToTxtFile(String fileContents, String fileName){
+        try{
+            Files.write(Paths.get(fileName),fileContents.getBytes());
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 }

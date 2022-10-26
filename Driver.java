@@ -136,8 +136,8 @@ public class Driver {
                     this.handleEmergencyContactsCoordinator(user);
                     break;
                 case 3:
-                    exit();
-                    break;
+                    System.out.println("Returning...") ;
+                    return;
             }
         }
     }
@@ -165,25 +165,132 @@ public class Driver {
         boolean running = true;
         while(running){
             printCabinsSectionCoordinatorOptions();
-            int selection = getValidSelection(1,3);
+            int selection = getValidSelection(1,4);
             switch(selection){
                 case 1:
-                    this.csm.viewCabinByCoordinator(coordinator);
+                    this.csm.viewCabinsByCoordinator(coordinator);
                     break;
                 case 2:
                     this.csm.viewCabinSchedulesByCoordinator(coordinator);
                     break;
                 case 3:
+                    // printing
+                    this.handleSaveFileSectionCoordinator(coordinator);
+                    break;
+                case 4:
                     System.out.println("Returning to main menu...");
                     return;
             }
         }
     }
+    public void handleSaveFileSectionCoordinator(Dependent user){
+        System.out.println("Save File Cabin Menu");
+        boolean running = true;
+        while(running){
+            printSaveFileCoordinatorOptions();
+            int selection = getValidSelection(1, 4);
+            if(selection == 4){
+                System.out.println("Exiting...");
+                return;
+            }
+            Cabin c = this.promptGetCabinByCoordinator(user);
+            if(c == null){
+                System.out.println("Exiting...");
+                return;
+            }
+            switch(selection){
+                case 1:
+                    // roster
+                    this.handleSaveFileCabin(c);
+                    break;
+                case 2:
+                    // vital info
+                    this.handleSaveFileCabinVitalInfo(c);
+                    break;
+                case 3:
+                    // schedules
+                    this.handleSaveFileCabinSchedules(c);
+                    break;
+            }
+        }
+    }
+    public void handleSaveFileCabinSchedules(Cabin c){
+        System.out.println(c.getSchedulesString());
+        System.out.println("Would you like to save this roster?");
+        int selection = getYesNoResponse();
+        switch(selection){
+            case 1:
+                //save
+                this.handleSaveToTextFile(c.getSchedulesString());
+                break;
+            case 2:
+                System.out.println("Returning...");
+                // exit
+                break;
+        }
+    }
+    public void handleSaveFileCabinVitalInfo(Cabin c){
+        System.out.println(c.getVitalInfo());
+        System.out.println("Would you like to save this information?");
+        int selection = getYesNoResponse();
+        switch(selection){
+            case 1:
+                // save
+                this.handleSaveToTextFile(c.getVitalInfo());
+                break;
+            case 2:
+                System.out.println("Returning...");
+                break;
+        }
+    }
+    public void handleSaveFileCabin(Cabin c){
+        System.out.println(c.getCabinRoster());
+        System.out.println("Would you like to save this roster?");
+        int selection = getYesNoResponse();
+        switch(selection){
+            case 1:
+                //save
+                this.handleSaveToTextFile(c.getCabinRoster());
+                break;
+            case 2:
+                System.out.println("Returning...");
+                // exit
+                break;
+        }
+    }
+    public void handleSaveToTextFile(String text){
+        System.out.println("Enter the file name: ");
+        String fileName = promptForStringResponse();
+        FileIO.writeToTxtFile(text, fileName);
+        System.out.println("File successfully saved.\n");
+    }
+    public Cabin promptGetCabinByCoordinator(Dependent user){
+        this.csm.viewCabinsByCoordinator(user);
+        int cabinCount = this.csm.getCabinCountByDependent(user);
+        while(true){
+            System.out.println("Select the number of the cabin.");
+            System.out.println("Or [-1] to exit.");
+            int selection = getValidSelection(-1,cabinCount-1);
+            if(selection == -1){
+                System.out.println("Exiting...");
+                return null;
+            }
+            return this.csm.getCabinByIndex(selection);
+        }
+    }
+
+    public void printSaveFileCoordinatorOptions(){
+        System.out.println("[1] Save Roster");
+        System.out.println("[2] Save Vital Information");
+        System.out.println("[3] Save Weekly Schedule");
+        System.out.println("[4] Exit");
+    }
     public void printCabinsSectionCoordinatorOptions(){
         System.out.println("Cabin Menu");
         System.out.println("[1] View Your Cabin");
         System.out.println("[2] View Your Cabin Schedules");
-        System.out.println("[3] Exit");
+        System.out.println("[3] Saving to File");
+        System.out.println("[4] Exit");
     }
     public void printCoordinatorOptions(){
         System.out.println("[1] Cabins");
@@ -194,42 +301,45 @@ public class Driver {
         System.out.println("Welcome, " + user.getFirstName() +"\n");
     }
     public void runAuthorizedGuardian(Guardian user){
-        int selection = getGuardianOptionSelection();
-        while(true){
-            handleGuardianOptionSelected(selection,user);
-            selection = getGuardianOptionSelection();
-        }
-    }
-    public void handleGuardianOptionSelected(int option,Guardian user){
-        switch(option) {
-            case 1:
-                // print dependents
-                this.handleGuardianDependentSection(user);
-                break;
-            case 2:
-                // register new dependent
-                this.handleGuardianCabinSection(user);
-                break;
-            case 3:
-                handleReviewSection(user);
-                break;
-            case 4:
-                break;
+        boolean running = true;
+        while(running){
+            printGuardianOptions();
+            int selection = getValidSelection(1,4);
+            switch(selection){
+                case 1:
+                    // print dependents
+                    this.handleGuardianDependentSection(user);
+                    break;
+                case 2:
+                    // register new dependent
+                    this.handleGuardianCabinSection(user);
+                    break;
+                case 3:
+                    handleReviewSection(user);
+                    break;
+                case 4:
+                    running = false;
+                    break;
+                }
         }
     }
     public void handleGuardianCabinSection(Guardian user){
         printGuardianCabinSectionOptions();
-        int selection = getValidSelection(1,3);
-        switch(selection){
-            case 1:
-                this.csm.viewCabins();
-                break;
-            case 2:
-                this.handleAddDependentToCabin(user);
-                break;
-            case 3:
-                System.out.println("Returning to main menu...");
-                return;
+        boolean running = true;
+        while(running){
+            int selection = getValidSelection(1,3);
+            switch(selection){
+                case 1:
+                    this.csm.viewCabins();
+                    break;
+                case 2:
+                    this.handleAddDependentToCabin(user);
+                    break;
+                case 3:
+                    System.out.println("Returning to main menu...");
+                    running = false;
+                    return;
+            }
         }
     }
     public void printGuardianCabinSectionOptions(){
@@ -451,17 +561,6 @@ public class Driver {
     public String promptMedNote(){
         System.out.println("Please enter any medical information, or \"done\" if done: ");
         return promptForStringResponse();
-    }
-    public int getGuardianOptionSelection(){
-        printGuardianOptions();
-        int intUserChoice = -1;
-        while(!isValidIntInput(intUserChoice,1,4)){
-            intUserChoice = promptForIntResponse();
-            if(!isValidIntInput(intUserChoice,1,4)){
-                printGuardianOptions();
-            }
-        }
-        return intUserChoice;
     }
 
     public void printGuardianOptions(){
@@ -777,7 +876,7 @@ public class Driver {
         return response;
     }
     public int getValidSelection(int lower, int upper){
-        int selection = -1;
+        int selection =-Integer.MAX_VALUE;
         while(!isValidIntInput(selection, lower, upper)){
             selection = promptForIntResponse();
             if(!isValidIntInput(selection, lower, upper)){

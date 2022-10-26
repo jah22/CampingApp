@@ -13,8 +13,6 @@ public class Cabin {
     // portia says we need an age range
     private int lowerAgeBound;
     private int upperAgeBound;
-    private int campYear;
-    private ArrayList<String> themes = new ArrayList<String>();
 
     public String getCabinName(){
         return this.name;
@@ -84,8 +82,6 @@ public class Cabin {
         this.coordinatorCapacity = coordinatorCapacity;
         this.lowerAgeBound = lowerAgeBound;
         this.upperAgeBound = upperAgeBound;
-        this.themes = themes;
-        this.campYear = campYear; 
     }
     public String toString(){
         // to do
@@ -160,5 +156,43 @@ public class Cabin {
     public boolean checkCanAddDependent(Dependent d){
         return(hasSpace() && inAgeRange(d.getAgeInt()));
     }
+    public String getCabinRoster(){
+        String out = "Roster for \"" + this.name + "\"\n";
+        out += "Coordinator count: " + this.coordinators.size()+ "/" + this.coordinatorCapacity + "\n";
+        out += "Camper count: " + this.campers.size()+ "/" + this.camperCapacity +"\n";
+        out += "Coordinator(s): \n";
+        for(Dependent dep: this.coordinators){
+            out += dep.getFullName() + "\n";
+        }
+        out += "Campers: \n";
+        for(Dependent dep: this.campers){
+            out += dep.getFullName() + "\n";
+        }
 
+        return out;
+    }
+
+    public String getVitalInfo(){
+        String out = "Vital information for " + this.name + "\n";
+        out += "Medical notes: \n";
+        for(Dependent d: this.campers){
+            out += "Camper: " + d.getFullName() +"\n";
+            out += "    Age: " + d.getAgeInt();
+            for(String note: d.getMedicalNotes()){
+                out += "    " + note + "\n";
+            }
+            out += "    Emergency Contacts: \n";
+            for(EmergencyContact contact: d.getEmergencyContacts()){
+                out += "    " + contact.toString() + "\n";
+            }
+        }
+        return out;
+    }
+    public String getSchedulesString(){
+        String out = "";
+        for(Schedule s: this.schedules){
+            out += s.toString() + "\n";
+        }
+        return out;
+    }
 }

@@ -11,6 +11,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -171,8 +173,9 @@ public class FileIO {
         String address = (String) jEM.get(DataConstants.PERSON_ADDRESS);
         UUID id = UUID.fromString((String)jEM.get(DataConstants.PERSON_ID));
         String birthDate = (String) jEM.get(DataConstants.PERSON_BIRTHDATE);
+        String phone = (String) jEM.get("phone");
         
-        return (new EmergencyContact(firstName, lastName, birthDate, address,id));
+        return (new EmergencyContact(firstName, lastName, birthDate, address,phone,id));
     }
     private Guardian parseGuardianObj(JSONObject guardian){
         String firstName = (String) guardian.get(DataConstants.PERSON_FIRST_NAME);
@@ -531,5 +534,12 @@ public class FileIO {
             e.printStackTrace();
         }
         return new JSONArray();
+    }
+    public static void writeToTxtFile(String fileContents, String fileName){
+        try{
+            Files.write(Paths.get(fileName),fileContents.getBytes());
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 }

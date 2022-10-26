@@ -1,3 +1,4 @@
+import java.nio.file.Files;
 import java.util.ArrayList;
 
 public class CabinManager {
@@ -14,10 +15,10 @@ public class CabinManager {
             }
         }
     }
-    public void viewCabinByCoordinator(Dependent coordinator){
-        for(Cabin c: this.cabins){
-            if(c.hasDependent(coordinator)){
-                System.out.println(c);
+    public void viewCabinsByCoordinator(Dependent coordinator){
+        for(int i=0;i<this.cabins.size();i++){
+            if(this.cabins.get(i).hasDependent(coordinator)){
+                System.out.println("[" + i + "] " + this.cabins.get(i).getCabinName());
             }
         }
     }
@@ -108,5 +109,43 @@ public class CabinManager {
     public boolean removeCoordinatorFromCabin(Dependent coordinator,String cabinName){
         // to do
         return false;
+    }
+    public ArrayList<Cabin> getCabinsByCoordinator(Dependent coordinator){
+        ArrayList<Cabin> cabins = new ArrayList<Cabin>();
+        for(Cabin c: this.cabins){
+            if(c.hasDependent(coordinator)){
+                cabins.add(c);
+            }
+        }
+        return cabins;
+    }
+    public String getCampRosters(Dependent coordinator) {
+        String out = "";
+        ArrayList<Cabin> coordCabins= getCabinsByCoordinator(coordinator);
+        for(Cabin c: coordCabins){
+            out += c.getCabinRoster() + "\n";
+        }
+        return out;
+    }
+    public ArrayList<Cabin> getDependentCabins(Dependent user){
+        ArrayList<Cabin> ret = new ArrayList<Cabin>();
+        for(Cabin c: this.cabins){
+            if(c.hasDependent(user)){
+                ret.add(c);
+            }
+        }
+        return ret;
+    }
+    public int getCabinCountByDependent(Dependent user){
+        int ret = 0;
+        for(Cabin c: this.cabins){
+            if(c.hasDependent(user)){
+                ret +=1;
+            }
+        }
+        return ret;
+    }
+    public String getCabinRoster(Cabin c){
+        return c.getCabinRoster();
     }
 }

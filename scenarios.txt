@@ -1,0 +1,31 @@
+1. 
+- Camp admin
+- sets up 9 sessions (cabins)
+- each session is 1 week long
+- session themes
+- she sets age range
+-
+
+2.
+- Parent logs in to existing account
+- browses thru list of sessions for each week
+- selects ninja warrior session
+- reads description
+- signs up two kids for ninja warrior week
+- gets confirmation 
+
+3.
+- Parent adds younger daughter to account 
+- same as 2
+- show their both there
+
+4. DONE
+- councelor 
+- logs in prints out roster for cabin
+- 8 children between 11-12 yo
+- print out list of vital info
+-- allergies, emergency contacts, medical info
+- prints out weekly schedules
+-- also WHERE it is located
+-- save the vital info to text file `vital_info.txt`
+-- save the weekly schedule to text file 

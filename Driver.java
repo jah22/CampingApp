@@ -38,7 +38,7 @@ public class Driver {
         boolean running = true;
         while(running){
             viewCampAdminOptions();
-            int selection = getValidSelection(1,3);
+            int selection = getValidSelection(1,4);
             switch(selection){
                 case 1:
                     // view camp site info
@@ -48,9 +48,146 @@ public class Driver {
                     this.handleEditCampSection();
                     break;
                 case 3:
+                    // new camp
+                    this.handleSetUpNewCamp();
+                case 4:
+                    // exit`
+                    System.out.println("Returning...");
                     return;
             }
         }
+    }
+    public void handleSetUpNewCampMenu(){
+        System.out.println("Would you like to set up a new camp?");
+        int selection = getYesNoResponse();
+        switch(selection){
+            case 1:
+                this.handleSetUpNewCamp();
+                break;
+            case 2:
+                System.out.println("Returning...");
+                break;
+        }
+    }
+    public void handleSetUpNewCamp(){
+        // reset old camp
+        this.csm.resetCamp();
+        System.out.println("Enter the name for the camp:");
+        this.csm.setName(promptForStringResponse());
+        this.csm.setAddress(promptForAddress());
+        System.out.println("Enter the year for the camp:");
+        this.csm.setYear(promptForIntResponse());
+        System.out.println("Enter the start month for the camp: ");
+        this.csm.setStartMonth(promptForMonth());
+        System.out.println("Now enter the sessions.");
+        System.out.println("How many sessions would you like? ");
+        int sessionCount = getValidSelection(1, 99);
+        this.handleSessionEntry(sessionCount);
+        System.out.println("Now enter the cabins.");
+        this.csm.setCabinManager(promptCabinManager(sessionCount));
+        System.out.println("Successfully created camp.");
+        System.out.println("Camp information: ");
+        this.csm.viewCamp();
+    }
+    public CabinManager promptCabinManager(int sessionCount){
+        CabinManager c = new CabinManager();
+        int count = 0;
+        boolean running = true;
+        while(running){
+            System.out.println("Would you like to add a new cabin?");
+            switch(getYesNoResponse()){
+                case 1:
+                    // add cabin
+                    c.addCabin(this.promptForCabin(sessionCount));
+                    count += 1;
+                    break;
+                case 2:
+                    if(count > 0){
+                        running = false;
+                        break;
+                    }
+                    System.out.println("Need at least one cabin.");
+                    break;
+            }
+        }
+        return c;
+    }
+    public Cabin promptForCabin(int sessionCount){
+        System.out.println("Enter the name of the cabin:");
+        String name = promptForStringResponse();
+        System.out.println("Enter the lower age bound for the cabin: ");
+        int lowerBound = getValidSelection(0, 20);
+        System.out.println("Enter the upper age range for the cabin: ");
+        int upperBound = getValidSelection(lowerBound+1,99);
+
+        return new Cabin(name,lowerBound,upperBound,sessionCount);
+    }
+    public void handleSessionEntry(int sessionCount){
+        this.csm.setThemeManager(promptThemeManager(sessionCount));
+    }
+    public ThemeManager promptThemeManager(int sessionCount){
+        ThemeManager t = new ThemeManager();
+        int count = 0;
+        for(int i=0;i<sessionCount;i++){
+            System.out.println("Enter the name of theme #" + i +  ": ");
+            String name = promptForStringResponse();
+            t.addTheme(new Theme(name, count));
+            count += 1;
+        }
+        return t;
+    }
+
+    public String promptForMonth(){
+        String jan = "Janurary";
+        String feb = "February";
+        String mar = "March";
+        String apr = "April";
+        String may = "May";
+        String jun = "June";
+        String jul = "July";
+        String aug = "August";
+        String sep = "September";
+        String oct = "October";
+        String nov = "November";
+        String dec = "December";
+        System.out.println("[1] " + jan);
+        System.out.println("[2] " + feb);
+        System.out.println("[3] " + mar);
+        System.out.println("[4] " + apr);
+        System.out.println("[5] " + may);
+        System.out.println("[6] " + jun);
+        System.out.println("[7] " + jul);
+        System.out.println("[8] " + aug);
+        System.out.println("[9] " + sep);
+        System.out.println("[10] " + oct);
+        System.out.println("[11] " + nov);
+        switch(getValidSelection(1, 11)){
+            case 1:
+                return jan;
+            case 2:
+                return feb;
+            case 3:
+                return mar;
+            case 4:
+                return apr;
+            case 5:
+                return may;
+            case 6: 
+                return jun;
+            case 7:
+                return jul;
+            case 8:  
+                return aug;
+            case 9:
+                return sep;
+            case 10:
+                return oct;
+            case 11:
+                return nov;
+            case 12:
+                return dec;
+        }
+        return null;
     }
     public void handleEditCampSection(){
         boolean running = true;
@@ -64,7 +201,7 @@ public class Driver {
                     break;
                 case 2:
                     // camp themeu
-                    this.handleEditCampThemes();
+                    // TODO
                     break;
                 case 3:
                     // camp year
@@ -75,11 +212,6 @@ public class Driver {
                     return;
             }
         }
-    }
-    public void handleEditCampThemes(){
-        System.out.println("The current themes are: ");
-        this.csm.viewCampThemes();
-        System.out.println("Would you like to edit any themes?");
     }
     public void handleEditCampName(){
         System.out.println("The current name is: " + this.csm.getName());
@@ -121,7 +253,8 @@ public class Driver {
     public void viewCampAdminOptions(){
         System.out.println("[1] View Camp Site Information");
         System.out.println("[2] Edit Camp Site Information");
-        System.out.println("[3] Exit");
+        System.out.println("[3] Setup new Camp");
+        System.out.println("[4] Exit");
     }
     public void runCoordinator(Dependent user){
         boolean running = true;
@@ -545,7 +678,9 @@ public class Driver {
         String birthdate =promptForBirthDate();
         String address = promptForAddress();
         String phone = promptForPhone();
-        return new EmergencyContact(firstName, lastName, birthdate, address,phone);
+        System.out.println("What relation is this contact? ");
+        String relation = promptForStringResponse();
+        return new EmergencyContact(firstName, lastName, birthdate, address,phone,relation);
     }
     public ArrayList<String> promptMedNotes(){
         ArrayList<String> notes = new ArrayList<>();
@@ -764,7 +899,7 @@ public class Driver {
         }
     }
     public void handleCabinSectionNonAuth(){
-        boolean running = false;
+        boolean running = true;
         while(running){
             printCabinSectionNonAuthOptions(); 
             int selection = getValidSelection(1,3);
@@ -877,6 +1012,7 @@ public class Driver {
     public int getValidSelection(int lower, int upper){
         int selection =-Integer.MAX_VALUE;
         while(!isValidIntInput(selection, lower, upper)){
+            System.out.println("Please enter an integer between " + lower + " and " + upper + " inclusively.");
             selection = promptForIntResponse();
             if(!isValidIntInput(selection, lower, upper)){
                 System.out.println("Please try again.");

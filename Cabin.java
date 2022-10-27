@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Cabin {
     private String name; 
@@ -49,7 +50,6 @@ public class Cabin {
         return this.schedules;
     }
     public void viewActivities(){
-        System.out.println(this.schedules.size());
         for(Schedule s:this.schedules){
             System.out.println(s);
         }
@@ -61,6 +61,81 @@ public class Cabin {
     }
     public Cabin(String name){
         this.name = name;
+    }
+    // for new cabin generation
+    public Cabin(String name, int lowerBound, int upperBound,int sessionCounts){
+        this.name = name;
+        this.lowerAgeBound = lowerBound;
+        this.upperAgeBound = upperBound;
+        this.generateRandomSchedulesForSession(sessionCounts);
+    }
+    public void generateRandomSchedulesForSession(int sessionCounts){
+        // randomly generate round wake up, breakfast, lunch, dinner, sleep
+        for(int i=0;i<sessionCounts;i++){
+            // one for each day of week
+            Schedule s = this.generateRandomSchedule(i);
+            this.schedules.add(s);
+        }
+    }
+    public Schedule generateRandomSchedule(int sessionNumber){
+        Schedule s = new Schedule(sessionNumber);
+        for(int i = 0 ; i < 7 ; i++){
+            String day = "";
+            if(i == 0){
+                day = "Saturday" ;
+                s.addDayActivityManager(day);
+            }
+            else if(i == 1){
+                day = "Sunday";
+                s.addDayActivityManager(day);
+            }
+            else if(i == 2){
+                day = "Monday";
+                s.addDayActivityManager(day);
+            }
+            else if(i == 3){
+                day = "Tuesday";
+                s.addDayActivityManager(day);
+            }
+            else if(i == 4){
+                day = "Wednesday";
+                s.addDayActivityManager(day);
+            }
+            else if(i == 5){
+                day = "Thursday";
+                s.addDayActivityManager(day);
+            }
+            else if(i == 6){
+                day = "Friday";
+                s.addDayActivityManager(day);
+            }
+            for(int j = s.getStartTime(); j <= s.getEndTime();j++){
+                // some preset times
+                if(j == ActivityManager.START_TIME) {
+                    // wake up always first
+                    s.addActivity(day,Activity.WAKEUP.toString());
+                }
+                else if(j == ActivityManager.BREAKFAST_TIME){
+                    // breakfast after wake up
+                    s.addActivity(day,Activity.BREAKFAST.toString());
+                }
+                else if(j == ActivityManager.LUNCH_TIME){
+                    s.addActivity(day,Activity.LUNCH.toString());
+                }
+                else if(j == ActivityManager.DINNER_TIME){
+                    s.addActivity(day,Activity.DINNER.toString());
+                }
+                else{
+                    // randomize
+                    String randActivity= Activity.values()[new Random().nextInt(Activity.values().length)].toString();
+                    while(s.hasActivity(day,randActivity)){
+                        randActivity = Activity.values()[new Random().nextInt(Activity.values().length)].toString();
+                    }
+                    s.addActivity(day,randActivity);
+                }
+            }
+        }
+        return s;
     }
     public Cabin(String name,ArrayList<Dependent>coordinators, ArrayList<Dependent> campers,ArrayList<Schedule> schedules, int camperCapacity, int coordinatorCapacity,int lowerAgeBound, int upperAgeBound){
         this.name = name;

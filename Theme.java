@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Theme {
     private String name; 
     private int weekNumber;

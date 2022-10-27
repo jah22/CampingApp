@@ -4,40 +4,33 @@ import java.util.UUID;
 
 public class CampSiteManager{
   // to do: add themes
-  private ArrayList<String> themes;
+  private ThemeManager themeManager;
   private int year;
+  private String startMonth;
 
   private String name;
   private String address;
-  // portia said 7 dollars is fine 
-  private double pricePerCamperPerDay;
 
   private ArrayList<FAQ> frequentlyAskedQuestions;
 
   private static CampSiteManager campSiteManager;
-  private String authcode;
 
   // managers
   PersonManager personManager;
   ReviewManager reviewManager;
   CabinManager cabinManager;
 
-  private CampSiteManager(String name, String address, double pricePerCamperPerDay, int year,ArrayList<String> themes,String authCode) {
-    /*
-     * TODO:
-     * init the managers
-     */
+  private CampSiteManager(String name, String address, int year,String startMonth,ThemeManager themeManager) {
     this.personManager = new PersonManager(FileIO.getAdmins(),FileIO.getGuardians(),FileIO.getDependents(),FileIO.getEmergencyContacts());
     this.reviewManager = new ReviewManager(FileIO.getReviews());
     this.cabinManager = new CabinManager(FileIO.getCabins());
 
     this.name = name;
     this.address = address;
-    this.pricePerCamperPerDay = pricePerCamperPerDay;
     this.frequentlyAskedQuestions =FileIO.getFaqs();
-    this.authcode = authCode;
     this.year = year;
-    this.themes = themes;
+    this.startMonth = startMonth;
+    this.themeManager=themeManager;
   }
   public static CampSiteManager getInstance() {
     //To-Do
@@ -47,10 +40,10 @@ public class CampSiteManager{
     }
     return campSiteManager;
   }
-  public static CampSiteManager getInstance(String name, String address, double price, int year,ArrayList<String> themes,String authCode) {
+  public static CampSiteManager getInstance(String name, String address, int year,String startMonth, ThemeManager themeManager) {
     //To-Do
     if(campSiteManager == null){
-      campSiteManager = new CampSiteManager(name, address, price, year,themes,authCode);
+      campSiteManager = new CampSiteManager(name, address, year,startMonth,themeManager);
       return campSiteManager;
     }
     return campSiteManager;
@@ -71,10 +64,9 @@ public class CampSiteManager{
       String out = "Cabin: " + this.name +"\n";
       out += "Year: " + this.year + "\n";
       out += "Rating: " + this.getAvgRating() +"\n";
+      out += "Start month: "+ this.getStartMonth() +"\n";
       out += "Themes: "+"\n";
-      for(int i=0;i<this.themes.size();i++){
-        out += "[" + i + "] "  + this.themes.get(i) + "\n";
-      }
+      out += this.themeManager.toString();
 
       // to do:
       // be more fancy 
@@ -156,26 +148,6 @@ public class CampSiteManager{
   }
   public Dependent registerCoordinator(String firstName, String lastName, String username, String password, String birthDate, String phone, String email) {
     return this.personManager.registerCoordinator(firstName, lastName, username, password, birthDate, phone, email);
-  }
-  public boolean removeCoordinator(Dependent coord) {
-    //To-Do
-    return false;
-  }
-  public boolean removeCamper(Dependent camper) {
-    //To-Do
-    return false;
-  }
-  public boolean payForCamper(String camperFirstName, String camperLastName) {
-    //To-Do
-    return false;
-  }
-  public boolean refundGuardian(String camperFirstName, String capmerLastName) {
-    //To-Do
-    return false;
-  }
-  public boolean signUpDependentForCabin(String guardianUserName, String guardianPassword) {
-    //To-Do
-    return false;
   }
   public boolean viewDependentsFromGuardian(UUID guardianId){
     Guardian g = this.personManager.getGuardianById(guardianId);
@@ -286,14 +258,6 @@ public class CampSiteManager{
   public double getAvgRating(){
     return this.reviewManager.getAvgRating();
   }
-  public ArrayList<String> getThemes(){
-    return this.themes;
-  }
-  public void viewCampThemes(){
-    for(int i=0;i<this.themes.size();i++){
-      System.out.println("[" + i + "] " + this.themes.get(i));
-    }
-  }
   public String getCampRosters(Dependent coordinator){
     return this.cabinManager.getCampRosters(coordinator);
   }
@@ -306,5 +270,28 @@ public class CampSiteManager{
   public String getCabinRoster(Cabin c){
     return this.cabinManager.getCabinRoster(c);
   }
-
+  public void setThemeManager(ThemeManager t){
+    this.themeManager = t;
+  }
+  public void resetCamp(){
+    this.frequentlyAskedQuestions = new ArrayList<FAQ>();
+    this.name = "";
+    this.year = -1;
+    this.address = "";
+    this.personManager = new PersonManager();
+    this.reviewManager = new ReviewManager();
+    this.cabinManager = new CabinManager();
+  }
+  public void setCabinManager(CabinManager cabinManager){
+    this.cabinManager = cabinManager; 
+  }
+  public void setAddress(String address){
+    this.address = address;
+  }
+  public void setStartMonth(String month){
+    this.startMonth = month;
+  }
+  public String getStartMonth(){
+    return this.startMonth;
+  }
 }

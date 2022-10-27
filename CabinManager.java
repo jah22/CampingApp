@@ -1,11 +1,13 @@
-import java.nio.file.Files;
 import java.util.ArrayList;
 
 public class CabinManager {
-    private ArrayList<Cabin> cabins;
+    private ArrayList<Cabin> cabins = new ArrayList<Cabin>();
     
     public CabinManager(ArrayList<Cabin> cabins){
         this.cabins = cabins;
+    }
+    public CabinManager(){
+        // empty ctor
     }
     public void viewGuardianRegisteredCabins(Guardian g){
         // the indices of the cabins that the gaurdians has ov
@@ -147,5 +149,8 @@ public class CabinManager {
     }
     public String getCabinRoster(Cabin c){
         return c.getCabinRoster();
+    }
+    public void addCabin(Cabin c){
+        this.cabins.add(c);
     }
 }

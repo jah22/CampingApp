@@ -32,6 +32,7 @@ public class FileIO {
     private static ArrayList<Dependent> dependents;
     private static ArrayList<EmergencyContact> emergencyContacts;
     private static CampSiteManager campSiteManager;
+    private static ArrayList<ThemeManager> themeManagers;
 
     /*
      * Managers
@@ -48,6 +49,8 @@ public class FileIO {
          */
         this.faqs = readFaqs();
         this.reviews = readReviews();
+        this.themeManagers = readThemeManagers();
+
         // start dealing with people
         this.pM = new PersonManager();
         this.admins = readAdmins();
@@ -113,6 +116,7 @@ public class FileIO {
     private static Schedule parseScheduleObj(JSONObject jSchedule){
         UUID id = UUID.fromString((String)jSchedule.get(DataConstants.SCHEDULE_ID));
         String cabinName = (String) jSchedule.get(DataConstants.SCHEDULE_CABIN_NAME);
+        int sessionNumber  = Math.toIntExact((long) jSchedule.get("sessionNumber"));
         JSONArray jSchedules = (JSONArray)jSchedule.get(DataConstants.SCHEDULE_SCHEDULES);
         // create the hash
         HashMap<String,ActivityManager> hash = new HashMap<String,ActivityManager>();
@@ -132,7 +136,7 @@ public class FileIO {
             });
             hash.put(dayOfWeek,aM);
         });
-        Schedule sched = new Schedule(hash, id);
+        Schedule sched = new Schedule(hash, sessionNumber,id);
         // add to cabin
         for(Cabin c: cabins){
             if(c.getCabinName().equals(cabinName)){
@@ -147,6 +151,19 @@ public class FileIO {
         String answer = (String) jFaq.get(DataConstants.FAQ_ANSWER);
         return new FAQ(question,answer);
     }
+    private ThemeManager parseThemeManager(JSONObject jTheme) {
+        ThemeManager tm = new ThemeManager();
+        UUID id = UUID.fromString((String) jTheme.get("id"));
+        tm.setId(id);
+        JSONArray jaThemes = (JSONArray) jTheme.get("themes");
+        jaThemes.forEach(objTheme->{
+            JSONObject joTheme = (JSONObject)objTheme;
+            String name = (String) joTheme.get("name");
+            int week = Math.toIntExact((long)joTheme.get("week"));
+            tm.addTheme(new Theme(name, week));
+        });
+        return tm;
+    }
     private Review parseReviewObj(JSONObject rev){
         
         String author= (String) rev.get(DataConstants.REVIEW_AUTHOR);
@@ -156,16 +173,6 @@ public class FileIO {
 
         return new Review(author,rating,title,body);
     }
-    private Person parsePersonObj(JSONObject jPer){
-        // get attributes
-        String firstName = (String) jPer.get(DataConstants.PERSON_FIRST_NAME);
-        String lastName = (String) jPer.get(DataConstants.PERSON_LAST_NAME);
-        String address = (String) jPer.get(DataConstants.PERSON_ADDRESS);
-        UUID id = UUID.fromString((String)jPer.get(DataConstants.PERSON_ID));
-        String birthDate = (String) jPer.get(DataConstants.PERSON_BIRTHDATE);
-        
-        return (new Person(firstName, lastName, birthDate, address,id));
-    }
     private EmergencyContact parseEmergencyContactObj(JSONObject jEM){
         // get attributes
         String firstName = (String) jEM.get(DataConstants.PERSON_FIRST_NAME);
@@ -174,8 +181,9 @@ public class FileIO {
         UUID id = UUID.fromString((String)jEM.get(DataConstants.PERSON_ID));
         String birthDate = (String) jEM.get(DataConstants.PERSON_BIRTHDATE);
         String phone = (String) jEM.get("phone");
+        String relation = (String) jEM.get("relation");
         
-        return (new EmergencyContact(firstName, lastName, birthDate, address,phone,id));
+        return (new EmergencyContact(firstName, lastName, birthDate, address,phone,relation,id));
     }
     private Guardian parseGuardianObj(JSONObject guardian){
         String firstName = (String) guardian.get(DataConstants.PERSON_FIRST_NAME);
@@ -310,16 +318,19 @@ public class FileIO {
 
         String name = (String) jCamp.get("name");
         String address = (String) jCamp.get("address");
-        double price = (double) jCamp.get("pricePerCamperPerDay");
-        String authCode = (String) jCamp.get("authCode");
         int year = Math.toIntExact((Long) jCamp.get("year"));
-        ArrayList<String> themes = new ArrayList<String>();
-        JSONArray jThemes = (JSONArray) jCamp.get("themes");;
-        jThemes.forEach(jTheme->{
-            themes.add((String) jTheme);
-        });
+        UUID themeId = UUID.fromString((String) jCamp.get("themeId"));
+        String startMonth = (String) jCamp.get("startMonth");
 
-        return CampSiteManager.getInstance(name,address, price,year,themes,authCode);
+        ThemeManager themeManager = new ThemeManager();
+        for(ThemeManager t: this.themeManagers){
+            if(t.getId().equals(themeId)){
+                themeManager = t;
+            }
+        }
+
+
+        return CampSiteManager.getInstance(name,address,year,startMonth,themeManager);
     }
 
     /*
@@ -374,6 +385,14 @@ public class FileIO {
         );
         return guardians;
     }   
+    private ArrayList<ThemeManager> readThemeManagers(){
+        ArrayList<ThemeManager> ret = new ArrayList<ThemeManager>();
+        JSONArray jaThemeManagerList = parseJsonFileArr("./json/Theme.json");
+        jaThemeManagerList.forEach(jTheme ->
+            ret.add(parseThemeManager((JSONObject) jTheme))
+        );
+        return ret;
+    }
     private ArrayList<CampAdmin> readAdmins(){
         ArrayList<CampAdmin> admins = new ArrayList<CampAdmin>();
         JSONArray adminList = parseJsonFileArr(DataConstants.CAMP_ADMIN_FILE_NAME);

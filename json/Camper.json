@@ -10,7 +10,6 @@
     }
   ],
   "id": "81c7ae99-247f-4c80-950a-4a41e767e84d",
-  "hasBeenPaidFor": true,
   "medicalNotes": [
     "allergy 1",
     "allergy 2"
@@ -28,7 +27,6 @@
     }
   ],
   "id": "81c7ae99-247f-4c80-950a-4a41e767e84e",
-  "hasBeenPaidFor": true,
   "medicalNotes": [
     "allergy 1",
     "allergy 2"
@@ -46,7 +44,6 @@
     }
   ],
   "id": "81c7ae99-247f-4c80-950a-4a41e767e84f",
-  "hasBeenPaidFor": false,
   "medicalNotes": [
     "allergy 1",
     "allergy 2"

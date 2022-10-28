@@ -96,7 +96,12 @@ public class Cabin {
             System.out.println(d.toString() + "\n");
         }
     }
-
+    public int getLowerAgeBound() {
+        return this.lowerAgeBound;
+    }
+    public int getUpperAgeBound() {
+        return this.upperAgeBound;
+    }
     public boolean addCamperToCabin(Dependent camper){
         if(
             (this.lowerAgeBound <= camper.getAgeInt())

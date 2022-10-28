@@ -5,6 +5,7 @@ import org.json.simple.parser.JSONParser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.FileNotFoundException;
@@ -228,6 +229,7 @@ public class FileIO {
                 medNotes.addAll(notes);
             }
         );
+        
         NoPriorityBehavior npB = new NoPriorityBehavior();
         
         return  new Dependent(firstName, lastName, birthDate, address, id,isCoordinator,hasBeenPaidFor,emContacts,medNotes,npB);
@@ -382,7 +384,7 @@ public class FileIO {
     private ArrayList<Dependent> readDependents() {
         ArrayList<Dependent> deps = new ArrayList<Dependent>();
         // read campers
-        JSONArray jCamperList = parseJsonFileArr(DataConstants.CAMPER2_FILE_NAME);
+        JSONArray jCamperList = parseJsonFileArr(DataConstants.CAMPER_FILE_NAME);
         jCamperList.forEach(jDependent ->{
             deps.add(parseCamperObj((JSONObject)jDependent));
         }
@@ -440,10 +442,14 @@ public class FileIO {
         JSONObject jO = getPersonJson(d);
         jO.put("hasBeenPaidFor",d.getHasBeenPaidFor());
         jO.put("isCoordinator",d.getIsCoordinator());
-        String jsonMedNotes = new Gson().toJson(d.getMedicalNotes());
-        String jsonEmContacts = new Gson().toJson(d.getEmergencyContacts());
-        jO.put("medicalNotes",jsonMedNotes);
-        jO.put("emergencyContacts",jsonEmContacts);
+        ArrayList<JSONObject> ids = new ArrayList<>();
+        for(EmergencyContact regEmergencyContact : d.getEmergencyContacts()) {
+            JSONObject emergencyContacts = new JSONObject();
+            emergencyContacts.put("id", regEmergencyContact.id);
+            ids.add(emergencyContacts);
+        }
+        jO.put("medicalNotes",d.getMedicalNotes());
+        jO.put("emergencyContacts",ids);
 
         return jO;
     }
@@ -465,10 +471,33 @@ public class FileIO {
         jR.put("rating", r.getRating());
         return jR;
     }
-    // private JSONObject getCabinJson(Cabin c) {
-    //     JSONObject jsonC = 
-    //     return jsonC;
-    // }
+    private JSONObject getEmergencyContactJson(EmergencyContact eC) {
+        JSONObject jEC = getPersonJson(eC);
+        return jEC;
+    }
+    private JSONObject getCabinJson(Cabin c) {
+        JSONObject jC = new JSONObject();
+        jC.put("name", c.getCabinName());
+        jC.put("camperCapacity", c.getCamperCapacity());
+        jC.put("coordinatorCapacity", c.getCoordinatorCapacity());
+        jC.put("lowerAgeBound", c.getLowerAgeBound());
+        jC.put("upperAgeBound", c.getUpperAgeBound());
+        ArrayList<JSONObject> coordIds = new ArrayList<>();
+        ArrayList<JSONObject> camperIds = new ArrayList<>();
+        for(Dependent regCampers : c.getCampers()) {
+            JSONObject campers = new JSONObject();
+            campers.put("id", regCampers.id);
+            camperIds.add(campers);
+        }
+        //add coordinator info
+        return jC;
+    }
+    private JSONObject getScheduleJson(Schedule s) {
+        JSONObject jS = new JSONObject();
+        jS.put("id", s.getScheduleID());
+        
+        return jS;
+    }
 
     /*
      * ***************************
@@ -545,7 +574,7 @@ public class FileIO {
             }
         }
         String finalDependentString = jsonFormatter(dependJsonList);
-        writeToJson(finalDependentString,DataConstants.CAMPER2_FILE_NAME);
+        writeToJson(finalDependentString,DataConstants.CAMPER_FILE_NAME);
     }
     private void writeCoordinator(ArrayList<Dependent> coordinator){
         String coordJsonList = "";
@@ -567,9 +596,6 @@ public class FileIO {
         String finalCoordinatorString = jsonFormatter(coordJsonList);
         writeToJson(finalCoordinatorString,DataConstants.COORDINATOR_FILE_NAME);
     }
-    private void writeCabin(Cabin cabin) {
-
-    }
     private void writeReview(ArrayList<Review> review) {
         String reviewJsonList = "";
         boolean isFirst = true;
@@ -588,14 +614,54 @@ public class FileIO {
             }
         }
         String finalCoordinatorString = jsonFormatter(reviewJsonList);
-        writeToJson(finalCoordinatorString, DataConstants.REVIEW_FILE_NAME);
+        String formattedCoordinatorString = finalCoordinatorString.replace("\\u0027", "\'");
+        writeToJson(formattedCoordinatorString, DataConstants.REVIEW_FILE_NAME);
     }
     private void writeEmergencyContact(ArrayList<EmergencyContact> emergencyC) {
         String emcJsonList = "";
         boolean isFirst = true;
         for(EmergencyContact newEMC : emergencyC) {
-            //JSONObject emcInfo 
-            // ^ get emergencyContactJson
+            JSONObject eCInfo = getEmergencyContactJson(newEMC);
+            String contactInfoString = eCInfo.toJSONString();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            JsonElement je = JsonParser.parseString(contactInfoString);
+            String formattedJsonString = gson.toJson(je);
+            if(isFirst) {
+                emcJsonList = emcJsonList+formattedJsonString;
+                isFirst = false;
+            }
+            else {
+                emcJsonList = emcJsonList+",\n"+formattedJsonString;
+            }
+        }
+        String finalEmergencyContactString = jsonFormatter(emcJsonList);
+        writeToJson(finalEmergencyContactString, DataConstants.EMERGENCY_CONTACT_FILE_NAME);
+    }
+    private void writeCabin(ArrayList<Cabin> cabin) {
+        String cabinJsonList = "";
+        boolean isFirst = true;
+        for(Cabin newCabin : cabin) {
+            JSONObject cabinInfo = getCabinJson(newCabin);
+            String cabinInfoString = cabinInfo.toJSONString();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            JsonElement je = JsonParser.parseString(cabinInfoString);
+            String formattedJsonString = gson.toJson(je);
+            if(isFirst) {
+                cabinJsonList = cabinJsonList+formattedJsonString;
+                isFirst = false;
+            }
+            else {
+                cabinJsonList =cabinJsonList+"\n"+formattedJsonString;
+            }
+        }
+        String finalCabinString = jsonFormatter(cabinJsonList);
+        writeToJson(finalCabinString, DataConstants.CABIN_FILE_NAME);
+    }
+    private void writeSchedule(ArrayList<Schedule> schedule) {
+        String scheduleJsonList = "";
+        boolean isFirst = true;
+        for(Schedule newSchudule : schedule) {
+            //JSONObject scheduleInfo 
         }
     }
     /*
@@ -623,8 +689,8 @@ public class FileIO {
     }
     public static void main(String args[]){
         FileIO fiO = FileIO.getInstance();
-        ArrayList<Review> test = fiO.readReviews();
-        fiO.writeReview(test);
+        ArrayList<EmergencyContact> test = fiO.readEmergencyContacts();
+        fiO.writeEmergencyContact(test);
         System.out.println("here");
     }
 }

@@ -14,9 +14,12 @@ public class Schedule {
     public Schedule(){
         // empty ctor
     }
-
+    
     public HashMap<String,ActivityManager> getScheduledActivities(){
         return this.scheduledActivities;
+    }
+    public UUID getScheduleID() {
+        return this.id;
     }
     public String toString(){
         String out = "Schedule: " + this.id.toString() + "\n";

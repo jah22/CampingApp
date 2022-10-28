@@ -100,18 +100,6 @@ public class CabinManager {
         }
         System.out.println(this.cabins.get(index));
     }
-    public boolean removeCamperFromCabin(Dependent camper,String cabinName){
-        // to do
-        return false;
-    }
-    public boolean addCoordinatorToCabin(Dependent coordinator,String cabinName){
-        // to do
-        return false;
-    }
-    public boolean removeCoordinatorFromCabin(Dependent coordinator,String cabinName){
-        // to do
-        return false;
-    }
     public ArrayList<Cabin> getCabinsByCoordinator(Dependent coordinator){
         ArrayList<Cabin> cabins = new ArrayList<Cabin>();
         for(Cabin c: this.cabins){

@@ -99,18 +99,6 @@ public class CampSiteManager{
   public boolean addCamperToCabin(Dependent camper,Cabin cabin) {
     return this.cabinManager.addCamperToCabin(camper,cabin);
   }
-  public boolean removeCamperFromCabin(Dependent camper) {
-    //To-Do
-    return false;
-  }
-  public boolean addCoordinatorToCabin(Dependent coordinator) {
-    //To-Do
-    return false;
-  }
-  public boolean removeCoordinatorFromCabin(Dependent coordinator) {
-    //To-Do
-    return false;
-  }
   public void viewAllReviews(){
     this.reviewManager.viewAllReviews();
   }
@@ -177,10 +165,6 @@ public class CampSiteManager{
       return;
     }
     System.out.println("Review successfully removed.\n");
-  }
-  public boolean updateLoginInformation(String curUsername, String curPassword) {
-    //To-Do
-    return false;
   }
   public boolean viewDependent(String id) {
     UUID uuid = UUID.fromString(id);

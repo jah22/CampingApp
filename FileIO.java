@@ -5,7 +5,6 @@ import org.json.simple.parser.JSONParser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.FileNotFoundException;
@@ -724,12 +723,5 @@ public class FileIO {
         }catch(IOException e){
             e.printStackTrace();
         }
-    }
-    public static void main(String args[]){
-        FileIO fiO = FileIO.getInstance();
-        ArrayList<EmergencyContact> test = fiO.readEmergencyContacts();
-        fiO.writeEmergencyContact(test);
-        System.out.println("here");
-
     }
 }

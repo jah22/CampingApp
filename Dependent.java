@@ -56,11 +56,6 @@ public class Dependent extends Person{
             System.out.println(emergencyContact) ;
         }
     }
-    public boolean inCabin(Cabin cabin){
-        // todo
-        return false;
-    }
-
     public boolean getIsCoordinator(){
         return this.isCoordinator;
     }

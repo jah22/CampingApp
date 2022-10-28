@@ -14,6 +14,27 @@ public class Cabin {
     private int lowerAgeBound;
     private int upperAgeBound;
 
+    public Cabin(String name,ArrayList<Dependent>coordinators, ArrayList<Dependent> campers,ArrayList<Schedule> schedules, int camperCapacity, int coordinatorCapacity,int lowerAgeBound, int upperAgeBound){
+        this.name = name;
+        this.coordinators = coordinators;
+        this.campers = campers;
+        this.schedules = schedules;
+        this.camperCapacity = camperCapacity;
+        this.coordinatorCapacity = coordinatorCapacity;
+        this.lowerAgeBound = lowerAgeBound;
+        this.upperAgeBound = upperAgeBound;
+    }
+    public Cabin(String name,ArrayList<Dependent>coordinators, ArrayList<Dependent> campers,ArrayList<Schedule> schedules, int camperCapacity, int coordinatorCapacity,int lowerAgeBound, int upperAgeBound, ArrayList<String> themes, int campYear ){
+        this.name = name;
+        this.coordinators = coordinators;
+        this.campers = campers;
+        this.schedules = schedules;
+        this.camperCapacity = camperCapacity;
+        this.coordinatorCapacity = coordinatorCapacity;
+        this.lowerAgeBound = lowerAgeBound;
+        this.upperAgeBound = upperAgeBound;
+    }
+
     public String getCabinName(){
         return this.name;
     }
@@ -137,43 +158,8 @@ public class Cabin {
         }
         return s;
     }
-    public Cabin(String name,ArrayList<Dependent>coordinators, ArrayList<Dependent> campers,ArrayList<Schedule> schedules, int camperCapacity, int coordinatorCapacity,int lowerAgeBound, int upperAgeBound){
-        this.name = name;
-        this.coordinators = coordinators;
-        this.campers = campers;
-        this.schedules = schedules;
-        this.camperCapacity = camperCapacity;
-        this.coordinatorCapacity = coordinatorCapacity;
-        this.lowerAgeBound = lowerAgeBound;
-        this.upperAgeBound = upperAgeBound;
-    }
-    public Cabin(String name,ArrayList<Dependent>coordinators, ArrayList<Dependent> campers,ArrayList<Schedule> schedules, int camperCapacity, int coordinatorCapacity,int lowerAgeBound, int upperAgeBound, ArrayList<String> themes, int campYear ){
-        this.name = name;
-        this.coordinators = coordinators;
-        this.campers = campers;
-        this.schedules = schedules;
-        this.camperCapacity = camperCapacity;
-        this.coordinatorCapacity = coordinatorCapacity;
-        this.lowerAgeBound = lowerAgeBound;
-        this.upperAgeBound = upperAgeBound;
-    }
     public String toString(){
-        // to do
-        String division = "----------------------";
-        String out = division +"\n";
-        out += "Cabin: " + this.name + "\n";
-        out += division +"\n";
-        out += "Age range: " + this.lowerAgeBound + "-" + this.upperAgeBound +"\n";
-        out += division +"\n";
-        out += "Coordinators: " + this.coordinators.size() +"/"+ this.coordinatorCapacity + "\n";
-        for (Dependent dependent :this.coordinators) {
-            out += dependent.getFullName() + "\n";
-        }
-        out += division +"\n";
-        out += "Campers: " + this.campers.size() +"/"+ this.camperCapacity+ "\n";
-        out += division +"\n";
-
-        return out;
+        return this.getCabinRoster();
     }
     public void addSchedule(Schedule schedule){
         this.schedules.add(schedule);
@@ -280,5 +266,13 @@ public class Cabin {
     }
     public void setUpperAgeBound(int bound){
         this.upperAgeBound = bound;
+    }
+    public int getSessionCount(){
+        return this.schedules.size();
+    }
+    public void viewSessionAtIndex(int sessionIndex){
+        if(0<= sessionIndex && sessionIndex < this.schedules.size()){
+            System.out.println(this.schedules.get(sessionIndex));
+        }
     }
 }

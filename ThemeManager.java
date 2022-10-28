@@ -28,4 +28,12 @@ public class ThemeManager {
     public void setId(UUID id){
         this.id = id;
     }
+    public int getThemeCount(){
+        return this.themes.size();
+    }
+    public void viewThemes(){
+        for(Theme theme: this.themes){
+            System.out.println(theme);
+        }
+    }
 }

@@ -47,14 +47,14 @@ public class CabinManager {
         return null;
     }
 
-    public boolean viewCabinActivities(String cabinName){
-        for(Cabin c: this.cabins){
-            if(c.getCabinName().equals(cabinName)){
-                c.viewActivities();
-                return true;
-            }
+    public void viewIndexCabinSession(int cabinIndex, int sessionIndex){
+        if(
+            (0 <= cabinIndex && cabinIndex < this.cabins.size())
+            &&
+            (0 <= sessionIndex && sessionIndex < this.cabins.get(cabinIndex).getSessionCount())
+        ){
+            this.cabins.get(cabinIndex).viewSessionAtIndex(sessionIndex);
         }
-        return false;
     }
     public boolean viewCabinCoordinators(String cabinName){
         for(Cabin c: this.cabins){
@@ -95,22 +95,10 @@ public class CabinManager {
         }
     }
     public void viewCabinByIndex(int index){
-        if(index <=0 || index >= this.cabins.size()){
+        if(index < 0 || index >= this.cabins.size()){
             return;
         }
         System.out.println(this.cabins.get(index));
-    }
-    public boolean removeCamperFromCabin(Dependent camper,String cabinName){
-        // to do
-        return false;
-    }
-    public boolean addCoordinatorToCabin(Dependent coordinator,String cabinName){
-        // to do
-        return false;
-    }
-    public boolean removeCoordinatorFromCabin(Dependent coordinator,String cabinName){
-        // to do
-        return false;
     }
     public ArrayList<Cabin> getCabinsByCoordinator(Dependent coordinator){
         ArrayList<Cabin> cabins = new ArrayList<Cabin>();

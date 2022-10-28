@@ -13,6 +13,6 @@ public class Theme {
         return this.weekNumber;
     }
     public String toString(){
-        return "Theme name: " + this.name + "\nTheme week number: " + this.weekNumber;
+        return "Week: " + this.weekNumber + " -- Theme: " + this.name;
     }
 }

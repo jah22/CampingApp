@@ -85,11 +85,6 @@ public class CampSiteManager{
   public void viewCabinSchedulesByCoordinator(Dependent coordinator){
     this.cabinManager.viewCabinSchedulesByCoordinator(coordinator);
   }
-  public void viewAllCabinActivities(String cabinId) {
-    if(!this.cabinManager.viewCabinActivities(cabinId)){
-      System.out.println("A cabin with that ID cannot be found.");
-    }
-  }
   public void viewCabinCoordinators(String cabinID) {
     if(!this.cabinManager.viewCabinCoordinators(cabinID)){
       System.out.println("A cabin with that ID cannot be found.");
@@ -103,18 +98,6 @@ public class CampSiteManager{
   }
   public boolean addCamperToCabin(Dependent camper,Cabin cabin) {
     return this.cabinManager.addCamperToCabin(camper,cabin);
-  }
-  public boolean removeCamperFromCabin(Dependent camper) {
-    //To-Do
-    return false;
-  }
-  public boolean addCoordinatorToCabin(Dependent coordinator) {
-    //To-Do
-    return false;
-  }
-  public boolean removeCoordinatorFromCabin(Dependent coordinator) {
-    //To-Do
-    return false;
   }
   public void viewAllReviews(){
     this.reviewManager.viewAllReviews();
@@ -182,10 +165,6 @@ public class CampSiteManager{
       return;
     }
     System.out.println("Review successfully removed.\n");
-  }
-  public boolean updateLoginInformation(String curUsername, String curPassword) {
-    //To-Do
-    return false;
   }
   public boolean viewDependent(String id) {
     UUID uuid = UUID.fromString(id);
@@ -293,5 +272,14 @@ public class CampSiteManager{
   }
   public String getStartMonth(){
     return this.startMonth;
+  }
+  public int getSessionCount(){
+    return this.themeManager.getThemeCount();
+  }
+  public void viewThemes(){
+    this.themeManager.viewThemes();
+  }
+  public void viewIndexCabinSession(int cabinIndex,int sessionIndex){
+    this.cabinManager.viewIndexCabinSession(cabinIndex, sessionIndex);
   }
 }

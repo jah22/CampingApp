@@ -5,11 +5,14 @@ public class ActivityManager {
     // all activities start at 8 oclock morning
     // use military time
     // 8 am military
-    private static int START_TIME = 8;
+    static int START_TIME = 8;
     // 8 pm military
-    private static int END_TIME = 20;
+    static int END_TIME = 20;
+    static int LUNCH_TIME = 12;
+    static int BREAKFAST_TIME = 9;
+    static int DINNER_TIME = 18;
     // all activities last one hour
-    private static int ACTIVITY_LENGTH = 1;
+    private int ACTIVITY_LENGTH = 1;
 
     public ActivityManager(ArrayList<String> activities){
         this.activities = activities;
@@ -84,5 +87,8 @@ public class ActivityManager {
             out += this.getActivityStartTime(activity) + "-" + this.getActivityEndTime(activity)+ ": " + activity +"\n";
         }
         return out;
+    }
+    public boolean hasActivity(String activity){
+        return this.activities.contains(activity);
     }
 }

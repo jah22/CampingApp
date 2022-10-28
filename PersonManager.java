@@ -3,19 +3,54 @@ import java.util.UUID;
 
 public class PersonManager {
     private ArrayList<CampAdmin> admins = new ArrayList<CampAdmin>(); 
-    private ArrayList<Guardian>  gaurdians = new ArrayList<Guardian>(); 
+    private ArrayList<Guardian>  guardians = new ArrayList<Guardian>(); 
     private ArrayList<Dependent>  dependents = new ArrayList<Dependent>(); 
     private ArrayList<EmergencyContact> emergencyContacts = new ArrayList<EmergencyContact>();
     
-    public PersonManager(ArrayList<CampAdmin> admins, ArrayList<Guardian> gaurdians, ArrayList<Dependent> dependents,ArrayList<EmergencyContact> ems){
+    public PersonManager(ArrayList<CampAdmin> admins, ArrayList<Guardian> guardians, ArrayList<Dependent> dependents,ArrayList<EmergencyContact> ems){
         this.admins = admins;
-        this.gaurdians = gaurdians;
+        this.guardians = guardians;
         this.dependents = dependents;
         this.emergencyContacts = ems;
     }
     // empty ctor
     public PersonManager(){
 
+    }
+    public void viewCamperNamesByGuardian(UUID id){
+        Guardian g = this.getGuardianById(id);
+        ArrayList<Dependent> reg = g.getRegisteredDependents();
+        for(int i=0;i<reg.size();i++){
+            if(!reg.get(i).getIsCoordinator()){
+                System.out.println(reg.get(i).getFullName());
+            }
+        }
+    }
+    public Dependent getDependentByName(UUID guardianId,String firstName, String lastName){
+        for(Dependent d: this.dependents){
+            if(d.getFirstName().equals(firstName) && (d.getLastName().equals(lastName))){
+                return d;
+            }
+        }
+
+        return null;
+    }
+
+    public Dependent guardianGetDependentByInt(UUID guardianId, int dependentIndex){
+        Guardian g = this.getGuardianById(guardianId);
+        ArrayList<Dependent> reg = g.getRegisteredDependents();
+        if(dependentIndex >= reg.size()){
+            return null;
+        }
+        return reg.get(dependentIndex);
+    }
+    public int guardianGetNumberDependents(UUID gId){
+        Guardian g = this.getGuardianById(gId);
+        return g.getRegisteredDependents().size();
+    }
+
+    public boolean guardianHasDependents(Guardian g){
+        return g.getRegisteredDependents().size() > 0;
     }
 
 
@@ -44,23 +79,31 @@ public class PersonManager {
     }
 
 
-    public void seeCoordinators(){
+    public void viewCoordinators(){
         for(Dependent d: this.dependents){
             if(d.getIsCoordinator()){
                 System.out.println(d);
             }
         }
     }
+    public Dependent registerCoordinator(String firstName, String lastName, String username, String password, String birthDate, String phone, String email){
+        Dependent dep = new Dependent(firstName, lastName, birthDate, birthDate, username, password, email, phone);
+        this.dependents.add(dep);
+        return dep;
+    }
 
-    public void seeAdmins(){
+    public void viewAdmins(){
         for(CampAdmin a: this.admins){
             System.out.println(a);
         }
     }
 
-    public boolean registerGuardian(){
+    public Guardian registerGuardian(String firstName, String lastName, String birthDate, String username, String password, String email, String phone,String address){
+        Guardian g = new Guardian(firstName, lastName, birthDate, address, password, username, email, phone);
+        // add guardian
+        this.guardians.add(g);
         // to do
-        return false;
+        return g;
     }
     public boolean registerDependent(){
         // to do
@@ -73,25 +116,30 @@ public class PersonManager {
         this.admins = admins;
     }
     public void setGuardian(ArrayList<Guardian> gs){
-        this.gaurdians = gs;
+        this.guardians = gs;
     }
     public void setEmergencyContacts(ArrayList<EmergencyContact> ems){
         this.emergencyContacts = ems;
     }
-    public boolean removeDependent(UUID id){
+    public boolean removeDependent(Guardian parent, Dependent dep){
+        boolean successfullyRemoved = false;
         for(Dependent d:this.dependents){
-            if(d.getId().equals(id)){
-                this.dependents.remove(d);
-                return true;
+            if(d.equals(dep)){
+                this.dependents.remove(dep);
+                successfullyRemoved = true;
+                break;
             }
         }
-        return false;
+        for(Guardian g: this.guardians){
+            g.removeDependent(dep);
+        }
+        return successfullyRemoved;
     }
 
     public boolean removeGuardian(UUID id){
-        for(Guardian g: this.gaurdians){
+        for(Guardian g: this.guardians){
             if(g.getId().equals(id)){
-                this.gaurdians.remove(g);
+                this.guardians.remove(g);
                 return true;
             }
         }
@@ -113,7 +161,7 @@ public class PersonManager {
         return false;
     }
     public boolean viewDependents(UUID guardianId){
-        for(Guardian g: this.gaurdians){
+        for(Guardian g: this.guardians){
             if(g.getId().equals(guardianId)){
                 g.viewDependents();
                 return true;
@@ -121,9 +169,16 @@ public class PersonManager {
         }
         return false;
     }
-    public void addDependent(Guardian g, String depFirstName, String depLastName, String birthDate, String address,ArrayList<String>medNotes, ArrayList<EmergencyContact> ems){
+    public void addDependent(UUID guardianID, String depFirstName, String depLastName, String birthDate, String address,ArrayList<String>medNotes, ArrayList<EmergencyContact> ems){
+        // need to be by reference
         Dependent newDep = new Dependent(depFirstName, depLastName, birthDate, address,medNotes,ems) ;
-        g.addDependent(newDep);
+        for(int i=0;i<this.guardians.size();i++){
+            if(this.guardians.get(i).getId().equals(guardianID)){
+                this.guardians.get(i).addDependent(newDep);
+            }
+        }
+        // dont forget to add the dependent
+        this.dependents.add(newDep);
     }
     public boolean getDependentCabin(String firstName, String lastName){
         // to do
@@ -142,7 +197,7 @@ public class PersonManager {
         return null;
     }
     public Guardian getGuardianById(UUID id){
-        for(Guardian g: this.gaurdians){
+        for(Guardian g: this.guardians){
             if(g.getId().equals(id)){
                 return g;
             }
@@ -170,7 +225,7 @@ public class PersonManager {
         return false;
     }
     public Guardian loginGuardian(String username, String password){
-        for(Guardian g: this.gaurdians){
+        for(Guardian g: this.guardians){
             if(g.getAuthBehavior().login(username, password)){
                 return g;
             }
@@ -205,7 +260,7 @@ public class PersonManager {
             }
         }
         // go thru guardians
-        for(Guardian g: this.gaurdians){
+        for(Guardian g: this.guardians){
             if(g.getAuthBehavior().login(username, password)){
                 g.getAuthBehavior().logout();
                 return true;
@@ -219,5 +274,17 @@ public class PersonManager {
             }
         }
         return false;
+    }
+    public void viewEmergencyContacts(Dependent dep){
+        for(Dependent d: this.dependents){
+            if(d.equals(dep)){
+                d.viewEmergencyContacts();
+                return;
+            }
+        }
+    }
+    public CampAdmin registerAdmin(CampAdmin admin){
+        this.admins.add(admin);
+        return admin;
     }
 }

@@ -37,10 +37,21 @@ public class Guardian extends Person {
             System.out.println(d);
         }
     }
+    public boolean hasDependent(Dependent d){
+        for(Dependent dep: this.registeredDependents){
+            if(dep.equals(d)){
+                return true;
+            }
+        }
+        return false;
+    }
     public String getPersonType(){
         return "Guardian";
     }
     public void addDependent(Dependent dep){
         this.registeredDependents.add(dep);
+    }
+    public void removeDependent(Dependent dep){
+        this.registeredDependents.remove(dep);
     }
 }

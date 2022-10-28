@@ -6,12 +6,15 @@ public class Dependent extends Person{
     private ArrayList<EmergencyContact> emergencyContacts = new ArrayList<EmergencyContact>();
     private ArrayList<String> medicalNotes = new ArrayList<String>();
 
-    private boolean hasBeenPaidFor = false;
     private boolean isCoordinator = false;
 
     public Dependent(String firstName, String lastName, String birthDate, String address, UUID id) {
         super(firstName, lastName, birthDate, address, id);
         this.authBehavior = new NoPriorityBehavior();
+    }
+    public Dependent(String firstName, String lastName, String birthdate, String address, String username, String password, String email, String phone){
+        super(firstName, lastName, birthdate, address, UUID.randomUUID());
+        this.authBehavior = new PriorityBehavior(username,password, phone, email);
     }
     public Dependent(String firstName, String lastName, String birthDate, String address,ArrayList<String> medNotes, ArrayList<EmergencyContact> ems) {
         super(firstName, lastName, birthDate, address,UUID.randomUUID());
@@ -20,25 +23,22 @@ public class Dependent extends Person{
         this.emergencyContacts = ems;
     }
 
-    public Dependent(String firstName, String lastName, String birthDate, String address, UUID id, boolean isCoordinator, boolean hasBeenPaidFor,ArrayList<EmergencyContact> emergencyContacts, ArrayList<String> medNotes){
+    public Dependent(String firstName, String lastName, String birthDate, String address, UUID id, boolean isCoordinator,ArrayList<EmergencyContact> emergencyContacts, ArrayList<String> medNotes){
         super(firstName, lastName, birthDate, address,id);
-        this.hasBeenPaidFor = hasBeenPaidFor;
         this.isCoordinator = isCoordinator;
         this.medicalNotes = medNotes;
         this.emergencyContacts = emergencyContacts;
         this.authBehavior = new NoPriorityBehavior();
     }
-    public Dependent(String firstName, String lastName, String birthDate, String address, UUID id, boolean isCoordinator, boolean hasBeenPaidFor,ArrayList<EmergencyContact> emergencyContacts, ArrayList<String> medNotes,AuthBehavior auth){
+    public Dependent(String firstName, String lastName, String birthDate, String address, UUID id, boolean isCoordinator,ArrayList<EmergencyContact> emergencyContacts, ArrayList<String> medNotes,AuthBehavior auth){
         super(firstName, lastName, birthDate, address,id);
-        this.hasBeenPaidFor = hasBeenPaidFor;
         this.isCoordinator = isCoordinator;
         this.medicalNotes = medNotes;
         this.emergencyContacts = emergencyContacts;
         this.authBehavior = auth;
     }
-    public Dependent(String firstName, String lastName, String birthDate, String address, boolean isCoordinator, boolean hasBeenPaidFor,ArrayList<EmergencyContact> emergencyContacts, ArrayList<String> medNotes){
+    public Dependent(String firstName, String lastName, String birthDate, String address, boolean isCoordinator,ArrayList<EmergencyContact> emergencyContacts, ArrayList<String> medNotes){
         super(firstName, lastName, birthDate, address,UUID.randomUUID());
-        this.hasBeenPaidFor = hasBeenPaidFor;
         this.isCoordinator = isCoordinator;
         this.medicalNotes = medNotes;
         this.emergencyContacts = emergencyContacts;
@@ -59,9 +59,6 @@ public class Dependent extends Person{
     public boolean inCabin(Cabin cabin){
         // todo
         return false;
-    }
-    public boolean getHasBeenPaidFor(){
-        return this.hasBeenPaidFor;
     }
 
     public boolean getIsCoordinator(){
@@ -88,8 +85,6 @@ public class Dependent extends Person{
         out += "Auth Information:\n";
         out += this.authBehavior.toString() +"\n";
         out += div;
-        System.out.println(out);
-
         return out;
     }
     public String getPersonType(){

@@ -9,6 +9,8 @@ public abstract class DataConstants {
     protected static final String CABIN_CAMPER_CAPACITY = "camperCapacity";
     protected static final String CABIN_LOWER_AGE_BOUND = "lowerAgeBound";
     protected static final String CABIN_UPEER_AGE_BOUND = "upperAgeBound";
+    protected static final String CABIN_CAMP_YEAR = "campYear";
+    protected static final String CABIN_THEMES = "themes";
 
     protected static final String CAMP_FILE_NAME = "./json/Camp.json";
     protected static final String CAMP_NAME = "name";
@@ -29,10 +31,10 @@ public abstract class DataConstants {
 
     protected static final String CAMPER_FILE_NAME = "./json/Camper.json";
     protected static final String COORDINATOR_FILE_NAME = "./json/Coordinator.json";
-    protected static final String COORDINATOR_PHONE_NUMBER= "./json/Coordinator.json";
-    protected static final String COORDINATOR_EMAIL= "./json/Coordinator.json";
-    protected static final String COORDINATOR_USERNAME= "./json/Coordinator.json";
-    protected static final String COORDINATOR_PASSWORD= "./json/Coordinator.json";
+    protected static final String COORDINATOR_PHONE_NUMBER= "phoneNumber";
+    protected static final String COORDINATOR_EMAIL= "email";
+    protected static final String COORDINATOR_USERNAME= "username";
+    protected static final String COORDINATOR_PASSWORD= "password";
 
     protected static final String DEPENDENT_ID = "id";
     protected static final String DEPENDENT_FIRST_NAME = "firstName";
@@ -73,6 +75,7 @@ public abstract class DataConstants {
     protected static final String EMERGENCY_CONTACT_ADDRESS = "address";
     protected static final String EMERGENCY_CONTACT_BIRTHDATE= "birthDate";
     protected static final String EMERGENCY_CONTACT_ID= "id";
+    protected static final String EMERGENCY_CONTACT_PHONE_NUMBER = "phoneNumber";
 
     protected static final String PERSON_FIRST_NAME = "firstName";
     protected static final String PERSON_LAST_NAME = "lastName";
@@ -82,6 +85,7 @@ public abstract class DataConstants {
 
 
     protected static final String SCHEDULE_SCHEDULE = "schedule";
+    protected static final String SCHEDULE_CABIN_NAME = "cabinName";
     protected static final String SCHEDULE_DAY_OF_WEEK = "dayOfWeek";
     protected static final String SCHEDULE_SCHEDULES = "schedules";
     protected static final String SCHEDULE_FILE_NAME = "./json/Schedule.json";

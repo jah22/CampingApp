@@ -1,0 +1,49 @@
+    Samantha Samuels is the camp administrator. 
+    She is getting setup for the 2023 Summer Camp season
+    She sets up 9 sessions representing each of the weeks in July and August.  Each session is one week long.  The following are the session themes
+        Session 1: Hawaiin
+        Session 2: Rockstars
+        Session 3: Ninja Warriors
+        Session 4: Willy Wonka
+        Session 5: Hollywood
+        Session 6: Legos
+        Session 7: Cops and Robbers
+        Session 8: Shark Tank
+        Session 9: Smores
+    There are 6 cabins in the camp.
+        Cabin 1: 7 and 8 year olds
+        Cabin 2: 9 and 10 year olds
+        Cabin 3: 11 and 12 year olds
+        Cabin 4: 13 and 14 year olds
+        Cabin 5: 15 and 16 year olds
+        Cabin 6: 17 and 18 year olds
+    After she finishes the setup, each cabin's schedule should be randomly generated.  All cabins will have meals at the same time. Note: Make sure that a cabin isn't going to the same activity twice in one day.
+    Show Session 2's schedule for cabin 2 and 5, to demonstrate that this is working.
+
+Scenario 2: 
+
+    A parent Levaeh Davis logs into her existing account.
+    She browses through the lists of camps for each week, she notices on the week of July 18 their is a 'Ninja Warrior' theme.  She reads the description and decides to signup her two kids.
+    Her older Son Nutella Davis (Age 16) attended 2 sessions of this camp last year so fortunately he is already in the system.  She signs him up for a week.  She gets a confirmation, and can now see that the camp is tied to his name under her account.
+
+Scenario 3:
+
+    Levaeh now goes through the process of adding her younger daughter (Daisy Boo Davis) to her account.
+    Daisy Boo
+        12 years old
+        allergic to pine nuts, and sunflowers
+        She needs to take 5ml of zertec at breakfast daily.
+        Her contact information is the same as her mothers.
+        Add her Father Neil Davis, and her GrandFather Buzz Davis as emergency contacts, make sure to give them appropriate contact information.
+        Her Pediatrician is Palmetto Pediatrics, her Doctor is Megan Martin, and her phone number 803-455-6767
+        Please add any other additional required information
+    When the account is created please enroll her in the same session as her brother.  Show that it is now clear that they are both in the session.
+
+Scenario 4:
+
+    Kix Gonzalez is a counselor at our camp. He is getting ready for the Ninja Warrior week, next week.  Restart your program we know your data was all successfully saved.
+    He logs into this system
+    First he prints out his roster for the cabin.  Their is 8 students all between 11 and 12 years old.
+    Second he prints out the list of next weeks vital information, this will generate a beautifully formatted report of all his campers allergies, emergency contacts, and medical information.  Make sure this is a good sized list.
+    Third he prints out the weekly schedule, showing a grid of what they will be doing at each day and time.  For each activity it also indicates where it is located.
+    Each of these printouts will be txt documents.

@@ -6,12 +6,21 @@ public class ReviewManager {
 
     public ReviewManager(ArrayList<Review> reviews){
         this.reviews = reviews;
+        updateAvgReview(reviews);
     }
     public ReviewManager(){
         // param ctor
     }
     public void setReviews(ArrayList<Review> revs){
         this.reviews = revs;
+        updateAvgReview(revs);
+    }
+    public void updateAvgReview(ArrayList<Review> revs){
+        // add to avg
+        for(Review rev: revs){
+            this.avgReview += rev.getRating();
+        }
+        this.avgReview = (this.avgReview/revs.size());
     }
     public Review getReviewByTitle(String title){
         for(Review r:this.reviews){
@@ -21,15 +30,17 @@ public class ReviewManager {
         }
         return null;
     }
-
-    public void seeAvgReview(){
+    public double getAvgRating(){
+        return this.avgReview;
+    }
+    public void viewAvgRating(){
         if(this.avgReview == 0){
             System.out.println("No reviews yet");
             return;
         }
         System.out.println("Average rating: " + this.avgReview);
     }
-    public void seeReviewsByAuthor(String author){
+    public void viewReviewsByAuthor(String author){
         /*
          * Author is first name last name
          */
@@ -42,8 +53,9 @@ public class ReviewManager {
         }
         System.out.println("Total reviews by " + author + ": " + reviewCount + "\n");
     }
-    public void seeReviewsByRating(int rating){
+    public void viewReviewsByRating(int rating){
         int reviewCount = 0;
+        System.out.println("SEARCHING FOR REVIEWS...\n");
         for(Review r: this.reviews){
             if(r.getRating() == rating){
                 System.out.println(r);
@@ -52,7 +64,7 @@ public class ReviewManager {
         }
         System.out.println("Total reviews with rating of " + rating + ": " + reviewCount +"\n");
     }
-    public void seeReviewsByTitle(String title){
+    public void viewReviewsByTitle(String title){
         for(Review r: this.reviews){
             if(r.getTitle().equals(title)){
                 System.out.println(r);
@@ -86,5 +98,14 @@ public class ReviewManager {
         // else you have the review
         this.reviews.remove(rev);
         return true;
+    }
+    public void viewAllReviews(){
+        if(this.reviews.size() == 0){
+            System.out.println("No reviews present.");
+            return;
+        }
+        for(Review r: this.reviews){
+            System.out.println(r);
+        }
     }
 }

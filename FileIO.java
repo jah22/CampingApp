@@ -12,6 +12,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -31,6 +33,7 @@ public class FileIO {
     private static ArrayList<Dependent> dependents;
     private static ArrayList<EmergencyContact> emergencyContacts;
     private static CampSiteManager campSiteManager;
+    private static ArrayList<ThemeManager> themeManagers;
 
     /*
      * Managers
@@ -47,8 +50,8 @@ public class FileIO {
          */
         this.faqs = readFaqs();
         this.reviews = readReviews();
-        // read schedules
-        this.schedules = readSchedules();
+        this.themeManagers = readThemeManagers();
+
         // start dealing with people
         this.pM = new PersonManager();
         this.admins = readAdmins();
@@ -61,10 +64,9 @@ public class FileIO {
         // read guardians after dependents since guardians depend on them
         this.guardians = readGuardians();
 
-
-        // add dependents
-        // to do: read schedules
+        // read cabins and THEN schedules
         this.cabins = readCabins();
+        this.schedules = readSchedules();
 
         this.campSiteManager = readCamp();
     }
@@ -114,6 +116,8 @@ public class FileIO {
      */
     private static Schedule parseScheduleObj(JSONObject jSchedule){
         UUID id = UUID.fromString((String)jSchedule.get(DataConstants.SCHEDULE_ID));
+        String cabinName = (String) jSchedule.get(DataConstants.SCHEDULE_CABIN_NAME);
+        int sessionNumber  = Math.toIntExact((long) jSchedule.get("sessionNumber"));
         JSONArray jSchedules = (JSONArray)jSchedule.get(DataConstants.SCHEDULE_SCHEDULES);
         // create the hash
         HashMap<String,ActivityManager> hash = new HashMap<String,ActivityManager>();
@@ -133,14 +137,33 @@ public class FileIO {
             });
             hash.put(dayOfWeek,aM);
         });
-
-        return new Schedule(hash,id);
+        Schedule sched = new Schedule(hash, sessionNumber,id);
+        // add to cabin
+        for(Cabin c: cabins){
+            if(c.getCabinName().equals(cabinName)){
+                c.addSchedule(sched);
+            }
+        }
+        return sched;
     }
 
     private static FAQ parseFaqObj(JSONObject jFaq){
         String question = (String) jFaq.get(DataConstants.FAQ_QUESTION);
         String answer = (String) jFaq.get(DataConstants.FAQ_ANSWER);
         return new FAQ(question,answer);
+    }
+    private ThemeManager parseThemeManager(JSONObject jTheme) {
+        ThemeManager tm = new ThemeManager();
+        UUID id = UUID.fromString((String) jTheme.get("id"));
+        tm.setId(id);
+        JSONArray jaThemes = (JSONArray) jTheme.get("themes");
+        jaThemes.forEach(objTheme->{
+            JSONObject joTheme = (JSONObject)objTheme;
+            String name = (String) joTheme.get("name");
+            int week = Math.toIntExact((long)joTheme.get("week"));
+            tm.addTheme(new Theme(name, week));
+        });
+        return tm;
     }
     private Review parseReviewObj(JSONObject rev){
         
@@ -151,16 +174,6 @@ public class FileIO {
 
         return new Review(author,rating,title,body);
     }
-    private Person parsePersonObj(JSONObject jPer){
-        // get attributes
-        String firstName = (String) jPer.get(DataConstants.PERSON_FIRST_NAME);
-        String lastName = (String) jPer.get(DataConstants.PERSON_LAST_NAME);
-        String address = (String) jPer.get(DataConstants.PERSON_ADDRESS);
-        UUID id = UUID.fromString((String)jPer.get(DataConstants.PERSON_ID));
-        String birthDate = (String) jPer.get(DataConstants.PERSON_BIRTHDATE);
-        
-        return (new Person(firstName, lastName, birthDate, address,id));
-    }
     private EmergencyContact parseEmergencyContactObj(JSONObject jEM){
         // get attributes
         String firstName = (String) jEM.get(DataConstants.PERSON_FIRST_NAME);
@@ -168,8 +181,10 @@ public class FileIO {
         String address = (String) jEM.get(DataConstants.PERSON_ADDRESS);
         UUID id = UUID.fromString((String)jEM.get(DataConstants.PERSON_ID));
         String birthDate = (String) jEM.get(DataConstants.PERSON_BIRTHDATE);
+        String phone = (String) jEM.get("phone");
+        String relation = (String) jEM.get("relation");
         
-        return (new EmergencyContact(firstName, lastName, birthDate, address,id));
+        return (new EmergencyContact(firstName, lastName, birthDate, address,phone,relation,id));
     }
     private Guardian parseGuardianObj(JSONObject guardian){
         String firstName = (String) guardian.get(DataConstants.PERSON_FIRST_NAME);
@@ -196,21 +211,20 @@ public class FileIO {
         });
         return new Guardian(firstName, lastName, birthDate, address, id, password, username, email, phoneNumber,deps);
     }
-    private Dependent parseCamperObj(JSONObject dependent){
+    private Dependent parseCamperObj(JSONObject jsonDep){
         // get attributes
-        String firstName = (String) dependent.get(DataConstants.DEPENDENT_FIRST_NAME);
-        String lastName = (String) dependent.get(DataConstants.DEPENDENT_LAST_NAME);
-        String address = (String) dependent.get(DataConstants.DEPENDENT_ADDRESS);
-        UUID id = UUID.fromString((String) dependent.get(DataConstants.DEPENDENT_ID));
-        String birthDate = (String) dependent.get(DataConstants.DEPENDENT_BIRTH_DATE);
-        boolean hasBeenPaidFor = (boolean) dependent.get(DataConstants.DEPENDENT_HAS_BEEN_PAID_FOR);
-        boolean isCoordinator = (boolean) dependent.get(DataConstants.DEPENDENT_IS_COORDINATOR);
+        String firstName = (String) jsonDep.get(DataConstants.DEPENDENT_FIRST_NAME);
+        String lastName = (String) jsonDep.get(DataConstants.DEPENDENT_LAST_NAME);
+        String address = (String) jsonDep.get(DataConstants.DEPENDENT_ADDRESS);
+        UUID id = UUID.fromString((String) jsonDep.get(DataConstants.DEPENDENT_ID));
+        String birthDate = (String) jsonDep.get(DataConstants.DEPENDENT_BIRTH_DATE);
+        boolean isCoordinator = (boolean) jsonDep.get(DataConstants.DEPENDENT_IS_COORDINATOR);
 
         ArrayList<EmergencyContact> emContacts = new ArrayList<EmergencyContact>();
         ArrayList<String> medNotes = new ArrayList<String>();
 
         // parse the contacts
-        JSONArray jEmContacts = (JSONArray) dependent.get(DataConstants.DEPENDENT_EMERGENCY_CONTACTS);
+        JSONArray jEmContacts = (JSONArray) jsonDep.get(DataConstants.DEPENDENT_EMERGENCY_CONTACTS);
         jEmContacts.forEach(jContact->{
             JSONObject jEm =(JSONObject) jContact;
             UUID jEmId= UUID.fromString((String) jEm.get(DataConstants.EMERGENCY_CONTACT_ID));
@@ -221,7 +235,7 @@ public class FileIO {
         });
 
         // parse the medical notes
-        JSONArray jMedNotes = (JSONArray) dependent.get(DataConstants.DEPENDENT_MEDICAL_NOTES);
+        JSONArray jMedNotes = (JSONArray) jsonDep.get(DataConstants.DEPENDENT_MEDICAL_NOTES);
         jMedNotes.forEach(
             jMedNote->{
                 String [] split = ((String) jMedNote).split(",");
@@ -232,7 +246,7 @@ public class FileIO {
         
         NoPriorityBehavior npB = new NoPriorityBehavior();
         
-        return  new Dependent(firstName, lastName, birthDate, address, id,isCoordinator,hasBeenPaidFor,emContacts,medNotes,npB);
+        return new Dependent(firstName, lastName, birthDate, address, id,isCoordinator,emContacts,medNotes,npB);
     }
     private Dependent parseCoordinatorObj(JSONObject jObject){
         Dependent coordinator = parseCamperObj(jObject) ;
@@ -302,14 +316,23 @@ public class FileIO {
 
         return(new Cabin(cabinName,coordinators,campers,schedules, camperCapacity, coordinatorCapacity,lowerAgeBound,upperAgeBound));
     }
-    private CampSiteManager parseCampObj(JSONObject camp){
+    private CampSiteManager parseCampObj(JSONObject jCamp){
 
-        String name = (String) camp.get("name");
-        String address = (String) camp.get("address");
-        double price = (double) camp.get("pricePerCamperPerDay");
-        String authCode = (String) camp.get("authCode");
+        String name = (String) jCamp.get("name");
+        String address = (String) jCamp.get("address");
+        int year = Math.toIntExact((Long) jCamp.get("year"));
+        UUID themeId = UUID.fromString((String) jCamp.get("themeId"));
+        String startMonth = (String) jCamp.get("startMonth");
 
-        return CampSiteManager.getInstance(name,address, price,authCode);
+        ThemeManager themeManager = new ThemeManager();
+        for(ThemeManager t: this.themeManagers){
+            if(t.getId().equals(themeId)){
+                themeManager = t;
+            }
+        }
+
+
+        return CampSiteManager.getInstance(name,address,year,startMonth,themeManager);
     }
 
     /*
@@ -364,6 +387,14 @@ public class FileIO {
         );
         return guardians;
     }   
+    private ArrayList<ThemeManager> readThemeManagers(){
+        ArrayList<ThemeManager> ret = new ArrayList<ThemeManager>();
+        JSONArray jaThemeManagerList = parseJsonFileArr("./json/Theme.json");
+        jaThemeManagerList.forEach(jTheme ->
+            ret.add(parseThemeManager((JSONObject) jTheme))
+        );
+        return ret;
+    }
     private ArrayList<CampAdmin> readAdmins(){
         ArrayList<CampAdmin> admins = new ArrayList<CampAdmin>();
         JSONArray adminList = parseJsonFileArr(DataConstants.CAMP_ADMIN_FILE_NAME);
@@ -387,7 +418,7 @@ public class FileIO {
         JSONArray jCamperList = parseJsonFileArr(DataConstants.CAMPER_FILE_NAME);
         jCamperList.forEach(jDependent ->{
             deps.add(parseCamperObj((JSONObject)jDependent));
-        }
+            }
         );
         // read coordinators
         JSONArray jCoordinatorList = parseJsonFileArr(DataConstants.COORDINATOR_FILE_NAME);
@@ -440,7 +471,6 @@ public class FileIO {
     }
     private JSONObject getCamperJson(Dependent d){
         JSONObject jO = getPersonJson(d);
-        jO.put("hasBeenPaidFor",d.getHasBeenPaidFor());
         jO.put("isCoordinator",d.getIsCoordinator());
         ArrayList<JSONObject> ids = new ArrayList<>();
         for(EmergencyContact regEmergencyContact : d.getEmergencyContacts()) {
@@ -694,5 +724,6 @@ public class FileIO {
         ArrayList<EmergencyContact> test = fiO.readEmergencyContacts();
         fiO.writeEmergencyContact(test);
         System.out.println("here");
+
     }
 }

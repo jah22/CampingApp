@@ -1,6 +1,8 @@
 [
     {
         "id":"ddd86dd0-0335-4e37-a6ef-e416c897c532",
+        "sessionNumber": 1,
+        "cabinName":"Salty City Cabin",
         "schedules":[
             {
                 "dayOfWeek":"Monday",
@@ -35,7 +37,56 @@
                     "ROCK_CLIMBING #2",
                     "NIGHT"
                 ]
-        }
+            },
+            {
+                "dayOfWeek":"Wednesday",
+                "schedule":[
+                    "WAKE_UP",
+                    "BREAKFAST",
+                    "WALK #1",
+                    "WALK #2",
+                    "LUNCH",
+                    "ART_CRAFTS #1",
+                    "ART_CRAFTS #2",
+                    "TUBING",
+                    "TUBING",
+                    "ARCHERY #1",
+                    "ARCHERY #2",
+                    "NIGHT"
+                ]
+            },{
+                "dayOfWeek":"Thursday",
+                "schedule":[
+                    "WAKE_UP",
+                    "BREAKFAST",
+                    "WALK #1",
+                    "WALK #2",
+                    "LUNCH",
+                    "ART_CRAFTS #1",
+                    "ART_CRAFTS #2",
+                    "TUBING",
+                    "TUBING",
+                    "ARCHERY #1",
+                    "ARCHERY #2",
+                    "NIGHT"
+                ]
+            },{
+                "dayOfWeek":"Friday",
+                "schedule":[
+                    "WAKE_UP",
+                    "BREAKFAST",
+                    "WALK #1",
+                    "WALK #2",
+                    "LUNCH",
+                    "ART_CRAFTS #1",
+                    "ART_CRAFTS #2",
+                    "TUBING",
+                    "TUBING",
+                    "ARCHERY #1",
+                    "ARCHERY #2",
+                    "NIGHT"
+                ]
+            }
     ]
 }
 ]

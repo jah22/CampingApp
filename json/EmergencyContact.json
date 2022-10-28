@@ -1,16 +1,22 @@
 [
-{
-  "firstName": "E First",
-  "lastName": "E Last",
-  "address": "E address",
-  "id": "71c7ae99-247f-4c80-950a-4a41e767e84d",
-  "birthDate": "1990-11-20"
-},
-{
-  "firstName": "E First1",
-  "lastName": "E Last1",
-  "address": "E address",
-  "id": "61c7ae99-247f-4c80-950a-4a41e767e84d",
-  "birthDate": "1995-11-20"
-}
+
+    {
+        "firstName":"Father",
+        "lastName": "Figure",
+        "birthDate": "1990-11-20",
+        "address":"E address",
+        "phone":"222-333-1111",
+        "id":"71c7ae99-247f-4c80-950a-4a41e767e84d",
+        "relation": "Father"
+    },
+    {
+        "firstName":"Doc",
+        "lastName": "ter",
+        "birthDate": "1995-11-20",
+        "address":"Hospital",
+        "phone":"111-222-3333",
+        "id":"61c7ae99-247f-4c80-950a-4a41e767e84d",
+        "relation":"Pediatrician"
+    }
+
 ]

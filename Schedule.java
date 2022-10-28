@@ -18,9 +18,12 @@ public class Schedule {
     public void addDayActivityManager(String day){
         this.scheduledActivities.put(day,new ActivityManager());
     }
-
+    
     public HashMap<String,ActivityManager> getScheduledActivities(){
         return this.scheduledActivities;
+    }
+    public UUID getScheduleID() {
+        return this.id;
     }
     public String toString(){
         String out = "";

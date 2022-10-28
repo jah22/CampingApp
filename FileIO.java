@@ -485,7 +485,6 @@ public class FileIO {
     }
     private JSONObject getCoordinatorJson(Dependent c) {
         JSONObject jCo = getPriorityPersonJson(c);
-        jCo.put("hasBeenPaidFor",c.getHasBeenPaidFor());
         jCo.put("isCoordinator",c.getIsCoordinator());
         String jsonMedNotes = new Gson().toJson(c.getMedicalNotes());
         String jsonEmContacts = new Gson().toJson(c.getEmergencyContacts());
@@ -718,6 +717,13 @@ public class FileIO {
             e.printStackTrace();
         }
         return new JSONArray();
+    }
+    public static void writeToTxtFile(String fileContents, String fileName){
+        try{
+            Files.write(Paths.get(fileName),fileContents.getBytes());
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
     public static void main(String args[]){
         FileIO fiO = FileIO.getInstance();

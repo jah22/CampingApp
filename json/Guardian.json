@@ -34,5 +34,20 @@
   "birthDate": "1982-10-20",
   "email": "johnsmith@gmail.com",
   "username": "1"
+},
+{
+  "firstName": "Levaeh",
+  "lastName": "Davis",
+  "password": "password",
+  "address": "429 Sycamore Drive, Columbia, SC",
+  "registeredDependents": [
+    {
+      "id": "81c7ae99-247f-4c80-950a-4a41f767e84c"
+    }
+  ],
+  "id": "49c7ae99-247f-4c80-950a-4a41e762e84c",
+  "birthDate": "1982-10-20",
+  "email": "ldavis@gmail.com",
+  "username": "ldavis"
 }
 ]

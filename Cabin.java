@@ -158,22 +158,7 @@ public class Cabin {
         this.upperAgeBound = upperAgeBound;
     }
     public String toString(){
-        // to do
-        String division = "----------------------";
-        String out = division +"\n";
-        out += "Cabin: " + this.name + "\n";
-        out += division +"\n";
-        out += "Age range: " + this.lowerAgeBound + "-" + this.upperAgeBound +"\n";
-        out += division +"\n";
-        out += "Coordinators: " + this.coordinators.size() +"/"+ this.coordinatorCapacity + "\n";
-        for (Dependent dependent :this.coordinators) {
-            out += dependent.getFullName() + "\n";
-        }
-        out += division +"\n";
-        out += "Campers: " + this.campers.size() +"/"+ this.camperCapacity+ "\n";
-        out += division +"\n";
-
-        return out;
+        return this.getCabinRoster();
     }
     public void addSchedule(Schedule schedule){
         this.schedules.add(schedule);
@@ -280,5 +265,13 @@ public class Cabin {
     }
     public void setUpperAgeBound(int bound){
         this.upperAgeBound = bound;
+    }
+    public int getSessionCount(){
+        return this.schedules.size();
+    }
+    public void viewSessionAtIndex(int sessionIndex){
+        if(0<= sessionIndex && sessionIndex < this.schedules.size()){
+            System.out.println(this.schedules.get(sessionIndex));
+        }
     }
 }

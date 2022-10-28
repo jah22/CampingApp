@@ -50,6 +50,7 @@ public class Driver {
                 case 3:
                     // new camp
                     this.handleSetUpNewCamp();
+                    break;
                 case 4:
                     // exit`
                     System.out.println("Returning...");
@@ -457,9 +458,9 @@ public class Driver {
         }
     }
     public void handleGuardianCabinSection(Guardian user){
-        printGuardianCabinSectionOptions();
         boolean running = true;
         while(running){
+            printGuardianCabinSectionOptions();
             int selection = getValidSelection(1,3);
             switch(selection){
                 case 1:
@@ -636,7 +637,7 @@ public class Driver {
     public void handleAddNewDependent(Guardian user){
         System.out.println("First name: ");
         String firstName = this.promptForStringResponse();
-        System.out.println("Last name (or \"same\"if your last name): ");
+        System.out.println("Last name (or \"same\" if your last name): ");
         String lastName = this.promptForStringResponse();
         if(lastName.equals("same")){
             lastName = user.getLastName();
@@ -768,21 +769,21 @@ public class Driver {
     }
     public String promptForPhone(){
         // to do: perform checks here
-        System.out.println("Enter your phone number [XXX-XXX-XXXX]: ");
+        System.out.println("Enter the phone number [XXX-XXX-XXXX]: ");
         return promptForStringResponse();
     }
     public String promptForBirthDate(){
         // to do: perform checks here
-        System.out.println("Enter your birth date [YYYY-MM-DD]: ");
+        System.out.println("Enter the birth date [YYYY-MM-DD]: ");
         return promptForStringResponse();
     }
     public String promptForAddress(){
-        System.out.println("Enter your address: ");
+        System.out.println("Enter the address: ");
         return promptForStringResponse();
     }
     public String promptForEmail(){
         // to do: perform checks here
-        System.out.println("Enter your email: ");
+        System.out.println("Enter the email: ");
         return promptForStringResponse();
     }
     public String createPassword(){
@@ -918,7 +919,7 @@ public class Driver {
     }
     public void handleCabinSpecificSectionNonAuth(){
         boolean running = true;
-        int upperBoundCabinIndex = this.csm.getCabinCount();
+        int upperBoundCabinIndex = this.csm.getCabinCount()-1;
         while(running){
             printCabinSpecificSectionNonAuthOptions();
             int selection = getValidSelection(-1,upperBoundCabinIndex);
@@ -926,8 +927,24 @@ public class Driver {
                 System.out.println("Returning to cabin section...");
                 return;
             }
-            this.csm.viewCabinByIndex(selection);
+            this.handleCabinSpecificSectionDetail(selection);
         }
+    }
+    public void handleCabinSpecificSectionDetail(int cabinIndex){
+        boolean running = true;
+        while(running){
+            Cabin c = this.csm.getCabinByIndex(cabinIndex);
+            System.out.println("You are seeing information for cabin \"" + c.getCabinName() + "\".");
+            System.out.println("Please enter a session number to show information for, or [0] to exit.");
+            this.csm.viewThemes();
+            int selection = getValidSelection(-1, this.csm.getSessionCount()) ;
+            if(selection == -1){
+                System.out.println("Returning...");
+                return;
+            }
+            this.csm.viewIndexCabinSession(cabinIndex, selection);
+        }
+
     }
     public void printCabinSpecificSectionNonAuthOptions(){
         System.out.println("Below are the available cabins: ");

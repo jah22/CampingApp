@@ -85,11 +85,6 @@ public class CampSiteManager{
   public void viewCabinSchedulesByCoordinator(Dependent coordinator){
     this.cabinManager.viewCabinSchedulesByCoordinator(coordinator);
   }
-  public void viewAllCabinActivities(String cabinId) {
-    if(!this.cabinManager.viewCabinActivities(cabinId)){
-      System.out.println("A cabin with that ID cannot be found.");
-    }
-  }
   public void viewCabinCoordinators(String cabinID) {
     if(!this.cabinManager.viewCabinCoordinators(cabinID)){
       System.out.println("A cabin with that ID cannot be found.");
@@ -293,5 +288,14 @@ public class CampSiteManager{
   }
   public String getStartMonth(){
     return this.startMonth;
+  }
+  public int getSessionCount(){
+    return this.themeManager.getThemeCount();
+  }
+  public void viewThemes(){
+    this.themeManager.viewThemes();
+  }
+  public void viewIndexCabinSession(int cabinIndex,int sessionIndex){
+    this.cabinManager.viewIndexCabinSession(cabinIndex, sessionIndex);
   }
 }

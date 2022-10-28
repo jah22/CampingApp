@@ -10,6 +10,6 @@
         "camperCapacity":8,
         "coordinatorCapacity":1,
         "lowerAgeBound": 10,
-        "upperAgeBound":15
+        "upperAgeBound":20
     }
 ]

@@ -10,7 +10,6 @@
     }
   ],
   "id": "81c7ae99-247f-4c80-950a-4a41e767e84d",
-  "hasBeenPaidFor": true,
   "medicalNotes": [
     "allergy 1",
     "allergy 2"
@@ -28,7 +27,6 @@
     }
   ],
   "id": "81c7ae99-247f-4c80-950a-4a41e767e84e",
-  "hasBeenPaidFor": true,
   "medicalNotes": [
     "allergy 1",
     "allergy 2"
@@ -46,29 +44,10 @@
     }
   ],
   "id": "81c7ae99-247f-4c80-950a-4a41e767e84f",
-  "hasBeenPaidFor": false,
   "medicalNotes": [
     "allergy 1",
     "allergy 2"
   ],
   "birthDate": "2012-03-21"
-},
-{
-  "firstName": "Jane",
-  "lastName": "Smith",
-  "isCoordinator": true,
-  "address": "429 Sycamore Drive, Columbia, SC",
-  "emergencyContacts": [
-    {
-      "id": "71c7ae99-247f-4c80-950a-4a41e767e84d"
-    }
-  ],
-  "id": "81c7ae99-247f-4c80-950a-4a41e767e84c",
-  "hasBeenPaidFor": true,
-  "medicalNotes": [
-    "allergy 1",
-    "allergy 2"
-  ],
-  "birthDate": "2009-05-14"
 }
 ]

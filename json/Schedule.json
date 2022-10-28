@@ -1,92 +1,94 @@
 [
+{
+  "sessionNumber": 1,
+  "schedules": [
     {
-        "id":"ddd86dd0-0335-4e37-a6ef-e416c897c532",
-        "sessionNumber": 1,
-        "cabinName":"Salty City Cabin",
-        "schedules":[
-            {
-                "dayOfWeek":"Monday",
-                "schedule":[
-                    "WAKE_UP",
-                    "BREAKFAST",
-                    "WALK #1",
-                    "WALK #2",
-                    "LUNCH",
-                    "ART_CRAFTS #1",
-                    "ART_CRAFTS #2",
-                    "TUBING",
-                    "TUBING",
-                    "ARCHERY #1",
-                    "ARCHERY #2",
-                    "NIGHT"
-                ]
-            },
-            {
-                "dayOfWeek":"Tuesday",
-                "schedule":[
-                    "WAKE_UP",
-                    "BREAKFAST",
-                    "WALK #1",
-                    "WALK #2",
-                    "LUNCH",
-                    "ART_CRAFTS #1",
-                    "ART_CRAFTS #2",
-                    "TUBING",
-                    "TUBING",
-                    "ROCK_CLIMBING #1",
-                    "ROCK_CLIMBING #2",
-                    "NIGHT"
-                ]
-            },
-            {
-                "dayOfWeek":"Wednesday",
-                "schedule":[
-                    "WAKE_UP",
-                    "BREAKFAST",
-                    "WALK #1",
-                    "WALK #2",
-                    "LUNCH",
-                    "ART_CRAFTS #1",
-                    "ART_CRAFTS #2",
-                    "TUBING",
-                    "TUBING",
-                    "ARCHERY #1",
-                    "ARCHERY #2",
-                    "NIGHT"
-                ]
-            },{
-                "dayOfWeek":"Thursday",
-                "schedule":[
-                    "WAKE_UP",
-                    "BREAKFAST",
-                    "WALK #1",
-                    "WALK #2",
-                    "LUNCH",
-                    "ART_CRAFTS #1",
-                    "ART_CRAFTS #2",
-                    "TUBING",
-                    "TUBING",
-                    "ARCHERY #1",
-                    "ARCHERY #2",
-                    "NIGHT"
-                ]
-            },{
-                "dayOfWeek":"Friday",
-                "schedule":[
-                    "WAKE_UP",
-                    "BREAKFAST",
-                    "WALK #1",
-                    "WALK #2",
-                    "LUNCH",
-                    "ART_CRAFTS #1",
-                    "ART_CRAFTS #2",
-                    "TUBING",
-                    "TUBING",
-                    "ARCHERY #1",
-                    "ARCHERY #2",
-                    "NIGHT"
-                ]
-            }
-    ]
+      "schedule": [
+        "WAKE_UP",
+        "BREAKFAST",
+        "WALK #1",
+        "WALK #2",
+        "LUNCH",
+        "ART_CRAFTS #1",
+        "ART_CRAFTS #2",
+        "TUBING",
+        "TUBING",
+        "ARCHERY #1",
+        "ARCHERY #2",
+        "NIGHT"
+      ],
+      "dayOfWeek": "Monday"
+    },
+    {
+      "schedule": [
+        "WAKE_UP",
+        "BREAKFAST",
+        "WALK #1",
+        "WALK #2",
+        "LUNCH",
+        "ART_CRAFTS #1",
+        "ART_CRAFTS #2",
+        "TUBING",
+        "TUBING",
+        "ARCHERY #1",
+        "ARCHERY #2",
+        "NIGHT"
+      ],
+      "dayOfWeek": "Thursday"
+    },
+    {
+      "schedule": [
+        "WAKE_UP",
+        "BREAKFAST",
+        "WALK #1",
+        "WALK #2",
+        "LUNCH",
+        "ART_CRAFTS #1",
+        "ART_CRAFTS #2",
+        "TUBING",
+        "TUBING",
+        "ARCHERY #1",
+        "ARCHERY #2",
+        "NIGHT"
+      ],
+      "dayOfWeek": "Friday"
+    },
+    {
+      "schedule": [
+        "WAKE_UP",
+        "BREAKFAST",
+        "WALK #1",
+        "WALK #2",
+        "LUNCH",
+        "ART_CRAFTS #1",
+        "ART_CRAFTS #2",
+        "TUBING",
+        "TUBING",
+        "ARCHERY #1",
+        "ARCHERY #2",
+        "NIGHT"
+      ],
+      "dayOfWeek": "Wednesday"
+    },
+    {
+      "schedule": [
+        "WAKE_UP",
+        "BREAKFAST",
+        "WALK #1",
+        "WALK #2",
+        "LUNCH",
+        "ART_CRAFTS #1",
+        "ART_CRAFTS #2",
+        "TUBING",
+        "TUBING",
+        "ROCK_CLIMBING #1",
+        "ROCK_CLIMBING #2",
+        "NIGHT"
+      ],
+      "dayOfWeek": "Tuesday"
+    }
+  ],
+  "id": "ddd86dd0-0335-4e37-a6ef-e416c897c532",
+  "cabinName": "Salty City Cabin"
 }
 ]

@@ -35,7 +35,9 @@ public class ActivityManager {
     public int getActivityEndTime(String activity){
         return this.getActivityStartTime(activity) + ACTIVITY_LENGTH;
     }
-
+    public ArrayList<String> getActivityList() {
+        return this.activities;
+    }
     public boolean isBefore(String activityOne, String activityTwo){
         /*
          * If act 1 is before act 2

@@ -6,11 +6,13 @@ public class Schedule {
     private HashMap<String,ActivityManager> scheduledActivities = new HashMap<>();
     private UUID id;
     private int sessionNumber;
+    private String cabinName;
 
-    public Schedule(HashMap<String,ActivityManager> scheduledActivities,int sessionNumber,UUID id){
+    public Schedule(HashMap<String,ActivityManager> scheduledActivities,int sessionNumber,UUID id, String cabinName){
         this.scheduledActivities = scheduledActivities;
         this.id = id;
         this.sessionNumber = sessionNumber;
+        this.cabinName = cabinName;
     }
     public Schedule(int sessionNumber){
         this.sessionNumber = sessionNumber;
@@ -24,6 +26,9 @@ public class Schedule {
     }
     public UUID getScheduleID() {
         return this.id;
+    }
+    public String getCabinName() {
+        return this.cabinName;
     }
     public String toString(){
         String out = "";

@@ -495,7 +495,9 @@ public class FileIO {
     private JSONObject getScheduleJson(Schedule s) {
         JSONObject jS = new JSONObject();
         jS.put("id", s.getScheduleID());
-        
+        ArrayList<JSONObject> schedules = new ArrayList<>();
+        ArrayList<JSONObject> dailySchedule = new ArrayList<>();
+        //for(Schedule cabinSchedule : s.get)
         return jS;
     }
 

@@ -1,5 +1,10 @@
 import java.util.ArrayList;
-
+/**
+ * A Cabin class containing a String name, an ArrayList<Dependent> coordinators, an ArrayList<Dependent> campers,
+ * an ArrayList<Schedule> schedules, an int camperCapacity, an int coordinatorCapacity, an int lowerAgeBound
+ * and an int upperAgeBound
+ * @author Jacob Hammond, Jordan fowler, Lex Whalen, Tze-Chen Lin
+ */
 public class Cabin {
     private String name; 
     private ArrayList<Dependent> coordinators = new ArrayList<Dependent>();
@@ -13,9 +18,18 @@ public class Cabin {
     private int lowerAgeBound;
     private int upperAgeBound;
 
+    /**
+     * to get the name of the cabin
+     * @return the name of the cabin
+     */
     public String getCabinName(){
         return this.name;
     }
+    /**
+     * check for guardian dependents
+     * @param g a Guardian 
+     * @return true if guardian has dependents
+     */
     public boolean hasGuardianDependents(Guardian g){
         for(Dependent dep: this.campers){
             if(g.hasDependent(dep)){
@@ -24,6 +38,11 @@ public class Cabin {
         }
         return false;
     }
+    /**
+     * check for deependent
+     * @param d a Depentent
+     * @return ture if depentent d where found
+     */
     public boolean hasDependent(Dependent d){
         for(Dependent dep: this.campers){
             if(d.equals(dep)){
@@ -37,31 +56,62 @@ public class Cabin {
         }
         return false;
     }
-
+    /**
+     * get the ArrayList<Dependent>
+     * @return the ArrayList<Dependent>
+     */
     public ArrayList<Dependent> getCoordinators(){
         return this.coordinators;
     }
-
+    /**
+     * get the ArrayList<Dependent>
+     * @return get the ArrayList<Dependent>
+     */
     public ArrayList<Dependent> getCampers(){
         return this.campers;
     }
+    /**
+     * get the ArrayList<Schedule>
+     * @return get the ArrayList<Schedule>
+     */
     public ArrayList<Schedule> getSchedules(){
         return this.schedules;
     }
+    /**
+     * print out the activities in the schedule
+     */
     public void viewActivities(){
         System.out.println(this.schedules.size());
         for(Schedule s:this.schedules){
             System.out.println(s);
         }
     }
+    /**
+     * print out the coordinators
+     */
     public void viewCoordinators(){
         for(Dependent c : this.coordinators){
             System.out.println(c);
         }
     }
+    /**
+     * Parameterized constructor
+     * @param name the name of the cabin
+     */
     public Cabin(String name){
         this.name = name;
     }
+    /**
+     * Parameterized constructor
+     * @param name the name of the cabin
+     * @param coordinators the ArrayList<Dependent> of coordinators
+     * @param campers ArrayList<Dependent> of campers
+     * @param schedules ArrayList<Schedule> of schedules
+     * @param camperCapacity an int camperCapacity
+     * @param coordinatorCapacity an int coordinatorCapacity
+     * @param lowerAgeBound an int lowerAgeBound
+     * @param upperAgeBound an int upperAgeBound
+     */
     public Cabin(String name,ArrayList<Dependent>coordinators, ArrayList<Dependent> campers,ArrayList<Schedule> schedules, int camperCapacity, int coordinatorCapacity,int lowerAgeBound, int upperAgeBound){
         this.name = name;
         this.coordinators = coordinators;
@@ -72,6 +122,18 @@ public class Cabin {
         this.lowerAgeBound = lowerAgeBound;
         this.upperAgeBound = upperAgeBound;
     }
+    /**
+     * Parameterized constructor
+     * @param name the name of the cabin
+     * @param coordinators the ArrayList<Dependent> of coordinators
+     * @param campers ArrayList<Dependent> of campers
+     * @param schedules ArrayList<Schedule> of schedules
+     * @param camperCapacity an int camperCapacity
+     * @param coordinatorCapacity an int coordinatorCapacity
+     * @param lowerAgeBound an int lowerAgeBound
+     * @param upperAgeBound an int upperAgeBound
+     * @param campYear an int campYear
+     */
     public Cabin(String name,ArrayList<Dependent>coordinators, ArrayList<Dependent> campers,ArrayList<Schedule> schedules, int camperCapacity, int coordinatorCapacity,int lowerAgeBound, int upperAgeBound, ArrayList<String> themes, int campYear ){
         this.name = name;
         this.coordinators = coordinators;
@@ -82,6 +144,9 @@ public class Cabin {
         this.lowerAgeBound = lowerAgeBound;
         this.upperAgeBound = upperAgeBound;
     }
+    /**
+     * print out the cabin info
+     */
     public String toString(){
         // to do
         String division = "----------------------";
@@ -100,33 +165,68 @@ public class Cabin {
 
         return out;
     }
+    /**
+     * to add Schedule
+     * @param schedule a schedule
+     */
     public void addSchedule(Schedule schedule){
         this.schedules.add(schedule);
     }
+    /**
+     * to get total campers
+     * @return the size of campers
+     */
     public int getTotalCampers(){
         return this.campers.size();
     }
+    /**
+     * to get total coordinators
+     * @return the siez of coordinators
+     */
     public int getTotalCoordinators(){
         return this.coordinators.size();
     }
+    /**
+     * to get remaining camper capacity
+     * @return remaining camper capacity
+     */
     public int getRemainingCamperCapacity(){
         return this.camperCapacity - this.campers.size();
     }
+    /**
+     * to get remaining Coordinator capacity
+     * @returnremaining Coordinator capacity
+     */
     public int getRemainingCoordinatorCapacity(){
         return this.coordinatorCapacity - this.coordinators.size();
     }
+    /**
+     * to get remaining Camper capacity
+     * @returnremaining Camper capacity
+     */
     public int getCamperCapacity(){
         return this.camperCapacity;
     }
+    /**
+     * to get Coordinator capacity
+     * @return Coordinator capacity
+     */
     public int getCoordinatorCapacity(){
         return this.coordinatorCapacity;
     }
+    /**
+     * print out cabin counselor
+     */
     public void viewCabinCouncelors(){
         for(Dependent d: coordinators){
             System.out.println(d.toString() + "\n");
         }
     }
-
+    /**
+     * to add camper to cabin
+     * @param camper the camper to be added
+     * @return true if added successfully
+     */
     public boolean addCamperToCabin(Dependent camper){
         if(
             this.inAgeRange(camper.getAgeInt())
@@ -143,6 +243,11 @@ public class Cabin {
         return false;
 
     }
+    /**
+     * check if dependent is in cabin
+     * @param dep
+     * @return true if the dependent is in cabin
+     */
     public boolean inCabin(Dependent dep){
         return (this.campers.contains(dep) || this.coordinators.contains(dep));
     }

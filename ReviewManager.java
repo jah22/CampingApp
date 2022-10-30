@@ -1,9 +1,16 @@
 import java.util.ArrayList;
-
+/**
+ * A ReviewManager class that contains an ArrayList<Review> review and a double aveReview
+ * @author Jacob Hammond, Jordan fowler, Lex Whalen, Tze-Chen Lin
+ */
 public class ReviewManager {
     private ArrayList<Review> reviews = new ArrayList<Review>();
     private double avgReview = 0.0;
 
+    /**
+     * Parameterized constructor
+     * @param reviews a new review
+     */
     public ReviewManager(ArrayList<Review> reviews){
         this.reviews = reviews;
         updateAvgReview(reviews);
@@ -11,10 +18,18 @@ public class ReviewManager {
     public ReviewManager(){
         // param ctor
     }
+    /**
+     * set the ArrayList reviews
+     * @param revs an ArrayList of review
+     */
     public void setReviews(ArrayList<Review> revs){
         this.reviews = revs;
         updateAvgReview(revs);
     }
+    /**
+     * update the Average Review
+     * @param revs an ArrayList of review
+     */
     public void updateAvgReview(ArrayList<Review> revs){
         // add to avg
         for(Review rev: revs){
@@ -22,6 +37,11 @@ public class ReviewManager {
         }
         this.avgReview = (this.avgReview/revs.size());
     }
+    /**
+     * Find a review by title
+     * @param title the title of the review
+     * @return the review that matches the title
+     */
     public Review getReviewByTitle(String title){
         for(Review r:this.reviews){
             if(r.getTitle().equals(title)){
@@ -30,9 +50,16 @@ public class ReviewManager {
         }
         return null;
     }
+    /**
+     * get the average rating
+     * @return the average rating
+     */
     public double getAvgRating(){
         return this.avgReview;
     }
+    /**
+     * print out the average rating
+     */
     public void viewAvgRating(){
         if(this.avgReview == 0){
             System.out.println("No reviews yet");
@@ -40,6 +67,10 @@ public class ReviewManager {
         }
         System.out.println("Average rating: " + this.avgReview);
     }
+    /**
+     * Find and print all reviews of an author
+     * @param author an author
+     */
     public void viewReviewsByAuthor(String author){
         /*
          * Author is first name last name
@@ -53,6 +84,10 @@ public class ReviewManager {
         }
         System.out.println("Total reviews by " + author + ": " + reviewCount + "\n");
     }
+    /**
+     * Find and print all reviews of a rating
+     * @param rating a rating
+     */
     public void viewReviewsByRating(int rating){
         int reviewCount = 0;
         System.out.println("SEARCHING FOR REVIEWS...\n");
@@ -64,6 +99,10 @@ public class ReviewManager {
         }
         System.out.println("Total reviews with rating of " + rating + ": " + reviewCount +"\n");
     }
+    /**
+     * Find and print all reviews of a title
+     * @param title a title
+     */
     public void viewReviewsByTitle(String title){
         for(Review r: this.reviews){
             if(r.getTitle().equals(title)){
@@ -71,6 +110,13 @@ public class ReviewManager {
             }
         }
     }
+    /**
+     * add a review and update the average review
+     * @param author an authorof the review
+     * @param rating a rating of the review
+     * @param title a title of the review
+     * @param text a body of the review
+     */
     public void addReview(String author, int rating, String title, String text){
         // update the avg
         // avg = sum of all entries / number of entries
@@ -85,6 +131,12 @@ public class ReviewManager {
         // update avg
         this.avgReview = newAvg;
     }
+    /**
+     * remove a review and update the average review
+     * @param title a title of the review
+     * @param yourSelf an authorized user
+     * @return true if successful removed the review
+     */
     public boolean removeReview(String title, Person yourSelf){
         // need to check username password combo
         // to do
@@ -99,6 +151,9 @@ public class ReviewManager {
         this.reviews.remove(rev);
         return true;
     }
+    /**
+     * print out all reviews
+     */
     public void viewAllReviews(){
         if(this.reviews.size() == 0){
             System.out.println("No reviews present.");

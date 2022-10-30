@@ -21,6 +21,18 @@ public class Cabin {
     private int lowerAgeBound;
     private int upperAgeBound;
 
+    /**
+     * Parameterized constructor
+     * @param name the name of the cabin
+     * @param coordinators the ArrayList<Dependent> of coordinators
+     * @param campers ArrayList<Dependent> of campers
+     * @param schedules ArrayList<Schedule> of schedules
+     * @param camperCapacity an int camperCapacity
+     * @param coordinatorCapacity an int coordinatorCapacity
+     * @param lowerAgeBound an int lowerAgeBound
+     * @param upperAgeBound an int upperAgeBound
+     * @param campYear an int campYear
+     */
     public Cabin(String name,ArrayList<Dependent>coordinators, ArrayList<Dependent> campers,ArrayList<Schedule> schedules, int camperCapacity, int coordinatorCapacity,int lowerAgeBound, int upperAgeBound){
         this.name = name;
         this.coordinators = coordinators;
@@ -132,28 +144,6 @@ public class Cabin {
         this.generateRandomSchedulesForSession(sessionCounts);
     }
 
-    /**
-     * Parameterized constructor
-     * @param name the name of the cabin
-     * @param coordinators the ArrayList<Dependent> of coordinators
-     * @param campers ArrayList<Dependent> of campers
-     * @param schedules ArrayList<Schedule> of schedules
-     * @param camperCapacity an int camperCapacity
-     * @param coordinatorCapacity an int coordinatorCapacity
-     * @param lowerAgeBound an int lowerAgeBound
-     * @param upperAgeBound an int upperAgeBound
-     * @param campYear an int campYear
-     */
-    public Cabin(String name,ArrayList<Dependent>coordinators, ArrayList<Dependent> campers,ArrayList<Schedule> schedules, int camperCapacity, int coordinatorCapacity,int lowerAgeBound, int upperAgeBound, ArrayList<String> themes, int campYear ){
-        this.name = name;
-        this.coordinators = coordinators;
-        this.campers = campers;
-        this.schedules = schedules;
-        this.camperCapacity = camperCapacity;
-        this.coordinatorCapacity = coordinatorCapacity;
-        this.lowerAgeBound = lowerAgeBound;
-        this.upperAgeBound = upperAgeBound;
-    }
     public void generateRandomSchedulesForSession(int sessionCounts){
         // randomly generate round wake up, breakfast, lunch, dinner, sleep
         for(int i=0;i<sessionCounts;i++){

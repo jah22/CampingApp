@@ -53,7 +53,7 @@ public class Person {
      * set authBehavior
      * @param behavior the behavior of the person
      */
-    public void setAuthBehavior(AuthBehavior behasvior){
+    public void setAuthBehavior(AuthBehavior behavior){
         this.authBehavior = behavior;
     }
     /**

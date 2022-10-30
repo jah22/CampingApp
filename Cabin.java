@@ -1,3 +1,9 @@
+/*
+ * CSCE 247
+ * October 28, 2022
+ *
+ */
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -99,7 +105,7 @@ public class Cabin {
         }
     }
     public Schedule generateRandomSchedule(int sessionNumber){
-        Schedule s = new Schedule(sessionNumber);
+        Schedule s = new Schedule(sessionNumber,this.name);
         for(int i = 0 ; i < 7 ; i++){
             String day = "";
             if(i == 0){

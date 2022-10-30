@@ -98,9 +98,8 @@ public class Driver {
         System.out.println("Now enter the sessions.");
         System.out.println("How many sessions would you like? ");
         int sessionCount = getValidSelection(1, 99);
+        this.csm.setThemeManager(this.promptThemeManager(sessionCount));
         this.csm.setCabinManager(this.promptCabinManager(sessionCount));
-        System.out.println("Now enter the cabins.");
-        this.csm.setCabinManager(promptCabinManager(sessionCount));
         System.out.println("Successfully created camp.");
         System.out.println("Camp information: ");
         this.csm.viewCamp();
@@ -108,9 +107,9 @@ public class Driver {
     // get a cabin manager, used for creating a new camp
     // new camps need cabins, this is where they are created
     public CabinManager promptCabinManager(int sessionCount){
-        CabinManager c = new CabinManager();
-        int count = 0;
         boolean running = true;
+        int count = 0;
+        CabinManager c = new CabinManager();
         while(running){
             System.out.println("Would you like to add a new cabin?");
             switch(getYesNoResponse()){
@@ -120,6 +119,7 @@ public class Driver {
                     count += 1;
                     break;
                 case 2:
+                    System.out.println(count);
                     if(count > 0){
                         running = false;
                         break;
@@ -998,7 +998,7 @@ public class Driver {
         while(running){
             Cabin c = this.csm.getCabinByIndex(cabinIndex);
             System.out.println("You are seeing information for cabin \"" + c.getCabinName() + "\".");
-            System.out.println("Please enter a session number to show information for, or [0] to exit.");
+            System.out.println("Please enter a session number to show information for, or [-1] to exit.");
             this.csm.viewThemes();
             int selection = getValidSelection(-1, this.csm.getSessionCount()) ;
             if(selection == -1){
@@ -1059,8 +1059,8 @@ public class Driver {
     }
     public void exit(){
         System.out.println("Goodbye!");
-        // TO DO:
-        // REWRITE ALL THE JSON HERE
+        // write the json
+        this.csm.save();
         System.exit(0);
     }
     public void printLoginRegViewOptions(){

@@ -282,4 +282,18 @@ public class CampSiteManager{
   public void viewIndexCabinSession(int cabinIndex,int sessionIndex){
     this.cabinManager.viewIndexCabinSession(cabinIndex, sessionIndex);
   }
+  public void save(){
+    // saves all of the current data
+
+    // 1. Save People
+    this.personManager.save();
+
+    // TO DO
+    // 2. Save Themes
+
+    // 3. Save Reviews
+    this.reviewManager.save();
+    // 4. Save Cabins & Schedules
+    this.cabinManager.save();
+  }
 }

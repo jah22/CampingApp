@@ -272,7 +272,7 @@ public class FileIO {
         String password = (String)  admin.get("password");
         String username = (String)  admin.get("username");
         String email = (String)  admin.get("email");
-        String phone = (String)  admin.get("phoneNumber");
+        String phone = (String)  admin.get("phone");
 
         return(new CampAdmin(firstName, lastName, birthDate, address, id, password, username, email, phone));
     }
@@ -434,7 +434,7 @@ public class FileIO {
      * ***************************
      */
 
-    private JSONObject getPersonJson(Person p){
+    private static JSONObject getPersonJson(Person p){
         JSONObject jP = new JSONObject();
         jP.put("id",p.getId().toString());
         jP.put("firstName",p.getFirstName());
@@ -444,7 +444,7 @@ public class FileIO {
 
         return jP;
     }
-    private JSONObject getPriorityPersonJson(Person p){
+    private static JSONObject getPriorityPersonJson(Person p){
         PriorityBehavior pB = (PriorityBehavior) p.getAuthBehavior();
         JSONObject jP = getPersonJson(p);
         jP.put("password",pB.getPassword());
@@ -454,7 +454,7 @@ public class FileIO {
 
         return jP;
     }
-    private JSONObject getGuardianJson(Guardian g){
+    private static JSONObject getGuardianJson(Guardian g){
         JSONObject jsonG = getPriorityPersonJson(g);
         ArrayList<JSONObject> ids = new ArrayList<>();
         for(Dependent regDependent : g.getRegisteredDependents()) {
@@ -465,11 +465,11 @@ public class FileIO {
         jsonG.put("registeredDependents", ids);
         return jsonG;
     }
-    private JSONObject getCampAdminJson(CampAdmin cA){
+    private static JSONObject getCampAdminJson(CampAdmin cA){
         JSONObject jO = getPriorityPersonJson(cA);
         return jO;
     }
-    private JSONObject getCamperJson(Dependent d){
+    private static JSONObject getCamperJson(Dependent d){
         JSONObject jO = getPersonJson(d);
         jO.put("isCoordinator",d.getIsCoordinator());
         ArrayList<JSONObject> ids = new ArrayList<>();
@@ -483,7 +483,7 @@ public class FileIO {
 
         return jO;
     }
-    private JSONObject getCoordinatorJson(Dependent c) {
+    private static JSONObject getCoordinatorJson(Dependent c) {
         JSONObject jCo = getPriorityPersonJson(c);
         jCo.put("isCoordinator",c.getIsCoordinator());
         ArrayList<JSONObject> ids = new ArrayList<>();
@@ -496,7 +496,7 @@ public class FileIO {
         jCo.put("emergencyContacts",ids);
         return jCo;
     }
-    private JSONObject getReviewJson(Review r) {
+    private static JSONObject getReviewJson(Review r) {
         JSONObject jR = new JSONObject();
         jR.put("title", r.getTitle());
         jR.put("author", r.getAuthor());
@@ -504,11 +504,11 @@ public class FileIO {
         jR.put("rating", r.getRating());
         return jR;
     }
-    private JSONObject getEmergencyContactJson(EmergencyContact eC) {
+    private static JSONObject getEmergencyContactJson(EmergencyContact eC) {
         JSONObject jEC = getPersonJson(eC);
         return jEC;
     }
-    private JSONObject getCabinJson(Cabin c) {
+    private static JSONObject getCabinJson(Cabin c) {
         JSONObject jC = new JSONObject();
         jC.put("name", c.getCabinName());
         jC.put("camperCapacity", c.getCamperCapacity());
@@ -531,7 +531,7 @@ public class FileIO {
         jC.put("coordinators", coordIds);
         return jC;
     }
-    private JSONObject getScheduleJson(Schedule s) {
+    private static JSONObject getScheduleJson(Schedule s) {
         JSONObject jS = new JSONObject();
         jS.put("id", s.getScheduleID());
         jS.put("sessionNumber", s.getSessionNumber());
@@ -546,7 +546,7 @@ public class FileIO {
             dailySchedule.put("schedule", weekEntry.getValue().getActivityList());
             schedule.add(dailySchedule);
         }
-        jS.put("schedules", schedule);
+        jS.put("schedules",schedule);
         return jS;
     }
 
@@ -556,18 +556,18 @@ public class FileIO {
      * ***************************
      */
     // write a JSON object to file
-    private void writeToJson(String jO,String filePath){
+    private static void writeToJson(String jO,String filePath){
         try(FileWriter fW = new FileWriter(filePath)){
             fW.write(jO);
         }catch(IOException e){
             e.printStackTrace();
         }
     }
-    private String jsonFormatter(String jsonFile) {
+    private static String jsonFormatter(String jsonFile) {
         String fixedFormat = "[\n"+jsonFile+"\n]";
         return fixedFormat;
     }
-    private void writeGuardian(ArrayList<Guardian> guardian) {
+    public static void writeGuardian(ArrayList<Guardian> guardian) {
         String guardJsonList = "";
         boolean isFirst = true;
         for(Guardian newGuard : guardian) {
@@ -587,7 +587,8 @@ public class FileIO {
         String finalGuardString = jsonFormatter(guardJsonList);
         writeToJson(finalGuardString,DataConstants.GUARDIAN_FILE_NAME);
     }
-    private void writeCampAdmin(ArrayList<CampAdmin> admin) {
+    // tested and works
+    public static void writeCampAdmin(ArrayList<CampAdmin> admin) {
         String adminJsonList = "";
         boolean isFirst = true;
         for(CampAdmin newAdmin : admin) {
@@ -607,7 +608,7 @@ public class FileIO {
         String finalAdminString = jsonFormatter(adminJsonList);
         writeToJson(finalAdminString,DataConstants.CAMP_ADMIN_FILE_NAME);
     }
-    private void writeDependent(ArrayList<Dependent> dependent) {
+    public static void writeDependent(ArrayList<Dependent> dependent) {
         String dependJsonList = "";
         String coordJsonList = "";
         boolean isFirstCoordinator = true;
@@ -647,7 +648,8 @@ public class FileIO {
             }
         }
     }
-    private void writeReview(ArrayList<Review> review) {
+    // tested, works
+    public static void writeReview(ArrayList<Review> review) {
         String reviewJsonList = "";
         boolean isFirst = true;
         for(Review newReview : review) {
@@ -668,7 +670,8 @@ public class FileIO {
         String formattedCoordinatorString = finalCoordinatorString.replace("\\u0027", "\'");
         writeToJson(formattedCoordinatorString, DataConstants.REVIEW_FILE_NAME);
     }
-    private void writeEmergencyContact(ArrayList<EmergencyContact> emergencyC) {
+    // tested, works
+    public static void writeEmergencyContact(ArrayList<EmergencyContact> emergencyC) {
         String emcJsonList = "";
         boolean isFirst = true;
         for(EmergencyContact newEMC : emergencyC) {
@@ -688,7 +691,8 @@ public class FileIO {
         String finalEmergencyContactString = jsonFormatter(emcJsonList);
         writeToJson(finalEmergencyContactString, DataConstants.EMERGENCY_CONTACT_FILE_NAME);
     }
-    private void writeCabin(ArrayList<Cabin> cabin) {
+    // tested, works
+    public static void writeCabin(ArrayList<Cabin> cabin) {
         String cabinJsonList = "";
         boolean isFirst = true;
         for(Cabin newCabin : cabin) {
@@ -702,13 +706,14 @@ public class FileIO {
                 isFirst = false;
             }
             else {
-                cabinJsonList =cabinJsonList+"\n"+formattedJsonString;
+                cabinJsonList =cabinJsonList+",\n"+formattedJsonString;
             }
         }
         String finalCabinString = jsonFormatter(cabinJsonList);
         writeToJson(finalCabinString, DataConstants.CABIN_FILE_NAME);
     }
-    private void writeSchedule(ArrayList<Schedule> schedule) {
+    // tested, works
+    public static void writeSchedule(ArrayList<Schedule> schedule) {
         String scheduleJsonList = "";
         boolean isFirst = true;
         for(Schedule newSchedule : schedule) {
@@ -722,13 +727,13 @@ public class FileIO {
                 isFirst = false;
             }
             else {
-                scheduleJsonList =scheduleJsonList+"\n"+formattedJsonString;
+                scheduleJsonList =scheduleJsonList+",\n"+formattedJsonString;
             }
         }
         String finalScheduleString = jsonFormatter(scheduleJsonList);
         writeToJson(finalScheduleString, DataConstants.SCHEDULE_FILE_NAME);
     }
-    private JSONArray parseJsonFileArr(String filename) {
+    private static JSONArray parseJsonFileArr(String filename) {
         JSONParser jsonP = new JSONParser();
         try(FileReader reader = new FileReader(filename)){
             Object obj = jsonP.parse(reader);
@@ -752,12 +757,9 @@ public class FileIO {
             e.printStackTrace();
         }
     }
-    public static void main(String args[]){
-        FileIO fiO = FileIO.getInstance();
-        ArrayList<Dependent> test = fiO.readDependents();
-        fiO.writeDependent(test);
-        System.out.println("here");
-
-
-    }
+    // public static void main(String args[]){
+    //     FileIO fiO = FileIO.getInstance();
+    //     ArrayList<Dependent> deps = fiO.readDependents();
+    //     fiO.writeDependent(deps);
+    // }
 }

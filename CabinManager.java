@@ -141,4 +141,17 @@ public class CabinManager {
     public void addCabin(Cabin c){
         this.cabins.add(c);
     }
+    public void save(){
+        // save cabins
+        FileIO.writeCabin(this.cabins);
+        // save schedules
+        FileIO.writeSchedule(this.getAllSchedules());
+    }
+    public ArrayList<Schedule> getAllSchedules(){
+        ArrayList<Schedule> ret = new ArrayList<>();
+        for(Cabin c: this.cabins){
+            ret.addAll(c.getSchedules());
+        }
+        return ret;
+    }
 }

@@ -14,8 +14,10 @@ public class Schedule {
         this.sessionNumber = sessionNumber;
         this.cabinName = cabinName;
     }
-    public Schedule(int sessionNumber){
+    public Schedule(int sessionNumber,String cabinName){
         this.sessionNumber = sessionNumber;
+        this.cabinName = cabinName;
+        this.id = UUID.randomUUID();
     }
     public void addDayActivityManager(String day){
         this.scheduledActivities.put(day,new ActivityManager());

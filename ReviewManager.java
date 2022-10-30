@@ -108,4 +108,7 @@ public class ReviewManager {
             System.out.println(r);
         }
     }
+    public void save(){
+        FileIO.writeReview(this.reviews);
+    }
 }

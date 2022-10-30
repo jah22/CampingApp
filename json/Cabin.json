@@ -2,24 +2,19 @@
 {
   "camperCapacity": 8,
   "coordinatorCapacity": 1,
-  "campers": [
-    {
-      "id": "81c7ae99-247f-4c80-950a-4a41e767e84d"
-    },
-    {
-      "id": "81c7ae99-247f-4c80-950a-4a41e767e84e"
-    },
-    {
-      "id": "81c7ae99-247f-4c80-950a-4a41e767e84f"
-    }
-  ],
-  "coordinators": [
-    {
-      "id": "81c7ae99-247f-4c80-950a-4a41e767e84c"
-    }
-  ],
-  "name": "Salty City Cabin",
+  "campers": [],
+  "coordinators": [],
+  "name": "asd",
   "upperAgeBound": 15,
-  "lowerAgeBound": 10
+  "lowerAgeBound": 11
+},
+{
+  "camperCapacity": 8,
+  "coordinatorCapacity": 1,
+  "campers": [],
+  "coordinators": [],
+  "name": "fsdas",
+  "upperAgeBound": 16,
+  "lowerAgeBound": 14
 }
 ]

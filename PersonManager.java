@@ -267,4 +267,11 @@ public class PersonManager {
         this.admins.add(admin);
         return admin;
     }
+    public void save(){
+        // save all data to json
+        FileIO.writeCampAdmin(this.admins);
+        FileIO.writeEmergencyContact(this.emergencyContacts);
+        FileIO.writeDependent(this.dependents);
+        FileIO.writeGuardian(this.guardians);
+    }
 }

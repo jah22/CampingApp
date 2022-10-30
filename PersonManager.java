@@ -180,14 +180,6 @@ public class PersonManager {
         // dont forget to add the dependent
         this.dependents.add(newDep);
     }
-    public boolean getDependentCabin(String firstName, String lastName){
-        // to do
-        return false;
-    }
-    public boolean showDependentContacts(String firstName, String lastName){
-        // to do
-        return false;
-    }
     public Dependent getDependentById(UUID id){
         for(Dependent d: this.dependents){
             if(d.getId().equals(id)){
@@ -211,18 +203,6 @@ public class PersonManager {
             }
         }
         return null;
-    }
-    public boolean updateLoginInfo(String curUsername, String curPassword){
-        // to do
-        return false;
-    }
-    public boolean getMedicalNotes(String username, String password){
-        // to do
-        return false;
-    }
-    public boolean getContactInformation(String username, String password){
-        // to do
-        return false;
     }
     public Guardian loginGuardian(String username, String password){
         for(Guardian g: this.guardians){
@@ -286,5 +266,12 @@ public class PersonManager {
     public CampAdmin registerAdmin(CampAdmin admin){
         this.admins.add(admin);
         return admin;
+    }
+    public void save(){
+        // save all data to json
+        FileIO.writeCampAdmin(this.admins);
+        FileIO.writeEmergencyContact(this.emergencyContacts);
+        FileIO.writeDependent(this.dependents);
+        FileIO.writeGuardian(this.guardians);
     }
 }

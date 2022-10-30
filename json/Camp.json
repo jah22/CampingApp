@@ -3,8 +3,8 @@
         "name":"Camp 247",
         "address":"1423 Greene, Columbia SC",
         "pricePerCamperPerDay": 7.00,
-        "authcode":"superCoolCampSiteCodeOnlyUsAdminsKnow!",
         "year":2022,
-        "themes":["Squid","Grass","Rock","Jelly Bean","Monster","Halloween"]
+        "startMonth":"July",
+        "themeId":"81c7ae99-247f-4c80-950a-4a41e767e84c"
     }
 ]

@@ -1,14 +1,3 @@
 [
-    {
-        "title":"some title",
-        "author":"John James",
-        "body":"Here's my review",
-        "rating":5
-    },
-    {
-        "title":"some nicer title",
-        "author":"Jimmy James",
-        "body":"Here's my review again",
-        "rating":3
-    }
+
 ]

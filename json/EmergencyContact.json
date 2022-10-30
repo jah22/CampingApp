@@ -1,18 +1,16 @@
 [
-    {
-        "firstName":"E First",
-        "lastName": "E Last",
-        "birthDate": "1990-11-20",
-        "address":"E address",
-        "phone":"222-333-1111",
-        "id":"71c7ae99-247f-4c80-950a-4a41e767e84d"
-    },
-    {
-        "firstName":"E First1",
-        "lastName": "E Last1",
-        "birthDate": "1995-11-20",
-        "address":"E address",
-        "phone":"111-222-3333",
-        "id":"61c7ae99-247f-4c80-950a-4a41e767e84d"
-    }
+{
+  "firstName": "Father",
+  "lastName": "Figure",
+  "address": "E address",
+  "id": "71c7ae99-247f-4c80-950a-4a41e767e84d",
+  "birthDate": "1990-11-20"
+},
+{
+  "firstName": "Doc",
+  "lastName": "Ter",
+  "address": "Hospital",
+  "id": "61c7ae99-247f-4c80-950a-4a41e767e84d",
+  "birthDate": "1995-11-20"
+}
 ]

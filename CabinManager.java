@@ -1,11 +1,13 @@
-import java.nio.file.Files;
 import java.util.ArrayList;
 
 public class CabinManager {
-    private ArrayList<Cabin> cabins;
+    private ArrayList<Cabin> cabins = new ArrayList<Cabin>();
     
     public CabinManager(ArrayList<Cabin> cabins){
         this.cabins = cabins;
+    }
+    public CabinManager(){
+        // empty ctor
     }
     public void viewGuardianRegisteredCabins(Guardian g){
         // the indices of the cabins that the gaurdians has ov
@@ -45,14 +47,14 @@ public class CabinManager {
         return null;
     }
 
-    public boolean viewCabinActivities(String cabinName){
-        for(Cabin c: this.cabins){
-            if(c.getCabinName().equals(cabinName)){
-                c.viewActivities();
-                return true;
-            }
+    public void viewIndexCabinSession(int cabinIndex, int sessionIndex){
+        if(
+            (0 <= cabinIndex && cabinIndex < this.cabins.size())
+            &&
+            (0 <= sessionIndex && sessionIndex < this.cabins.get(cabinIndex).getSessionCount())
+        ){
+            this.cabins.get(cabinIndex).viewSessionAtIndex(sessionIndex);
         }
-        return false;
     }
     public boolean viewCabinCoordinators(String cabinName){
         for(Cabin c: this.cabins){
@@ -93,22 +95,10 @@ public class CabinManager {
         }
     }
     public void viewCabinByIndex(int index){
-        if(index <=0 || index >= this.cabins.size()){
+        if(index < 0 || index >= this.cabins.size()){
             return;
         }
         System.out.println(this.cabins.get(index));
-    }
-    public boolean removeCamperFromCabin(Dependent camper,String cabinName){
-        // to do
-        return false;
-    }
-    public boolean addCoordinatorToCabin(Dependent coordinator,String cabinName){
-        // to do
-        return false;
-    }
-    public boolean removeCoordinatorFromCabin(Dependent coordinator,String cabinName){
-        // to do
-        return false;
     }
     public ArrayList<Cabin> getCabinsByCoordinator(Dependent coordinator){
         ArrayList<Cabin> cabins = new ArrayList<Cabin>();
@@ -147,5 +137,21 @@ public class CabinManager {
     }
     public String getCabinRoster(Cabin c){
         return c.getCabinRoster();
+    }
+    public void addCabin(Cabin c){
+        this.cabins.add(c);
+    }
+    public void save(){
+        // save cabins
+        FileIO.writeCabin(this.cabins);
+        // save schedules
+        FileIO.writeSchedule(this.getAllSchedules());
+    }
+    public ArrayList<Schedule> getAllSchedules(){
+        ArrayList<Schedule> ret = new ArrayList<>();
+        for(Cabin c: this.cabins){
+            ret.addAll(c.getSchedules());
+        }
+        return ret;
     }
 }

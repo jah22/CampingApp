@@ -1,20 +1,22 @@
 [
+{
+  "firstName": "Jane",
+  "lastName": "Smith",
+  "isCoordinator": true,
+  "password": "password",
+  "address": "429 Sycamore Drive, Columbia, SC",
+  "emergencyContacts": [
     {
-        "id":"81c7ae99-247f-4c80-950a-4a41e767e84c",
-        "firstName":"Jane",
-        "lastName":"Smith",
-        "birthDate":"2009-05-14",
-        "address":"429 Sycamore Drive, Columbia, SC",
-        "hasBeenPaidFor":true,
-        "isCoordinator":true,
-        "emergencyContacts":[
-            {"id":"71c7ae99-247f-4c80-950a-4a41e767e84d"}
-        ],
-        "medicalNotes":
-            ["allergy 1","allergy 2"],
-        "username":"janesmith",
-        "email":"janesmith@gmail.com",
-        "phoneNumber":"111-222-3333",
-        "password":"password"
+      "id": "71c7ae99-247f-4c80-950a-4a41e767e84d"
     }
+  ],
+  "id": "81c7ae99-247f-4c80-950a-4a41e767e84c",
+  "medicalNotes": [
+    "allergy 1",
+    "allergy 2"
+  ],
+  "birthDate": "2009-05-14",
+  "email": "janesmith@gmail.com",
+  "username": "janesmith"
+}
 ]

@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 /**
  * A Cabin class containing a String name, an ArrayList<Dependent> coordinators, an ArrayList<Dependent> campers,
@@ -5,6 +6,8 @@ import java.util.ArrayList;
  * and an int upperAgeBound
  * @author Jacob Hammond, Jordan fowler, Lex Whalen, Tze-Chen Lin
  */
+import java.util.Random;
+
 public class Cabin {
     private String name; 
     private ArrayList<Dependent> coordinators = new ArrayList<Dependent>();
@@ -17,6 +20,27 @@ public class Cabin {
     // portia says we need an age range
     private int lowerAgeBound;
     private int upperAgeBound;
+
+    public Cabin(String name,ArrayList<Dependent>coordinators, ArrayList<Dependent> campers,ArrayList<Schedule> schedules, int camperCapacity, int coordinatorCapacity,int lowerAgeBound, int upperAgeBound){
+        this.name = name;
+        this.coordinators = coordinators;
+        this.campers = campers;
+        this.schedules = schedules;
+        this.camperCapacity = camperCapacity;
+        this.coordinatorCapacity = coordinatorCapacity;
+        this.lowerAgeBound = lowerAgeBound;
+        this.upperAgeBound = upperAgeBound;
+    }
+    public Cabin(String name,ArrayList<Dependent>coordinators, ArrayList<Dependent> campers,ArrayList<Schedule> schedules, int camperCapacity, int coordinatorCapacity,int lowerAgeBound, int upperAgeBound, ArrayList<String> themes, int campYear ){
+        this.name = name;
+        this.coordinators = coordinators;
+        this.campers = campers;
+        this.schedules = schedules;
+        this.camperCapacity = camperCapacity;
+        this.coordinatorCapacity = coordinatorCapacity;
+        this.lowerAgeBound = lowerAgeBound;
+        this.upperAgeBound = upperAgeBound;
+    }
 
     /**
      * to get the name of the cabin
@@ -81,7 +105,6 @@ public class Cabin {
      * print out the activities in the schedule
      */
     public void viewActivities(){
-        System.out.println(this.schedules.size());
         for(Schedule s:this.schedules){
             System.out.println(s);
         }
@@ -101,27 +124,14 @@ public class Cabin {
     public Cabin(String name){
         this.name = name;
     }
-    /**
-     * Parameterized constructor
-     * @param name the name of the cabin
-     * @param coordinators the ArrayList<Dependent> of coordinators
-     * @param campers ArrayList<Dependent> of campers
-     * @param schedules ArrayList<Schedule> of schedules
-     * @param camperCapacity an int camperCapacity
-     * @param coordinatorCapacity an int coordinatorCapacity
-     * @param lowerAgeBound an int lowerAgeBound
-     * @param upperAgeBound an int upperAgeBound
-     */
-    public Cabin(String name,ArrayList<Dependent>coordinators, ArrayList<Dependent> campers,ArrayList<Schedule> schedules, int camperCapacity, int coordinatorCapacity,int lowerAgeBound, int upperAgeBound){
+    // for new cabin generation
+    public Cabin(String name, int lowerBound, int upperBound,int sessionCounts){
         this.name = name;
-        this.coordinators = coordinators;
-        this.campers = campers;
-        this.schedules = schedules;
-        this.camperCapacity = camperCapacity;
-        this.coordinatorCapacity = coordinatorCapacity;
-        this.lowerAgeBound = lowerAgeBound;
-        this.upperAgeBound = upperAgeBound;
+        this.lowerAgeBound = lowerBound;
+        this.upperAgeBound = upperBound;
+        this.generateRandomSchedulesForSession(sessionCounts);
     }
+
     /**
      * Parameterized constructor
      * @param name the name of the cabin
@@ -144,26 +154,76 @@ public class Cabin {
         this.lowerAgeBound = lowerAgeBound;
         this.upperAgeBound = upperAgeBound;
     }
-    /**
-     * print out the cabin info
-     */
-    public String toString(){
-        // to do
-        String division = "----------------------";
-        String out = division +"\n";
-        out += "Cabin: " + this.name + "\n";
-        out += division +"\n";
-        out += "Age range: " + this.lowerAgeBound + "-" + this.upperAgeBound +"\n";
-        out += division +"\n";
-        out += "Coordinators: " + this.coordinators.size() +"/"+ this.coordinatorCapacity + "\n";
-        for (Dependent dependent :this.coordinators) {
-            out += dependent.getFullName() + "\n";
+    public void generateRandomSchedulesForSession(int sessionCounts){
+        // randomly generate round wake up, breakfast, lunch, dinner, sleep
+        for(int i=0;i<sessionCounts;i++){
+            // one for each day of week
+            Schedule s = this.generateRandomSchedule(i);
+            this.schedules.add(s);
         }
-        out += division +"\n";
-        out += "Campers: " + this.campers.size() +"/"+ this.camperCapacity+ "\n";
-        out += division +"\n";
-
-        return out;
+    }
+    public Schedule generateRandomSchedule(int sessionNumber){
+        Schedule s = new Schedule(sessionNumber,this.name);
+        for(int i = 0 ; i < 7 ; i++){
+            String day = "";
+            if(i == 0){
+                day = "Saturday" ;
+                s.addDayActivityManager(day);
+            }
+            else if(i == 1){
+                day = "Sunday";
+                s.addDayActivityManager(day);
+            }
+            else if(i == 2){
+                day = "Monday";
+                s.addDayActivityManager(day);
+            }
+            else if(i == 3){
+                day = "Tuesday";
+                s.addDayActivityManager(day);
+            }
+            else if(i == 4){
+                day = "Wednesday";
+                s.addDayActivityManager(day);
+            }
+            else if(i == 5){
+                day = "Thursday";
+                s.addDayActivityManager(day);
+            }
+            else if(i == 6){
+                day = "Friday";
+                s.addDayActivityManager(day);
+            }
+            for(int j = s.getStartTime(); j <= s.getEndTime();j++){
+                // some preset times
+                if(j == ActivityManager.START_TIME) {
+                    // wake up always first
+                    s.addActivity(day,Activity.WAKEUP.toString());
+                }
+                else if(j == ActivityManager.BREAKFAST_TIME){
+                    // breakfast after wake up
+                    s.addActivity(day,Activity.BREAKFAST.toString());
+                }
+                else if(j == ActivityManager.LUNCH_TIME){
+                    s.addActivity(day,Activity.LUNCH.toString());
+                }
+                else if(j == ActivityManager.DINNER_TIME){
+                    s.addActivity(day,Activity.DINNER.toString());
+                }
+                else{
+                    // randomize
+                    String randActivity= Activity.values()[new Random().nextInt(Activity.values().length)].toString();
+                    while(s.hasActivity(day,randActivity)){
+                        randActivity = Activity.values()[new Random().nextInt(Activity.values().length)].toString();
+                    }
+                    s.addActivity(day,randActivity);
+                }
+            }
+        }
+        return s;
+    }
+    public String toString(){
+        return this.getCabinRoster();
     }
     /**
      * to add Schedule
@@ -221,6 +281,12 @@ public class Cabin {
         for(Dependent d: coordinators){
             System.out.println(d.toString() + "\n");
         }
+    }
+    public int getLowerAgeBound() {
+        return this.lowerAgeBound;
+    }
+    public int getUpperAgeBound() {
+        return this.upperAgeBound;
     }
     /**
      * to add camper to cabin
@@ -338,5 +404,13 @@ public class Cabin {
      */
     public void setUpperAgeBound(int bound){
         this.upperAgeBound = bound;
+    }
+    public int getSessionCount(){
+        return this.schedules.size();
+    }
+    public void viewSessionAtIndex(int sessionIndex){
+        if(0<= sessionIndex && sessionIndex < this.schedules.size()){
+            System.out.println(this.schedules.get(sessionIndex));
+        }
     }
 }

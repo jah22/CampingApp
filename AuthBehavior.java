@@ -1,6 +1,9 @@
+
 /**
  * An interface of authBehavior
  * @author Jacob Hammond, Jordan fowler, Lex Whalen, Tze-Chen Lin
+ * CSCE 247
+ * October 28, 2022
  */
 public interface AuthBehavior{
     /**

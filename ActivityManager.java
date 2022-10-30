@@ -1,19 +1,39 @@
+/*
+ * CSCE 247
+ * October 28, 2022
+ * Activity Manager.
+ * Manages activities.
+ */
 import java.util.ArrayList;
 
 public class ActivityManager {
+    // array list of strings representing the activities
     private ArrayList<String> activities = new ArrayList<>();
+
     // all activities start at 8 oclock morning
     // use military time
     // 8 am military
-    private static int START_TIME = 8;
+    static int START_TIME = 8;
     // 8 pm military
-    private static int END_TIME = 20;
-    // all activities last one hour
-    private static int ACTIVITY_LENGTH = 1;
+    static int END_TIME = 20;
+    static int LUNCH_TIME = 12;
+    static int BREAKFAST_TIME = 9;
+    static int DINNER_TIME = 18;
 
+    // all activities last one hour
+    private int ACTIVITY_LENGTH = 1;
+
+    /*
+     * 
+     */
     public ActivityManager(ArrayList<String> activities){
         this.activities = activities;
     }
+
+    /*
+     * @param activities ArrayList<String> : an array list of activities
+     * sets the activities of the manager.
+     */
     public void setActivities(ArrayList<String> activities){
         this.activities = activities;
     }
@@ -21,6 +41,9 @@ public class ActivityManager {
         // nulll ctor
     }
 
+    /*
+     * 
+     */
     public int getActivityStartTime(String activity){
         // get time of start
         int index = this.activities.indexOf(activity);
@@ -29,10 +52,13 @@ public class ActivityManager {
         }
         return index + START_TIME;
     }
+
     public int getActivityEndTime(String activity){
         return this.getActivityStartTime(activity) + ACTIVITY_LENGTH;
     }
-
+    public ArrayList<String> getActivityList() {
+        return this.activities;
+    }
     public boolean isBefore(String activityOne, String activityTwo){
         /*
          * If act 1 is before act 2
@@ -84,5 +110,8 @@ public class ActivityManager {
             out += this.getActivityStartTime(activity) + "-" + this.getActivityEndTime(activity)+ ": " + activity +"\n";
         }
         return out;
+    }
+    public boolean hasActivity(String activity){
+        return this.activities.contains(activity);
     }
 }

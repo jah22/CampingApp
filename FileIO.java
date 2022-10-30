@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.Map.Entry;
 
 
 public class FileIO {
@@ -32,6 +33,7 @@ public class FileIO {
     private static ArrayList<Dependent> dependents;
     private static ArrayList<EmergencyContact> emergencyContacts;
     private static CampSiteManager campSiteManager;
+    private static ArrayList<ThemeManager> themeManagers;
 
     /*
      * Managers
@@ -48,6 +50,8 @@ public class FileIO {
          */
         this.faqs = readFaqs();
         this.reviews = readReviews();
+        this.themeManagers = readThemeManagers();
+
         // start dealing with people
         this.pM = new PersonManager();
         this.admins = readAdmins();
@@ -113,6 +117,7 @@ public class FileIO {
     private static Schedule parseScheduleObj(JSONObject jSchedule){
         UUID id = UUID.fromString((String)jSchedule.get(DataConstants.SCHEDULE_ID));
         String cabinName = (String) jSchedule.get(DataConstants.SCHEDULE_CABIN_NAME);
+        int sessionNumber  = Math.toIntExact((long) jSchedule.get("sessionNumber"));
         JSONArray jSchedules = (JSONArray)jSchedule.get(DataConstants.SCHEDULE_SCHEDULES);
         // create the hash
         HashMap<String,ActivityManager> hash = new HashMap<String,ActivityManager>();
@@ -132,7 +137,7 @@ public class FileIO {
             });
             hash.put(dayOfWeek,aM);
         });
-        Schedule sched = new Schedule(hash, id);
+        Schedule sched = new Schedule(hash, sessionNumber,id,cabinName);
         // add to cabin
         for(Cabin c: cabins){
             if(c.getCabinName().equals(cabinName)){
@@ -147,6 +152,19 @@ public class FileIO {
         String answer = (String) jFaq.get(DataConstants.FAQ_ANSWER);
         return new FAQ(question,answer);
     }
+    private ThemeManager parseThemeManager(JSONObject jTheme) {
+        ThemeManager tm = new ThemeManager();
+        UUID id = UUID.fromString((String) jTheme.get("id"));
+        tm.setId(id);
+        JSONArray jaThemes = (JSONArray) jTheme.get("themes");
+        jaThemes.forEach(objTheme->{
+            JSONObject joTheme = (JSONObject)objTheme;
+            String name = (String) joTheme.get("name");
+            int week = Math.toIntExact((long)joTheme.get("week"));
+            tm.addTheme(new Theme(name, week));
+        });
+        return tm;
+    }
     private Review parseReviewObj(JSONObject rev){
         
         String author= (String) rev.get(DataConstants.REVIEW_AUTHOR);
@@ -156,16 +174,6 @@ public class FileIO {
 
         return new Review(author,rating,title,body);
     }
-    private Person parsePersonObj(JSONObject jPer){
-        // get attributes
-        String firstName = (String) jPer.get(DataConstants.PERSON_FIRST_NAME);
-        String lastName = (String) jPer.get(DataConstants.PERSON_LAST_NAME);
-        String address = (String) jPer.get(DataConstants.PERSON_ADDRESS);
-        UUID id = UUID.fromString((String)jPer.get(DataConstants.PERSON_ID));
-        String birthDate = (String) jPer.get(DataConstants.PERSON_BIRTHDATE);
-        
-        return (new Person(firstName, lastName, birthDate, address,id));
-    }
     private EmergencyContact parseEmergencyContactObj(JSONObject jEM){
         // get attributes
         String firstName = (String) jEM.get(DataConstants.PERSON_FIRST_NAME);
@@ -174,8 +182,9 @@ public class FileIO {
         UUID id = UUID.fromString((String)jEM.get(DataConstants.PERSON_ID));
         String birthDate = (String) jEM.get(DataConstants.PERSON_BIRTHDATE);
         String phone = (String) jEM.get("phone");
+        String relation = (String) jEM.get("relation");
         
-        return (new EmergencyContact(firstName, lastName, birthDate, address,phone,id));
+        return (new EmergencyContact(firstName, lastName, birthDate, address,phone,relation,id));
     }
     private Guardian parseGuardianObj(JSONObject guardian){
         String firstName = (String) guardian.get(DataConstants.PERSON_FIRST_NAME);
@@ -234,6 +243,7 @@ public class FileIO {
                 medNotes.addAll(notes);
             }
         );
+        
         NoPriorityBehavior npB = new NoPriorityBehavior();
         
         return new Dependent(firstName, lastName, birthDate, address, id,isCoordinator,emContacts,medNotes,npB);
@@ -262,7 +272,7 @@ public class FileIO {
         String password = (String)  admin.get("password");
         String username = (String)  admin.get("username");
         String email = (String)  admin.get("email");
-        String phone = (String)  admin.get("phoneNumber");
+        String phone = (String)  admin.get("phone");
 
         return(new CampAdmin(firstName, lastName, birthDate, address, id, password, username, email, phone));
     }
@@ -310,16 +320,19 @@ public class FileIO {
 
         String name = (String) jCamp.get("name");
         String address = (String) jCamp.get("address");
-        double price = (double) jCamp.get("pricePerCamperPerDay");
-        String authCode = (String) jCamp.get("authCode");
         int year = Math.toIntExact((Long) jCamp.get("year"));
-        ArrayList<String> themes = new ArrayList<String>();
-        JSONArray jThemes = (JSONArray) jCamp.get("themes");;
-        jThemes.forEach(jTheme->{
-            themes.add((String) jTheme);
-        });
+        UUID themeId = UUID.fromString((String) jCamp.get("themeId"));
+        String startMonth = (String) jCamp.get("startMonth");
 
-        return CampSiteManager.getInstance(name,address, price,year,themes,authCode);
+        ThemeManager themeManager = new ThemeManager();
+        for(ThemeManager t: this.themeManagers){
+            if(t.getId().equals(themeId)){
+                themeManager = t;
+            }
+        }
+
+
+        return CampSiteManager.getInstance(name,address,year,startMonth,themeManager);
     }
 
     /*
@@ -374,6 +387,14 @@ public class FileIO {
         );
         return guardians;
     }   
+    private ArrayList<ThemeManager> readThemeManagers(){
+        ArrayList<ThemeManager> ret = new ArrayList<ThemeManager>();
+        JSONArray jaThemeManagerList = parseJsonFileArr("./json/Theme.json");
+        jaThemeManagerList.forEach(jTheme ->
+            ret.add(parseThemeManager((JSONObject) jTheme))
+        );
+        return ret;
+    }
     private ArrayList<CampAdmin> readAdmins(){
         ArrayList<CampAdmin> admins = new ArrayList<CampAdmin>();
         JSONArray adminList = parseJsonFileArr(DataConstants.CAMP_ADMIN_FILE_NAME);
@@ -413,7 +434,7 @@ public class FileIO {
      * ***************************
      */
 
-    private JSONObject getPersonJson(Person p){
+    private static JSONObject getPersonJson(Person p){
         JSONObject jP = new JSONObject();
         jP.put("id",p.getId().toString());
         jP.put("firstName",p.getFirstName());
@@ -423,7 +444,7 @@ public class FileIO {
 
         return jP;
     }
-    private JSONObject getPriorityPersonJson(Person p){
+    private static JSONObject getPriorityPersonJson(Person p){
         PriorityBehavior pB = (PriorityBehavior) p.getAuthBehavior();
         JSONObject jP = getPersonJson(p);
         jP.put("password",pB.getPassword());
@@ -433,7 +454,7 @@ public class FileIO {
 
         return jP;
     }
-    private JSONObject getGuardianJson(Guardian g){
+    private static JSONObject getGuardianJson(Guardian g){
         JSONObject jsonG = getPriorityPersonJson(g);
         ArrayList<JSONObject> ids = new ArrayList<>();
         for(Dependent regDependent : g.getRegisteredDependents()) {
@@ -444,24 +465,90 @@ public class FileIO {
         jsonG.put("registeredDependents", ids);
         return jsonG;
     }
-    private JSONObject getCampAdminJson(CampAdmin cA){
+    private static JSONObject getCampAdminJson(CampAdmin cA){
         JSONObject jO = getPriorityPersonJson(cA);
         return jO;
     }
-    private JSONObject getCamperJson(Dependent d){
+    private static JSONObject getCamperJson(Dependent d){
         JSONObject jO = getPersonJson(d);
         jO.put("isCoordinator",d.getIsCoordinator());
-        String jsonMedNotes = new Gson().toJson(d.getMedicalNotes());
-        String jsonEmContacts = new Gson().toJson(d.getMedicalNotes());
-        jO.put("medicalNotes",jsonMedNotes);
-        jO.put("emergencyContacts",jsonEmContacts);
+        ArrayList<JSONObject> ids = new ArrayList<>();
+        for(EmergencyContact regEmergencyContact : d.getEmergencyContacts()) {
+            JSONObject emergencyContacts = new JSONObject();
+            emergencyContacts.put("id", regEmergencyContact.id);
+            ids.add(emergencyContacts);
+        }
+        jO.put("medicalNotes",d.getMedicalNotes());
+        jO.put("emergencyContacts",ids);
 
         return jO;
     }
-    // private JSONObject getCabinJson(Cabin c) {
-    //     JSONObject jsonC = 
-    //     return jsonC;
-    // }
+    private static JSONObject getCoordinatorJson(Dependent c) {
+        JSONObject jCo = getPriorityPersonJson(c);
+        jCo.put("isCoordinator",c.getIsCoordinator());
+        ArrayList<JSONObject> ids = new ArrayList<>();
+        for(EmergencyContact regEmergencyContact : c.getEmergencyContacts()) {
+            JSONObject emergencyContacts = new JSONObject();
+            emergencyContacts.put("id", regEmergencyContact.id);
+            ids.add(emergencyContacts);
+        }
+        jCo.put("medicalNotes",c.getMedicalNotes());
+        jCo.put("emergencyContacts",ids);
+        return jCo;
+    }
+    private static JSONObject getReviewJson(Review r) {
+        JSONObject jR = new JSONObject();
+        jR.put("title", r.getTitle());
+        jR.put("author", r.getAuthor());
+        jR.put("body", r.getbody());
+        jR.put("rating", r.getRating());
+        return jR;
+    }
+    private static JSONObject getEmergencyContactJson(EmergencyContact eC) {
+        JSONObject jEC = getPersonJson(eC);
+        return jEC;
+    }
+    private static JSONObject getCabinJson(Cabin c) {
+        JSONObject jC = new JSONObject();
+        jC.put("name", c.getCabinName());
+        jC.put("camperCapacity", c.getCamperCapacity());
+        jC.put("coordinatorCapacity", c.getCoordinatorCapacity());
+        jC.put("lowerAgeBound", c.getLowerAgeBound());
+        jC.put("upperAgeBound", c.getUpperAgeBound());
+        ArrayList<JSONObject> coordIds = new ArrayList<>();
+        ArrayList<JSONObject> camperIds = new ArrayList<>();
+        for(Dependent regCampers : c.getCampers()) {
+            JSONObject campers = new JSONObject();
+            campers.put("id", regCampers.id);
+            camperIds.add(campers);
+        }
+        for(Dependent regCoords : c.getCoordinators()) {
+            JSONObject coords = new JSONObject();
+            coords.put("id", regCoords.id);
+            coordIds.add(coords);
+        }
+        jC.put("campers", camperIds);
+        jC.put("coordinators", coordIds);
+        return jC;
+    }
+    private static JSONObject getScheduleJson(Schedule s) {
+        JSONObject jS = new JSONObject();
+        jS.put("id", s.getScheduleID());
+        jS.put("sessionNumber", s.getSessionNumber());
+        jS.put("cabinName", s.getCabinName());
+        ArrayList<JSONObject> schedule = new ArrayList<>();
+        
+        for(Entry<String, ActivityManager> weekEntry : s.getScheduledActivities().entrySet()){
+            String weekDay = weekEntry.getKey();
+            JSONObject dailySchedule = new JSONObject();
+            dailySchedule.put("dayOfWeek", weekDay);
+           
+            dailySchedule.put("schedule", weekEntry.getValue().getActivityList());
+            schedule.add(dailySchedule);
+        }
+        jS.put("schedules",schedule);
+        return jS;
+    }
 
     /*
      * ***************************
@@ -469,18 +556,18 @@ public class FileIO {
      * ***************************
      */
     // write a JSON object to file
-    private void writeToJson(String jO,String filePath){
+    private static void writeToJson(String jO,String filePath){
         try(FileWriter fW = new FileWriter(filePath)){
             fW.write(jO);
         }catch(IOException e){
             e.printStackTrace();
         }
     }
-    private String jsonFormatter(String jsonFile) {
+    private static String jsonFormatter(String jsonFile) {
         String fixedFormat = "[\n"+jsonFile+"\n]";
         return fixedFormat;
     }
-    private void writeGuardian(ArrayList<Guardian> guardian) {
+    public static void writeGuardian(ArrayList<Guardian> guardian) {
         String guardJsonList = "";
         boolean isFirst = true;
         for(Guardian newGuard : guardian) {
@@ -500,25 +587,153 @@ public class FileIO {
         String finalGuardString = jsonFormatter(guardJsonList);
         writeToJson(finalGuardString,DataConstants.GUARDIAN_FILE_NAME);
     }
-    private void writeCabin(Cabin cabin) {
-
+    // tested and works
+    public static void writeCampAdmin(ArrayList<CampAdmin> admin) {
+        String adminJsonList = "";
+        boolean isFirst = true;
+        for(CampAdmin newAdmin : admin) {
+            JSONObject adminInfo = getCampAdminJson(newAdmin);
+            String adminInfoString = adminInfo.toJSONString();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            JsonElement je = JsonParser.parseString(adminInfoString);
+            String formattedJsonString = gson.toJson(je);
+            if(isFirst) {
+                adminJsonList = adminJsonList+formattedJsonString;
+                isFirst = false;
+            }
+            else {
+                adminJsonList = adminJsonList+",\n"+formattedJsonString;
+            }
+        }
+        String finalAdminString = jsonFormatter(adminJsonList);
+        writeToJson(finalAdminString,DataConstants.CAMP_ADMIN_FILE_NAME);
     }
-    private void writeReview(Review review) {
-
+    public static void writeDependent(ArrayList<Dependent> dependent) {
+        String dependJsonList = "";
+        String coordJsonList = "";
+        boolean isFirstCoordinator = true;
+        boolean isFirstCamper = true;
+        for(Dependent newDepend : dependent) {
+            if(newDepend.getIsCoordinator()) {
+                JSONObject coordInfo = getCoordinatorJson(newDepend);
+                String coordInfoString = coordInfo.toJSONString();
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                JsonElement je = JsonParser.parseString(coordInfoString);
+                String formattedJsonString = gson.toJson(je);
+                if(isFirstCoordinator) {
+                    coordJsonList = coordJsonList+formattedJsonString;
+                    isFirstCoordinator = false;
+                }
+                else {
+                    coordJsonList = coordJsonList+",\n"+formattedJsonString;
+                }
+                String finalCoordinatorString = jsonFormatter(coordJsonList);
+                writeToJson(finalCoordinatorString,DataConstants.COORDINATOR_FILE_NAME);
+            }
+            else {
+                JSONObject dependInfo = getCamperJson(newDepend);
+                String dependInfoString = dependInfo.toJSONString();
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                JsonElement je = JsonParser.parseString(dependInfoString);
+                String formattedJsonString = gson.toJson(je);
+                if(isFirstCamper) {
+                    dependJsonList = dependJsonList+formattedJsonString;
+                    isFirstCamper = false;
+                }
+                else {
+                    dependJsonList = dependJsonList+",\n"+formattedJsonString;
+                }
+                String finalDependentString = jsonFormatter(dependJsonList);
+                writeToJson(finalDependentString,DataConstants.CAMPER_FILE_NAME);
+            }
+        }
     }
-    private void writeCoordinator(Dependent coordinator){
-
+    // tested, works
+    public static void writeReview(ArrayList<Review> review) {
+        String reviewJsonList = "";
+        boolean isFirst = true;
+        for(Review newReview : review) {
+            JSONObject revInfo = getReviewJson(newReview);
+            String reviewInfoString = revInfo.toJSONString();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            JsonElement je = JsonParser.parseString(reviewInfoString);
+            String formattedJsonString = gson.toJson(je);
+            if(isFirst) {
+                reviewJsonList = reviewJsonList+formattedJsonString;
+                isFirst = false;
+            }
+            else {
+                reviewJsonList = reviewJsonList+",\n"+formattedJsonString;
+            }
+        }
+        String finalCoordinatorString = jsonFormatter(reviewJsonList);
+        String formattedCoordinatorString = finalCoordinatorString.replace("\\u0027", "\'");
+        writeToJson(formattedCoordinatorString, DataConstants.REVIEW_FILE_NAME);
     }
-    // private void writeCabin(Cabin cabin) {
-    //     writeToJson(getCabinJson(cabin),DataConstants.CABIN_FILE_NAME);
-    // }
-    //private void writeReview(Review review) {
-    //    writeToJson(getReviewJson(review),DataConstants.REVIEW_FILE_NAME);
-    //}
-    // private void writeCoordinator(Dependent coordinator){
-    //     writeToJson(getCampAdminJson(coordinator),DataConstants.CAMP_ADMIN_FILE_NAME);
-    // }
-    private JSONArray parseJsonFileArr(String filename) {
+    // tested, works
+    public static void writeEmergencyContact(ArrayList<EmergencyContact> emergencyC) {
+        String emcJsonList = "";
+        boolean isFirst = true;
+        for(EmergencyContact newEMC : emergencyC) {
+            JSONObject eCInfo = getEmergencyContactJson(newEMC);
+            String contactInfoString = eCInfo.toJSONString();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            JsonElement je = JsonParser.parseString(contactInfoString);
+            String formattedJsonString = gson.toJson(je);
+            if(isFirst) {
+                emcJsonList = emcJsonList+formattedJsonString;
+                isFirst = false;
+            }
+            else {
+                emcJsonList = emcJsonList+",\n"+formattedJsonString;
+            }
+        }
+        String finalEmergencyContactString = jsonFormatter(emcJsonList);
+        writeToJson(finalEmergencyContactString, DataConstants.EMERGENCY_CONTACT_FILE_NAME);
+    }
+    // tested, works
+    public static void writeCabin(ArrayList<Cabin> cabin) {
+        String cabinJsonList = "";
+        boolean isFirst = true;
+        for(Cabin newCabin : cabin) {
+            JSONObject cabinInfo = getCabinJson(newCabin);
+            String cabinInfoString = cabinInfo.toJSONString();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            JsonElement je = JsonParser.parseString(cabinInfoString);
+            String formattedJsonString = gson.toJson(je);
+            if(isFirst) {
+                cabinJsonList = cabinJsonList+formattedJsonString;
+                isFirst = false;
+            }
+            else {
+                cabinJsonList =cabinJsonList+",\n"+formattedJsonString;
+            }
+        }
+        String finalCabinString = jsonFormatter(cabinJsonList);
+        writeToJson(finalCabinString, DataConstants.CABIN_FILE_NAME);
+    }
+    // tested, works
+    public static void writeSchedule(ArrayList<Schedule> schedule) {
+        String scheduleJsonList = "";
+        boolean isFirst = true;
+        for(Schedule newSchedule : schedule) {
+            JSONObject scheduleInfo = getScheduleJson(newSchedule);
+            String scheduleInfoString = scheduleInfo.toJSONString();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            JsonElement je = JsonParser.parseString(scheduleInfoString);
+            String formattedJsonString = gson.toJson(je);
+            if(isFirst) {
+                scheduleJsonList = scheduleJsonList+formattedJsonString;
+                isFirst = false;
+            }
+            else {
+                scheduleJsonList =scheduleJsonList+",\n"+formattedJsonString;
+            }
+        }
+        String finalScheduleString = jsonFormatter(scheduleJsonList);
+        writeToJson(finalScheduleString, DataConstants.SCHEDULE_FILE_NAME);
+    }
+    private static JSONArray parseJsonFileArr(String filename) {
         JSONParser jsonP = new JSONParser();
         try(FileReader reader = new FileReader(filename)){
             Object obj = jsonP.parse(reader);
@@ -542,4 +757,9 @@ public class FileIO {
             e.printStackTrace();
         }
     }
+    // public static void main(String args[]){
+    //     FileIO fiO = FileIO.getInstance();
+    //     ArrayList<Dependent> deps = fiO.readDependents();
+    //     fiO.writeDependent(deps);
+    // }
 }

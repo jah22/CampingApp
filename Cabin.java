@@ -251,15 +251,33 @@ public class Cabin {
     public boolean inCabin(Dependent dep){
         return (this.campers.contains(dep) || this.coordinators.contains(dep));
     }
+    /**
+     * check if campers still has space
+     * @return true if campers still has space 
+     */
     public boolean hasSpace(){
         return this.campers.size() < this.camperCapacity;
     }
+    /**
+     * check if the age is in age bound
+     * @param age an age
+     * @return true if the age is in age bound
+     */
     public boolean inAgeRange(int age){
         return ((this.lowerAgeBound <= age) && (this.upperAgeBound >= age));
     }
+    /**
+     * check if the dependent can be added successfully
+     * @param d a Dependent
+     * @return ture if dependent can be added successfully
+     */
     public boolean checkCanAddDependent(Dependent d){
         return(hasSpace() && inAgeRange(d.getAgeInt()));
     }
+    /**
+     *get the cabin roster
+     * @return a string of the cabin roster
+     */
     public String getCabinRoster(){
         String out = "Roster for \"" + this.name + "\"\n";
         out += "Age range: " + this.lowerAgeBound + " to " + this.upperAgeBound +" years old\n";
@@ -276,7 +294,10 @@ public class Cabin {
 
         return out;
     }
-
+    /**
+     * get the vital information
+     * @return a string of the vital information 
+     */
     public String getVitalInfo(){
         String out = "Vital information for " + this.name + "\n";
         out += "Medical notes: \n";
@@ -293,6 +314,10 @@ public class Cabin {
         }
         return out;
     }
+    /**
+     * get the schedules
+     * @return a string of the schedules
+     */
     public String getSchedulesString(){
         String out = "";
         for(Schedule s: this.schedules){
@@ -300,9 +325,17 @@ public class Cabin {
         }
         return out;
     }
+    /**
+     * set the lower age bound 
+     * @param bound an age boung
+     */
     public void setLowerAgeBound(int bound){
         this.lowerAgeBound = bound;
     }
+    /**
+     * set the upper age bound 
+     * @param bound an age bound
+     */
     public void setUpperAgeBound(int bound){
         this.upperAgeBound = bound;
     }

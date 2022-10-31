@@ -1,10 +1,10 @@
 [
-    {
-        "name":"Camp 247",
-        "address":"1423 Greene, Columbia SC",
-        "pricePerCamperPerDay": 7.00,
-        "year":2022,
-        "startMonth":"July",
-        "themeId":"81c7ae99-247f-4c80-950a-4a41e767e84c"
-    }
+{
+  "address": "1423 Greene, Columbia SC",
+  "year": 2022,
+  "startMonth": "July",
+  "name": "Camp 247",
+  "themeId": "81c7ae99-247f-4c80-950a-4a41e767e84c",
+  "pricePerCamperPerDay": 7
+}
 ]

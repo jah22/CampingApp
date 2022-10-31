@@ -31,6 +31,9 @@ public class ThemeManager {
     public int getThemeCount(){
         return this.themes.size();
     }
+    public ArrayList<Theme> getThemes() {
+        return this.themes;
+    }
     public void viewThemes(){
         for(Theme theme: this.themes){
             System.out.println(theme);

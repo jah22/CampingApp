@@ -55,6 +55,12 @@ public class CampSiteManager{
   public String getAddress() {
     return address;
   }
+  public int getPricePerCamper() {
+    return 7;
+  }
+  public UUID getCurrentThemeID() {
+    return this.themeManager.getId();
+  }
   public void viewCoordinators() {
     this.personManager.viewCoordinators();
   }
@@ -280,5 +286,8 @@ public class CampSiteManager{
     this.reviewManager.save();
     // 4. Save Cabins & Schedules
     this.cabinManager.save();
+
+    //5. save camp
+    FileIO.writeCamp(this.campSiteManager);
   }
 }

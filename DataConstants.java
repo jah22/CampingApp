@@ -95,4 +95,10 @@ public abstract class DataConstants {
     protected static final String SCHEDULE_THURSDAY = "Thursday";
     protected static final String SCHEDULE_FRIDAY = "Friday";
     protected static final String SCHEDULE_ID = "id";
+
+    protected static final String THEME_FILE_NAME = "./json/Theme.json";
+    protected static final String THEME_NAME = "name";
+    protected static final String THEME_WEEK = "week";
+    protected static final String THEME_ID = "id";
+
 }

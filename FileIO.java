@@ -108,6 +108,9 @@ public class FileIO {
     public static ArrayList<Schedule> getSchedules(){
         return schedules;
     }
+    public static ArrayList<ThemeManager> getThemes() {
+        return themeManagers;
+    }
 
     /*
      * ***************************
@@ -549,6 +552,29 @@ public class FileIO {
         jS.put("schedules",schedule);
         return jS;
     }
+    private static JSONObject getThemeManagerJson(ThemeManager t) {
+        JSONObject jT = new JSONObject();
+        jT.put("id", t.getId());
+        ArrayList<JSONObject> weeklyThemes = new ArrayList<>();
+        for(Theme themes : t.getThemes()) {
+            JSONObject dailyTheme = new JSONObject();
+            dailyTheme.put("name", themes.getName());
+            dailyTheme.put("week", themes.getWeekNumber());
+            weeklyThemes.add(dailyTheme);
+        }
+        jT.put("themes", weeklyThemes);
+        return jT;
+    }
+    private static JSONObject getCampJson(CampSiteManager cM) {
+        JSONObject jCM = new JSONObject();
+        jCM.put("name", cM.getName());
+        jCM.put("address", cM.getAddress());
+        jCM.put("pricePerCamperPerDay", cM.getPricePerCamper());
+        jCM.put("year", cM.getYear());
+        jCM.put("startMonth", cM.getStartMonth());
+        jCM.put("themeId", cM.getCurrentThemeID());
+        return jCM;
+    }
 
     /*
      * ***************************
@@ -733,6 +759,45 @@ public class FileIO {
         String finalScheduleString = jsonFormatter(scheduleJsonList);
         writeToJson(finalScheduleString, DataConstants.SCHEDULE_FILE_NAME);
     }
+    public static void writeTheme(ArrayList<ThemeManager> theme) {
+        String themeJsonList = "";
+        boolean isFirst = true;
+        for(ThemeManager newTheme : theme) {
+            JSONObject themeInfo = getThemeManagerJson(newTheme);
+            String themeInfoString = themeInfo.toJSONString();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            JsonElement je = JsonParser.parseString(themeInfoString);
+            String formattedJsonString = gson.toJson(je);
+            if(isFirst) {
+                themeJsonList = themeJsonList+formattedJsonString;
+                isFirst = false;
+            }
+            else {
+                themeJsonList = themeJsonList+",\n"+formattedJsonString;
+            }
+        }
+        String finalThemeString = jsonFormatter(themeJsonList);
+        writeToJson(finalThemeString, DataConstants.THEME_FILE_NAME);
+    }
+    public static void writeCamp(CampSiteManager camp) {
+        String campJsonList = "";
+        boolean isFirst = true;
+        JSONObject campInfo = getCampJson(camp);
+        String campInfoString = campInfo.toJSONString();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        JsonElement je = JsonParser.parseString(campInfoString);
+        String formattedJsonString = gson.toJson(je);
+        if(isFirst) {
+            campJsonList = campJsonList+formattedJsonString;
+            isFirst = false;
+        }
+        else {
+            campJsonList = campJsonList+",\n"+formattedJsonString;
+        }
+
+        String finalCampString = jsonFormatter(campJsonList);
+        writeToJson(finalCampString, DataConstants.CAMP_FILE_NAME);
+    }
     private static JSONArray parseJsonFileArr(String filename) {
         JSONParser jsonP = new JSONParser();
         try(FileReader reader = new FileReader(filename)){
@@ -757,9 +822,9 @@ public class FileIO {
             e.printStackTrace();
         }
     }
-    // public static void main(String args[]){
-    //     FileIO fiO = FileIO.getInstance();
-    //     ArrayList<Dependent> deps = fiO.readDependents();
-    //     fiO.writeDependent(deps);
-    // }
+     public static void main(String args[]){
+         FileIO fiO = FileIO.getInstance();
+         CampSiteManager test = fiO.readCamp();
+         writeCamp(test);
+    }
 }

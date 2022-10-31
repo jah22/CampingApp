@@ -32,7 +32,6 @@ public class CampSiteManager{
     this.themeManager=themeManager;
   }
   public static CampSiteManager getInstance() {
-    //To-Do
     if(campSiteManager == null){
       campSiteManager = FileIO.getCamp();
       return campSiteManager;
@@ -141,10 +140,6 @@ public class CampSiteManager{
   }
   public void addDependent(UUID guardianId,String firstName, String lastName, String birthDate, String address,ArrayList<String> medNotes, ArrayList<EmergencyContact> ems) {
     this.personManager.addDependent(guardianId, firstName, lastName, birthDate, address,medNotes,ems);
-  }
-  public boolean getDependentCabin(String id) {
-
-    return false;
   }
   public void writeReview(String firstName,String lastName,int rating, String title, String text) {
     this.reviewManager.addReview(firstName + " " + lastName,rating,title,text);

@@ -24,7 +24,8 @@ public class ActivityManager {
     private int ACTIVITY_LENGTH = 1;
 
     /*
-     * 
+     * ctor
+     * Set activities
      */
     public ActivityManager(ArrayList<String> activities){
         this.activities = activities;
@@ -37,12 +38,16 @@ public class ActivityManager {
     public void setActivities(ArrayList<String> activities){
         this.activities = activities;
     }
+    /*
+     * Empty ctor only used for initialize objects
+     */
     public ActivityManager(){
-        // nulll ctor
     }
 
     /*
-     * 
+     * Get the start time of an activity.
+     * @param activity: String representing activity
+     * @ return int: representing start time of activity
      */
     public int getActivityStartTime(String activity){
         // get time of start

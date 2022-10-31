@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class CampSiteManager{
-  // to do: add themes
   private ThemeManager themeManager;
   private int year;
   private String startMonth;
@@ -114,19 +113,10 @@ public class CampSiteManager{
   public Guardian registerGuardian(String firstName, String lastName, String birthDate, String username, String password, String email, String phone,String address) {
     return this.personManager.registerGuardian(firstName, lastName, birthDate, username, password, email, phone,address) ;
   }
-  public boolean registerDependent() {
-    //To-Do
-    return false;
-  }
   public boolean removeDependent(Guardian g, Dependent dept) {
     return this.personManager.removeDependent(g,dept);
   }
-  public boolean removeGuardian(String firstName, String lastName) {
-    //To-Do
-    return false;
-  }
   public CampAdmin registerAdmin(CampAdmin admin) {
-    //To-Do
     return this.personManager.registerAdmin(admin);
   }
   public Dependent registerCoordinator(String firstName, String lastName, String username, String password, String birthDate, String phone, String email) {

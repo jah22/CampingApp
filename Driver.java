@@ -1,9 +1,10 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// DO A SEARCH FOR "TO DO" TO SEE WHAT NEEDS DONE
 
-// just for testing
+/*
+ * Driver for Camp System.
+ */
 public class Driver {
     // camp site manager
     CampSiteManager csm = FileIO.getInstance().getCamp();
@@ -817,30 +818,44 @@ public class Driver {
 
         return this.csm.registerGuardian(firstName,lastName,birthDate,username,password,email,phone, address);
     }
-    // prompt for phone
+    /*
+     * 
+     */
     public String promptForPhone(){
         // to do: perform checks here
         System.out.println("Enter the phone number [XXX-XXX-XXXX]: ");
         return promptForStringResponse();
     }
-    // prompt for birthday
+    /*
+     * Get a birthday.
+     * @return String: birthday of user
+     */
     public String promptForBirthDate(){
         // to do: perform checks here
         System.out.println("Enter the birth date [YYYY-MM-DD]: ");
         return promptForStringResponse();
     }
-    // prompt for addresrs
+    /*
+     * Get an address.
+     * @return String: address of user
+     */
     public String promptForAddress(){
         System.out.println("Enter the address: ");
         return promptForStringResponse();
     }
-    // get email
+    /*
+     * Get an email.
+     * @return String: the email of the user.
+     */
     public String promptForEmail(){
         // to do: perform checks here
         System.out.println("Enter the email: ");
         return promptForStringResponse();
     }
-    // get password
+    /*
+     * Create a password.
+     * @return String: password of user.
+     */
     public String createPassword(){
         String password = "";
         boolean isPasswordMatch = false;
@@ -856,7 +871,11 @@ public class Driver {
         }
         return password;
     }
-    // register
+    /*
+     * Called in handleRegister
+     * Register a Dependent.
+     * @return Dependent: the user
+     */
     public Dependent handleRegisterCoordinator(){
         // register a guardian
         System.out.println("Enter your first name: ");
@@ -873,7 +892,10 @@ public class Driver {
         return this.csm.registerCoordinator(firstName, lastName, username, password, birthDate, phone, email);
     }
 
-    // register
+    /*
+     * Register a person.
+     * @return Person: the person registered
+     */
     public Person handleRegister(){
         Person user = null;
         System.out.println("Are you a");
@@ -895,7 +917,10 @@ public class Driver {
         }
         return user;
     }
-    // register camp admin
+    /*
+     * Register a camp admin
+     * @return CampAdmin: the camp admin created
+     */
     public CampAdmin handleRegisterCampAdmin(){
         // register a guardian
         System.out.println("Enter your first name: ");
@@ -912,7 +937,10 @@ public class Driver {
         CampAdmin admin = new CampAdmin(firstName, lastName, birthDate, address, password, username, email, phone);
         return this.csm.registerAdmin(admin);
     }
-    // login user
+    /*
+     * Login a user, return that user
+     * @return Person: the user registered
+     */
     public Person handleLoginRegView(){
         int command = -1;
         while(!isValidIntInput(command, 1, 4)){
@@ -936,7 +964,9 @@ public class Driver {
         }
         return null;
     }
-    // view camp
+    /*
+     * Handle the view section of the cabins
+     */
     public void handleViewCampSection(){
         boolean running = true;
         while(running){
@@ -947,10 +977,10 @@ public class Driver {
                     this.csm.viewCamp();
                     break;
                 case 2:
-                    this.handleReviewSectionNonAuth();
+                    this.handleReviewSection();
                     break;
                 case 3:
-                    this.handleCabinSectionNonAuth();
+                    this.handleCabinSection();
                     break;
                 case 4:
                     running = false;
@@ -959,8 +989,10 @@ public class Driver {
             }
         }
     }
-    // view non auth cabins
-    public void handleCabinSectionNonAuth(){
+    /*
+     * Handle Cabin section
+     */
+    public void handleCabinSection(){
         boolean running = true;
         while(running){
             printCabinSectionNonAuthOptions(); 
@@ -970,7 +1002,7 @@ public class Driver {
                     this.csm.viewCabins();
                     break;
                 case 2:
-                    this.handleCabinSpecificSectionNonAuth();
+                    this.handleCabinSpecificSection();
                     break;
                 case 3:
                     System.out.println("Returning to camp menu.");
@@ -978,12 +1010,14 @@ public class Driver {
             }
         }
     }
-    // view cabin specific
-    public void handleCabinSpecificSectionNonAuth(){
+    /*
+     * Handle the cabin detailing section
+     */
+    public void handleCabinSpecificSection(){
         boolean running = true;
         int upperBoundCabinIndex = this.csm.getCabinCount()-1;
         while(running){
-            printCabinSpecificSectionNonAuthOptions();
+            printCabinSelectionOptions();
             int selection = getValidSelection(-1,upperBoundCabinIndex);
             if(selection == -1){
                 System.out.println("Returning to cabin section...");
@@ -992,7 +1026,10 @@ public class Driver {
             this.handleCabinSpecificSectionDetail(selection);
         }
     }
-    // view specific cabin
+    /*
+     * Detail a specific cabin
+     * @param cabinIndex: int representing the index of the cabin to look at
+     */
     public void handleCabinSpecificSectionDetail(int cabinIndex){
         boolean running = true;
         while(running){
@@ -1009,24 +1046,30 @@ public class Driver {
         }
 
     }
-    // show options for specific cabin
-    public void printCabinSpecificSectionNonAuthOptions(){
+    /*
+     * Print the options to select a cabin.
+     */
+    public void printCabinSelectionOptions(){
         System.out.println("Below are the available cabins: ");
         this.csm.viewCabinNames();
         System.out.println("Or [-1] to exit.");
     }
 
-    // show options for specific cabin
+    /*
+     * Show options for a specific cabin
+     */
     public void printCabinSectionNonAuthOptions(){
         System.out.println("[1] View all Cabins");
         System.out.println("[2] View specific Cabin");
         System.out.println("[3] Exit");
     }
-    // review section
-    public void handleReviewSectionNonAuth(){
+    /*
+     * Handle entry into the review section
+     */
+    public void handleReviewSection(){
         boolean running = true;
         while(running){
-            printReviewSectionNonAuthOptions();
+            printReviewSectionOptions();
             int selection = getValidSelection(1,3);
             switch(selection){
                 case 1:
@@ -1042,14 +1085,18 @@ public class Driver {
             }
         }
     }
-    // review section options
-    public void printReviewSectionNonAuthOptions(){
+    /*
+     * Print review section options
+     */
+    public void printReviewSectionOptions(){
         System.out.println("Review Section Menu");
         System.out.println("[1] See all reviews");
         System.out.println("[2] See reviews by rating");
         System.out.println("[3] Exit");
     }
-    // review section options
+    /*
+     * Print the view camp options.
+     */
     public void printViewCampSectionOptions(){
         System.out.println("Camp View Menu");
         System.out.println("[1] See Camp Site");
@@ -1057,12 +1104,18 @@ public class Driver {
         System.out.println("[3] Cabins");
         System.out.println("[4] Exit");
     }
+    /*
+     * Exit from the system and save data.
+     */
     public void exit(){
         System.out.println("Goodbye!");
         // write the json
         this.csm.save();
         System.exit(0);
     }
+    /*
+     * Print the login, register, or view camp options
+     */
     public void printLoginRegViewOptions(){
         // prints options for login, register, or view
         System.out.println("Would you like to");
@@ -1071,6 +1124,10 @@ public class Driver {
         System.out.println("[3] View Camp Site");
         System.out.println("[4] Exit");
     }
+    /*
+     * Get an int response
+     * @return int: representing the int entered by user
+     */
     public int promptForIntResponse(){
         boolean running = true;
         int command = -1;
@@ -1087,12 +1144,22 @@ public class Driver {
 
         return command;
     }
+    /*
+     * Get a string response.
+     * @return string representing the string entered by user
+     */
     public String promptForStringResponse(){
         System.out.print("> ");
         String response = USER_INPUT.nextLine();
         response = response.trim();
         return response;
     }
+    /*
+     * Get a valid int betwee lower and upper.
+     * @param lower: int representing lower bound
+     * @param upper: int representing upper bound
+     * @ return int: representing the selection value
+     */
     public int getValidSelection(int lower, int upper){
         int selection =-Integer.MAX_VALUE;
         while(!isValidIntInput(selection, lower, upper)){
@@ -1105,10 +1172,17 @@ public class Driver {
         return selection;
     }
 
+    /*
+     * Print a welcome to the camp system.
+     */
     public void printWelcome(){
         System.out.println("Welcome to the camp system! ");
     }
+    /*
+     * Main driver for Camp Site.
+     */
     public static void main(String[] args) {
+
         Driver driver = new Driver();
         driver.runDriver();
     }

@@ -156,56 +156,24 @@ public class Driver {
     }
     // prompt for a month
     public String promptForMonth(){
-        String jan = "Janurary";
-        String feb = "February";
-        String mar = "March";
-        String apr = "April";
-        String may = "May";
-        String jun = "June";
-        String jul = "July";
-        String aug = "August";
-        String sep = "September";
-        String oct = "October";
-        String nov = "November";
-        String dec = "December";
-        System.out.println("[1] " + jan);
-        System.out.println("[2] " + feb);
-        System.out.println("[3] " + mar);
-        System.out.println("[4] " + apr);
-        System.out.println("[5] " + may);
-        System.out.println("[6] " + jun);
-        System.out.println("[7] " + jul);
-        System.out.println("[8] " + aug);
-        System.out.println("[9] " + sep);
-        System.out.println("[10] " + oct);
-        System.out.println("[11] " + nov);
-        switch(getValidSelection(1, 11)){
-            case 1:
-                return jan;
-            case 2:
-                return feb;
-            case 3:
-                return mar;
-            case 4:
-                return apr;
-            case 5:
-                return may;
-            case 6: 
-                return jun;
-            case 7:
-                return jul;
-            case 8:  
-                return aug;
-            case 9:
-                return sep;
-            case 10:
-                return oct;
-            case 11:
-                return nov;
-            case 12:
-                return dec;
+        String[] months = {
+            "Janurary",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+        };
+        for(int i=0;i<12;i++){
+            System.out.println("[" + i + "] " + months[i]);
         }
-        return null;
+        return months[getValidSelection(0, 11)];
     }
     // edit a camp
     public void handleEditCampSection(){

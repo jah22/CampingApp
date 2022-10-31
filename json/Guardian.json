@@ -1,53 +1,20 @@
 [
 {
-  "firstName": "John",
-  "lastName": "Smith",
-  "password": "1",
-  "address": "429 Sycamore Drive, Columbia, SC",
-  "registeredDependents": [
-    {
-      "id": "81c7ae99-247f-4c80-950a-4a41e767e84c"
-    },
-    {
-      "id": "81c7ae99-247f-4c80-950a-4a41e767e84d"
-    }
-  ],
-  "id": "79c7ae99-247f-4c80-950a-4a41e767e84c",
-  "birthDate": "1982-10-20",
-  "email": "johnsmith@gmail.com",
-  "username": "1"
-},
-{
-  "firstName": "Jane",
-  "lastName": "Smith",
-  "password": "12",
-  "address": "429 Sycamore Drive, Columbia, SC",
-  "registeredDependents": [
-    {
-      "id": "81c7ae99-247f-4c80-950a-4a41e767e84c"
-    },
-    {
-      "id": "81c7ae99-247f-4c80-950a-4a41e767e84d"
-    }
-  ],
-  "id": "49c7ae99-247f-4c80-950a-4a41e767e84c",
-  "birthDate": "1982-10-20",
-  "email": "johnsmith@gmail.com",
-  "username": "1"
-},
-{
-  "firstName": "Levaeh",
-  "lastName": "Davis",
+  "firstName": "guaridanfirst",
+  "lastName": "guardsinlast",
   "password": "password",
-  "address": "429 Sycamore Drive, Columbia, SC",
+  "address": "address",
   "registeredDependents": [
     {
-      "id": "81c7ae99-247f-4c80-950a-4a41f767e84c"
+      "id": "16337a18-71fb-43ea-ae88-213dc2d26a2d"
+    },
+    {
+      "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd0"
     }
   ],
-  "id": "49c7ae99-247f-4c80-950a-4a41e762e84c",
-  "birthDate": "1982-10-20",
-  "email": "ldavis@gmail.com",
-  "username": "ldavis"
+  "id": "4eb2f9b9-773e-4088-8474-c5b0624f3a52",
+  "birthDate": "1111-22-33",
+  "email": "email",
+  "username": "username"
 }
 ]

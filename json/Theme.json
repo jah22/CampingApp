@@ -2,42 +2,42 @@
 {
   "themes": [
     {
+      "week": 0,
+      "name": "t1"
+    },
+    {
       "week": 1,
-      "name": "Hawaiian"
+      "name": "t2"
     },
     {
       "week": 2,
-      "name": "Rockstars"
+      "name": "t3"
     },
     {
       "week": 3,
-      "name": "Ninja Warriors"
+      "name": "t4"
     },
     {
       "week": 4,
-      "name": "Willy Wonka"
+      "name": "t5"
     },
     {
       "week": 5,
-      "name": "Hollywood"
+      "name": "t6"
     },
     {
       "week": 6,
-      "name": "Legos"
+      "name": "t7"
     },
     {
       "week": 7,
-      "name": "Cops and Robbers"
+      "name": "t8"
     },
     {
       "week": 8,
-      "name": "Shark Tank"
-    },
-    {
-      "week": 9,
-      "name": "Smores"
+      "name": "t9"
     }
   ],
-  "id": "81c7ae99-247f-4c80-950a-4a41e767e84c"
+  "id": "0a767c4d-989b-4beb-af93-50663ed79800"
 }
 ]

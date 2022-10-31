@@ -509,6 +509,9 @@ public class FileIO {
     }
     private static JSONObject getEmergencyContactJson(EmergencyContact eC) {
         JSONObject jEC = getPersonJson(eC);
+        jEC.put("phone",eC.getPhone());
+        jEC.put("relation",eC.getRelation());
+
         return jEC;
     }
     private static JSONObject getCabinJson(Cabin c) {
@@ -821,10 +824,5 @@ public class FileIO {
         }catch(IOException e){
             e.printStackTrace();
         }
-    }
-     public static void main(String args[]){
-         FileIO fiO = FileIO.getInstance();
-         CampSiteManager test = fiO.readCamp();
-         writeCamp(test);
     }
 }

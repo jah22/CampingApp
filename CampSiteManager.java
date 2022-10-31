@@ -6,6 +6,7 @@ public class CampSiteManager{
   private ThemeManager themeManager;
   private int year;
   private String startMonth;
+  private UUID themeId;
 
   private String name;
   private String address;
@@ -241,6 +242,7 @@ public class CampSiteManager{
     return this.cabinManager.getCabinRoster(c);
   }
   public void setThemeManager(ThemeManager t){
+    this.themeId= t.getId();
     this.themeManager = t;
   }
   public void resetCamp(){
@@ -248,7 +250,7 @@ public class CampSiteManager{
     this.name = "";
     this.year = -1;
     this.address = "";
-    this.personManager = new PersonManager();
+    this.personManager.reset();
     this.reviewManager = new ReviewManager();
     this.cabinManager = new CabinManager();
   }
@@ -279,9 +281,8 @@ public class CampSiteManager{
     // 1. Save People
     this.personManager.save();
 
-    // TO DO
     // 2. Save Themes
-
+    this.themeManager.save();
     // 3. Save Reviews
     this.reviewManager.save();
     // 4. Save Cabins & Schedules

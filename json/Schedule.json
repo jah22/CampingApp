@@ -6,17 +6,17 @@
       "schedule": [
         "WAKEUP",
         "BREAKFAST",
-        "PUMPKIN",
-        "GAMES",
+        "WALKING",
+        "PHILOSOPHICAL_DISCUSSION",
         "LUNCH",
-        "JOGGING",
-        "EAT_CANDY",
         "SUPER_HAPPY",
-        "JUMPING",
-        "FRIENDLY_CONVERSATION",
+        "ROPES",
+        "ARTS",
+        "VALENTINES",
+        "TAXES",
         "DINNER",
-        "RUNNING",
-        "ROPES"
+        "PUMPKIN",
+        "LAUNDRY"
       ],
       "dayOfWeek": "Monday"
     },
@@ -24,17 +24,17 @@
       "schedule": [
         "WAKEUP",
         "BREAKFAST",
-        "LAUNDRY",
-        "GAMES",
-        "LUNCH",
         "SLIP_N_SLIDE",
+        "ARCHERY",
+        "LUNCH",
         "RUNNING",
-        "PUMPKIN",
+        "JOGGING",
+        "SWIMMING",
+        "VALENTINES",
         "GROCERIES",
-        "SANTA",
         "DINNER",
-        "LIFE_ADVICE",
-        "SLEEP"
+        "GAMES",
+        "LAUNDRY"
       ],
       "dayOfWeek": "Thursday"
     },
@@ -42,17 +42,17 @@
       "schedule": [
         "WAKEUP",
         "BREAKFAST",
-        "LAUNDRY",
-        "EAT_CANDY",
+        "GROCERIES",
         "LUNCH",
-        "VALENTINES",
-        "ARCHERY",
-        "SLEEP",
-        "SUPER_HAPPY",
-        "PHILOSOPHICAL_DISCUSSION",
-        "DINNER",
+        "LUNCH",
         "DISHES",
-        "JOGGING"
+        "LAUNDRY",
+        "JOGGING",
+        "FRIENDLY_CONVERSATION",
+        "CRAFTS",
+        "DINNER",
+        "ARTS",
+        "TAXES"
       ],
       "dayOfWeek": "Friday"
     },
@@ -60,17 +60,17 @@
       "schedule": [
         "WAKEUP",
         "BREAKFAST",
-        "GROCERIES",
-        "DISHES",
-        "LUNCH",
-        "SLEEP",
-        "LAUNDRY",
-        "FRIENDLY_CONVERSATION",
+        "SANTA",
         "GAMES",
-        "SWIMMING",
-        "DINNER",
+        "LUNCH",
+        "TAXES",
+        "PUMPKIN",
+        "DISHES",
         "EAT_CANDY",
-        "ARCHERY"
+        "ROPES",
+        "DINNER",
+        "FRIENDLY_CONVERSATION",
+        "SWIMMING"
       ],
       "dayOfWeek": "Sunday"
     },
@@ -78,17 +78,17 @@
       "schedule": [
         "WAKEUP",
         "BREAKFAST",
-        "JOGGING",
-        "EAT_CANDY",
+        "PHILOSOPHICAL_DISCUSSION",
+        "GROCERIES",
         "LUNCH",
-        "ARTS",
-        "LAUNDRY",
-        "VALENTINES",
-        "CRAFTS",
-        "SLIP_N_SLIDE",
+        "ARCHERY",
+        "FRIENDLY_CONVERSATION",
+        "JOGGING",
+        "SUPER_HAPPY",
+        "SLEEP",
         "DINNER",
-        "PUMPKIN",
-        "DISHES"
+        "JUMPING",
+        "ARTS"
       ],
       "dayOfWeek": "Wednesday"
     },
@@ -96,17 +96,17 @@
       "schedule": [
         "WAKEUP",
         "BREAKFAST",
-        "SUPER_HAPPY",
-        "ARCHERY",
+        "FRIENDLY_CONVERSATION",
+        "SWIMMING",
         "LUNCH",
-        "JUMPING",
-        "ARTS",
-        "WALKING",
-        "GROCERIES",
-        "LIFE_ADVICE",
+        "SLIP_N_SLIDE",
+        "SUPER_HAPPY",
+        "SANTA",
+        "PHILOSOPHICAL_DISCUSSION",
+        "DISHES",
         "DINNER",
-        "RUNNING",
-        "SWIMMING"
+        "LIFE_ADVICE",
+        "ROPES"
       ],
       "dayOfWeek": "Tuesday"
     },
@@ -114,23 +114,23 @@
       "schedule": [
         "WAKEUP",
         "BREAKFAST",
-        "LAUNDRY",
-        "SLEEP",
         "LUNCH",
-        "VALENTINES",
-        "WALKING",
-        "JUMPING",
-        "TAXES",
-        "ROPES",
+        "PUMPKIN",
+        "LUNCH",
+        "FRIENDLY_CONVERSATION",
+        "JOGGING",
+        "LIFE_ADVICE",
+        "RUNNING",
+        "DISHES",
         "DINNER",
-        "CRAFTS",
-        "DISHES"
+        "LAUNDRY",
+        "VALENTINES"
       ],
       "dayOfWeek": "Saturday"
     }
   ],
-  "id": "01bb3041-0674-4628-a67e-e2278264b0aa",
-  "cabinName": "asd"
+  "id": "8ce1c5e6-d294-4a37-bc52-1126e84e189f",
+  "cabinName": "cabin1"
 },
 {
   "sessionNumber": 1,
@@ -139,17 +139,17 @@
       "schedule": [
         "WAKEUP",
         "BREAKFAST",
-        "WALKING",
         "ROPES",
+        "PHILOSOPHICAL_DISCUSSION",
         "LUNCH",
-        "PUMPKIN",
-        "CRAFTS",
-        "SWIMMING",
-        "FRIENDLY_CONVERSATION",
-        "EAT_CANDY",
+        "JUMPING",
+        "TAXES",
         "DINNER",
-        "DISHES",
-        "SLIP_N_SLIDE"
+        "SUPER_HAPPY",
+        "SWIMMING",
+        "DINNER",
+        "GAMES",
+        "FRIENDLY_CONVERSATION"
       ],
       "dayOfWeek": "Monday"
     },
@@ -157,17 +157,17 @@
       "schedule": [
         "WAKEUP",
         "BREAKFAST",
-        "THROW_STICKS",
-        "PUMPKIN",
-        "LUNCH",
-        "LIFE_ADVICE",
-        "GAMES",
-        "ARCHERY",
-        "DISHES",
-        "SWIMMING",
-        "DINNER",
+        "WALKING",
         "SUPER_HAPPY",
-        "SLEEP"
+        "LUNCH",
+        "DISHES",
+        "PUMPKIN",
+        "ARCHERY",
+        "TAXES",
+        "SANTA",
+        "DINNER",
+        "RUNNING",
+        "JOGGING"
       ],
       "dayOfWeek": "Thursday"
     },
@@ -175,17 +175,17 @@
       "schedule": [
         "WAKEUP",
         "BREAKFAST",
-        "PUMPKIN",
-        "FRIENDLY_CONVERSATION",
+        "SLIP_N_SLIDE",
+        "RUNNING",
         "LUNCH",
-        "THROW_STICKS",
         "ROPES",
-        "SUPER_HAPPY",
-        "LAUNDRY",
-        "EAT_CANDY",
-        "DINNER",
         "SANTA",
-        "SLIP_N_SLIDE"
+        "DINNER",
+        "THROW_STICKS",
+        "LAUNDRY",
+        "DINNER",
+        "GROCERIES",
+        "TAXES"
       ],
       "dayOfWeek": "Friday"
     },
@@ -193,17 +193,150 @@
       "schedule": [
         "WAKEUP",
         "BREAKFAST",
-        "WALKING",
+        "JOGGING",
         "THROW_STICKS",
         "LUNCH",
-        "SUPER_HAPPY",
         "DINNER",
-        "SWIMMING",
-        "CRAFTS",
+        "ARTS",
+        "LIFE_ADVICE",
+        "ARCHERY",
+        "FRIENDLY_CONVERSATION",
+        "DINNER",
+        "DISHES",
+        "SLIP_N_SLIDE"
+      ],
+      "dayOfWeek": "Sunday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "DISHES",
+        "SLIP_N_SLIDE",
+        "LUNCH",
+        "SANTA",
+        "SLEEP",
+        "TAXES",
+        "ARTS",
+        "GROCERIES",
+        "DINNER",
+        "THROW_STICKS",
+        "SUPER_HAPPY"
+      ],
+      "dayOfWeek": "Wednesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "GROCERIES",
+        "SANTA",
+        "LUNCH",
+        "DINNER",
+        "ROPES",
+        "JOGGING",
+        "ARTS",
+        "TAXES",
+        "DINNER",
+        "ARCHERY",
+        "SLEEP"
+      ],
+      "dayOfWeek": "Tuesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "ARCHERY",
+        "FRIENDLY_CONVERSATION",
+        "LUNCH",
+        "PUMPKIN",
+        "LAUNDRY",
+        "WALKING",
+        "SLEEP",
         "EAT_CANDY",
         "DINNER",
+        "ARTS",
+        "RUNNING"
+      ],
+      "dayOfWeek": "Saturday"
+    }
+  ],
+  "id": "17207a4e-9f41-4ecd-913e-b80789d20bc1",
+  "cabinName": "cabin1"
+},
+{
+  "sessionNumber": 2,
+  "schedules": [
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "LUNCH",
         "LIFE_ADVICE",
-        "SANTA"
+        "LUNCH",
+        "SLEEP",
+        "SWIMMING",
+        "DINNER",
+        "CRAFTS",
+        "THROW_STICKS",
+        "DINNER",
+        "ARTS",
+        "ARCHERY"
+      ],
+      "dayOfWeek": "Monday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "ROPES",
+        "CRAFTS",
+        "LUNCH",
+        "EAT_CANDY",
+        "RUNNING",
+        "LIFE_ADVICE",
+        "PHILOSOPHICAL_DISCUSSION",
+        "PUMPKIN",
+        "DINNER",
+        "DISHES",
+        "ARCHERY"
+      ],
+      "dayOfWeek": "Thursday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "LUNCH",
+        "LAUNDRY",
+        "LUNCH",
+        "VALENTINES",
+        "JOGGING",
+        "FRIENDLY_CONVERSATION",
+        "DINNER",
+        "SLEEP",
+        "DINNER",
+        "DISHES",
+        "CRAFTS"
+      ],
+      "dayOfWeek": "Friday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "TAXES",
+        "ARTS",
+        "LUNCH",
+        "LAUNDRY",
+        "WALKING",
+        "FRIENDLY_CONVERSATION",
+        "ARCHERY",
+        "EAT_CANDY",
+        "DINNER",
+        "RUNNING",
+        "GAMES"
       ],
       "dayOfWeek": "Sunday"
     },
@@ -212,15 +345,414 @@
         "WAKEUP",
         "BREAKFAST",
         "PHILOSOPHICAL_DISCUSSION",
-        "LAUNDRY",
+        "TAXES",
+        "LUNCH",
+        "SWIMMING",
+        "VALENTINES",
+        "ROPES",
+        "WALKING",
+        "JUMPING",
+        "DINNER",
+        "CRAFTS",
+        "SLEEP"
+      ],
+      "dayOfWeek": "Wednesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "THROW_STICKS",
+        "JUMPING",
+        "LUNCH",
+        "DISHES",
+        "FRIENDLY_CONVERSATION",
+        "LIFE_ADVICE",
+        "SWIMMING",
+        "ARCHERY",
+        "DINNER",
+        "JOGGING",
+        "SLIP_N_SLIDE"
+      ],
+      "dayOfWeek": "Tuesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "WALKING",
+        "JUMPING",
         "LUNCH",
         "GROCERIES",
-        "DISHES",
-        "GAMES",
+        "LAUNDRY",
+        "VALENTINES",
+        "SANTA",
+        "TAXES",
+        "DINNER",
+        "PHILOSOPHICAL_DISCUSSION",
+        "DISHES"
+      ],
+      "dayOfWeek": "Saturday"
+    }
+  ],
+  "id": "df0a134e-3667-4ec2-8bf6-3be125e98de2",
+  "cabinName": "cabin1"
+},
+{
+  "sessionNumber": 3,
+  "schedules": [
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "FRIENDLY_CONVERSATION",
+        "THROW_STICKS",
+        "LUNCH",
+        "VALENTINES",
+        "LAUNDRY",
+        "ARTS",
+        "SWIMMING",
+        "SLEEP",
+        "DINNER",
         "CRAFTS",
+        "SLIP_N_SLIDE"
+      ],
+      "dayOfWeek": "Monday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "WALKING",
+        "ARCHERY",
+        "LUNCH",
         "PUMPKIN",
+        "SLIP_N_SLIDE",
+        "SUPER_HAPPY",
+        "ARTS",
+        "VALENTINES",
+        "DINNER",
+        "PHILOSOPHICAL_DISCUSSION",
+        "DISHES"
+      ],
+      "dayOfWeek": "Thursday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "EAT_CANDY",
+        "PHILOSOPHICAL_DISCUSSION",
+        "LUNCH",
+        "JOGGING",
+        "ARCHERY",
+        "PUMPKIN",
+        "JUMPING",
+        "LAUNDRY",
+        "DINNER",
+        "ARTS",
+        "SUPER_HAPPY"
+      ],
+      "dayOfWeek": "Friday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "SANTA",
+        "ARTS",
+        "LUNCH",
+        "ARCHERY",
+        "ROPES",
+        "DISHES",
+        "RUNNING",
+        "SLEEP",
+        "DINNER",
+        "FRIENDLY_CONVERSATION",
+        "GROCERIES"
+      ],
+      "dayOfWeek": "Sunday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "LUNCH",
+        "PHILOSOPHICAL_DISCUSSION",
+        "LUNCH",
+        "LIFE_ADVICE",
+        "DINNER",
+        "ROPES",
+        "SWIMMING",
+        "CRAFTS",
+        "DINNER",
+        "FRIENDLY_CONVERSATION",
+        "GROCERIES"
+      ],
+      "dayOfWeek": "Wednesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "ROPES",
+        "JUMPING",
+        "LUNCH",
+        "SUPER_HAPPY",
+        "SANTA",
+        "FRIENDLY_CONVERSATION",
+        "GROCERIES",
+        "THROW_STICKS",
+        "DINNER",
+        "PUMPKIN",
+        "LIFE_ADVICE"
+      ],
+      "dayOfWeek": "Tuesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "VALENTINES",
+        "LIFE_ADVICE",
+        "LUNCH",
+        "RUNNING",
+        "FRIENDLY_CONVERSATION",
+        "PHILOSOPHICAL_DISCUSSION",
+        "ROPES",
+        "SUPER_HAPPY",
+        "DINNER",
+        "SLIP_N_SLIDE",
+        "EAT_CANDY"
+      ],
+      "dayOfWeek": "Saturday"
+    }
+  ],
+  "id": "3f9c1f12-4d11-43a6-b990-ef9888161460",
+  "cabinName": "cabin1"
+},
+{
+  "sessionNumber": 4,
+  "schedules": [
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "GROCERIES",
+        "RUNNING",
+        "LUNCH",
+        "DISHES",
+        "ARCHERY",
+        "SANTA",
+        "SLIP_N_SLIDE",
+        "EAT_CANDY",
         "DINNER",
         "SLEEP",
+        "TAXES"
+      ],
+      "dayOfWeek": "Monday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "TAXES",
+        "FRIENDLY_CONVERSATION",
+        "LUNCH",
+        "ROPES",
+        "SWIMMING",
+        "JUMPING",
+        "PUMPKIN",
+        "SANTA",
+        "DINNER",
+        "LIFE_ADVICE",
+        "LAUNDRY"
+      ],
+      "dayOfWeek": "Thursday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "EAT_CANDY",
+        "DINNER",
+        "LUNCH",
+        "FRIENDLY_CONVERSATION",
+        "DISHES",
+        "PUMPKIN",
+        "ROPES",
+        "SLEEP",
+        "DINNER",
+        "CRAFTS",
+        "ARTS"
+      ],
+      "dayOfWeek": "Friday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "SLEEP",
+        "JOGGING",
+        "LUNCH",
+        "SLIP_N_SLIDE",
+        "FRIENDLY_CONVERSATION",
+        "TAXES",
+        "RUNNING",
+        "VALENTINES",
+        "DINNER",
+        "WALKING",
+        "SWIMMING"
+      ],
+      "dayOfWeek": "Sunday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "LIFE_ADVICE",
+        "JOGGING",
+        "LUNCH",
+        "ARCHERY",
+        "GAMES",
+        "RUNNING",
+        "LAUNDRY",
+        "WALKING",
+        "DINNER",
+        "ARTS",
+        "DISHES"
+      ],
+      "dayOfWeek": "Wednesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "EAT_CANDY",
+        "DISHES",
+        "LUNCH",
+        "ARTS",
+        "RUNNING",
+        "CRAFTS",
+        "SLIP_N_SLIDE",
+        "PUMPKIN",
+        "DINNER",
+        "ROPES",
+        "SLEEP"
+      ],
+      "dayOfWeek": "Tuesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "ROPES",
+        "WALKING",
+        "LUNCH",
+        "ARCHERY",
+        "THROW_STICKS",
+        "RUNNING",
+        "JOGGING",
+        "GAMES",
+        "DINNER",
+        "SANTA",
+        "ARTS"
+      ],
+      "dayOfWeek": "Saturday"
+    }
+  ],
+  "id": "0b98d23c-22ee-4fd1-a095-dc49f6de9bd8",
+  "cabinName": "cabin1"
+},
+{
+  "sessionNumber": 5,
+  "schedules": [
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "DISHES",
+        "WALKING",
+        "LUNCH",
+        "THROW_STICKS",
+        "EAT_CANDY",
+        "VALENTINES",
+        "TAXES",
+        "SUPER_HAPPY",
+        "DINNER",
+        "SLIP_N_SLIDE",
+        "CRAFTS"
+      ],
+      "dayOfWeek": "Monday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "DISHES",
+        "SLIP_N_SLIDE",
+        "LUNCH",
+        "VALENTINES",
+        "ARTS",
+        "LAUNDRY",
+        "SLEEP",
+        "FRIENDLY_CONVERSATION",
+        "DINNER",
+        "SUPER_HAPPY",
+        "SWIMMING"
+      ],
+      "dayOfWeek": "Thursday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "LUNCH",
+        "FRIENDLY_CONVERSATION",
+        "LUNCH",
+        "LIFE_ADVICE",
+        "ROPES",
+        "EAT_CANDY",
+        "THROW_STICKS",
+        "TAXES",
+        "DINNER",
+        "DISHES",
+        "WALKING"
+      ],
+      "dayOfWeek": "Friday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "SLIP_N_SLIDE",
+        "THROW_STICKS",
+        "LUNCH",
+        "FRIENDLY_CONVERSATION",
+        "SLEEP",
+        "LIFE_ADVICE",
+        "DISHES",
+        "VALENTINES",
+        "DINNER",
+        "PUMPKIN",
+        "TAXES"
+      ],
+      "dayOfWeek": "Sunday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "WALKING",
+        "VALENTINES",
+        "LUNCH",
+        "PUMPKIN",
+        "LAUNDRY",
+        "SWIMMING",
+        "EAT_CANDY",
+        "GAMES",
+        "DINNER",
+        "CRAFTS",
         "ARCHERY"
       ],
       "dayOfWeek": "Wednesday"
@@ -229,149 +761,16 @@
       "schedule": [
         "WAKEUP",
         "BREAKFAST",
-        "RUNNING",
-        "SWIMMING",
-        "LUNCH",
-        "CRAFTS",
-        "SLIP_N_SLIDE",
-        "THROW_STICKS",
-        "ROPES",
-        "VALENTINES",
-        "DINNER",
-        "WALKING",
-        "DISHES"
-      ],
-      "dayOfWeek": "Tuesday"
-    },
-    {
-      "schedule": [
-        "WAKEUP",
-        "BREAKFAST",
-        "GAMES",
-        "JUMPING",
         "LUNCH",
         "PUMPKIN",
-        "VALENTINES",
-        "DISHES",
-        "PHILOSOPHICAL_DISCUSSION",
-        "LIFE_ADVICE",
-        "DINNER",
-        "SLEEP",
-        "GROCERIES"
-      ],
-      "dayOfWeek": "Saturday"
-    }
-  ],
-  "id": "1b85359a-68e6-4528-a17f-9573c190cb2c",
-  "cabinName": "asd"
-},
-{
-  "sessionNumber": 0,
-  "schedules": [
-    {
-      "schedule": [
-        "WAKEUP",
-        "BREAKFAST",
-        "JOGGING",
-        "LIFE_ADVICE",
         "LUNCH",
-        "TAXES",
-        "THROW_STICKS",
-        "ROPES",
-        "WALKING",
-        "SANTA",
-        "DINNER",
-        "ARCHERY",
-        "SLIP_N_SLIDE"
-      ],
-      "dayOfWeek": "Monday"
-    },
-    {
-      "schedule": [
-        "WAKEUP",
-        "BREAKFAST",
-        "THROW_STICKS",
-        "LUNCH",
-        "LUNCH",
-        "SLEEP",
-        "SLIP_N_SLIDE",
-        "EAT_CANDY",
-        "CRAFTS",
-        "PUMPKIN",
-        "DINNER",
-        "ARTS",
-        "DISHES"
-      ],
-      "dayOfWeek": "Thursday"
-    },
-    {
-      "schedule": [
-        "WAKEUP",
-        "BREAKFAST",
-        "DISHES",
-        "ARTS",
-        "LUNCH",
-        "GROCERIES",
-        "SLIP_N_SLIDE",
-        "THROW_STICKS",
-        "PHILOSOPHICAL_DISCUSSION",
-        "VALENTINES",
-        "DINNER",
-        "PUMPKIN",
-        "EAT_CANDY"
-      ],
-      "dayOfWeek": "Friday"
-    },
-    {
-      "schedule": [
-        "WAKEUP",
-        "BREAKFAST",
-        "TAXES",
-        "EAT_CANDY",
-        "LUNCH",
-        "ARTS",
         "SUPER_HAPPY",
-        "WALKING",
-        "SLEEP",
         "SWIMMING",
+        "LIFE_ADVICE",
+        "DISHES",
+        "VALENTINES",
         "DINNER",
-        "PHILOSOPHICAL_DISCUSSION",
-        "JOGGING"
-      ],
-      "dayOfWeek": "Sunday"
-    },
-    {
-      "schedule": [
-        "WAKEUP",
-        "BREAKFAST",
-        "SANTA",
         "LAUNDRY",
-        "LUNCH",
-        "EAT_CANDY",
-        "ROPES",
-        "SUPER_HAPPY",
-        "VALENTINES",
-        "ARTS",
-        "DINNER",
-        "GAMES",
-        "PUMPKIN"
-      ],
-      "dayOfWeek": "Wednesday"
-    },
-    {
-      "schedule": [
-        "WAKEUP",
-        "BREAKFAST",
-        "GAMES",
-        "GROCERIES",
-        "LUNCH",
-        "RUNNING",
-        "LIFE_ADVICE",
-        "SUPER_HAPPY",
-        "JUMPING",
-        "FRIENDLY_CONVERSATION",
-        "DINNER",
-        "SLEEP",
         "WALKING"
       ],
       "dayOfWeek": "Tuesday"
@@ -380,41 +779,41 @@
       "schedule": [
         "WAKEUP",
         "BREAKFAST",
-        "SUPER_HAPPY",
-        "GAMES",
+        "SLEEP",
+        "LIFE_ADVICE",
         "LUNCH",
-        "EAT_CANDY",
-        "THROW_STICKS",
-        "LAUNDRY",
-        "SLIP_N_SLIDE",
-        "ROPES",
-        "DINNER",
+        "SANTA",
         "WALKING",
-        "SLEEP"
+        "DISHES",
+        "FRIENDLY_CONVERSATION",
+        "LAUNDRY",
+        "DINNER",
+        "ARTS",
+        "TAXES"
       ],
       "dayOfWeek": "Saturday"
     }
   ],
-  "id": "3959f22d-e665-49c3-b541-509c110385ee",
-  "cabinName": "fsdas"
+  "id": "626c34eb-ad08-4a91-9bab-4109b09b1db6",
+  "cabinName": "cabin1"
 },
 {
-  "sessionNumber": 1,
+  "sessionNumber": 6,
   "schedules": [
     {
       "schedule": [
         "WAKEUP",
         "BREAKFAST",
-        "DISHES",
-        "WALKING",
-        "LUNCH",
-        "ARTS",
-        "ROPES",
-        "PHILOSOPHICAL_DISCUSSION",
-        "GROCERIES",
-        "LIFE_ADVICE",
         "DINNER",
-        "LAUNDRY",
+        "PHILOSOPHICAL_DISCUSSION",
+        "LUNCH",
+        "FRIENDLY_CONVERSATION",
+        "PUMPKIN",
+        "CRAFTS",
+        "ARTS",
+        "TAXES",
+        "DINNER",
+        "WALKING",
         "SLIP_N_SLIDE"
       ],
       "dayOfWeek": "Monday"
@@ -423,17 +822,17 @@
       "schedule": [
         "WAKEUP",
         "BREAKFAST",
-        "LUNCH",
-        "THROW_STICKS",
+        "WALKING",
+        "DISHES",
         "LUNCH",
         "EAT_CANDY",
         "RUNNING",
-        "ARCHERY",
-        "GAMES",
-        "TAXES",
+        "PHILOSOPHICAL_DISCUSSION",
+        "ARTS",
         "DINNER",
-        "SUPER_HAPPY",
-        "CRAFTS"
+        "DINNER",
+        "ROPES",
+        "ARCHERY"
       ],
       "dayOfWeek": "Thursday"
     },
@@ -441,17 +840,17 @@
       "schedule": [
         "WAKEUP",
         "BREAKFAST",
-        "VALENTINES",
-        "CRAFTS",
-        "LUNCH",
-        "JUMPING",
-        "FRIENDLY_CONVERSATION",
-        "EAT_CANDY",
-        "THROW_STICKS",
+        "DISHES",
         "SANTA",
-        "DINNER",
+        "LUNCH",
+        "ARTS",
         "WALKING",
-        "GROCERIES"
+        "JUMPING",
+        "CRAFTS",
+        "FRIENDLY_CONVERSATION",
+        "DINNER",
+        "SWIMMING",
+        "JOGGING"
       ],
       "dayOfWeek": "Friday"
     },
@@ -459,16 +858,16 @@
       "schedule": [
         "WAKEUP",
         "BREAKFAST",
-        "FRIENDLY_CONVERSATION",
+        "ARCHERY",
+        "PUMPKIN",
         "LUNCH",
-        "LUNCH",
-        "ARTS",
-        "SUPER_HAPPY",
-        "SLEEP",
-        "THROW_STICKS",
-        "ROPES",
-        "DINNER",
         "JOGGING",
+        "ROPES",
+        "THROW_STICKS",
+        "VALENTINES",
+        "SUPER_HAPPY",
+        "DINNER",
+        "FRIENDLY_CONVERSATION",
         "PHILOSOPHICAL_DISCUSSION"
       ],
       "dayOfWeek": "Sunday"
@@ -477,16 +876,814 @@
       "schedule": [
         "WAKEUP",
         "BREAKFAST",
+        "WALKING",
+        "PUMPKIN",
+        "LUNCH",
+        "LIFE_ADVICE",
+        "THROW_STICKS",
+        "RUNNING",
+        "SUPER_HAPPY",
+        "CRAFTS",
+        "DINNER",
+        "ARTS",
+        "ARCHERY"
+      ],
+      "dayOfWeek": "Wednesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "ROPES",
+        "JOGGING",
+        "LUNCH",
+        "ARTS",
+        "PUMPKIN",
+        "GROCERIES",
+        "RUNNING",
+        "SLIP_N_SLIDE",
+        "DINNER",
+        "FRIENDLY_CONVERSATION",
+        "LAUNDRY"
+      ],
+      "dayOfWeek": "Tuesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "CRAFTS",
+        "VALENTINES",
+        "LUNCH",
+        "SWIMMING",
+        "SUPER_HAPPY",
         "ROPES",
         "GAMES",
-        "LUNCH",
+        "THROW_STICKS",
+        "DINNER",
+        "ARTS",
+        "GROCERIES"
+      ],
+      "dayOfWeek": "Saturday"
+    }
+  ],
+  "id": "80250c20-9995-4510-a561-ede42d23c5b2",
+  "cabinName": "cabin1"
+},
+{
+  "sessionNumber": 7,
+  "schedules": [
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
         "VALENTINES",
+        "CRAFTS",
+        "LUNCH",
+        "GAMES",
+        "LAUNDRY",
+        "ROPES",
+        "SWIMMING",
+        "RUNNING",
+        "DINNER",
+        "FRIENDLY_CONVERSATION",
+        "PHILOSOPHICAL_DISCUSSION"
+      ],
+      "dayOfWeek": "Monday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "LUNCH",
+        "EAT_CANDY",
+        "LUNCH",
+        "ARCHERY",
+        "TAXES",
+        "SWIMMING",
+        "GROCERIES",
+        "SUPER_HAPPY",
+        "DINNER",
+        "JOGGING",
+        "PHILOSOPHICAL_DISCUSSION"
+      ],
+      "dayOfWeek": "Thursday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "JOGGING",
+        "ARCHERY",
+        "LUNCH",
+        "WALKING",
+        "LIFE_ADVICE",
+        "CRAFTS",
         "RUNNING",
         "LAUNDRY",
+        "DINNER",
+        "VALENTINES",
+        "FRIENDLY_CONVERSATION"
+      ],
+      "dayOfWeek": "Friday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "SWIMMING",
         "SANTA",
+        "LUNCH",
         "JUMPING",
+        "JOGGING",
+        "GAMES",
+        "PHILOSOPHICAL_DISCUSSION",
+        "PUMPKIN",
+        "DINNER",
+        "LAUNDRY",
+        "SLIP_N_SLIDE"
+      ],
+      "dayOfWeek": "Sunday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "RUNNING",
+        "PHILOSOPHICAL_DISCUSSION",
+        "LUNCH",
+        "LAUNDRY",
+        "ARTS",
+        "GAMES",
+        "ARCHERY",
+        "DINNER",
+        "DINNER",
+        "SANTA",
+        "SLEEP"
+      ],
+      "dayOfWeek": "Wednesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "GAMES",
+        "VALENTINES",
+        "LUNCH",
+        "EAT_CANDY",
+        "THROW_STICKS",
+        "LIFE_ADVICE",
+        "SLEEP",
+        "CRAFTS",
+        "DINNER",
+        "JOGGING",
+        "SUPER_HAPPY"
+      ],
+      "dayOfWeek": "Tuesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "JUMPING",
+        "JOGGING",
+        "LUNCH",
+        "EAT_CANDY",
+        "LIFE_ADVICE",
+        "SWIMMING",
+        "GROCERIES",
+        "SLEEP",
+        "DINNER",
+        "SLIP_N_SLIDE",
+        "VALENTINES"
+      ],
+      "dayOfWeek": "Saturday"
+    }
+  ],
+  "id": "906ad011-b9bd-48a3-9930-4b48c7a5d340",
+  "cabinName": "cabin1"
+},
+{
+  "sessionNumber": 8,
+  "schedules": [
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "SANTA",
+        "LUNCH",
+        "LUNCH",
+        "RUNNING",
+        "FRIENDLY_CONVERSATION",
+        "JOGGING",
+        "EAT_CANDY",
+        "WALKING",
+        "DINNER",
+        "SLEEP",
+        "JUMPING"
+      ],
+      "dayOfWeek": "Monday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "ARTS",
+        "SUPER_HAPPY",
+        "LUNCH",
+        "THROW_STICKS",
+        "SLIP_N_SLIDE",
+        "CRAFTS",
+        "PUMPKIN",
+        "LAUNDRY",
+        "DINNER",
+        "LIFE_ADVICE",
+        "TAXES"
+      ],
+      "dayOfWeek": "Thursday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "JOGGING",
+        "ROPES",
+        "LUNCH",
+        "ARTS",
+        "ARCHERY",
+        "TAXES",
+        "SWIMMING",
+        "VALENTINES",
+        "DINNER",
+        "FRIENDLY_CONVERSATION",
+        "EAT_CANDY"
+      ],
+      "dayOfWeek": "Friday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "ARTS",
+        "PHILOSOPHICAL_DISCUSSION",
+        "LUNCH",
+        "LAUNDRY",
+        "SANTA",
+        "ARCHERY",
+        "ROPES",
+        "FRIENDLY_CONVERSATION",
+        "DINNER",
+        "SWIMMING",
+        "JOGGING"
+      ],
+      "dayOfWeek": "Sunday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "CRAFTS",
+        "ROPES",
+        "LUNCH",
+        "DINNER",
+        "SLIP_N_SLIDE",
+        "LAUNDRY",
+        "GAMES",
+        "ARCHERY",
         "DINNER",
         "GROCERIES",
+        "PHILOSOPHICAL_DISCUSSION"
+      ],
+      "dayOfWeek": "Wednesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "SLIP_N_SLIDE",
+        "JUMPING",
+        "LUNCH",
+        "FRIENDLY_CONVERSATION",
+        "RUNNING",
+        "EAT_CANDY",
+        "ARTS",
+        "GROCERIES",
+        "DINNER",
+        "LAUNDRY",
+        "ARCHERY"
+      ],
+      "dayOfWeek": "Tuesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "SUPER_HAPPY",
+        "RUNNING",
+        "LUNCH",
+        "LAUNDRY",
+        "GAMES",
+        "SANTA",
+        "SWIMMING",
+        "EAT_CANDY",
+        "DINNER",
+        "PHILOSOPHICAL_DISCUSSION",
+        "FRIENDLY_CONVERSATION"
+      ],
+      "dayOfWeek": "Saturday"
+    }
+  ],
+  "id": "313bedde-ba28-4d43-8fee-8d24784107a6",
+  "cabinName": "cabin1"
+},
+{
+  "sessionNumber": 0,
+  "schedules": [
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "LAUNDRY",
+        "SLEEP",
+        "LUNCH",
+        "ROPES",
+        "JUMPING",
+        "GAMES",
+        "DISHES",
+        "CRAFTS",
+        "DINNER",
+        "SUPER_HAPPY",
+        "ARTS"
+      ],
+      "dayOfWeek": "Monday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "FRIENDLY_CONVERSATION",
+        "THROW_STICKS",
+        "LUNCH",
+        "VALENTINES",
+        "SLEEP",
+        "EAT_CANDY",
+        "DISHES",
+        "TAXES",
+        "DINNER",
+        "ARCHERY",
+        "SWIMMING"
+      ],
+      "dayOfWeek": "Thursday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "WALKING",
+        "SLEEP",
+        "LUNCH",
+        "TAXES",
+        "ARCHERY",
+        "SLIP_N_SLIDE",
+        "THROW_STICKS",
+        "SANTA",
+        "DINNER",
+        "EAT_CANDY",
+        "JOGGING"
+      ],
+      "dayOfWeek": "Friday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "SLEEP",
+        "THROW_STICKS",
+        "LUNCH",
+        "JUMPING",
+        "SUPER_HAPPY",
+        "GAMES",
+        "JOGGING",
+        "LAUNDRY",
+        "DINNER",
+        "DISHES",
+        "SLIP_N_SLIDE"
+      ],
+      "dayOfWeek": "Sunday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "PHILOSOPHICAL_DISCUSSION",
+        "DINNER",
+        "LUNCH",
+        "FRIENDLY_CONVERSATION",
+        "VALENTINES",
+        "ROPES",
+        "DISHES",
+        "LAUNDRY",
+        "DINNER",
+        "JOGGING",
+        "SANTA"
+      ],
+      "dayOfWeek": "Wednesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "LIFE_ADVICE",
+        "PHILOSOPHICAL_DISCUSSION",
+        "LUNCH",
+        "ARCHERY",
+        "DINNER",
+        "VALENTINES",
+        "SUPER_HAPPY",
+        "GROCERIES",
+        "DINNER",
+        "DISHES",
+        "GAMES"
+      ],
+      "dayOfWeek": "Tuesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "DISHES",
+        "JUMPING",
+        "LUNCH",
+        "FRIENDLY_CONVERSATION",
+        "LIFE_ADVICE",
+        "WALKING",
+        "CRAFTS",
+        "GROCERIES",
+        "DINNER",
+        "PUMPKIN",
+        "TAXES"
+      ],
+      "dayOfWeek": "Saturday"
+    }
+  ],
+  "id": "68597029-6cca-46d6-8dc6-7bb4797fd762",
+  "cabinName": "cabin2"
+},
+{
+  "sessionNumber": 1,
+  "schedules": [
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "GAMES",
+        "DINNER",
+        "LUNCH",
+        "WALKING",
+        "SWIMMING",
+        "SANTA",
+        "JOGGING",
+        "PHILOSOPHICAL_DISCUSSION",
+        "DINNER",
+        "PUMPKIN",
+        "JUMPING"
+      ],
+      "dayOfWeek": "Monday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "JOGGING",
+        "ROPES",
+        "LUNCH",
+        "ARCHERY",
+        "DISHES",
+        "SLIP_N_SLIDE",
+        "CRAFTS",
+        "FRIENDLY_CONVERSATION",
+        "DINNER",
+        "VALENTINES",
+        "GROCERIES"
+      ],
+      "dayOfWeek": "Thursday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "VALENTINES",
+        "EAT_CANDY",
+        "LUNCH",
+        "SWIMMING",
+        "FRIENDLY_CONVERSATION",
+        "DINNER",
+        "GAMES",
+        "GROCERIES",
+        "DINNER",
+        "THROW_STICKS",
+        "SLEEP"
+      ],
+      "dayOfWeek": "Friday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "SLEEP",
+        "FRIENDLY_CONVERSATION",
+        "LUNCH",
+        "THROW_STICKS",
+        "LIFE_ADVICE",
+        "DINNER",
+        "JOGGING",
+        "SANTA",
+        "DINNER",
+        "RUNNING",
+        "TAXES"
+      ],
+      "dayOfWeek": "Sunday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "SLIP_N_SLIDE",
+        "PHILOSOPHICAL_DISCUSSION",
+        "LUNCH",
+        "WALKING",
+        "TAXES",
+        "ARTS",
+        "SWIMMING",
+        "DISHES",
+        "DINNER",
+        "SUPER_HAPPY",
+        "RUNNING"
+      ],
+      "dayOfWeek": "Wednesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "RUNNING",
+        "JUMPING",
+        "LUNCH",
+        "SWIMMING",
+        "GROCERIES",
+        "SLEEP",
+        "ARCHERY",
+        "SLIP_N_SLIDE",
+        "DINNER",
+        "ROPES",
+        "LAUNDRY"
+      ],
+      "dayOfWeek": "Tuesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "RUNNING",
+        "VALENTINES",
+        "LUNCH",
+        "DISHES",
+        "PHILOSOPHICAL_DISCUSSION",
+        "PUMPKIN",
+        "THROW_STICKS",
+        "EAT_CANDY",
+        "DINNER",
+        "TAXES",
+        "ARCHERY"
+      ],
+      "dayOfWeek": "Saturday"
+    }
+  ],
+  "id": "7b62e88a-0771-47b5-a3cc-37557ad73d37",
+  "cabinName": "cabin2"
+},
+{
+  "sessionNumber": 2,
+  "schedules": [
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "RUNNING",
+        "ARTS",
+        "LUNCH",
+        "PUMPKIN",
+        "SWIMMING",
+        "THROW_STICKS",
+        "LAUNDRY",
+        "JUMPING",
+        "DINNER",
+        "SLIP_N_SLIDE",
+        "GAMES"
+      ],
+      "dayOfWeek": "Monday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "FRIENDLY_CONVERSATION",
+        "GAMES",
+        "LUNCH",
+        "JUMPING",
+        "PUMPKIN",
+        "VALENTINES",
+        "SLIP_N_SLIDE",
+        "SWIMMING",
+        "DINNER",
+        "LAUNDRY",
+        "DISHES"
+      ],
+      "dayOfWeek": "Thursday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "VALENTINES",
+        "FRIENDLY_CONVERSATION",
+        "LUNCH",
+        "PHILOSOPHICAL_DISCUSSION",
+        "THROW_STICKS",
+        "ARTS",
+        "CRAFTS",
+        "SLIP_N_SLIDE",
+        "DINNER",
+        "RUNNING",
+        "DISHES"
+      ],
+      "dayOfWeek": "Friday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "SLEEP",
+        "SUPER_HAPPY",
+        "LUNCH",
+        "WALKING",
+        "RUNNING",
+        "DINNER",
+        "GROCERIES",
+        "PUMPKIN",
+        "DINNER",
+        "VALENTINES",
+        "ARTS"
+      ],
+      "dayOfWeek": "Sunday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "TAXES",
+        "THROW_STICKS",
+        "LUNCH",
+        "CRAFTS",
+        "SLIP_N_SLIDE",
+        "JOGGING",
+        "DINNER",
+        "ROPES",
+        "DINNER",
+        "ARTS",
+        "SLEEP"
+      ],
+      "dayOfWeek": "Wednesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "EAT_CANDY",
+        "FRIENDLY_CONVERSATION",
+        "LUNCH",
+        "THROW_STICKS",
+        "DISHES",
+        "LIFE_ADVICE",
+        "GAMES",
+        "ARTS",
+        "DINNER",
+        "RUNNING",
+        "SLIP_N_SLIDE"
+      ],
+      "dayOfWeek": "Tuesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "PUMPKIN",
+        "PHILOSOPHICAL_DISCUSSION",
+        "LUNCH",
+        "JOGGING",
+        "ARCHERY",
+        "LIFE_ADVICE",
+        "SUPER_HAPPY",
+        "EAT_CANDY",
+        "DINNER",
+        "RUNNING",
+        "SLIP_N_SLIDE"
+      ],
+      "dayOfWeek": "Saturday"
+    }
+  ],
+  "id": "ecc02a71-bcf4-4e0f-997f-ebb2eaca6aea",
+  "cabinName": "cabin2"
+},
+{
+  "sessionNumber": 3,
+  "schedules": [
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "GROCERIES",
+        "ARTS",
+        "LUNCH",
+        "ROPES",
+        "SLIP_N_SLIDE",
+        "CRAFTS",
+        "DISHES",
+        "FRIENDLY_CONVERSATION",
+        "DINNER",
+        "EAT_CANDY",
+        "PUMPKIN"
+      ],
+      "dayOfWeek": "Monday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "SANTA",
+        "CRAFTS",
+        "LUNCH",
+        "JOGGING",
+        "DINNER",
+        "RUNNING",
+        "THROW_STICKS",
+        "LAUNDRY",
+        "DINNER",
+        "SLIP_N_SLIDE",
+        "SLEEP"
+      ],
+      "dayOfWeek": "Thursday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "SLEEP",
+        "LUNCH",
+        "LUNCH",
+        "PUMPKIN",
+        "DINNER",
+        "GROCERIES",
+        "SWIMMING",
+        "LAUNDRY",
+        "DINNER",
+        "ROPES",
+        "DISHES"
+      ],
+      "dayOfWeek": "Friday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "WALKING",
+        "DISHES",
+        "LUNCH",
+        "SWIMMING",
+        "PUMPKIN",
+        "SANTA",
+        "TAXES",
+        "JOGGING",
+        "DINNER",
+        "ARTS",
+        "GROCERIES"
+      ],
+      "dayOfWeek": "Sunday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "SUPER_HAPPY",
+        "FRIENDLY_CONVERSATION",
+        "LUNCH",
+        "DISHES",
+        "DINNER",
+        "ARTS",
+        "LIFE_ADVICE",
+        "SWIMMING",
+        "DINNER",
+        "SANTA",
         "TAXES"
       ],
       "dayOfWeek": "Wednesday"
@@ -495,17 +1692,17 @@
       "schedule": [
         "WAKEUP",
         "BREAKFAST",
-        "PUMPKIN",
         "SLEEP",
+        "ARTS",
         "LUNCH",
-        "WALKING",
-        "ARCHERY",
-        "SUPER_HAPPY",
-        "JUMPING",
-        "LAUNDRY",
+        "PUMPKIN",
+        "ROPES",
+        "LIFE_ADVICE",
+        "TAXES",
+        "CRAFTS",
         "DINNER",
-        "PHILOSOPHICAL_DISCUSSION",
-        "ROPES"
+        "JOGGING",
+        "DISHES"
       ],
       "dayOfWeek": "Tuesday"
     },
@@ -513,22 +1710,687 @@
       "schedule": [
         "WAKEUP",
         "BREAKFAST",
-        "GROCERIES",
         "ARCHERY",
+        "WALKING",
         "LUNCH",
         "CRAFTS",
-        "JOGGING",
-        "TAXES",
-        "PHILOSOPHICAL_DISCUSSION",
-        "JUMPING",
-        "DINNER",
+        "GROCERIES",
+        "VALENTINES",
+        "SLEEP",
         "EAT_CANDY",
-        "FRIENDLY_CONVERSATION"
+        "DINNER",
+        "GAMES",
+        "ROPES"
       ],
       "dayOfWeek": "Saturday"
     }
   ],
-  "id": "c0387b80-6009-441a-9b9e-34f68e198b3f",
-  "cabinName": "fsdas"
+  "id": "631c5476-647d-4efc-87f6-e90c279e9fb9",
+  "cabinName": "cabin2"
+},
+{
+  "sessionNumber": 4,
+  "schedules": [
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "WALKING",
+        "TAXES",
+        "LUNCH",
+        "RUNNING",
+        "JUMPING",
+        "SWIMMING",
+        "DISHES",
+        "LAUNDRY",
+        "DINNER",
+        "CRAFTS",
+        "ARCHERY"
+      ],
+      "dayOfWeek": "Monday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "DISHES",
+        "SUPER_HAPPY",
+        "LUNCH",
+        "SLEEP",
+        "TAXES",
+        "PUMPKIN",
+        "ARCHERY",
+        "GAMES",
+        "DINNER",
+        "FRIENDLY_CONVERSATION",
+        "LIFE_ADVICE"
+      ],
+      "dayOfWeek": "Thursday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "GAMES",
+        "GROCERIES",
+        "LUNCH",
+        "CRAFTS",
+        "JUMPING",
+        "PUMPKIN",
+        "SLEEP",
+        "WALKING",
+        "DINNER",
+        "SWIMMING",
+        "THROW_STICKS"
+      ],
+      "dayOfWeek": "Friday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "VALENTINES",
+        "PHILOSOPHICAL_DISCUSSION",
+        "LUNCH",
+        "CRAFTS",
+        "PUMPKIN",
+        "DINNER",
+        "SUPER_HAPPY",
+        "JOGGING",
+        "DINNER",
+        "THROW_STICKS",
+        "SWIMMING"
+      ],
+      "dayOfWeek": "Sunday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "SUPER_HAPPY",
+        "SWIMMING",
+        "LUNCH",
+        "PHILOSOPHICAL_DISCUSSION",
+        "TAXES",
+        "THROW_STICKS",
+        "GAMES",
+        "SLEEP",
+        "DINNER",
+        "JUMPING",
+        "DISHES"
+      ],
+      "dayOfWeek": "Wednesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "PHILOSOPHICAL_DISCUSSION",
+        "FRIENDLY_CONVERSATION",
+        "LUNCH",
+        "THROW_STICKS",
+        "GAMES",
+        "ARTS",
+        "SWIMMING",
+        "ARCHERY",
+        "DINNER",
+        "DISHES",
+        "EAT_CANDY"
+      ],
+      "dayOfWeek": "Tuesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "VALENTINES",
+        "LAUNDRY",
+        "LUNCH",
+        "DINNER",
+        "ARTS",
+        "FRIENDLY_CONVERSATION",
+        "DISHES",
+        "GROCERIES",
+        "DINNER",
+        "TAXES",
+        "LIFE_ADVICE"
+      ],
+      "dayOfWeek": "Saturday"
+    }
+  ],
+  "id": "d35bb3d1-782e-4284-ac32-1510dfc15b28",
+  "cabinName": "cabin2"
+},
+{
+  "sessionNumber": 5,
+  "schedules": [
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "GROCERIES",
+        "JOGGING",
+        "LUNCH",
+        "ARTS",
+        "LIFE_ADVICE",
+        "WALKING",
+        "DISHES",
+        "ROPES",
+        "DINNER",
+        "JUMPING",
+        "SLEEP"
+      ],
+      "dayOfWeek": "Monday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "VALENTINES",
+        "THROW_STICKS",
+        "LUNCH",
+        "SLEEP",
+        "WALKING",
+        "PHILOSOPHICAL_DISCUSSION",
+        "CRAFTS",
+        "DINNER",
+        "DINNER",
+        "SANTA",
+        "TAXES"
+      ],
+      "dayOfWeek": "Thursday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "WALKING",
+        "ROPES",
+        "LUNCH",
+        "FRIENDLY_CONVERSATION",
+        "SWIMMING",
+        "ARCHERY",
+        "SANTA",
+        "VALENTINES",
+        "DINNER",
+        "ARTS",
+        "TAXES"
+      ],
+      "dayOfWeek": "Friday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "JOGGING",
+        "FRIENDLY_CONVERSATION",
+        "LUNCH",
+        "ARTS",
+        "EAT_CANDY",
+        "SLIP_N_SLIDE",
+        "LIFE_ADVICE",
+        "SWIMMING",
+        "DINNER",
+        "GAMES",
+        "SLEEP"
+      ],
+      "dayOfWeek": "Sunday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "SUPER_HAPPY",
+        "ARTS",
+        "LUNCH",
+        "WALKING",
+        "PUMPKIN",
+        "RUNNING",
+        "JOGGING",
+        "SLIP_N_SLIDE",
+        "DINNER",
+        "ARCHERY",
+        "SANTA"
+      ],
+      "dayOfWeek": "Wednesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "JOGGING",
+        "SUPER_HAPPY",
+        "LUNCH",
+        "SLIP_N_SLIDE",
+        "FRIENDLY_CONVERSATION",
+        "DISHES",
+        "SANTA",
+        "DINNER",
+        "DINNER",
+        "LAUNDRY",
+        "EAT_CANDY"
+      ],
+      "dayOfWeek": "Tuesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "EAT_CANDY",
+        "JOGGING",
+        "LUNCH",
+        "JUMPING",
+        "DISHES",
+        "THROW_STICKS",
+        "ROPES",
+        "PUMPKIN",
+        "DINNER",
+        "SANTA",
+        "WALKING"
+      ],
+      "dayOfWeek": "Saturday"
+    }
+  ],
+  "id": "0d944636-9d0c-452c-a605-ba4c56352533",
+  "cabinName": "cabin2"
+},
+{
+  "sessionNumber": 6,
+  "schedules": [
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "LIFE_ADVICE",
+        "GROCERIES",
+        "LUNCH",
+        "ROPES",
+        "JUMPING",
+        "JOGGING",
+        "FRIENDLY_CONVERSATION",
+        "THROW_STICKS",
+        "DINNER",
+        "PUMPKIN",
+        "SLEEP"
+      ],
+      "dayOfWeek": "Monday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "SLIP_N_SLIDE",
+        "JOGGING",
+        "LUNCH",
+        "SLEEP",
+        "SWIMMING",
+        "RUNNING",
+        "PHILOSOPHICAL_DISCUSSION",
+        "ARCHERY",
+        "DINNER",
+        "EAT_CANDY",
+        "FRIENDLY_CONVERSATION"
+      ],
+      "dayOfWeek": "Thursday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "GROCERIES",
+        "PHILOSOPHICAL_DISCUSSION",
+        "LUNCH",
+        "DISHES",
+        "SLIP_N_SLIDE",
+        "THROW_STICKS",
+        "SUPER_HAPPY",
+        "VALENTINES",
+        "DINNER",
+        "FRIENDLY_CONVERSATION",
+        "EAT_CANDY"
+      ],
+      "dayOfWeek": "Friday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "THROW_STICKS",
+        "GAMES",
+        "LUNCH",
+        "WALKING",
+        "JUMPING",
+        "JOGGING",
+        "PHILOSOPHICAL_DISCUSSION",
+        "VALENTINES",
+        "DINNER",
+        "TAXES",
+        "ARCHERY"
+      ],
+      "dayOfWeek": "Sunday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "SLIP_N_SLIDE",
+        "THROW_STICKS",
+        "LUNCH",
+        "TAXES",
+        "PHILOSOPHICAL_DISCUSSION",
+        "JUMPING",
+        "VALENTINES",
+        "SUPER_HAPPY",
+        "DINNER",
+        "ARTS",
+        "CRAFTS"
+      ],
+      "dayOfWeek": "Wednesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "SLIP_N_SLIDE",
+        "GROCERIES",
+        "LUNCH",
+        "GAMES",
+        "LIFE_ADVICE",
+        "SLEEP",
+        "SUPER_HAPPY",
+        "JOGGING",
+        "DINNER",
+        "LAUNDRY",
+        "CRAFTS"
+      ],
+      "dayOfWeek": "Tuesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "SANTA",
+        "TAXES",
+        "LUNCH",
+        "GAMES",
+        "VALENTINES",
+        "FRIENDLY_CONVERSATION",
+        "SUPER_HAPPY",
+        "JOGGING",
+        "DINNER",
+        "ARCHERY",
+        "JUMPING"
+      ],
+      "dayOfWeek": "Saturday"
+    }
+  ],
+  "id": "df575121-868e-42b0-95dd-792306974cc4",
+  "cabinName": "cabin2"
+},
+{
+  "sessionNumber": 7,
+  "schedules": [
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "LIFE_ADVICE",
+        "DISHES",
+        "LUNCH",
+        "SLIP_N_SLIDE",
+        "SWIMMING",
+        "SUPER_HAPPY",
+        "PHILOSOPHICAL_DISCUSSION",
+        "GAMES",
+        "DINNER",
+        "ROPES",
+        "TAXES"
+      ],
+      "dayOfWeek": "Monday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "RUNNING",
+        "CRAFTS",
+        "LUNCH",
+        "GAMES",
+        "EAT_CANDY",
+        "FRIENDLY_CONVERSATION",
+        "PHILOSOPHICAL_DISCUSSION",
+        "JOGGING",
+        "DINNER",
+        "THROW_STICKS",
+        "ARTS"
+      ],
+      "dayOfWeek": "Thursday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "TAXES",
+        "JUMPING",
+        "LUNCH",
+        "CRAFTS",
+        "SANTA",
+        "SLEEP",
+        "LIFE_ADVICE",
+        "WALKING",
+        "DINNER",
+        "ROPES",
+        "JOGGING"
+      ],
+      "dayOfWeek": "Friday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "CRAFTS",
+        "WALKING",
+        "LUNCH",
+        "SLEEP",
+        "LAUNDRY",
+        "JUMPING",
+        "TAXES",
+        "ROPES",
+        "DINNER",
+        "RUNNING",
+        "SANTA"
+      ],
+      "dayOfWeek": "Sunday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "GROCERIES",
+        "RUNNING",
+        "LUNCH",
+        "DISHES",
+        "JOGGING",
+        "CRAFTS",
+        "ARTS",
+        "ROPES",
+        "DINNER",
+        "LAUNDRY",
+        "FRIENDLY_CONVERSATION"
+      ],
+      "dayOfWeek": "Wednesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "GAMES",
+        "TAXES",
+        "LUNCH",
+        "CRAFTS",
+        "THROW_STICKS",
+        "JUMPING",
+        "EAT_CANDY",
+        "LAUNDRY",
+        "DINNER",
+        "VALENTINES",
+        "RUNNING"
+      ],
+      "dayOfWeek": "Tuesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "ARCHERY",
+        "JOGGING",
+        "LUNCH",
+        "VALENTINES",
+        "PUMPKIN",
+        "EAT_CANDY",
+        "FRIENDLY_CONVERSATION",
+        "SWIMMING",
+        "DINNER",
+        "LIFE_ADVICE",
+        "CRAFTS"
+      ],
+      "dayOfWeek": "Saturday"
+    }
+  ],
+  "id": "3c54528b-47f3-44aa-b31b-1a160b5a78dc",
+  "cabinName": "cabin2"
+},
+{
+  "sessionNumber": 8,
+  "schedules": [
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "DINNER",
+        "EAT_CANDY",
+        "LUNCH",
+        "SUPER_HAPPY",
+        "TAXES",
+        "LAUNDRY",
+        "GAMES",
+        "ARTS",
+        "DINNER",
+        "VALENTINES",
+        "PHILOSOPHICAL_DISCUSSION"
+      ],
+      "dayOfWeek": "Monday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "VALENTINES",
+        "LAUNDRY",
+        "LUNCH",
+        "JOGGING",
+        "PHILOSOPHICAL_DISCUSSION",
+        "THROW_STICKS",
+        "SWIMMING",
+        "ARTS",
+        "DINNER",
+        "LIFE_ADVICE",
+        "JUMPING"
+      ],
+      "dayOfWeek": "Thursday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "SANTA",
+        "LUNCH",
+        "LUNCH",
+        "GAMES",
+        "JUMPING",
+        "VALENTINES",
+        "FRIENDLY_CONVERSATION",
+        "WALKING",
+        "DINNER",
+        "SUPER_HAPPY",
+        "THROW_STICKS"
+      ],
+      "dayOfWeek": "Friday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "WALKING",
+        "FRIENDLY_CONVERSATION",
+        "LUNCH",
+        "GROCERIES",
+        "CRAFTS",
+        "ARTS",
+        "DINNER",
+        "PUMPKIN",
+        "DINNER",
+        "SLEEP",
+        "LIFE_ADVICE"
+      ],
+      "dayOfWeek": "Sunday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "PUMPKIN",
+        "ARCHERY",
+        "LUNCH",
+        "JOGGING",
+        "RUNNING",
+        "TAXES",
+        "SUPER_HAPPY",
+        "ARTS",
+        "DINNER",
+        "ROPES",
+        "THROW_STICKS"
+      ],
+      "dayOfWeek": "Wednesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "PHILOSOPHICAL_DISCUSSION",
+        "LIFE_ADVICE",
+        "LUNCH",
+        "ARTS",
+        "SLIP_N_SLIDE",
+        "TAXES",
+        "JUMPING",
+        "LAUNDRY",
+        "DINNER",
+        "SANTA",
+        "SLEEP"
+      ],
+      "dayOfWeek": "Tuesday"
+    },
+    {
+      "schedule": [
+        "WAKEUP",
+        "BREAKFAST",
+        "WALKING",
+        "EAT_CANDY",
+        "LUNCH",
+        "JUMPING",
+        "CRAFTS",
+        "SWIMMING",
+        "DISHES",
+        "SANTA",
+        "DINNER",
+        "RUNNING",
+        "JOGGING"
+      ],
+      "dayOfWeek": "Saturday"
+    }
+  ],
+  "id": "57484238-2b28-4a45-8fa0-84621b7a4ade",
+  "cabinName": "cabin2"
 }
 ]

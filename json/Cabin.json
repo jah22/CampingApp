@@ -4,17 +4,17 @@
   "coordinatorCapacity": 1,
   "campers": [],
   "coordinators": [],
-  "name": "asd",
+  "name": "cabin1",
   "upperAgeBound": 15,
-  "lowerAgeBound": 11
+  "lowerAgeBound": 14
 },
 {
   "camperCapacity": 8,
   "coordinatorCapacity": 1,
   "campers": [],
   "coordinators": [],
-  "name": "fsdas",
-  "upperAgeBound": 16,
-  "lowerAgeBound": 14
+  "name": "cabin2",
+  "upperAgeBound": 14,
+  "lowerAgeBound": 12
 }
 ]

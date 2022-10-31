@@ -7,12 +7,14 @@ public class ThemeManager {
 
     public ThemeManager(){
         // empty ctor
+        this.id = UUID.randomUUID();
     }
     public void addTheme(Theme theme){
         this.themes.add(theme);
     }
     public void ThemeManager(ArrayList<Theme> themes){
         this.themes = themes;
+        this.id = UUID.randomUUID();
     }
     public String toString(){
         String out = "";
@@ -38,5 +40,11 @@ public class ThemeManager {
         for(Theme theme: this.themes){
             System.out.println(theme);
         }
+    }
+    public void save(){
+        // save the themes
+        ArrayList<ThemeManager> tmList = new ArrayList<ThemeManager>();
+        tmList.add(this);
+        FileIO.writeTheme(tmList);
     }
 }

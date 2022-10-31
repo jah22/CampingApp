@@ -5,11 +5,7 @@
   "isCoordinator": true,
   "password": "password",
   "address": "429 Sycamore Drive, Columbia, SC",
-  "emergencyContacts": [
-    {
-      "id": "71c7ae99-247f-4c80-950a-4a41e767e84d"
-    }
-  ],
+  "emergencyContacts": [],
   "id": "81c7ae99-247f-4c80-950a-4a41e767e84c",
   "medicalNotes": [
     "allergy 1",

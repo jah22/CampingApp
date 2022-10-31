@@ -13,6 +13,12 @@ public class PersonManager {
         this.dependents = dependents;
         this.emergencyContacts = ems;
     }
+    public void reset(){
+        // only admins can reset, so keep admins
+        this.guardians = new ArrayList<Guardian>();
+        this.dependents = new ArrayList<Dependent>();
+        this.emergencyContacts = new ArrayList<EmergencyContact>();
+    }
     // empty ctor
     public PersonManager(){
 
@@ -179,6 +185,8 @@ public class PersonManager {
         }
         // dont forget to add the dependent
         this.dependents.add(newDep);
+        // add the emergency contacts
+        this.emergencyContacts.addAll(ems);
     }
     public Dependent getDependentById(UUID id){
         for(Dependent d: this.dependents){

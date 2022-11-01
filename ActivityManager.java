@@ -4,6 +4,7 @@
  * CSCE 247
  * October 28, 2022
  */
+
 import java.util.ArrayList;
 
 public class ActivityManager {

@@ -1,3 +1,9 @@
+/**
+ * Theme Class
+ * @author Jacob Hammond, Jordan fowler, Lex Whalen, Tze-Chen Lin
+ * CSCE 247
+ * October 28, 2022
+ */
 public class Theme {
     private String name; 
     private int weekNumber;

@@ -1,3 +1,9 @@
+/**
+ * Person class
+ * @author Jacob Hammond, Jordan fowler, Lex Whalen, Tze-Chen Lin
+ * CSCE 247
+ * October 28, 2022
+ */
 import java.util.UUID;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

@@ -1,3 +1,9 @@
+/**
+ * ThemeManager
+ * @author Jacob Hammond, Jordan fowler, Lex Whalen, Tze-Chen Lin
+ * CSCE 247
+ * October 28, 2022
+ */
 import java.util.ArrayList;
 import java.util.UUID;
 

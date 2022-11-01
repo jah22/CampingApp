@@ -1,8 +1,9 @@
-import java.util.ArrayList;
 /**
  * A ReviewManager class that contains an ArrayList<Review> review and a double aveReview
  * @author Jacob Hammond, Jordan fowler, Lex Whalen, Tze-Chen Lin
  */
+import java.util.ArrayList;
+
 public class ReviewManager {
     private ArrayList<Review> reviews = new ArrayList<Review>();
     private double avgReview = 0.0;

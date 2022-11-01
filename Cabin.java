@@ -1,11 +1,12 @@
-
-import java.util.ArrayList;
 /**
  * A Cabin class containing a String name, an ArrayList<Dependent> coordinators, an ArrayList<Dependent> campers,
  * an ArrayList<Schedule> schedules, an int camperCapacity, an int coordinatorCapacity, an int lowerAgeBound
  * and an int upperAgeBound
  * @author Jacob Hammond, Jordan fowler, Lex Whalen, Tze-Chen Lin
+ * CSCE 247
+ * October 28, 2022
  */
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Cabin {

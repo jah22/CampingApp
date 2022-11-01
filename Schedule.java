@@ -1,5 +1,10 @@
+/**
+ * Schedule class
+ * @author Jacob Hammond, Jordan fowler, Lex Whalen, Tze-Chen Lin
+ * CSCE 247
+ * October 28, 2022
+ */
 import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 public class Schedule {

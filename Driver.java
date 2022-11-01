@@ -7,7 +7,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 /*
  * Driver for Camp System.
  */
@@ -17,7 +16,9 @@ public class Driver {
     // scanner
     Scanner USER_INPUT = new Scanner(System.in);
 
-    // run the driver
+    /*
+     * Run the driver for the camp system
+     */
     public void runDriver(){
         boolean running = true;
         while(running){
@@ -51,7 +52,9 @@ public class Driver {
             }
         }
     }
-    // run the driver for an admin
+    /*
+     * run the driver for an admin
+     */
     public void runCampAdmin(CampAdmin user){
         boolean running = true;
         while(running){
@@ -78,7 +81,9 @@ public class Driver {
             }
         }
     }
-    // handle setting up a new camp
+    /*
+     * handle setting up a new camp
+     */
     public void handleSetUpNewCampMenu(){
         System.out.println("Would you like to set up a new camp?");
         int selection = getYesNoResponse();
@@ -92,6 +97,9 @@ public class Driver {
                 break;
         }
     }
+    /*
+     * Handle the setting up of a new camp
+     */
     public void handleSetUpNewCamp(){
         // reset old camp
         this.csm.resetCamp();
@@ -111,8 +119,12 @@ public class Driver {
         System.out.println("Camp information: ");
         this.csm.viewCamp();
     }
-    // get a cabin manager, used for creating a new camp
-    // new camps need cabins, this is where they are created
+    /*
+     * get a cabin manager, used for creating a new camp
+     * new camps need cabins, this is where they are created
+     * @param sessionCount: int representing the number of sessions
+     * @return CabinManager: return a cabin manager object to populate the campsite with
+     */
     public CabinManager promptCabinManager(int sessionCount){
         boolean running = true;
         int count = 0;
@@ -137,7 +149,11 @@ public class Driver {
         }
         return c;
     }
-    // create and return a cabin
+    /*
+     * create and return a cabin
+     * @param sessionCount: the number of sessions of the cabin
+     * @return Cabin: cabin that the user created
+     */
     public Cabin promptForCabin(int sessionCount){
         System.out.println("Enter the name of the cabin:");
         String name = promptForStringResponse();
@@ -148,7 +164,11 @@ public class Driver {
 
         return new Cabin(name,lowerBound,upperBound,sessionCount);
     }
-    // make a theme manager
+    /*
+     * make a theme manager
+     * @param sessionCount: int representing the number of session
+     * @return ThemeManager: the theme manager created by the user
+     */
     public ThemeManager promptThemeManager(int sessionCount){
         ThemeManager t = new ThemeManager();
         int count = 0;
@@ -162,7 +182,10 @@ public class Driver {
         }
         return t;
     }
-    // prompt for a month
+    /*
+     * prompt for a month
+     * @return String: month that the user selects
+     */
     public String promptForMonth(){
         String[] months = {
             "Janurary",
@@ -183,7 +206,9 @@ public class Driver {
         }
         return months[getValidSelection(0, 11)];
     }
-    // edit a camp
+    /*
+     * Edit a camp
+     */
     public void handleEditCampSection(){
         boolean running = true;
         while(running){
@@ -207,7 +232,9 @@ public class Driver {
             }
         }
     }
-    // edit a camp name
+    /*
+     * Edit a camp name
+     */
     public void handleEditCampName(){
         System.out.println("The current name is: " + this.csm.getName());
         System.out.println("Would you like to edit the name?");
@@ -222,7 +249,9 @@ public class Driver {
                 return;
         }
     }
-    // edit a camp year
+    /*
+     * Edit a camp year
+     */
     public void handleEditCampYear(){
         System.out.println("The current year for this camp is: "+ this.csm.getYear());
         System.out.println("Would you like to edit the year?");
@@ -239,21 +268,28 @@ public class Driver {
 
 
     }
-    // show edit options
+    /*
+     * Show edit options
+     */
     public void viewHandleEditCampSectionOptions(){
         System.out.println("[1] Edit camp name");
         System.out.println("[2] Edit camp themes");
         System.out.println("[3] Edit camp year");
         System.out.println("[4] Exit");
     }
-    // show camp admin options
+    /*
+     * Show camp admin options
+     */
     public void viewCampAdminOptions(){
         System.out.println("[1] View Camp Site Information");
         System.out.println("[2] Edit Camp Site Information");
         System.out.println("[3] Setup new Camp");
         System.out.println("[4] Exit");
     }
-    // run driver for coordinator
+    /*
+     * Run the system for coordinators
+     * @param user: Dependent representing the current user
+     */
     public void runCoordinator(Dependent user){
         boolean running = true;
         while(running){
@@ -272,7 +308,10 @@ public class Driver {
             }
         }
     }
-    // handle emergency contacts 
+    /*
+     * Handle emergency contacts 
+     * @param Dependent: dependent representing the user
+     */
     public void handleEmergencyContactsCoordinator(Dependent user){
         boolean running = true;
         while(running){
@@ -288,13 +327,18 @@ public class Driver {
             }
         }
     }
-    // show options for emergency contacts
+    /*
+     * Show options for emergency contacts
+     */
     public void printEmergencyContactsCoordinatorOptions(){
         System.out.println("Emergency Contacts Menu");
         System.out.println("[1] view your emergency contacts");
         System.out.println("[2] Exit");
     }
-    // handle cabins section for coordinator
+    /*
+     * Handle cabins section for coordinator
+     * @param Dependent: the dependent representing the current user
+     */
     public void handleCabinsCoordinator(Dependent coordinator){
         boolean running = true;
         while(running){
@@ -317,7 +361,10 @@ public class Driver {
             }
         }
     }
-    // handle saving of files for coordinator
+    /*
+     * Handle saving of files for coordinator
+     * @param Dependent: dependent representing the current user
+     */
     public void handleSaveFileSectionCoordinator(Dependent user){
         System.out.println("Save File Cabin Menu");
         boolean running = true;
@@ -349,7 +396,10 @@ public class Driver {
             }
         }
     }
-    // handle saving of files for cabins
+    /*
+     * Handle saving of files for cabins 
+     * @param Cabin: cabin that is being dealt with
+     */
     public void handleSaveFileCabinSchedules(Cabin c){
         System.out.println(c.getSchedulesString());
         System.out.println("Would you like to save these schedules?");
@@ -365,7 +415,10 @@ public class Driver {
                 break;
         }
     }
-    // handle saving of file for vital info
+    /*
+     * Handle saving of file for vital info
+     * @param Cabin: cabin being dealt with
+     */
     public void handleSaveFileCabinVitalInfo(Cabin c){
         System.out.println(c.getVitalInfo());
         System.out.println("Would you like to save this information?");
@@ -380,7 +433,10 @@ public class Driver {
                 break;
         }
     }
-    // handle save file for cabins
+    /*
+     * Handle save file for cabins
+     * @param Cabin: cabin being dealt with
+     */
     public void handleSaveFileCabin(Cabin c){
         System.out.println(c.getCabinRoster());
         System.out.println("Would you like to save this roster?");
@@ -396,14 +452,21 @@ public class Driver {
                 break;
         }
     }
-    // handle saving text to a file
+    /*
+     * Handle saving text to a file
+     * @param String: text to be saved
+     */
     public void handleSaveToTextFile(String text){
         System.out.println("Enter the file name: ");
         String fileName = promptForStringResponse();
         FileIO.writeToTxtFile(text, fileName);
         System.out.println("File successfully saved.\n");
     }
-    // get a cabin by coordinator
+    /*
+     * Get a cabin by coordinator
+     * @param Dependent: dependent representing the current user
+     * @return Cabin: return cabin to be created by user
+     */
     public Cabin promptGetCabinByCoordinator(Dependent user){
         this.csm.viewCabinsByCoordinator(user);
         int cabinCount = this.csm.getCabinCountByDependent(user);
@@ -419,14 +482,18 @@ public class Driver {
         }
     }
 
-    // show file coordinator options
+    /*
+     * Show file coordinator options
+     */
     public void printSaveFileCoordinatorOptions(){
         System.out.println("[1] Save Roster");
         System.out.println("[2] Save Vital Information");
         System.out.println("[3] Save Weekly Schedule");
         System.out.println("[4] Exit");
     }
-    // show cabin coordinator options
+    /*
+     * Show cabin coordinator options
+     */
     public void printCabinsSectionCoordinatorOptions(){
         System.out.println("Cabin Menu");
         System.out.println("[1] View Your Cabin");
@@ -434,17 +501,26 @@ public class Driver {
         System.out.println("[3] Saving to File");
         System.out.println("[4] Exit");
     }
-    // show general coordinator options
+    /*
+     * Show general coordinator options
+     */
     public void printCoordinatorOptions(){
         System.out.println("[1] Cabins");
         System.out.println("[2] Emergency Contacts");
         System.out.println("[3] Exit");
     }
-    // welcome user
+    /*
+     * Welcome user
+     * @param Person: person to be welcomed to the system
+     */
     public void welcomeAuthUser(Person user){
         System.out.println("Welcome, " + user.getFirstName() +"\n");
     }
-    // run driver for guardian
+
+    /*
+     * Run driver for guardian
+     * @param Guardian: represents the current user
+     */
     public void runGuardian(Guardian user){
         boolean running = true;
         while(running){
@@ -471,7 +547,10 @@ public class Driver {
                 }
         }
     }
-    // handle guardian cabin section
+    /*
+     * Handle guardian cabin section
+     * @param Guardian: current user
+     */
     public void handleGuardianCabinSection(Guardian user){
         boolean running = true;
         while(running){
@@ -491,13 +570,18 @@ public class Driver {
             }
         }
     }
-    // show guardian options
+    /*
+     * Show guardian options
+     */
     public void printGuardianCabinSectionOptions(){
         System.out.println("[1] View cabins");
         System.out.println("[2] Add dependent to cabin");
         System.out.println("[3] Exit");
     }
-    // handle the review section
+    /*
+     * Handle the review section
+     * @param Guardian: the current user
+     */
     public void handleReviewSection(Guardian guardian){
         while(true){
             System.out.println("[1] Add review");
@@ -525,13 +609,18 @@ public class Driver {
             }
         }
     }
-    // handle viewing of reviews by rating
+    /*
+     * Handle viewing of reviews by rating
+     */
     public void handleViewReviewsByRating(){
         System.out.println("Enter rating: ");
         int rating = getValidSelection(1,5);
         this.csm.viewReviewsByRating(rating);
     }
-    // handle reviewing a camp
+    /*
+     * Handle reviewing a camp
+     * @param Guardian: the current user
+     */
     public void handleReviewCamp(Guardian guardian){
         if(!this.csm.guardianHasDependents(guardian)){
             System.out.println("No dependents found. You cannot review if you have no campers.");
@@ -557,7 +646,10 @@ public class Driver {
         }
         this.csm.addReview(guardian.getFullName(),rating,title,body);
     }
-    // handle guardian dependent section
+    /*
+     * Handle guardian dependent section
+     * @param Guardian: current user
+     */
     public void handleGuardianDependentSection(Guardian user){
         while(true){
             printGuardianDependentSectionOptions();
@@ -578,7 +670,10 @@ public class Driver {
             }
         }
     }
-    // remove dependent from guardian
+    /*
+     * Remove dependent from guardian
+     * @param Guardian: current user
+     */
     public void handleRemoveDependentFromGuardian(Guardian user){
         System.out.println("Here are your dependents: ");
         this.csm.viewDependentsFromGuardian(user.getId());
@@ -598,13 +693,18 @@ public class Driver {
         }
         System.out.println("No camper with that name present.");
     }
-    // get yes or no
+    /*
+     * Get yes or no
+     * @return int: 1 for yes, 2 for no
+     */
     public int getYesNoResponse(){
         System.out.println("[1] Yes");
         System.out.println("[2] No");
         return getValidSelection(1, 2);
     }
-    // show dependent options
+    /*
+     * Show dependent options
+     */
     public void printGuardianDependentSectionOptions(){
         System.out.println("Dependent Information Menu");
         System.out.println("[1] View your dependents");
@@ -612,7 +712,10 @@ public class Driver {
         System.out.println("[3] Remove dependent");
         System.out.println("[4] Exit");
     }
-    // add dependent to cabin
+    /*
+     * Add dependent to cabin
+     * @param Guardian: the current user
+     */
     public void handleAddDependentToCabin(Guardian guardian){
         // check if dependents
         if(!this.csm.guardianHasDependents(guardian)){
@@ -656,7 +759,10 @@ public class Driver {
             System.out.println("Could not add camper to cabin.");
         }
     }
-    // add new depenednet
+    /*
+     * Add new dependent
+     * @param Guardian: the current user
+     */
     public void handleAddNewDependent(Guardian user){
         System.out.println("First name: ");
         String firstName = this.promptForStringResponse();
@@ -675,7 +781,10 @@ public class Driver {
         ArrayList<EmergencyContact> emContacts = promptEmContacts();
         this.csm.addDependent(user.getId(), firstName, lastName, birthDate, address,medNotes,emContacts);
     }
-    // get emergency contacts
+    /*
+     * Get emergency contacts
+     * @return ArrayList<EmergencyContact> the list of emergency contacts
+     */
     public ArrayList<EmergencyContact> promptEmContacts(){
         ArrayList<EmergencyContact> ems = new ArrayList<>();
         boolean running = true;
@@ -695,7 +804,10 @@ public class Driver {
         }
         return ems;
     }
-    // get an emergency contact
+    /*
+     * Get an emergency contact
+     * @return EmergencyContact created by the user
+     */
     public EmergencyContact promptEmContact(){
         System.out.println("First name: ");
         String firstName = promptForStringResponse();
@@ -708,7 +820,10 @@ public class Driver {
         String relation = promptForStringResponse();
         return new EmergencyContact(firstName, lastName, birthdate, address,phone,relation);
     }
-    // get medical notes
+    /*
+     * Get medical notes
+     * @return ArrayList<String> return the medical notes of the user
+     */
     public ArrayList<String> promptMedNotes(){
         ArrayList<String> notes = new ArrayList<>();
         while(true){
@@ -719,12 +834,17 @@ public class Driver {
             notes.add(medNote);
         }
     }
-    // show medical notes
+    /*
+     * Show medical notes
+     * @return String: the medical notes of the user
+     */
     public String promptMedNote(){
         System.out.println("Please enter any medical information, or \"done\" if done: ");
         return promptForStringResponse();
     }
-    // show guardian options
+    /*
+     * Show guardian options
+     */
     public void printGuardianOptions(){
         System.out.println("[1] Dependents");
         System.out.println("[2] Cabins");
@@ -732,12 +852,18 @@ public class Driver {
         System.out.println("[4] Cabin Information");
         System.out.println("[5] Exit");
     }
-    // check if valid input
+    /*
+     * Check if valid input
+     * @return boolean: representing if the input is valid
+     */
     public boolean isValidIntInput(int input,int lower, int upper){
         // if between lower and upper, valid
         return (input >= lower && input <= upper);
     }
-    // get login
+    /*
+     * Login a user
+     * @return Person: the logged in user
+     */
     public Person handleLogin(){
         int userChoice = -1;
         System.out.println("Are you a\n[1] Guardian\n[2] Coordinator\n[3] Camp Admin\nOr [4] to exit.");
@@ -769,7 +895,10 @@ public class Driver {
 
         return retPerson;
     }
-    // prompt for login info
+    /*
+     * Prompt for login information
+     * @return ArrayList<String> zero index is username, first index is password
+     */
     public ArrayList<String> promptLoginInfo(){
         // first entry is username, second is password
         ArrayList<String> ret = new ArrayList<>();
@@ -781,7 +910,10 @@ public class Driver {
         ret.add(password);
         return ret;
     }
-    // register guardian
+    /*
+     * Register guardian
+     * @return Guardian: the registered guardian
+     */
     public Guardian handleRegisterGuardian(){
         // register a guardian
         System.out.println("Enter your first name: ");
@@ -799,7 +931,8 @@ public class Driver {
         return this.csm.registerGuardian(firstName,lastName,birthDate,username,password,email,phone, address);
     }
     /*
-     * 
+     * Prompt user for phone
+     * @return String representing phone
      */
     public String promptForPhone(){
         // to do: perform checks here

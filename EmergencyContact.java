@@ -10,22 +10,48 @@ public class EmergencyContact extends Person {
     private String phone;
     private String relation;
 
+    /*
+     * @param firstName: String representing the first name of the contact
+     * @param lastName: String representing the last name of the contact
+     * @param birthDate: String representing the birthDate of the contact
+     * @param address: String representing the address of the contact
+     * @param phone: String representing the phone number of the contact
+     * @param relation: String representing the relation of the contact
+     * @param id: UUID representing the id of the contact
+     */
     public EmergencyContact(String firstName, String lastName, String birthDate, String address, String phone,String relation,UUID id) {
         super(firstName, lastName, birthDate, address, id);
         this.phone= phone;
         this.relation = relation;
     }
+    /*
+     * @param firstName: String representing the first name of the contact
+     * @param lastName: String representing the last name of the contact
+     * @param birthDate: String representing the birthDate of the contact
+     * @param address: String representing the address of the contact
+     * @param phone: String representing the phone number of the contact
+     * @param relation: String representing the relation of the contact
+     */
     public EmergencyContact(String firstName, String lastName, String birthDate, String address, String phoneNumber,String relation) {
         super(firstName, lastName, birthDate, address, UUID.randomUUID());
         this.phone= phoneNumber;
         this.relation = relation;
     }
+    /*
+     * @return String representing the phone number of the person
+     */
     public String getPhone(){
         return this.phone;
     }
+    /*
+     * @return String representing the relation of the person
+     */
     public String getRelation(){
         return this.relation;
     }
+    /*
+     * @return String representing the emergency contact
+     */
     public String toString(){
         String out = "";
         out += "Full name: " + this.getFullName() + "\n";

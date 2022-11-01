@@ -25,6 +25,9 @@ import java.util.HashMap;
 import java.util.UUID;
 import java.util.Map.Entry;
 
+/**
+ * This class handles getting, parsing, reading, and writing JSONFiles within the camp system.
+ */
 
 public class FileIO {
     /*
@@ -46,12 +49,15 @@ public class FileIO {
      */
     private PersonManager pM;
 
-    // singleton
+    /**
+     * singleton initializer
+     */
     private static FileIO fileIO;
-
+    /**
+     * This functions populates the initalized ArrayLists with data.
+     */
     private void populateData(){
         /*
-         * Populates all arraylists of data
          * ORDER MATTERS! DEPENDENCIES FIRST!
          */
         this.faqs = readFaqs();
@@ -76,9 +82,16 @@ public class FileIO {
 
         this.campSiteManager = readCamp();
     }
+    /**
+     * Calls populateData in order to read from JSON files and populate ArrayLists
+     */
     private FileIO(){
         populateData();
     }
+    /**
+     * Creates a new instance of FileIO as a singleton
+     * @return one instance of FileIO
+     */
     public static FileIO getInstance(){
         if(fileIO == null){
             fileIO = new FileIO();
@@ -86,7 +99,15 @@ public class FileIO {
         }
         return fileIO;
     }
-
+    /*
+     * **********************
+     * JSON getters
+     * **********************
+     */
+    /**
+     * Main accessor for data in the JSON files
+     * @return the ArrayList of objects of their respective types.
+     */
     public static ArrayList<CampAdmin> getAdmins(){
         return admins;
     }
@@ -123,6 +144,12 @@ public class FileIO {
      * Json Parsers
      * ***************************
      */
+    /**
+     * Creates a new JSONObject that contains the information needed to create a Schedule
+     * Each Schedule contains a UUID, cabinName, sessionNumber, and a HashMap of activities
+     * @param jSchedule an empty JSONObject
+     * @return jO, a JSONObject populated with Schedule information
+     */
     private static Schedule parseScheduleObj(JSONObject jSchedule){
         UUID id = UUID.fromString((String)jSchedule.get(DataConstants.SCHEDULE_ID));
         String cabinName = (String) jSchedule.get(DataConstants.SCHEDULE_CABIN_NAME);
@@ -155,12 +182,24 @@ public class FileIO {
         }
         return sched;
     }
-
+    /**
+     * Creates a new JSONObject that contains the information needed to create an FAQ
+     * @param jFaq an empty JSONObject
+     * @return new FAQ, a JSONObject populated with FAQ information
+     */
     private static FAQ parseFaqObj(JSONObject jFaq){
         String question = (String) jFaq.get(DataConstants.FAQ_QUESTION);
         String answer = (String) jFaq.get(DataConstants.FAQ_ANSWER);
         return new FAQ(question,answer);
     }
+    /**
+     * Creates a new JSONObject that contains the information needed to create a new ThemeManager
+     * A ThemeManager contains themes for the camp to be used week by week.
+     * It also contains a UUID, an Array of Themes 
+     * Each Theme has a name, week, and description
+     * @param jTheme an empty JSONObject
+     * @return tm, a JSONObject populated with ThemeManager information
+     */
     private ThemeManager parseThemeManager(JSONObject jTheme) {
         ThemeManager tm = new ThemeManager();
         UUID id = UUID.fromString((String) jTheme.get("id"));
@@ -175,6 +214,12 @@ public class FileIO {
         });
         return tm;
     }
+    /**
+     * Creates a new JSONObject that contains the information needed to create a Review
+     * A Review has an Author, Rating, Title, and Body
+     * @param rev, an empty JSON Object
+     * @return a new Review with the needed information as a parameter
+     */
     private Review parseReviewObj(JSONObject rev){
         
         String author= (String) rev.get(DataConstants.REVIEW_AUTHOR);
@@ -184,6 +229,12 @@ public class FileIO {
 
         return new Review(author,rating,title,body);
     }
+    /**
+     * Creates a new JSONObject that contains the information needed to create an EmergencyContact
+     * An EmergencyContact requires a last name, first name, address, UUID, birthdate, phone number, and relationship to the camper
+     * @param jEM, an empty JSON Object
+     * @return a new EmergencyContact with needed information parameterized.
+     */
     private EmergencyContact parseEmergencyContactObj(JSONObject jEM){
         // get attributes
         String firstName = (String) jEM.get(DataConstants.PERSON_FIRST_NAME);
@@ -196,6 +247,12 @@ public class FileIO {
         
         return (new EmergencyContact(firstName, lastName, birthDate, address,phone,relation,id));
     }
+    /**
+     * Creates a new JSONObject that contains the information needed to create a Guardian
+     * A Guardian requires a first name, last name, address, UUID, birthdate, password, username, email, phone number, and any registered dependents.
+     * @param guardian, an empty JSON Object
+     * @return a new Guardian with the needed information parameterized
+     */
     private Guardian parseGuardianObj(JSONObject guardian){
         String firstName = (String) guardian.get(DataConstants.PERSON_FIRST_NAME);
         String lastName = (String) guardian.get(DataConstants.PERSON_LAST_NAME);
@@ -221,6 +278,13 @@ public class FileIO {
         });
         return new Guardian(firstName, lastName, birthDate, address, id, password, username, email, phoneNumber,deps);
     }
+    /**
+     * Creates a new JSONObject that contains the information needed to create a Camper
+     * A Camper is a Dependent which requires a first name, last name, address, UUID, birthdate, isCoordinator, emergency contacts,
+     * and medical notes.
+     * @param jsonDep, an empty JSON Object
+     * @return a new Dependent with the needed information parameterized
+     */
     private Dependent parseCamperObj(JSONObject jsonDep){
         // get attributes
         String firstName = (String) jsonDep.get(DataConstants.DEPENDENT_FIRST_NAME);
@@ -258,6 +322,13 @@ public class FileIO {
         
         return new Dependent(firstName, lastName, birthDate, address, id,isCoordinator,emContacts,medNotes,npB);
     }
+    /**
+     * Creates a new JSONObject that contains the information needed to create a Coordinator
+     * Coordinators are identical to Dependents with the exceptions of their AuthBehaviors and their boolean isCoordinator set to true
+     * Coordinators have a username, email, phoneNumber, and password
+     * @param jObject, an empty JSON Object
+     * @return a Dependent object with the needed information for a Coordinator
+     */
     private Dependent parseCoordinatorObj(JSONObject jObject){
         Dependent coordinator = parseCamperObj(jObject) ;
 
@@ -272,6 +343,13 @@ public class FileIO {
 
         return coordinator;
     }
+    /**
+     * Creates a new JSONObject that contains the information needed to create a CampAdmin
+     * These are authorized users with admin priveleges in the camp system
+     * They have a first name, last name, address, UUID, birthdate, password, username, and email
+     * @param admin, an empty JSON Object
+     * @return a new CampAdmin with the needed information parameterized
+     */
     private CampAdmin parseAdminObj(JSONObject admin){
         // get attributes
         String firstName = (String) admin.get("firstName");
@@ -286,6 +364,14 @@ public class FileIO {
 
         return(new CampAdmin(firstName, lastName, birthDate, address, id, password, username, email, phone));
     }
+    /**
+     * Creates a new JSONObject that contains the information needed to create a Cabin
+     * Cabins contain ArrayLists of coordinators, campers, and schedules.
+     * They also contain a name, camper capacity, coordinator capacity, lower age limit, and upper age limit
+     * Due to having coordinators and campers, they must be parsed again in order to get the information needed
+     * @param cabin, an empty JSON Object
+     * @return a new Cabin with the needed information parameterized
+     */
     private Cabin parseCabinObj(JSONObject cabin){
         // get attributes
         String cabinName = (String) cabin.get("name");
@@ -326,6 +412,12 @@ public class FileIO {
 
         return(new Cabin(cabinName,coordinators,campers,schedules, camperCapacity, coordinatorCapacity,lowerAgeBound,upperAgeBound));
     }
+    /**
+     * Creates a new JSONObject that contains the information needed to create a CampsiteManager
+     * Creates a new camp that would have its own independent cabins, schedules, activities, etc.
+     * @param jCamp, an empty JSON Object
+     * @return a new CampSiteManager with the needed information parameterized.
+     */
     private CampSiteManager parseCampObj(JSONObject jCamp){
 
         String name = (String) jCamp.get("name");
@@ -350,6 +442,11 @@ public class FileIO {
      * Json Readers
      * ***************************
      */
+    /**
+     * Reads the JSON file for Schedules
+     * Populates the ArrayList with new JSONObjects containing the information read.
+     * @return scheds, the ArrayList of Schedules
+     */
     private ArrayList<Schedule> readSchedules(){
         ArrayList<Schedule> scheds = new ArrayList<Schedule>();
         JSONArray jScheds = parseJsonFileArr(DataConstants.SCHEDULE_FILE_NAME);
@@ -358,6 +455,11 @@ public class FileIO {
         });
         return scheds; 
     }
+    /**
+     * Reads the JSON file for Reviews
+     * Populates the ArrayList with new JSONObjects containing the information read
+     * @return revs, the ArrayList of Reviews
+     */
     private ArrayList<Review> readReviews(){
         ArrayList<Review> revs=  new ArrayList<Review>();
         JSONArray revList = parseJsonFileArr(DataConstants.REVIEW_FILE_NAME);
@@ -366,6 +468,11 @@ public class FileIO {
         });
         return revs;
     }
+    /**
+     * Reads the JSON file for FAQs
+     * Populates the ArrayList with new JSONObjects containing the information read
+     * @return faqs, the ArrayList of FAQs
+     */
     private ArrayList<FAQ> readFaqs(){
         ArrayList<FAQ> faqs=  new ArrayList<FAQ>();
         JSONArray faqList= parseJsonFileArr(DataConstants.FAQ_FILE_NAME);
@@ -374,12 +481,21 @@ public class FileIO {
         });
         return faqs;
     }
+    /**
+     * Reads the JSON file for Camp
+     * @return calls parseCampObject to return a JSONObject containing the information read from the JSON file
+     */
     private CampSiteManager readCamp(){
         JSONArray campObject = parseJsonFileArr(DataConstants.CAMP_FILE_NAME);
 
         // only deal with one camp for now
         return parseCampObj((JSONObject) campObject.get(0));
     }
+    /**
+     * Reads the JSON file for EmergencyContacts
+     * Populates the ArrayList with new JSONObjects containing the information read
+     * @return emContacts, the ArrayList of EmergencyContacts
+     */
     private ArrayList<EmergencyContact> readEmergencyContacts(){
         ArrayList<EmergencyContact> emContacts = new ArrayList<EmergencyContact>();
         JSONArray emList = parseJsonFileArr(DataConstants.EMERGENCY_CONTACT_FILE_NAME);
@@ -388,7 +504,11 @@ public class FileIO {
         });
         return emContacts;
     }
-
+    /**
+     * Reads the JSON file for Guardians
+     * Populates the ArrayList with new JSONObjects containing the information read
+     * @return guardians, an ArrayList populated with Guardians
+     */
     private ArrayList<Guardian> readGuardians() { 
         ArrayList<Guardian> guardians = new ArrayList<Guardian>();
         JSONArray guardianList = parseJsonFileArr(DataConstants.GUARDIAN_FILE_NAME);
@@ -396,7 +516,12 @@ public class FileIO {
             guardians.add(parseGuardianObj((JSONObject)guardian))
         );
         return guardians;
-    }   
+    }
+    /**
+     * Reads the JSON file for ThemeManagers
+     * Populates the ArrayList with new JSONObjects containing the information read
+     * @return ret, populated ArrayList of ThemeManagers
+     */
     private ArrayList<ThemeManager> readThemeManagers(){
         ArrayList<ThemeManager> ret = new ArrayList<ThemeManager>();
         JSONArray jaThemeManagerList = parseJsonFileArr("./json/Theme.json");
@@ -405,6 +530,11 @@ public class FileIO {
         );
         return ret;
     }
+    /**
+     * Reads the JSON file for CampAdmins
+     * Populates the ArrayList with new JSONObjects containing the information read
+     * @return admins, a populated ArrayList of CampAdmins
+     */
     private ArrayList<CampAdmin> readAdmins(){
         ArrayList<CampAdmin> admins = new ArrayList<CampAdmin>();
         JSONArray adminList = parseJsonFileArr(DataConstants.CAMP_ADMIN_FILE_NAME);
@@ -413,6 +543,11 @@ public class FileIO {
         );
         return admins;
     }
+    /**
+     * Reads the JSON file for Cabins
+     * Populates the ArrayList with new JSONObjects containing the information read
+     * @return cabins, a populated ArrayList of Cabins
+     */
     private ArrayList<Cabin> readCabins(){
         // cabins hold dependents, so need to read those in first
         ArrayList<Cabin> cabins = new ArrayList<Cabin>();
@@ -422,6 +557,12 @@ public class FileIO {
         );
         return cabins;
     }
+    /**
+     * Reads the JSON file for Dependents
+     * Populates the ArrayList with new JSONObjects containing the information read
+     * Notably populates the ArrayList with both Campers and Coordinators as they are both dependents
+     * @return deps, an ArrayList populated with Dependents
+     */
     private ArrayList<Dependent> readDependents() {
         ArrayList<Dependent> deps = new ArrayList<Dependent>();
         // read campers
@@ -443,7 +584,12 @@ public class FileIO {
      * JSON Getters
      * ***************************
      */
-
+    /**
+     * Populates a Person object with information needed to create a Person
+     * The information needed is a UUID, first name, last name, address, and birthdate
+     * @param p, an empty Person object
+     * @return jP, a JSONObject containing information needed for a Person
+     */
     private static JSONObject getPersonJson(Person p){
         JSONObject jP = new JSONObject();
         jP.put("id",p.getId().toString());
@@ -454,6 +600,12 @@ public class FileIO {
 
         return jP;
     }
+    /**
+     * Contains the information needed for a person
+     * Also contains password, email, phone, and username
+     * @param p, an empty Person object
+     * @return jP, a JSONObject containing information needed for a Person
+     */
     private static JSONObject getPriorityPersonJson(Person p){
         PriorityBehavior pB = (PriorityBehavior) p.getAuthBehavior();
         JSONObject jP = getPersonJson(p);
@@ -464,6 +616,12 @@ public class FileIO {
 
         return jP;
     }
+    /**
+     * Contains the information of a PriorityPerson
+     * Creates a new ArrayList of JSONObjects to populate with the Guardian's Dependent's IDs
+     * @param g, an empty Guardian object
+     * @return jsonG, a JSONObject containing the information of Guardians
+     */
     private static JSONObject getGuardianJson(Guardian g){
         JSONObject jsonG = getPriorityPersonJson(g);
         ArrayList<JSONObject> ids = new ArrayList<>();
@@ -475,10 +633,22 @@ public class FileIO {
         jsonG.put("registeredDependents", ids);
         return jsonG;
     }
+    /**
+     * Calls get priorityPerson and returns that JSONObject
+     * @param cA, an empty CampAdmin object
+     * @return jO, a JSONObject containing CampAdmin information
+     */
     private static JSONObject getCampAdminJson(CampAdmin cA){
         JSONObject jO = getPriorityPersonJson(cA);
         return jO;
     }
+    /**
+     * Calls getPersonJson to get basic Camper information
+     * Stores isCoordinator by calling getIsCoordinator from Dependent
+     * Creates a new ArrayList for EmergencyContact ids and populates that
+     * @param d, an empty Dependent object
+     * @return jO, a JSONObject containing Camper information
+     */
     private static JSONObject getCamperJson(Dependent d){
         JSONObject jO = getPersonJson(d);
         jO.put("isCoordinator",d.getIsCoordinator());
@@ -493,6 +663,13 @@ public class FileIO {
 
         return jO;
     }
+    /**
+     * Calls getPriorityPerson for the basic Coordinator information
+     * Stores isCoordinator by calling getIsCoordinator from Dependent
+     * Creates a new ArrayList for EmergencyContact ids and populates that
+     * @param c, an empty Coordinator object
+     * @return jCo, a JSONObject containing Coordinator information
+     */
     private static JSONObject getCoordinatorJson(Dependent c) {
         JSONObject jCo = getPriorityPersonJson(c);
         jCo.put("isCoordinator",c.getIsCoordinator());
@@ -506,6 +683,11 @@ public class FileIO {
         jCo.put("emergencyContacts",ids);
         return jCo;
     }
+    /**
+     * Creates a new JSONObject and populates it with Review information
+     * @param r, an empty Review object
+     * @return jR, a JSONObject containing Review information
+     */
     private static JSONObject getReviewJson(Review r) {
         JSONObject jR = new JSONObject();
         jR.put("title", r.getTitle());
@@ -514,6 +696,12 @@ public class FileIO {
         jR.put("rating", r.getRating());
         return jR;
     }
+    /**
+     * Calls getPersonJson to get basic EmergencyContact information
+     * Populates the JSONObject with phone number and relation
+     * @param eC, an empty EmergencyContact object
+     * @return jEc, a JSONObject containing EmergencyContact information
+     */
     private static JSONObject getEmergencyContactJson(EmergencyContact eC) {
         JSONObject jEC = getPersonJson(eC);
         jEC.put("phone",eC.getPhone());
@@ -521,6 +709,13 @@ public class FileIO {
 
         return jEC;
     }
+    /**
+     * Calls functions from cabin to get name, camper capacity, etc.
+     * Creates two new ArrayLists of JSONObjects
+     * Populates these ArrayLists with coordinator and camper IDs
+     * @param c, an empty Cabin object
+     * @return jC, a JSONObject containing all the Cabin information
+     */
     private static JSONObject getCabinJson(Cabin c) {
         JSONObject jC = new JSONObject();
         jC.put("name", c.getCabinName());
@@ -544,6 +739,13 @@ public class FileIO {
         jC.put("coordinators", coordIds);
         return jC;
     }
+    /**
+     * Calls functions from Schedule to get id, session number, and cabin name
+     * Creates a new ArrayList to store the daily schedules
+     * Each daily schedule has a week day and activity list within it
+     * @param s, an empty Schedule object
+     * @return jS, a JSONObject containing Schedule information
+     */
     private static JSONObject getScheduleJson(Schedule s) {
         JSONObject jS = new JSONObject();
         jS.put("id", s.getScheduleID());
@@ -562,6 +764,12 @@ public class FileIO {
         jS.put("schedules",schedule);
         return jS;
     }
+    /**
+     * Calls functions from ThemeManager and Theme to get information needed.
+     * Each ThemeManager has a UUID, and an ArrayList of Themes that have names, week numbers, and descriptions
+     * @param t, an empty ThemeManager object
+     * @return jT, a JSONObject containing ThemeManager information
+     */
     private static JSONObject getThemeManagerJson(ThemeManager t) {
         JSONObject jT = new JSONObject();
         jT.put("id", t.getId());
@@ -576,6 +784,11 @@ public class FileIO {
         jT.put("themes", weeklyThemes);
         return jT;
     }
+    /**
+     * Uses functions from CampSiteManager to populate a JSONObject 
+     * @param cM, an empty CampSiteManager object
+     * @return jCM, a JSONObject containing CampSiteManager information
+     */
     private static JSONObject getCampJson(CampSiteManager cM) {
         JSONObject jCM = new JSONObject();
         jCM.put("name", cM.getName());
@@ -592,7 +805,12 @@ public class FileIO {
      * JSON Writers
      * ***************************
      */
-    // write a JSON object to file
+
+    /**
+     * Writes a JSONObject to a file
+     * @param jO, the String representation of the JSONObject you wish to write
+     * @param filePath the Filepath that you wish to write to
+     */
     private static void writeToJson(String jO,String filePath){
         try(FileWriter fW = new FileWriter(filePath)){
             fW.write(jO);
@@ -600,10 +818,19 @@ public class FileIO {
             e.printStackTrace();
         }
     }
+    /**
+     * Corrects a missing feature in JsonParser.parseString() by adding brackets required in JSON file formatting
+     * @param jsonFile the String representation of the JSONObject
+     * @return fixedFormat, a String with brackets and new lines added to each end
+     */
     private static String jsonFormatter(String jsonFile) {
         String fixedFormat = "[\n"+jsonFile+"\n]";
         return fixedFormat;
     }
+    /**
+     * Writes an ArrayList of Guardians to the respective JSON file
+     * @param guardian the ArrayList of Guardians you wish to write
+     */
     public static void writeGuardian(ArrayList<Guardian> guardian) {
         String guardJsonList = "";
         boolean isFirst = true;
@@ -624,7 +851,10 @@ public class FileIO {
         String finalGuardString = jsonFormatter(guardJsonList);
         writeToJson(finalGuardString,DataConstants.GUARDIAN_FILE_NAME);
     }
-    // tested and works
+    /**
+     * Writes an ArrayList of CampAdmins to the respective JSON file
+     * @param admin the ArrayList of CampAdmins you wish to write
+     */
     public static void writeCampAdmin(ArrayList<CampAdmin> admin) {
         String adminJsonList = "";
         boolean isFirst = true;
@@ -645,6 +875,13 @@ public class FileIO {
         String finalAdminString = jsonFormatter(adminJsonList);
         writeToJson(finalAdminString,DataConstants.CAMP_ADMIN_FILE_NAME);
     }
+    /**
+     * Writes an ArrayList of Dependents to their respective files
+     * This functions checks each Dependent if it's Coordinator or not
+     * If it is a Coordinator then it is written to the Coordinator JSON file
+     * If is is not a Coordinator then it is written to the Camper JSON file
+     * @param dependent the ArrayList of Dependents you wish to write
+     */
     public static void writeDependent(ArrayList<Dependent> dependent) {
         String dependJsonList = "";
         String coordJsonList = "";
@@ -685,7 +922,11 @@ public class FileIO {
             }
         }
     }
-    // tested, works
+    /**
+     * Writes an ArrayList of Reviews to the respective JSON file
+     * Check's each review for apostrophe's and replaces them accordingly as JSON cannot parse those correctly
+     * @param guardian the ArrayList of Reviews you wish to write
+     */
     public static void writeReview(ArrayList<Review> review) {
         String reviewJsonList = "";
         boolean isFirst = true;
@@ -707,7 +948,10 @@ public class FileIO {
         String formattedCoordinatorString = finalCoordinatorString.replace("\\u0027", "\'");
         writeToJson(formattedCoordinatorString, DataConstants.REVIEW_FILE_NAME);
     }
-    // tested, works
+    /**
+     * Writes an ArrayList of EmergencyContacts to the respective JSON file
+     * @param guardian the ArrayList of EmergencyContacts you wish to write
+     */
     public static void writeEmergencyContact(ArrayList<EmergencyContact> emergencyC) {
         String emcJsonList = "";
         boolean isFirst = true;
@@ -728,7 +972,10 @@ public class FileIO {
         String finalEmergencyContactString = jsonFormatter(emcJsonList);
         writeToJson(finalEmergencyContactString, DataConstants.EMERGENCY_CONTACT_FILE_NAME);
     }
-    // tested, works
+    /**
+     * Writes an ArrayList of Cabins to the respective JSON file
+     * @param guardian the ArrayList of Cabins you wish to write
+     */
     public static void writeCabin(ArrayList<Cabin> cabin) {
         String cabinJsonList = "";
         boolean isFirst = true;
@@ -749,7 +996,10 @@ public class FileIO {
         String finalCabinString = jsonFormatter(cabinJsonList);
         writeToJson(finalCabinString, DataConstants.CABIN_FILE_NAME);
     }
-    // tested, works
+    /**
+     * Writes an ArrayList of Schedules to the respective JSON file
+     * @param guardian the ArrayList of Schedules you wish to write
+     */
     public static void writeSchedule(ArrayList<Schedule> schedule) {
         String scheduleJsonList = "";
         boolean isFirst = true;
@@ -770,6 +1020,11 @@ public class FileIO {
         String finalScheduleString = jsonFormatter(scheduleJsonList);
         writeToJson(finalScheduleString, DataConstants.SCHEDULE_FILE_NAME);
     }
+    /**
+     * Writes an ArrayList of to the respective JSON file
+     * 
+     * @param guardian the ArrayList of you wish to write
+     */
     public static void writeTheme(ArrayList<ThemeManager> theme) {
         String themeJsonList = "";
         boolean isFirst = true;
@@ -790,6 +1045,11 @@ public class FileIO {
         String finalThemeString = jsonFormatter(themeJsonList);
         writeToJson(finalThemeString, DataConstants.THEME_FILE_NAME);
     }
+    /**
+     * Writes an ArrayList of CampSiteManagers to the respective JSON file
+     * 
+     * @param guardian the ArrayList of CampSiteManagers you wish to write
+     */
     public static void writeCamp(CampSiteManager camp) {
         String campJsonList = "";
         boolean isFirst = true;
@@ -809,6 +1069,11 @@ public class FileIO {
         String finalCampString = jsonFormatter(campJsonList);
         writeToJson(finalCampString, DataConstants.CAMP_FILE_NAME);
     }
+    /**
+     * Used by the readers in order to parse the information from the given filepath
+     * @param filename, file path of the file you wish to parse
+     * @return a JSONArray of objects containing the information from the filepath
+     */
     private static JSONArray parseJsonFileArr(String filename) {
         JSONParser jsonP = new JSONParser();
         try(FileReader reader = new FileReader(filename)){
@@ -826,6 +1091,11 @@ public class FileIO {
         }
         return new JSONArray();
     }
+    /**
+     * Writes a String to a given file path
+     * @param fileContents, a string representation of what you wish to be written to a text file
+     * @param fileName the filepath you wish to write to
+     */
     public static void writeToTxtFile(String fileContents, String fileName){
         try{
             Files.write(Paths.get(fileName),fileContents.getBytes());

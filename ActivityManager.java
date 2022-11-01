@@ -13,15 +13,15 @@ public class ActivityManager {
     // all activities start at 8 oclock morning
     // use military time
     // 8 am military
-    static int START_TIME = 8;
+    public static int START_TIME = 8;
     // 8 pm military
-    static int END_TIME = 20;
-    static int LUNCH_TIME = 12;
-    static int BREAKFAST_TIME = 9;
-    static int DINNER_TIME = 18;
+    public static int END_TIME = 20;
+    public static int LUNCH_TIME = 12;
+    public static int BREAKFAST_TIME = 9;
+    public static int DINNER_TIME = 18;
 
     // all activities last one hour
-    private int ACTIVITY_LENGTH = 1;
+    public static int ACTIVITY_LENGTH = 1;
 
     /*
      * ctor

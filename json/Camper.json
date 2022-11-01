@@ -1,18 +1,5 @@
 [
 {
-  "firstName": "firstName",
-  "lastName": "guardsinlast",
-  "isCoordinator": false,
-  "address": "same",
-  "emergencyContacts": [],
-  "id": "16337a18-71fb-43ea-ae88-213dc2d26a2d",
-  "medicalNotes": [
-    "med1",
-    "med2"
-  ],
-  "birthDate": "2011-11-11"
-},
-{
   "firstName": "first",
   "lastName": "last",
   "isCoordinator": false,
@@ -23,6 +10,6 @@
     "med1",
     "med2"
   ],
-  "birthDate": "2011-11-11"
+  "birthDate": "2007-11-11"
 }
 ]

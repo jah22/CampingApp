@@ -1,8 +1,8 @@
-/*
+/**
+ * Available activities
+ * @author Jacob Hammond, Jordan fowler, Lex Whalen, Tze-Chen Lin
  * CSCE 247
  * October 28, 2022
- * Activity.
- * Represents an available activity for the camp.
  */
 public enum Activity{
     WAKEUP__CABIN,

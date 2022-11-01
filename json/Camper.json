@@ -1,35 +1,15 @@
 [
 {
-  "firstName": "firstName",
-  "lastName": "guardsinlast",
-  "isCoordinator": false,
-  "address": "same",
-  "emergencyContacts": [],
-  "id": "16337a18-71fb-43ea-ae88-213dc2d26a2d",
-  "medicalNotes": [
-    "med1",
-    "med2"
-  ],
-  "birthDate": "2011-11-11"
-},
-{
   "firstName": "first",
   "lastName": "last",
   "isCoordinator": false,
   "address": "same",
-  "emergencyContacts": [
-    {
-      "id": "c6cb970f-86bd-480d-a9f8-7ccf7d655d03"
-    },
-    {
-      "id": "5ecea220-fb63-42ca-acac-69b8fdbee6cd"
-    }
-  ],
+  "emergencyContacts": [],
   "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd0",
   "medicalNotes": [
     "med1",
     "med2"
   ],
-  "birthDate": "2011-11-11"
+  "birthDate": "2007-11-11"
 }
 ]

@@ -149,7 +149,9 @@ public class Driver {
         for(int i=0;i<sessionCount;i++){
             System.out.println("Enter the name of theme #" + i +  ": ");
             String name = promptForStringResponse();
-            t.addTheme(new Theme(name, count));
+            System.out.println("Enter the description of the theme: ");
+            String desc = promptForStringResponse();
+            t.addTheme(new Theme(name, count,desc));
             count += 1;
         }
         return t;
@@ -344,7 +346,7 @@ public class Driver {
     // handle saving of files for cabins
     public void handleSaveFileCabinSchedules(Cabin c){
         System.out.println(c.getSchedulesString());
-        System.out.println("Would you like to save this roster?");
+        System.out.println("Would you like to save these schedules?");
         int selection = getYesNoResponse();
         switch(selection){
             case 1:
@@ -441,7 +443,7 @@ public class Driver {
         boolean running = true;
         while(running){
             printGuardianOptions();
-            int selection = getValidSelection(1,4);
+            int selection = getValidSelection(1,5);
             switch(selection){
                 case 1:
                     // print dependents
@@ -455,6 +457,9 @@ public class Driver {
                     handleReviewSection(user);
                     break;
                 case 4:
+                    handleViewCampSection();
+                    break;
+                case 5:
                     running = false;
                     break;
                 }
@@ -718,7 +723,8 @@ public class Driver {
         System.out.println("[1] Dependents");
         System.out.println("[2] Cabins");
         System.out.println("[3] Reviews");
-        System.out.println("[4] Exit");
+        System.out.println("[4] Cabin Information");
+        System.out.println("[5] Exit");
     }
     // check if valid input
     public boolean isValidIntInput(int input,int lower, int upper){

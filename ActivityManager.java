@@ -112,7 +112,7 @@ public class ActivityManager {
     public String toString() {
         String out = "";
         for (String activity: activities) {
-            out += this.getActivityStartTime(activity) + "-" + this.getActivityEndTime(activity)+ ": " + activity +"\n";
+            out += "Time: " + this.getActivityStartTime(activity) + " to " + this.getActivityEndTime(activity)+ " | Activity: " + activity +"\n";
         }
         return out;
     }

@@ -3,41 +3,20 @@
   "themes": [
     {
       "week": 0,
-      "name": "t1"
+      "name": "theme1",
+      "description": "description1"
     },
     {
       "week": 1,
-      "name": "t2"
+      "name": "theme2",
+      "description": "description2"
     },
     {
       "week": 2,
-      "name": "t3"
-    },
-    {
-      "week": 3,
-      "name": "t4"
-    },
-    {
-      "week": 4,
-      "name": "t5"
-    },
-    {
-      "week": 5,
-      "name": "t6"
-    },
-    {
-      "week": 6,
-      "name": "t7"
-    },
-    {
-      "week": 7,
-      "name": "t8"
-    },
-    {
-      "week": 8,
-      "name": "t9"
+      "name": "theme3",
+      "description": "description3"
     }
   ],
-  "id": "0a767c4d-989b-4beb-af93-50663ed79800"
+  "id": "e832f10f-9ff4-4d33-a774-04101a543fe8"
 }
 ]

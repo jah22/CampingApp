@@ -1,20 +1,3 @@
 [
-{
-  "firstName": "name1",
-  "lastName": "name2",
-  "address": "address",
-  "phone": "111-222-3333",
-  "id": "c6cb970f-86bd-480d-a9f8-7ccf7d655d03",
-  "birthDate": "2011-11-11",
-  "relation": "relation1"
-},
-{
-  "firstName": "first2",
-  "lastName": "asdf",
-  "address": "address2",
-  "phone": "111-222-3333",
-  "id": "5ecea220-fb63-42ca-acac-69b8fdbee6cd",
-  "birthDate": "2011-11-11",
-  "relation": "relation2"
-}
+
 ]

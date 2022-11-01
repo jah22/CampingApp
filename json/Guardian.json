@@ -1,20 +1,3 @@
 [
-{
-  "firstName": "guaridanfirst",
-  "lastName": "guardsinlast",
-  "password": "password",
-  "address": "address",
-  "registeredDependents": [
-    {
-      "id": "16337a18-71fb-43ea-ae88-213dc2d26a2d"
-    },
-    {
-      "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd0"
-    }
-  ],
-  "id": "4eb2f9b9-773e-4088-8474-c5b0624f3a52",
-  "birthDate": "1111-22-33",
-  "email": "email",
-  "username": "username"
-}
+
 ]

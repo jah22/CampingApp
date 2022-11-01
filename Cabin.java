@@ -188,17 +188,17 @@ public class Cabin {
                 // some preset times
                 if(j == ActivityManager.START_TIME) {
                     // wake up always first
-                    s.addActivity(day,Activity.WAKEUP.toString());
+                    s.addActivity(day,Activity.WAKEUP__CABIN.toString());
                 }
                 else if(j == ActivityManager.BREAKFAST_TIME){
                     // breakfast after wake up
-                    s.addActivity(day,Activity.BREAKFAST.toString());
+                    s.addActivity(day,Activity.BREAKFAST__CABIN.toString());
                 }
                 else if(j == ActivityManager.LUNCH_TIME){
-                    s.addActivity(day,Activity.LUNCH.toString());
+                    s.addActivity(day,Activity.LUNCH__CABIN.toString());
                 }
                 else if(j == ActivityManager.DINNER_TIME){
-                    s.addActivity(day,Activity.DINNER.toString());
+                    s.addActivity(day,Activity.DINNER__CABIN.toString());
                 }
                 else{
                     // randomize
@@ -359,13 +359,13 @@ public class Cabin {
         out += "Medical notes: \n";
         for(Dependent d: this.campers){
             out += "Camper: " + d.getFullName() +"\n";
-            out += "    Age: " + d.getAgeInt();
+            out += "Age: " + d.getAgeInt() +"\n";
             for(String note: d.getMedicalNotes()){
-                out += "    " + note + "\n";
+                out += note + "\n";
             }
-            out += "    Emergency Contacts: \n";
+            out += "Emergency Contacts: \n";
             for(EmergencyContact contact: d.getEmergencyContacts()){
-                out += "    " + contact.toString() + "\n";
+                out +=  contact.toString() + "\n";
             }
         }
         return out;

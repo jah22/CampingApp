@@ -164,7 +164,8 @@ public class FileIO {
             JSONObject joTheme = (JSONObject)objTheme;
             String name = (String) joTheme.get("name");
             int week = Math.toIntExact((long)joTheme.get("week"));
-            tm.addTheme(new Theme(name, week));
+            String description = (String) joTheme.get("description");
+            tm.addTheme(new Theme(name, week,description));
         });
         return tm;
     }
@@ -563,6 +564,7 @@ public class FileIO {
             JSONObject dailyTheme = new JSONObject();
             dailyTheme.put("name", themes.getName());
             dailyTheme.put("week", themes.getWeekNumber());
+            dailyTheme.put("description",themes.getDescription());
             weeklyThemes.add(dailyTheme);
         }
         jT.put("themes", weeklyThemes);

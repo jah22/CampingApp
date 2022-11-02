@@ -123,10 +123,6 @@ public class CampSiteManager{
       out += "Start month: "+ this.getStartMonth() +"\n";
       out += "Themes: "+"\n";
       out += this.themeManager.toString();
-
-      // to do:
-      // be more fancy 
-
       return out;
   }
   /**
@@ -156,7 +152,7 @@ public class CampSiteManager{
     this.cabinManager.viewCabinSchedulesByCoordinator(coordinator);
   }
   /**
-   * 
+   * View the cabin coordinators at a specific cabin
    * @param cabinID
    */
   public void viewCabinCoordinators(String cabinID) {

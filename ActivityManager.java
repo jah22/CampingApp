@@ -59,12 +59,27 @@ public class ActivityManager {
         return index + START_TIME;
     }
 
+    /*
+     * Get the end time of an activity
+     * @param activity: String representing the activity
+     * @return int the end time of the activity
+     */
     public int getActivityEndTime(String activity){
         return this.getActivityStartTime(activity) + ACTIVITY_LENGTH;
     }
+    /*
+     * Get the list of activities
+     * @return ArrayList<String> the activities
+     */
     public ArrayList<String> getActivityList() {
         return this.activities;
     }
+    /*
+     * Check if one activity is before another
+     * @param activityOne: String of the first activity
+     * @param activitiyTwo: String of the second activity
+     * @return bool if activity 1 is before activity 2
+     */
     public boolean isBefore(String activityOne, String activityTwo){
         /*
          * If act 1 is before act 2
@@ -75,6 +90,12 @@ public class ActivityManager {
         }
         return false;
     }
+    /*
+     * Check if one activity is after another
+     * @param activityOne: String of the first activity
+     * @param activitiyTwo: String of the second activity
+     * @return bool if activity 1 is after activity 2
+     */
     public boolean isAfter(String act1, String act2){
         /*
          * If act 1 is after act 2
@@ -83,6 +104,11 @@ public class ActivityManager {
          */
         return isBefore(act2,act1);
     }
+    /*
+     * Get the activity and its time
+     * @param activity: String of the activity
+     * @return String: a formatted activity string
+     */
     public String getActivity(String activity){
         int index = this.activities.indexOf(activity);
         if(index == -1){
@@ -95,13 +121,21 @@ public class ActivityManager {
         return out;
     }
 
-    // has more room for activities
+    /*
+     * If room for activities
+     * @return bool: representing if the activities has room for more
+     */
     private boolean hasRoom(){
         // size must be at most 
         // END_TIME - START_TIME + 1
         return (this.activities.size() <= (END_TIME-START_TIME + 1));
     }
 
+    /*
+     * Add an activity to end of list
+     * @param activity: String of the activity
+     * @return bool: if the activity can be added
+     */
     public boolean addActivityToEnd(String activity){
         if(!hasRoom()){
             // no more room, cannot add
@@ -110,6 +144,10 @@ public class ActivityManager {
         this.activities.add(activity);
         return true;
     }
+    /*
+     * Representing the manager as a str
+     * @return String the manager as a str
+     */
     public String toString() {
         String out = "";
         for (String activity: activities) {
@@ -117,6 +155,11 @@ public class ActivityManager {
         }
         return out;
     }
+    /*
+     * Check if contains an activity
+     * @param activity: String representing the activity
+     * @return bool: if have activity
+     */
     public boolean hasActivity(String activity){
         return this.activities.contains(activity);
     }

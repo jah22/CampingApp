@@ -627,10 +627,10 @@ public class FileIO {
         ArrayList<JSONObject> ids = new ArrayList<>();
         for(Dependent regDependent : g.getRegisteredDependents()) {
             JSONObject dependent = new JSONObject();
-            dependent.put("id", regDependent.id);
+            dependent.put(DataConstants.DEPENDENT_ID, regDependent.id);
             ids.add(dependent);
         }
-        jsonG.put("registeredDependents", ids);
+        jsonG.put(DataConstants.GUARDIAN_REGISTERED_DEPENDENTS, ids);
         return jsonG;
     }
     /**

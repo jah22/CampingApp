@@ -44,6 +44,19 @@ public class Cabin {
         this.lowerAgeBound = lowerAgeBound;
         this.upperAgeBound = upperAgeBound;
     }
+    /**
+     * Parameterized constructor
+     * @param name the name of the cabin
+     * @param coordinators the ArrayList<Dependent> of coordinators
+     * @param campers ArrayList<Dependent> of campers
+     * @param schedules ArrayList<Schedule> of schedules
+     * @param camperCapacity an int camperCapacity
+     * @param coordinatorCapacity an int coordinatorCapacity
+     * @param lowerAgeBound an int lowerAgeBound
+     * @param upperAgeBound an int upperAgeBound
+     * @param themes: array list of themes
+     * @param campYear an int campYear
+     */
     public Cabin(String name,ArrayList<Dependent>coordinators, ArrayList<Dependent> campers,ArrayList<Schedule> schedules, int camperCapacity, int coordinatorCapacity,int lowerAgeBound, int upperAgeBound, ArrayList<String> themes, int campYear ){
         this.name = name;
         this.coordinators = coordinators;
@@ -137,7 +150,13 @@ public class Cabin {
     public Cabin(String name){
         this.name = name;
     }
-    // for new cabin generation
+    /*
+     * Parameterized ctor
+     * @param name String name of cabin
+     * @param lowerBound int lower bound of age
+     * @param upperBound int upper bound of age
+     * @param sessionCounts int number of seesions
+     */
     public Cabin(String name, int lowerBound, int upperBound,int sessionCounts){
         this.name = name;
         this.lowerAgeBound = lowerBound;
@@ -145,6 +164,10 @@ public class Cabin {
         this.generateRandomSchedulesForSession(sessionCounts);
     }
 
+    /*
+     * Generate random schedules for cabin session
+     * @param sessionCounts: the number of sessions to gen
+     */
     public void generateRandomSchedulesForSession(int sessionCounts){
         // randomly generate round wake up, breakfast, lunch, dinner, sleep
         for(int i=0;i<sessionCounts;i++){
@@ -153,6 +176,11 @@ public class Cabin {
             this.schedules.add(s);
         }
     }
+    /*
+     * Generate a random schedule
+     * @param sessionNumber: the number of the session
+     * @return Schedule the random schedule
+     */
     public Schedule generateRandomSchedule(int sessionNumber){
         Schedule s = new Schedule(sessionNumber,this.name);
         for(int i = 0 ; i < 7 ; i++){
@@ -213,6 +241,10 @@ public class Cabin {
         }
         return s;
     }
+    /*
+     * str representation of obj
+     * @return String: the string of the object
+     */
     public String toString(){
         return this.getCabinRoster();
     }
@@ -273,9 +305,17 @@ public class Cabin {
             System.out.println(d.toString() + "\n");
         }
     }
+    /*
+     * get the lower age bound
+     * @return int: the lower age bound
+     */
     public int getLowerAgeBound() {
         return this.lowerAgeBound;
     }
+    /*
+     * get the upper age bound
+     * @return int: the upper age bound
+     */
     public int getUpperAgeBound() {
         return this.upperAgeBound;
     }
@@ -396,9 +436,17 @@ public class Cabin {
     public void setUpperAgeBound(int bound){
         this.upperAgeBound = bound;
     }
+    /*
+     * get the number of sessions
+     * @return int: the number of sessions
+     */
     public int getSessionCount(){
         return this.schedules.size();
     }
+    /*
+     * view a session at index
+     * @param sessionIndex: int index to be viewed
+     */
     public void viewSessionAtIndex(int sessionIndex){
         if(0<= sessionIndex && sessionIndex < this.schedules.size()){
             System.out.println(this.schedules.get(sessionIndex));

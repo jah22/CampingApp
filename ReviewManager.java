@@ -164,6 +164,9 @@ public class ReviewManager {
             System.out.println(r);
         }
     }
+    /*
+     * Save reviews
+     */
     public void save(){
         FileIO.writeReview(this.reviews);
     }

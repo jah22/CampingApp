@@ -8,7 +8,11 @@ import java.util.ArrayList;
 
 public class CabinManager {
     private ArrayList<Cabin> cabins = new ArrayList<Cabin>();
-    //Constructor for List of Cabins
+
+    /*
+     * Parameterized ctor
+     * @param cabins: ArrayList<Cabin> of cabins
+     */
     public CabinManager(ArrayList<Cabin> cabins){
         this.cabins = cabins;
     }

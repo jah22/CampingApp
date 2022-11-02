@@ -213,20 +213,17 @@ public class Driver {
         boolean running = true;
         while(running){
             viewHandleEditCampSectionOptions();
-            int selection = getValidSelection(1, 4);
+            int selection = getValidSelection(1, 3);
             switch(selection){
                 case 1:
                     // camp name 
                     this.handleEditCampName();
                     break;
                 case 2:
-                    // TO DO
-                    break;
-                case 3:
                     // camp year
                     this.handleEditCampYear();
                     break;
-                case 4:
+                case 3:
                     System.out.println("Returning to main menu...");
                     return;
             }
@@ -273,9 +270,8 @@ public class Driver {
      */
     public void viewHandleEditCampSectionOptions(){
         System.out.println("[1] Edit camp name");
-        System.out.println("[2] Edit camp themes");
-        System.out.println("[3] Edit camp year");
-        System.out.println("[4] Exit");
+        System.out.println("[2] Edit camp year");
+        System.out.println("[3] Exit");
     }
     /*
      * Show camp admin options
@@ -935,7 +931,6 @@ public class Driver {
      * @return String representing phone
      */
     public String promptForPhone(){
-        // to do: perform checks here
         System.out.println("Enter the phone number [XXX-XXX-XXXX]: ");
         return promptForStringResponse();
     }
@@ -944,7 +939,6 @@ public class Driver {
      * @return String: birthday of user
      */
     public String promptForBirthDate(){
-        // to do: perform checks here
         System.out.println("Enter the birth date [YYYY-MM-DD]: ");
         return promptForStringResponse();
     }
@@ -961,7 +955,6 @@ public class Driver {
      * @return String: the email of the user.
      */
     public String promptForEmail(){
-        // to do: perform checks here
         System.out.println("Enter the email: ");
         return promptForStringResponse();
     }

@@ -1,7 +1,7 @@
 [
 {
-  "firstName": "Jane",
-  "lastName": "Smith",
+  "firstName": "Lavaeh",
+  "lastName": "Davis",
   "isCoordinator": true,
   "password": "password",
   "address": "429 Sycamore Drive, Columbia, SC",
@@ -13,6 +13,6 @@
   ],
   "birthDate": "2009-05-14",
   "email": "janesmith@gmail.com",
-  "username": "janesmith"
+  "username": "username"
 }
 ]

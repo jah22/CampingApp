@@ -1,24 +1,11 @@
 [
 {
-  "firstName": "first",
-  "lastName": "last",
+  "firstName": "Nutella",
+  "lastName": "Davis",
   "isCoordinator": false,
   "address": "same",
   "emergencyContacts": [],
   "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd0",
-  "medicalNotes": [
-    "med1",
-    "med2"
-  ],
-  "birthDate": "2007-11-11"
-},
-{
-  "firstName": "Nutella",
-  "lastName": "Davis",
-  "isCoordinator": false,
-  "address": "abc st",
-  "emergencyContacts": [],
-  "id": "24f72791-fa08-4dd6-980a-d9958f3a4fa8",
   "medicalNotes": [
     "med1",
     "med2"

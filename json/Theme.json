@@ -13,7 +13,37 @@
     },
     {
       "week": 2,
+      "name": "Ninja Warrior",
+      "description": "Ninjas! Warriors!"
+    },
+    {
+      "week": 3,
       "name": "theme3",
+      "description": "description1"
+    },
+    {
+      "week": 4,
+      "name": "theme4",
+      "description": "description2"
+    },
+    {
+      "week": 5,
+      "name": "theme5",
+      "description": "description3"
+    },
+    {
+      "week": 6,
+      "name": "theme6",
+      "description": "description1"
+    },
+    {
+      "week": 7,
+      "name": "theme7",
+      "description": "description2"
+    },
+    {
+      "week": 8,
+      "name": "theme8",
       "description": "description3"
     }
   ],

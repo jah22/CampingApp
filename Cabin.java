@@ -342,7 +342,7 @@ public class Cabin {
         out += "Camper count: " + this.campers.size()+ "/" + this.camperCapacity +"\n";
         out += "Coordinator(s): \n";
         for(Dependent dep: this.coordinators){
-            out += dep.getFullName() + "\n";
+            out += dep.getFullName() + " " + dep.getAgeInt() + "\n";
         }
         out += "Campers: \n";
         for(Dependent dep: this.campers){

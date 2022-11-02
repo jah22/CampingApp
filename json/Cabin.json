@@ -5,32 +5,11 @@
     "campers": [
       {
         "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd0"
-      },
-      {
-        "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd1"
-      },
-      {
-        "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd2"
-      },
-      {
-        "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd3"
-      },
-      {
-        "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd4"
-      },
-      {
-        "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd5"
-      },
-      {
-        "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd6"
-      },
-      {
-        "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd7"
       }
     ],
-    "coordinators": [{ "id": "81c7ae99-247f-4c80-950a-4a41e767e84c" }],
+    "coordinators": [],
     "name": "cabin0",
-    "upperAgeBound": 12,
+    "upperAgeBound": 15,
     "lowerAgeBound": 11
   },
   {

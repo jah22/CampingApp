@@ -1,15 +1,82 @@
 [
-{
-  "firstName": "first",
-  "lastName": "last",
-  "isCoordinator": false,
-  "address": "same",
-  "emergencyContacts": [],
-  "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd0",
-  "medicalNotes": [
-    "med1",
-    "med2"
-  ],
-  "birthDate": "2007-11-11"
-}
+  {
+    "firstName": "Lex",
+    "lastName": "Stone",
+    "isCoordinator": false,
+    "address": "2210 very far away",
+    "emergencyContacts": [],
+    "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd0",
+    "medicalNotes": ["medical note 1", "medical note 2", "medical note 3"],
+    "birthDate": "2010-11-11"
+  },
+  {
+    "firstName": "Jordan",
+    "lastName": "Money",
+    "isCoordinator": false,
+    "address": "1040 ridge lane",
+    "emergencyContacts": [],
+    "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd1",
+    "medicalNotes": ["tfvgy", "tyukn"],
+    "birthDate": "2010-12-10"
+  },
+  {
+    "firstName": "Bobby",
+    "lastName": "Dylans",
+    "isCoordinator": false,
+    "address": "1642 oversight circle",
+    "emergencyContacts": [],
+    "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd2",
+    "medicalNotes": ["med1", "med2"],
+    "birthDate": "2010-01-03"
+  },
+  {
+    "firstName": "Michaela",
+    "lastName": "Davis",
+    "isCoordinator": false,
+    "address": "1949 Up a hill",
+    "emergencyContacts": [],
+    "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd3",
+    "medicalNotes": ["med5", "med7"],
+    "birthDate": "2011-02-11"
+  },
+  {
+    "firstName": "Jessica",
+    "lastName": "Nobody",
+    "isCoordinator": false,
+    "address": "1843 Down a hill",
+    "emergencyContacts": [],
+    "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd4",
+    "medicalNotes": ["med1", "med2"],
+    "birthDate": "2010-01-01"
+  },
+  {
+    "firstName": "Peter",
+    "lastName": "Car",
+    "isCoordinator": false,
+    "address": "1111 weird number lane",
+    "emergencyContacts": [],
+    "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd5",
+    "medicalNotes": ["med1", "med2"],
+    "birthDate": "2010-03-11"
+  },
+  {
+    "firstName": "Dog",
+    "lastName": "Cat",
+    "isCoordinator": false,
+    "address": "7777 Hilsbury Lane",
+    "emergencyContacts": [],
+    "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd6",
+    "medicalNotes": ["med1", "med2"],
+    "birthDate": "2010-04-12"
+  },
+  {
+    "firstName": "Haley",
+    "lastName": "Bradley",
+    "isCoordinator": false,
+    "address": "1212 happy lane",
+    "emergencyContacts": [],
+    "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd7",
+    "medicalNotes": ["med1", "med2"],
+    "birthDate": "2010-04-04"
+  }
 ]

@@ -1,18 +1,28 @@
 [
-{
-  "firstName": "Jane",
-  "lastName": "Smith",
-  "isCoordinator": true,
-  "password": "password",
-  "address": "429 Sycamore Drive, Columbia, SC",
-  "emergencyContacts": [],
-  "id": "81c7ae99-247f-4c80-950a-4a41e767e84c",
-  "medicalNotes": [
-    "allergy 1",
-    "allergy 2"
-  ],
-  "birthDate": "2009-05-14",
-  "email": "janesmith@gmail.com",
-  "username": "janesmith"
-}
+  {
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "isCoordinator": true,
+    "password": "password",
+    "address": "429 Sycamore Drive, Columbia, SC",
+    "emergencyContacts": [],
+    "id": "81c7ae99-247f-4c80-950a-4a41e767e84d",
+    "medicalNotes": ["allergy 1", "allergy 2"],
+    "birthDate": "2009-05-14",
+    "email": "janesmith@gmail.com",
+    "username": "janesmith"
+  },
+  {
+    "firstName": "Kix",
+    "lastName": "Gonzalez",
+    "isCoordinator": true,
+    "password": "password",
+    "address": "429 Sycamore Drive, Columbia, SC",
+    "emergencyContacts": [],
+    "id": "81c7ae99-247f-4c80-950a-4a41e767e84c",
+    "medicalNotes": ["peanuts", "grass"],
+    "birthDate": "2004-05-14",
+    "email": "janesmith@gmail.com",
+    "username": "username"
+  }
 ]

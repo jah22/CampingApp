@@ -346,7 +346,7 @@ public class Cabin {
         }
         out += "Campers: \n";
         for(Dependent dep: this.campers){
-            out += dep.getFullName() + "\n";
+            out += dep.getFullName() + " age: " + dep.getAgeInt() + "\n";
         }
 
         return out;

@@ -1,0 +1,43 @@
+Vital information for cabin0
+Medical notes: 
+Camper: Lex Stone
+Age: 11
+medical note 1
+medical note 2
+medical note 3
+Emergency Contacts: 
+Camper: Jordan Money
+Age: 11
+tfvgy
+tyukn
+Emergency Contacts: 
+Camper: Bobby Dylans
+Age: 12
+med1
+med2
+Emergency Contacts: 
+Camper: Michaela Davis
+Age: 11
+med5
+med7
+Emergency Contacts: 
+Camper: Jessica Nobody
+Age: 12
+med1
+med2
+Emergency Contacts: 
+Camper: Peter Car
+Age: 12
+med1
+med2
+Emergency Contacts: 
+Camper: Dog Cat
+Age: 12
+med1
+med2
+Emergency Contacts: 
+Camper: Haley Bradley
+Age: 12
+med1
+med2
+Emergency Contacts: 

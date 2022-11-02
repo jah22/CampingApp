@@ -13,5 +13,23 @@
   "birthDate": "2011-11-11",
   "email": "email",
   "username": "username"
+},
+{
+  "firstName": "Levaeh",
+  "lastName": "Davis",
+  "password": "zxcv",
+  "address": "abc st",
+  "registeredDependents": [
+    {
+      "id": "24f72791-fa08-4dd6-980a-d9958f3a4fa8"
+    },
+    {
+      "id": "4009d777-6a78-43df-a5a2-bf111ee7b274"
+    }
+  ],
+  "id": "76be6aea-5f38-4824-b53b-a356c0263f65",
+  "birthDate": "1961-11-11",
+  "email": "email@gmail",
+  "username": "Levaeh"
 }
 ]

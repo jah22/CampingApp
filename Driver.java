@@ -1292,7 +1292,7 @@ public class Driver {
         System.out.println("Welcome to the camp system! ");
     }
     /*
-     * Main driver for Camp Site.
+     *  driver for Camp Site.
      */
     public static void main(String[] args) {
 

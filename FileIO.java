@@ -153,7 +153,7 @@ public class FileIO {
     private static Schedule parseScheduleObj(JSONObject jSchedule){
         UUID id = UUID.fromString((String)jSchedule.get(DataConstants.SCHEDULE_ID));
         String cabinName = (String) jSchedule.get(DataConstants.SCHEDULE_CABIN_NAME);
-        int sessionNumber  = Math.toIntExact((long) jSchedule.get("sessionNumber"));
+        int sessionNumber  = Math.toIntExact((long) jSchedule.get(DataConstants.SCHEDULE_SESSION_NUMBER));
         JSONArray jSchedules = (JSONArray)jSchedule.get(DataConstants.SCHEDULE_SCHEDULES);
         // create the hash
         HashMap<String,ActivityManager> hash = new HashMap<String,ActivityManager>();
@@ -202,14 +202,14 @@ public class FileIO {
      */
     private ThemeManager parseThemeManager(JSONObject jTheme) {
         ThemeManager tm = new ThemeManager();
-        UUID id = UUID.fromString((String) jTheme.get("id"));
+        UUID id = UUID.fromString((String) jTheme.get(DataConstants.THEME_ID));
         tm.setId(id);
-        JSONArray jaThemes = (JSONArray) jTheme.get("themes");
+        JSONArray jaThemes = (JSONArray) jTheme.get(DataConstants.CABIN_THEMES);
         jaThemes.forEach(objTheme->{
             JSONObject joTheme = (JSONObject)objTheme;
-            String name = (String) joTheme.get("name");
-            int week = Math.toIntExact((long)joTheme.get("week"));
-            String description = (String) joTheme.get("description");
+            String name = (String) joTheme.get(DataConstants.THEME_NAME);
+            int week = Math.toIntExact((long)joTheme.get(DataConstants.THEME_WEEK));
+            String description = (String) joTheme.get(DataConstants.THEME_DESCRIPTION);
             tm.addTheme(new Theme(name, week,description));
         });
         return tm;
@@ -242,8 +242,8 @@ public class FileIO {
         String address = (String) jEM.get(DataConstants.PERSON_ADDRESS);
         UUID id = UUID.fromString((String)jEM.get(DataConstants.PERSON_ID));
         String birthDate = (String) jEM.get(DataConstants.PERSON_BIRTHDATE);
-        String phone = (String) jEM.get("phone");
-        String relation = (String) jEM.get("relation");
+        String phone = (String) jEM.get(DataConstants.GUARDIAN_PHONE_NUMBER);
+        String relation = (String) jEM.get(DataConstants.EMERGENCY_CONTACT_RELATION);
         
         return (new EmergencyContact(firstName, lastName, birthDate, address,phone,relation,id));
     }
@@ -333,10 +333,10 @@ public class FileIO {
         Dependent coordinator = parseCamperObj(jObject) ;
 
         // now read auth stuff
-        String username = (String) jObject.get("username");
-        String email = (String) jObject.get("email");
-        String phone = (String) jObject.get("phoneNumber");
-        String password = (String) jObject.get("password");
+        String username = (String) jObject.get(DataConstants.GUARDIAN_USERNAME);
+        String email = (String) jObject.get(DataConstants.GUARDIAN_EMAIL);
+        String phone = (String) jObject.get(DataConstants.GUARDIAN_PHONE_NUMBER);
+        String password = (String) jObject.get(DataConstants.GUARDIAN_PASSWORD);
 
         PriorityBehavior pB = new PriorityBehavior(username,password,phone,email);
         coordinator.setAuthBehavior(pB);
@@ -352,15 +352,15 @@ public class FileIO {
      */
     private CampAdmin parseAdminObj(JSONObject admin){
         // get attributes
-        String firstName = (String) admin.get("firstName");
-        String lastName = (String) admin.get("lastName");
-        String address = (String) admin.get("address");
-        UUID id = UUID.fromString((String) admin.get("id"));
-        String birthDate = (String) admin.get("birthDate");
-        String password = (String)  admin.get("password");
-        String username = (String)  admin.get("username");
-        String email = (String)  admin.get("email");
-        String phone = (String)  admin.get("phone");
+        String firstName = (String) admin.get(DataConstants.GUARDIAN_FIRST_NAME);
+        String lastName = (String) admin.get(DataConstants.GUARDIAN_LAST_NAME);
+        String address = (String) admin.get(DataConstants.GUARDIAN_ADDRESS);
+        UUID id = UUID.fromString((String) admin.get(DataConstants.GUARDIAN_ID));
+        String birthDate = (String) admin.get(DataConstants.GUARDIAN_BIRTH_DATE);
+        String password = (String)  admin.get(DataConstants.GUARDIAN_PASSWORD);
+        String username = (String)  admin.get(DataConstants.GUARDIAN_USERNAME);
+        String email = (String)  admin.get(DataConstants.GUARDIAN_EMAIL);
+        String phone = (String)  admin.get(DataConstants.GUARDIAN_PHONE_NUMBER);
 
         return(new CampAdmin(firstName, lastName, birthDate, address, id, password, username, email, phone));
     }
@@ -524,7 +524,7 @@ public class FileIO {
      */
     private ArrayList<ThemeManager> readThemeManagers(){
         ArrayList<ThemeManager> ret = new ArrayList<ThemeManager>();
-        JSONArray jaThemeManagerList = parseJsonFileArr("./json/Theme.json");
+        JSONArray jaThemeManagerList = parseJsonFileArr(DataConstants.THEME_FILE_NAME);
         jaThemeManagerList.forEach(jTheme ->
             ret.add(parseThemeManager((JSONObject) jTheme))
         );
@@ -592,11 +592,11 @@ public class FileIO {
      */
     private static JSONObject getPersonJson(Person p){
         JSONObject jP = new JSONObject();
-        jP.put("id",p.getId().toString());
-        jP.put("firstName",p.getFirstName());
-        jP.put("lastName",p.getLastName());
-        jP.put("address",p.getAddress());
-        jP.put("birthDate",p.getBirthDate());
+        jP.put(DataConstants.PERSON_ID,p.getId().toString());
+        jP.put(DataConstants.PERSON_FIRST_NAME,p.getFirstName());
+        jP.put(DataConstants.PERSON_LAST_NAME,p.getLastName());
+        jP.put(DataConstants.PERSON_ADDRESS,p.getAddress());
+        jP.put(DataConstants.PERSON_BIRTHDATE,p.getBirthDate());
 
         return jP;
     }
@@ -609,10 +609,10 @@ public class FileIO {
     private static JSONObject getPriorityPersonJson(Person p){
         PriorityBehavior pB = (PriorityBehavior) p.getAuthBehavior();
         JSONObject jP = getPersonJson(p);
-        jP.put("password",pB.getPassword());
-        jP.put("email",pB.getEmail());
-        jP.put("phone",pB.getPhone());
-        jP.put("username",pB.getUsername());
+        jP.put(DataConstants.GUARDIAN_PASSWORD,pB.getPassword());
+        jP.put(DataConstants.GUARDIAN_EMAIL,pB.getEmail());
+        jP.put(DataConstants.GUARDIAN_PHONE_NUMBER,pB.getPhone());
+        jP.put(DataConstants.GUARDIAN_USERNAME,pB.getUsername());
 
         return jP;
     }
@@ -651,15 +651,15 @@ public class FileIO {
      */
     private static JSONObject getCamperJson(Dependent d){
         JSONObject jO = getPersonJson(d);
-        jO.put("isCoordinator",d.getIsCoordinator());
+        jO.put(DataConstants.DEPENDENT_IS_COORDINATOR,d.getIsCoordinator());
         ArrayList<JSONObject> ids = new ArrayList<>();
         for(EmergencyContact regEmergencyContact : d.getEmergencyContacts()) {
             JSONObject emergencyContacts = new JSONObject();
-            emergencyContacts.put("id", regEmergencyContact.id);
+            emergencyContacts.put(DataConstants.DEPENDENT_ID, regEmergencyContact.id);
             ids.add(emergencyContacts);
         }
-        jO.put("medicalNotes",d.getMedicalNotes());
-        jO.put("emergencyContacts",ids);
+        jO.put(DataConstants.DEPENDENT_MEDICAL_NOTES,d.getMedicalNotes());
+        jO.put(DataConstants.DEPENDENT_EMERGENCY_CONTACTS,ids);
 
         return jO;
     }
@@ -672,15 +672,15 @@ public class FileIO {
      */
     private static JSONObject getCoordinatorJson(Dependent c) {
         JSONObject jCo = getPriorityPersonJson(c);
-        jCo.put("isCoordinator",c.getIsCoordinator());
+        jCo.put(DataConstants.DEPENDENT_IS_COORDINATOR,c.getIsCoordinator());
         ArrayList<JSONObject> ids = new ArrayList<>();
         for(EmergencyContact regEmergencyContact : c.getEmergencyContacts()) {
             JSONObject emergencyContacts = new JSONObject();
-            emergencyContacts.put("id", regEmergencyContact.id);
+            emergencyContacts.put(DataConstants.DEPENDENT_ID, regEmergencyContact.id);
             ids.add(emergencyContacts);
         }
-        jCo.put("medicalNotes",c.getMedicalNotes());
-        jCo.put("emergencyContacts",ids);
+        jCo.put(DataConstants.DEPENDENT_MEDICAL_NOTES,c.getMedicalNotes());
+        jCo.put(DataConstants.DEPENDENT_EMERGENCY_CONTACTS,ids);
         return jCo;
     }
     /**
@@ -690,10 +690,10 @@ public class FileIO {
      */
     private static JSONObject getReviewJson(Review r) {
         JSONObject jR = new JSONObject();
-        jR.put("title", r.getTitle());
-        jR.put("author", r.getAuthor());
-        jR.put("body", r.getbody());
-        jR.put("rating", r.getRating());
+        jR.put(DataConstants.REVIEW_TITLE, r.getTitle());
+        jR.put(DataConstants.REVIEW_AUTHOR, r.getAuthor());
+        jR.put(DataConstants.REVIEW_BODY, r.getbody());
+        jR.put(DataConstants.REVIEW_RATING, r.getRating());
         return jR;
     }
     /**
@@ -704,8 +704,8 @@ public class FileIO {
      */
     private static JSONObject getEmergencyContactJson(EmergencyContact eC) {
         JSONObject jEC = getPersonJson(eC);
-        jEC.put("phone",eC.getPhone());
-        jEC.put("relation",eC.getRelation());
+        jEC.put(DataConstants.EMERGENCY_CONTACT_PHONE_NUMBER,eC.getPhone());
+        jEC.put(DataConstants.EMERGENCY_CONTACT_RELATION,eC.getRelation());
 
         return jEC;
     }
@@ -718,25 +718,25 @@ public class FileIO {
      */
     private static JSONObject getCabinJson(Cabin c) {
         JSONObject jC = new JSONObject();
-        jC.put("name", c.getCabinName());
-        jC.put("camperCapacity", c.getCamperCapacity());
-        jC.put("coordinatorCapacity", c.getCoordinatorCapacity());
-        jC.put("lowerAgeBound", c.getLowerAgeBound());
-        jC.put("upperAgeBound", c.getUpperAgeBound());
+        jC.put(DataConstants.CABIN_NAME, c.getCabinName());
+        jC.put(DataConstants.CABIN_CAMPER_CAPACITY, c.getCamperCapacity());
+        jC.put(DataConstants.CABIN_COORDINATOR_CAPACITY, c.getCoordinatorCapacity());
+        jC.put(DataConstants.CABIN_LOWER_AGE_BOUND, c.getLowerAgeBound());
+        jC.put(DataConstants.CABIN_UPEER_AGE_BOUND, c.getUpperAgeBound());
         ArrayList<JSONObject> coordIds = new ArrayList<>();
         ArrayList<JSONObject> camperIds = new ArrayList<>();
         for(Dependent regCampers : c.getCampers()) {
             JSONObject campers = new JSONObject();
-            campers.put("id", regCampers.id);
+            campers.put(DataConstants.CABIN_ID, regCampers.id);
             camperIds.add(campers);
         }
         for(Dependent regCoords : c.getCoordinators()) {
             JSONObject coords = new JSONObject();
-            coords.put("id", regCoords.id);
+            coords.put(DataConstants.CABIN_ID, regCoords.id);
             coordIds.add(coords);
         }
-        jC.put("campers", camperIds);
-        jC.put("coordinators", coordIds);
+        jC.put(DataConstants.CABIN_CAMPERS, camperIds);
+        jC.put(DataConstants.CABIN_COORDINATORS, coordIds);
         return jC;
     }
     /**
@@ -748,20 +748,20 @@ public class FileIO {
      */
     private static JSONObject getScheduleJson(Schedule s) {
         JSONObject jS = new JSONObject();
-        jS.put("id", s.getScheduleID());
-        jS.put("sessionNumber", s.getSessionNumber());
-        jS.put("cabinName", s.getCabinName());
+        jS.put(DataConstants.SCHEDULE_ID, s.getScheduleID());
+        jS.put(DataConstants.SCHEDULE_SESSION_NUMBER, s.getSessionNumber());
+        jS.put(DataConstants.SCHEDULE_CABIN_NAME, s.getCabinName());
         ArrayList<JSONObject> schedule = new ArrayList<>();
         
         for(Entry<String, ActivityManager> weekEntry : s.getScheduledActivities().entrySet()){
             String weekDay = weekEntry.getKey();
             JSONObject dailySchedule = new JSONObject();
-            dailySchedule.put("dayOfWeek", weekDay);
+            dailySchedule.put(DataConstants.SCHEDULE_DAY_OF_WEEK, weekDay);
            
-            dailySchedule.put("schedule", weekEntry.getValue().getActivityList());
+            dailySchedule.put(DataConstants.SCHEDULE_SCHEDULE, weekEntry.getValue().getActivityList());
             schedule.add(dailySchedule);
         }
-        jS.put("schedules",schedule);
+        jS.put(DataConstants.SCHEDULE_SCHEDULES,schedule);
         return jS;
     }
     /**
@@ -772,16 +772,16 @@ public class FileIO {
      */
     private static JSONObject getThemeManagerJson(ThemeManager t) {
         JSONObject jT = new JSONObject();
-        jT.put("id", t.getId());
+        jT.put(DataConstants.THEME_ID, t.getId());
         ArrayList<JSONObject> weeklyThemes = new ArrayList<>();
         for(Theme themes : t.getThemes()) {
             JSONObject dailyTheme = new JSONObject();
-            dailyTheme.put("name", themes.getName());
-            dailyTheme.put("week", themes.getWeekNumber());
-            dailyTheme.put("description",themes.getDescription());
+            dailyTheme.put(DataConstants.THEME_NAME, themes.getName());
+            dailyTheme.put(DataConstants.THEME_WEEK, themes.getWeekNumber());
+            dailyTheme.put(DataConstants.THEME_DESCRIPTION,themes.getDescription());
             weeklyThemes.add(dailyTheme);
         }
-        jT.put("themes", weeklyThemes);
+        jT.put(DataConstants.THEME_THEMES, weeklyThemes);
         return jT;
     }
     /**
@@ -791,12 +791,12 @@ public class FileIO {
      */
     private static JSONObject getCampJson(CampSiteManager cM) {
         JSONObject jCM = new JSONObject();
-        jCM.put("name", cM.getName());
-        jCM.put("address", cM.getAddress());
-        jCM.put("pricePerCamperPerDay", cM.getPricePerCamper());
-        jCM.put("year", cM.getYear());
-        jCM.put("startMonth", cM.getStartMonth());
-        jCM.put("themeId", cM.getCurrentThemeID());
+        jCM.put(DataConstants.CAMP_NAME, cM.getName());
+        jCM.put(DataConstants.CAMP_ADDRESS, cM.getAddress());
+        jCM.put(DataConstants.CAMP_PRICE_PER_CAMPER_PER_DAY, cM.getPricePerCamper());
+        jCM.put(DataConstants.CAMP_YEAR, cM.getYear());
+        jCM.put(DataConstants.CAMP_START_MONTH, cM.getStartMonth());
+        jCM.put(DataConstants.CAMP_THEME_ID, cM.getCurrentThemeID());
         return jCM;
     }
 

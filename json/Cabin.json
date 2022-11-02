@@ -2,12 +2,12 @@
 {
   "camperCapacity": 8,
   "coordinatorCapacity": 1,
-  "campers": [
+  "campers": [],
+  "coordinators": [
     {
-      "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd0"
+      "id": "81c7ae99-247f-4c80-950a-4a41e767e84c"
     }
   ],
-  "coordinators": [],
   "name": "cabin0",
   "upperAgeBound": 12,
   "lowerAgeBound": 11

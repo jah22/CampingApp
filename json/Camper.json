@@ -10,6 +10,29 @@
     "med1",
     "med2"
   ],
-  "birthDate": "2006-11-01"
+  "birthDate": "2007-11-11"
+},
+{
+  "firstName": "Daisy",
+  "lastName": "Davis",
+  "isCoordinator": false,
+  "address": "same",
+  "emergencyContacts": [
+    {
+      "id": "076021d7-c7fe-4236-bafb-5ac1a869117c"
+    },
+    {
+      "id": "dfcc2d90-0e5b-4922-8fcb-97132ee09f75"
+    },
+    {
+      "id": "1b77f6ec-6798-4f17-bd24-3575132553f2"
+    }
+  ],
+  "id": "4009d777-6a78-43df-a5a2-bf111ee7b274",
+  "medicalNotes": [
+    "allergic to pin nuts and sun flowers",
+    "need to take 5ml of zertec at breakfast daily"
+  ],
+  "birthDate": "2010-11-01"
 }
 ]

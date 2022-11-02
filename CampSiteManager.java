@@ -24,7 +24,14 @@ public class CampSiteManager{
   PersonManager personManager;
   ReviewManager reviewManager;
   CabinManager cabinManager;
-
+  /**
+   * Constructor for CampsiteManager
+   * @param name is person's name
+   * @param address is person's address
+   * @param year is person's year
+   * @param startMonth 
+   * @param themeManager
+   */
   private CampSiteManager(String name, String address, int year,String startMonth,ThemeManager themeManager) {
     this.personManager = new PersonManager(FileIO.getAdmins(),FileIO.getGuardians(),FileIO.getDependents(),FileIO.getEmergencyContacts());
     this.reviewManager = new ReviewManager(FileIO.getReviews());
@@ -37,6 +44,10 @@ public class CampSiteManager{
     this.startMonth = startMonth;
     this.themeManager=themeManager;
   }
+  /**
+   * Creates instance of CampSiteManager
+   * @return CampSiteManager
+   */
   public static CampSiteManager getInstance() {
     if(campSiteManager == null){
       campSiteManager = FileIO.getCamp();
@@ -44,6 +55,15 @@ public class CampSiteManager{
     }
     return campSiteManager;
   }
+  /**
+   * 
+   * @param name
+   * @param address
+   * @param year
+   * @param startMonth
+   * @param themeManager
+   * @return
+   */
   public static CampSiteManager getInstance(String name, String address, int year,String startMonth, ThemeManager themeManager) {
     //To-Do
     if(campSiteManager == null){
@@ -52,24 +72,50 @@ public class CampSiteManager{
     }
     return campSiteManager;
   }
+  /**
+   * Gives name
+   * @return name
+   */
   public String getName() {
     return name;
   }
+  /**
+   * Set's name
+   * @param name is the name
+   */
   public void setName(String name){
     this.name = name;
   }
+  /**
+   * Get's address
+   * @return address
+   */
   public String getAddress() {
     return address;
   }
+  /**
+   * Get's price per camper
+   * @return price "7"
+   */
   public int getPricePerCamper() {
     return 7;
   }
+  /**
+   * Get's current theme ID
+   * @return theme ID
+   */
   public UUID getCurrentThemeID() {
     return this.themeManager.getId();
   }
+  /**
+   * Allows viewing of Coordinators
+   */
   public void viewCoordinators() {
     this.personManager.viewCoordinators();
   }
+  /**
+   * Prints information about campsite
+   */
   public String toString() {
       String out = "Cabin: " + this.name +"\n";
       out += "Year: " + this.year + "\n";
@@ -83,18 +129,36 @@ public class CampSiteManager{
 
       return out;
   }
+  /**
+   * Allows viewing of Admins
+   */
   public void viewAdmins() {
     this.personManager.viewAdmins();; 
   }
+  /**
+   * Allows viewing of cabins
+   */
   public void viewCabins() {
     this.cabinManager.viewCabins();
   }
+  /**
+   * Allows viewing cabins by coordinator
+   * @param coordinator
+   */
   public void viewCabinsByCoordinator(Dependent coordinator){
     this.cabinManager.viewCabinsByCoordinator(coordinator);
   }
+  /**
+   * Allows viewing of cabin schedules based on coordinator
+   * @param coordinator is the coordinator of the cabins
+   */
   public void viewCabinSchedulesByCoordinator(Dependent coordinator){
     this.cabinManager.viewCabinSchedulesByCoordinator(coordinator);
   }
+  /**
+   * 
+   * @param cabinID
+   */
   public void viewCabinCoordinators(String cabinID) {
     if(!this.cabinManager.viewCabinCoordinators(cabinID)){
       System.out.println("A cabin with that ID cannot be found.");

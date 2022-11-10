@@ -9,6 +9,10 @@ import org.junit.jupiter.api.Test;
 
 import org.junit.Test;
 
+/*
+ * Tests for FAQ
+ * COMPLETE
+ */
 public class testFAQ{
 
     @BeforeClass

@@ -9,6 +9,10 @@ import org.junit.jupiter.api.Test;
 
 import org.junit.Test;
 
+/*
+ * Test for EmergencyContact
+ * COMPLETE
+ */
 public class testEmergencyContact{
 
     @BeforeClass

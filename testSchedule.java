@@ -9,12 +9,12 @@ import org.junit.jupiter.api.Test;
 
 import org.junit.Test;
 
-public class testSchedule{
+public class testSchedule {
 
     @BeforeClass
-    public static void oneTimeSetup()[
+    public static void oneTimeSetup(){
 
-    ]
+    }
     @AfterClass
     public static void oneTimeTearDown(){
 

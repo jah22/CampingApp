@@ -1,3 +1,4 @@
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.AfterClass;
@@ -12,9 +13,9 @@ import org.junit.Test;
 public class testFileIO{
 
     @BeforeClass
-    public static void oneTimeSetup()[
+    public static void oneTimeSetup(){
 
-    ]
+    }
     @AfterClass
     public static void oneTimeTearDown(){
 
@@ -27,4 +28,9 @@ public class testFileIO{
     public static void tearDown(){
         // runs after each test
     }
+    @Test
+    public void testTest() {
+        assertEquals(1,1);
+    }
+
 }

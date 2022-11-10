@@ -1,4 +1,7 @@
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -26,5 +29,15 @@ public class testPersonManager{
     @AfterEach
     public static void tearDown(){
         // runs after each test
+    }
+    @Test
+    public void testNullAdmins(){
+        PersonManager p = new PersonManager(null,new ArrayList<Guardian>(),new ArrayList<Dependent>(),new ArrayList<EmergencyContact>());
+        assertEquals(p, null);
+    }
+    @Test
+    public void testNullGuardians(){
+        PersonManager p = new PersonManager(new ArrayList<CampAdmin>(),new ArrayList<Guardian>(),null,new ArrayList<EmergencyContact>());
+        assertEquals(p, null);
     }
 }

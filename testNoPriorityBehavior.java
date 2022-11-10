@@ -1,3 +1,4 @@
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.AfterClass;
@@ -9,11 +10,14 @@ import org.junit.jupiter.api.Test;
 
 import org.junit.Test;
 
+/*
+ * Tests for NoPriorityBehavior
+ * COMPLETE
+ */
 public class testNoPriorityBehavior{
 
     @BeforeClass
     public static void oneTimeSetup(){
-
 
     }
     @AfterClass
@@ -27,5 +31,20 @@ public class testNoPriorityBehavior{
     @AfterEach
     public static void tearDown(){
         // runs after each test
+    }
+    @Test
+    public void testLogin(){
+        NoPriorityBehavior np = new NoPriorityBehavior();
+        assertEquals(np.login("Anything","Anything"),false);
+    }
+    @Test
+    public void testNullPasswordLogin(){
+        NoPriorityBehavior np = new NoPriorityBehavior();
+        assertEquals(np.login("Anything",null),false);
+    }
+    @Test
+    public void testNullUsernameLogin(){
+        NoPriorityBehavior np = new NoPriorityBehavior();
+        assertEquals(np.login(null,"Anything"),false);
     }
 }

@@ -1,4 +1,7 @@
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -9,6 +12,10 @@ import org.junit.jupiter.api.Test;
 
 import org.junit.Test;
 
+/*
+ * Tests for CampAdmin
+ * COMPLETION
+ */
 public class testCampAdmin{
 
     @BeforeClass

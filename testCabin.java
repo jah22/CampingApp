@@ -12,9 +12,9 @@ import org.junit.Test;
 public class testCabin{
 
     @BeforeClass
-    public static void oneTimeSetup()[
+    public static void oneTimeSetup(){
 
-    ]
+    }
     @AfterClass
     public static void oneTimeTearDown(){
 

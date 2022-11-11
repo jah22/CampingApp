@@ -39,7 +39,7 @@ public class testFileIO{
     @Test
     public void testwriteToTxtFile() {
         ///Users/jacob/Documents/CampingApp/testing.txt
-        FileIO.writeToTxtFile("test", "{}/testing.txt");
+        FileIO.writeToTxtFile("test", "./testing.txt");
         System.out.print("OK!");
         }
 }

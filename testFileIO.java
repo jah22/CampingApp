@@ -1,6 +1,8 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.Console;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.AfterEach;
@@ -29,8 +31,15 @@ public class testFileIO{
         // runs after each test
     }
     @Test
-    public void testTest() {
-        assertEquals(1,1);
+    public void testSingleton() {
+        FileIO firstInstance = FileIO.getInstance();
+        FileIO secondInstance = FileIO.getInstance();
+        assertEquals(firstInstance, secondInstance);
     }
-
+    @Test
+    public void testwriteToTxtFile() {
+        ///Users/jacob/Documents/CampingApp/testing.txt
+        FileIO.writeToTxtFile("test", "{}/testing.txt");
+        System.out.print("OK!");
+        }
 }

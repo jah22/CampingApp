@@ -1,3 +1,4 @@
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.AfterClass;
@@ -26,5 +27,11 @@ public class testTheme {
     @AfterEach
     public static void tearDown(){
         // runs after each test
+    }
+    @Test
+    public void testThemeToString() {
+        Theme t = new Theme("testing", 1, "this is a test");
+        String testString = t.toString();
+        assertEquals("Week: 1 -- Theme: testing\nDescription: this is a test", testString);
     }
 }

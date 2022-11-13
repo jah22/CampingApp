@@ -4,7 +4,10 @@
 
         "workingDirectory": "${workspaceFolder}"
 
-    }
+    },
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar"
+    ]
 
 }
 

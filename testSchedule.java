@@ -27,4 +27,19 @@ public class testSchedule {
     public static void tearDown(){
         // runs after each test
     }
+    @Test
+    public void testHasActivityToEmptySchedule() {
+        Schedule sch = new Schedule(0, "one");
+        assertEquals(sch.hasActivity("Monday", "a"),false);
+    }
+    @Test
+    public void testHasActivityForNullActivity() {
+        Schedule sch = new Schedule(0, "one");
+        assertEquals(sch.hasActivity("Monday",null),false);
+    }
+    @Test
+    public void testHasActivityForNullDate() {
+        Schedule sch = new Schedule(0, "one");
+        assertEquals(sch.hasActivity("nope", "a"),false);
+    }
 }

@@ -9,6 +9,13 @@ import org.junit.jupiter.api.Test;
 
 import org.junit.Test;
 
+/*
+ * Class to test theme manager. 
+ * ThemeManager only has setters / getters / display functions, which 
+ * were stated to not be necessary for testing.
+ * 
+ * Thus this file has few tests.
+ */
 public class testThemeManager{
 
     @BeforeClass

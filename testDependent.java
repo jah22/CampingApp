@@ -11,7 +11,8 @@ import org.junit.Test;
 
 /*
  * Tests for Dependent
- * 
+ * All business logic is in Person class, so nothing here.
+ * COMPLETE
  */
 public class testDependent{
 

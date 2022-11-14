@@ -59,7 +59,7 @@ public class testPersonManager{
         ArrayList<EmergencyContact> es= new ArrayList<>();
         as.add(new CampAdmin("first","last","2011-11-11","address","password","username","j@gmail.com","111-222-3333"));
         gs.add(new Guardian("first","last","2011-11-11","address","password","username","j@gmail.com","111-222-3333"));
-        Dependent d = new Dependent("first","last","2011-11-11","address","password","username","j@gmail.com","111-222-3333")nt d = 
+        Dependent d = new Dependent("first","last","2011-11-11","address","password","username","j@gmail.com","111-222-3333");
         ds.add(d);
         es.add(new EmergencyContact("first","last","2011-11-11","addresss","111-222-3333","relation"));
         PersonManager p = new PersonManager(as, gs, ds, es);
@@ -74,7 +74,7 @@ public class testPersonManager{
         ArrayList<EmergencyContact> es= new ArrayList<>();
         as.add(new CampAdmin("first","last","2011-11-11","address","password","username","j@gmail.com","111-222-3333"));
         gs.add(new Guardian("first","last","2011-11-11","address","password","username","j@gmail.com","111-222-3333"));
-        Dependent d = new Dependent("first","last","2011-11-11","address","password","username","j@gmail.com","111-222-3333")nt d = 
+        Dependent d = new Dependent("first","last","2011-11-11","address","password","username","j@gmail.com","111-222-3333");
         ds.add(d);
         es.add(new EmergencyContact("first","last","2011-11-11","addresss","111-222-3333","relation"));
         PersonManager p = new PersonManager(as, gs, ds, es);

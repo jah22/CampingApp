@@ -121,28 +121,6 @@ public class testActivityManager{
         ActivityManager test = new ActivityManager(activities);
         assertEquals(test.isAfter("a", "a"),false);
     }
-    @Test
-    public void testAddActvityWhenScheduleIsFull() {
-        ArrayList<String> activities = new ArrayList<>();
-        activities.add("a");
-        activities.add("b");
-        activities.add("c");
-        activities.add("c");
-        activities.add("c");
-        activities.add("c");
-        activities.add("c");
-        activities.add("c");
-        activities.add("c");
-        activities.add("c");
-        activities.add("c");
-        activities.add("c");
-        activities.add("c");
-        activities.add("c");
-
-        ActivityManager test = new ActivityManager(activities);
-        assertEquals(test.addActivityToEnd("d"), false);
-    }
-
 
     @Test
     public void testAddActvityWhenScheduleIsFull() {

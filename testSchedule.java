@@ -9,6 +9,10 @@ import org.junit.jupiter.api.Test;
 
 import org.junit.Test;
 
+/*
+ * Tests for schedules
+ * COMPLETE
+ */
 public class testSchedule {
 
     @BeforeClass
@@ -26,6 +30,21 @@ public class testSchedule {
     @AfterEach
     public static void tearDown(){
         // runs after each test
+    }
+    @Test
+    public void testBadSessionNumberCtor(){
+        // no negatives
+        assertEquals(new Schedule(-1,"asdf"),null);
+    }
+    @Test
+    public void testEmptyCabinNameCtor(){
+        // no negatives
+        assertEquals(new Schedule(1,""),null);
+    }
+    @Test
+    public void testNullCabinNameCtor(){
+        // no negatives
+        assertEquals(new Schedule(1,null),null);
     }
     @Test
     public void testHasActivityToEmptySchedule() {

@@ -12,6 +12,10 @@ import org.junit.jupiter.api.Test;
 
 import org.junit.Test;
 
+/*
+ * Tests for review manager. 
+ * COMPLETE
+ */
 public class testReviewManager {
 
     @BeforeClass
@@ -30,6 +34,35 @@ public class testReviewManager {
     public  void tearDown(){
         // runs after each test
     }
+    @Test
+    public void testUpdateAvgReviewNullReviews(){
+        ReviewManager r = new ReviewManager(null);
+        r.updateAvgReview(null);
+        assertEquals(r.getAvgRating(),0);
+    }
+    @Test
+    public void testAddReviewChangeAvg1(){
+        // add review needs to properly change the average review count
+        ReviewManager r = new ReviewManager(null);
+        r.addReview("asdf", 1,"asdf","asdf");
+        assertEquals(r.getAvgRating(),1);
+    }
+    @Test
+    public void testAddReviewChangeAvg2(){
+        // add review needs to properly change the average review count
+        ReviewManager r = new ReviewManager(null);
+        r.addReview("asdf", 1,"asdf","asdf");
+        assertEquals(r.getAvgRating(),1);
+    }
+    @Test
+    public void testAddReviewChangeAvg2(){
+        // add review needs to properly change the average review count
+        ReviewManager r = new ReviewManager(null);
+        r.addReview("asdf", 1,"asdf","asdf");
+        r.addReview("asdfisdf", 2,"asdf","asdf");
+        assertEquals(r.getAvgRating(),1.5);
+    }
+
     @Test
     public void  testSetReview() {
         ArrayList<Review> revs = new ArrayList<Review>();

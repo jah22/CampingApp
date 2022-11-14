@@ -10,6 +10,10 @@ import org.junit.jupiter.api.Test;
 
 import org.junit.Test;
 
+/*
+ * The theme class only contains data, so no tests.
+ * COMPLETE
+ */
 public class testTheme {
 
     @BeforeClass

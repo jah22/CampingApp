@@ -11,6 +11,7 @@ import org.junit.Test;
 
 /*
  * Test for EmergencyContact
+ * All business logic is in Person class, so nothing here.
  * COMPLETE
  */
 public class testEmergencyContact{

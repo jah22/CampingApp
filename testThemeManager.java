@@ -14,7 +14,7 @@ import org.junit.Test;
  * ThemeManager only has setters / getters / display functions, which 
  * were stated to not be necessary for testing.
  * 
- * Thus this file has few tests.
+ * Thus this file has no tests.
  */
 public class testThemeManager{
 

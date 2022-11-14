@@ -122,4 +122,33 @@ public class testCabinManager{
 
         assertEquals(cm.guardianHasCampersRegistered(null),false);
     }
+    @Test 
+    public void testAddNullCamperToCabin(){
+        Cabin c = new Cabin("Cabin",10,30,4);
+        assertEquals(c.addCamperToCabin(null),false);
+    }
+    @Test
+    public void testGetCabinsByCoordinatorNullCoordinator(){
+        CabinManager cm = new CabinManager();
+        assertEquals(cm.getCabinsByCoordinator(null),false);
+    }
+    @Test
+    public void testGetDependentCabinsNullDependent(){
+        CabinManager cm = new CabinManager();
+        assertEquals(cm.getDependentCabins(null), null);
+    }
+    @Test
+    public void testGetDependentCabinsValidDependent(){
+        CabinManager cm = new CabinManager();
+        Cabin c = new Cabin("Cabin",10,30,4);
+        Dependent d = new Dependent(null, null, null, null, null, null);
+        c.addCamperToCabin(d);
+        cm.addCabin(c);
+        assertNotEquals(cm.getDependentCabins(d),null);
+    }
+    @Test
+    public void testGetCabinCountByDependentNullDependent(){
+        CabinManager cm = new CabinManager();
+        assertEquals(cm.getCabinCountByDependent(null),0);
+    }
 }

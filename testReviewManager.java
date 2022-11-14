@@ -19,19 +19,19 @@ import org.junit.Test;
 public class testReviewManager {
 
     @BeforeClass
-    public static void oneTimeSetup(){
+    public void oneTimeSetup(){
 
     }
     @AfterClass
-    public static void oneTimeTearDown(){
+    public void oneTimeTearDown(){
 
     }
     @BeforeEach
-    public static void setup(){
+    public void setup(){
         // runs before each test
     }
     @AfterEach
-    public static void tearDown(){
+    public  void tearDown(){
         // runs after each test
     }
     @Test
@@ -71,7 +71,7 @@ public class testReviewManager {
         ArrayList<Review> revs2 = new ArrayList<Review>();
         revs2.add(new Review("B", 5, "b?", "b!"));
         r.setReviews(revs2);
-        assertEquals(r.getAvgRating(), 5);
+        assertEquals(5, r.getAvgRating());
     }
     @Test 
     public void testUpdateAveReview() {
@@ -88,7 +88,7 @@ public class testReviewManager {
         revs.add(new Review("A", 4, "a?", "a!"));
         ReviewManager rm = new ReviewManager(revs);
         Review r = new Review("A", 4, "a?", "a!");
-        assertEquals(r, rm.getReviewByTitle("a?"));
+        assertEquals(r.toString(), rm.getReviewByTitle("a?").toString());
     }
     @Test
     public void testGetAveRating() {

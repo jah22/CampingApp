@@ -15,23 +15,6 @@ import org.junit.Test;
  * COMPLETE
  */
 public class testNoPriorityBehavior{
-
-    @BeforeClass
-    public static void oneTimeSetup(){
-
-    }
-    @AfterClass
-    public static void oneTimeTearDown(){
-
-    }
-    @BeforeEach
-    public static void setup(){
-        // runs before each test
-    }
-    @AfterEach
-    public static void tearDown(){
-        // runs after each test
-    }
     @Test
     public void testLogin(){
         NoPriorityBehavior np = new NoPriorityBehavior();

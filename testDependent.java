@@ -11,24 +11,8 @@ import org.junit.Test;
 
 /*
  * Tests for Dependent
- * 
+ * All business logic is in Person class, so nothing here.
+ * COMPLETE
  */
 public class testDependent{
-
-    @BeforeClass
-    public static void oneTimeSetup(){
-
-    }
-    @AfterClass
-    public static void oneTimeTearDown(){
-
-    }
-    @BeforeEach
-    public static void setup(){
-        // runs before each test
-    }
-    @AfterEach
-    public static void tearDown(){
-        // runs after each test
-    }
 }

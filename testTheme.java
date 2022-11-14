@@ -10,24 +10,11 @@ import org.junit.jupiter.api.Test;
 
 import org.junit.Test;
 
+/*
+ * The theme class only contains data, so no tests.
+ * COMPLETE
+ */
 public class testTheme {
-
-    @BeforeClass
-    public static void oneTimeSetup(){
-
-    }
-    @AfterClass
-    public static void oneTimeTearDown(){
-
-    }
-    @BeforeEach
-    public static void setup(){
-        // runs before each test
-    }
-    @AfterEach
-    public static void tearDown(){
-        // runs after each test
-    }
     @Test
     public void testThemeToString() {
         Theme t = new Theme("testing", 1, "this is a test");

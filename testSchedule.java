@@ -9,22 +9,39 @@ import org.junit.jupiter.api.Test;
 
 import org.junit.Test;
 
+/*
+ * Tests for schedules
+ * COMPLETE
+ */
 public class testSchedule {
-
-    @BeforeClass
-    public static void oneTimeSetup(){
-
+    @Test
+    public void testBadSessionNumberCtor(){
+        // no negatives
+        assertEquals(new Schedule(-1,"asdf"),null);
     }
-    @AfterClass
-    public static void oneTimeTearDown(){
-
+    @Test
+    public void testEmptyCabinNameCtor(){
+        // no negatives
+        assertEquals(new Schedule(1,""),null);
     }
-    @BeforeEach
-    public static void setup(){
-        // runs before each test
+    @Test
+    public void testNullCabinNameCtor(){
+        // no negatives
+        assertEquals(new Schedule(1,null),null);
     }
-    @AfterEach
-    public static void tearDown(){
-        // runs after each test
+    @Test
+    public void testHasActivityToEmptySchedule() {
+        Schedule sch = new Schedule(0, "one");
+        assertEquals(sch.hasActivity("Monday", "a"),false);
+    }
+    @Test
+    public void testHasActivityForNullActivity() {
+        Schedule sch = new Schedule(0, "one");
+        assertEquals(sch.hasActivity("Monday",null),false);
+    }
+    @Test
+    public void testHasActivityForNullDate() {
+        Schedule sch = new Schedule(0, "one");
+        assertEquals(sch.hasActivity("nope", "a"),false);
     }
 }

@@ -21,6 +21,7 @@ import org.junit.Test;
 
 public class testFileIO{
 
+
     @BeforeClass
     public static void oneTimeSetup(){
 
@@ -38,6 +39,7 @@ public class testFileIO{
         // runs after each test
     }
     //written by Jacob Hammond
+
     @Test
     public void testSingleton() {
         FileIO firstInstance = FileIO.getInstance();

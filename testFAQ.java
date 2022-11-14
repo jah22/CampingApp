@@ -11,24 +11,25 @@ import org.junit.Test;
 
 /*
  * Tests for FAQ
+ * No business logic, just holds data.
  * COMPLETE
  */
 public class testFAQ{
-
-    @BeforeClass
-    public static void oneTimeSetup(){
-
+    @Test
+    public void testNullQuestion(){
+        assertEquals(new FAQ(null,"asdf"), null);
     }
-    @AfterClass
-    public static void oneTimeTearDown(){
+    @Test
+    public void testNullAnswer(){
+        assertEquals(new FAQ("asdf",null), null);
+    }
 
+    @Test
+    public void testEmptyQuestion(){
+        assertEquals(new FAQ(null,""), null);
     }
-    @BeforeEach
-    public static void setup(){
-        // runs before each test
-    }
-    @AfterEach
-    public static void tearDown(){
-        // runs after each test
+    @Test
+    public void testEmptyAnswer(){
+        assertEquals(new FAQ("",null), null);
     }
 }

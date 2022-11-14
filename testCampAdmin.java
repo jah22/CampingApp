@@ -14,6 +14,8 @@ import org.junit.Test;
 
 /*
  * Tests for CampAdmin
+ * Note that all business logic takes place in the PriorityBehavior and Person classes,
+ * So admin really has nothing.
  * COMPLETION
  */
 public class testCampAdmin{

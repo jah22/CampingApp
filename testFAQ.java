@@ -15,23 +15,6 @@ import org.junit.Test;
  * COMPLETE
  */
 public class testFAQ{
-
-    @BeforeClass
-    public static void oneTimeSetup(){
-
-    }
-    @AfterClass
-    public static void oneTimeTearDown(){
-
-    }
-    @BeforeEach
-    public static void setup(){
-        // runs before each test
-    }
-    @AfterEach
-    public static void tearDown(){
-        // runs after each test
-    }
     @Test
     public void testNullQuestion(){
         assertEquals(new FAQ(null,"asdf"), null);

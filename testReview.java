@@ -12,23 +12,6 @@ import org.junit.jupiter.api.Test;
  */
 public class testReview{
 
-    @BeforeClass
-    public void oneTimeSetup(){
-
-    }
-    @AfterClass
-    public void oneTimeTearDown(){
-
-    }
-    @BeforeEach
-    public void setup(){
-        // runs before each test
-    }
-    @AfterEach
-    public void tearDown(){
-        // runs after each test
-    }
-
     @Test
     public void testNullAuthor(){
         assertEquals(new Review(null, 0,"adsf","asdf"), null);

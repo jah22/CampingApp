@@ -16,23 +16,6 @@ import org.junit.Test;
  * COMPLETE
  */
 public class testPriorityBehavior{
-
-    @BeforeClass
-    public static void oneTimeSetup(){
-
-    }
-    @AfterClass
-    public static void oneTimeTearDown(){
-
-    }
-    @BeforeEach
-    public static void setup(){
-        // runs before each test
-    }
-    @AfterEach
-    public static void tearDown(){
-        // runs after each test
-    }
     @Test
     public void testNullUsername(){
         PriorityBehavior pb = new PriorityBehavior(null,"Anything","111-222-3333","j@gmail.com");
@@ -71,6 +54,6 @@ public class testPriorityBehavior{
     @Test
     public void testLoginInValidCreds(){
         PriorityBehavior pb = new PriorityBehavior("username","password","111-222-3333","j@gmail.com");
-        assertEquals(pb.login("user","password"),true);
+        assertEquals(pb.login("user","password"),false);
     }
 }

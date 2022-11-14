@@ -17,23 +17,6 @@ import org.junit.Test;
  */
 
 public class testActivityManager{
-
-    @BeforeClass
-    public static void oneTimeSetup(){
-
-    }
-    @AfterClass
-    public static void oneTimeTearDown(){
-
-    }
-    @BeforeEach
-    public static void setup(){
-        // runs before each test
-    }
-    @AfterEach
-    public static void tearDown(){
-        // runs after each test
-    }
     @Test
     public void testGetActivityStartTimeForInvalidActivity() {
         ArrayList<String> activities = new ArrayList<>();
@@ -54,7 +37,7 @@ public class testActivityManager{
         activities.add("c");
 
         ActivityManager test = new ActivityManager(activities);
-        assertEquals(test.getActivityStartTime("a"),0);
+        assertEquals(test.getActivityStartTime("a"),ActivityManager.START_TIME);
     }
     @Test
     public void testGetActivityEndTimeForDuplicateActivity(){
@@ -67,7 +50,7 @@ public class testActivityManager{
         activities.add("c");
 
         ActivityManager test = new ActivityManager(activities);
-        assertEquals(test.getActivityStartTime("a"),1);
+        assertEquals(test.getActivityEndTime("a"),ActivityManager.START_TIME+1);
     }
 
     @Test

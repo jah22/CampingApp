@@ -17,23 +17,6 @@ import org.junit.Test;
  * COMPLETE
  */
 public class testReviewManager {
-
-    @BeforeClass
-    public void oneTimeSetup(){
-
-    }
-    @AfterClass
-    public void oneTimeTearDown(){
-
-    }
-    @BeforeEach
-    public void setup(){
-        // runs before each test
-    }
-    @AfterEach
-    public  void tearDown(){
-        // runs after each test
-    }
     @Test
     public void testUpdateAvgReviewNullReviews(){
         ReviewManager r = new ReviewManager(null);

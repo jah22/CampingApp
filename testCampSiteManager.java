@@ -23,23 +23,6 @@ import org.junit.Test;
  */
 public class testCampSiteManager{
 
-    @BeforeClass
-    public static void oneTimeSetup(){
-
-    }
-    @AfterClass
-    public static void oneTimeTearDown(){
-
-    }
-    @BeforeEach
-    public static void setup(){
-        // runs before each test
-    }
-    @AfterEach
-    public static void tearDown(){
-        // runs after each test
-    }
-    
     @Test
     public void testNullNameCtor(){
         CampSiteManager csm = CampSiteManager.getInstance(null,"asdf", 2001,"jan", null);

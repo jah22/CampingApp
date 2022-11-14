@@ -17,22 +17,6 @@ import org.junit.Test;
  */
 public class testCabinManager{
 
-    @BeforeClass
-    public static void oneTimeSetup(){
-
-    }
-    @AfterClass
-    public static void oneTimeTearDown(){
-
-    }
-    @BeforeEach
-    public static void setup(){
-        // runs before each test
-    }
-    @AfterEach
-    public static void tearDown(){
-        // runs after each test
-    }
     @Test
     public void testNullCtor(){
         CabinManager c = new CabinManager(null);
@@ -143,7 +127,7 @@ public class testCabinManager{
     public void testGetDependentCabinsValidDependent(){
         CabinManager cm = new CabinManager();
         Cabin c = new Cabin("Cabin",10,30,4);
-        Dependent d = new Dependent(null, null, null, null, null, null);
+        Dependent d = new Dependent("asdf","asd","2011-11-11", null, null, null);
         c.addCamperToCabin(d);
         cm.addCabin(c);
         assertNotEquals(cm.getDependentCabins(d),null);

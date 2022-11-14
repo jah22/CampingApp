@@ -12,6 +12,7 @@ import org.junit.Test;
 /*
  * Since AuthBehavior is an interface, no tests.
  * Cannot test something that has no functionality yet
+ * COMPLETE
  */
 public class testAuthBehavior{
 

@@ -6,6 +6,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/*
+ * Tests for Review
+ * Complete
+ */
 public class testReview{
 
     @BeforeClass
@@ -23,6 +27,35 @@ public class testReview{
     @AfterEach
     public void tearDown(){
         // runs after each test
+    }
+
+    @Test
+    public void testNullAuthor(){
+        assertEquals(new Review(null, 0,"adsf","asdf"), null);
+    }
+    @Test
+    public void testNullTitle(){
+        assertEquals(new Review("asdf", 0,null,"asdf"), null);
+    }
+    @Test
+    public void testNulLBody(){
+        assertEquals(new Review("asdf", 0,"asdf",null), null);
+    }
+    @Test
+    public void testEmptyTitle(){
+        assertEquals(new Review("asdf", 0,"","asdf"), null);
+    }
+    @Test
+    public void testEmptyBody(){
+        assertEquals(new Review("asdf", 0,"asdf",""), null);
+    }
+    @Test
+    public void testNegativeReview(){
+        assertEquals(new Review("asdf", -1,"asdf","asdf"), null);
+    }
+    @Test
+    public void testOutBoundsReview(){
+        assertEquals(new Review("asdf", 6,"asdf","asdf"), null);
     }
     
     @Test

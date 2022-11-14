@@ -13,19 +13,19 @@ import org.junit.jupiter.api.Test;
 public class testReview{
 
     @BeforeClass
-    public static void oneTimeSetup(){
+    public void oneTimeSetup(){
 
     }
     @AfterClass
-    public static void oneTimeTearDown(){
+    public void oneTimeTearDown(){
 
     }
     @BeforeEach
-    public static void setup(){
+    public void setup(){
         // runs before each test
     }
     @AfterEach
-    public static void tearDown(){
+    public void tearDown(){
         // runs after each test
     }
 
@@ -81,6 +81,6 @@ public class testReview{
     @Test
     public void testToString() {
         Review review = new Review("John", 5, "good", "very good");
-        assertEquals("Review: good\nAuthor: John\nBody: \ngood\n", review.toString());
+        assertEquals("Review: good\nAuthor: John\nBody: \nvery good\n", review.toString());
     }
 }

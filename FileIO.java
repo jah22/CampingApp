@@ -13,6 +13,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -1073,6 +1074,7 @@ public class FileIO {
      * Used by the readers in order to parse the information from the given filepath
      * @param filename, file path of the file you wish to parse
      * @return a JSONArray of objects containing the information from the filepath
+     * 
      */
     private static JSONArray parseJsonFileArr(String filename) {
         JSONParser jsonP = new JSONParser();
@@ -1101,6 +1103,51 @@ public class FileIO {
             Files.write(Paths.get(fileName),fileContents.getBytes());
         }catch(IOException e){
             e.printStackTrace();
+        }
+    }
+
+
+    public static class fileIOTester {
+        fileIOTester() { }
+
+        public static JSONArray testParseJsonFileArr(String filename) {
+            return parseJsonFileArr(filename);
+        }
+        public static ArrayList<EmergencyContact> testReadEmergencyContacts() {
+            FileIO driver = new FileIO();
+            return driver.readEmergencyContacts();
+        }
+        public static CampSiteManager testReadCampSiteManager() {
+            FileIO driver = new FileIO();
+            return driver.readCamp();
+        }
+        public static ArrayList<ThemeManager> testReadThemeManager() {
+            FileIO driver = new FileIO();
+            return driver.readThemeManagers();
+        }
+        public static ArrayList<Schedule> testReadSchedules() {
+            FileIO driver = new FileIO();
+            return driver.readSchedules();
+        }
+        public static ArrayList<Cabin> testReadCabins() {
+            FileIO driver = new FileIO();
+            return driver.readCabins();
+        }
+        public static ArrayList<Dependent> testReadDependents() {
+            FileIO driver = new FileIO();
+            return driver.readDependents();
+        }
+        public static ArrayList<Review> testReadReviews() {
+            FileIO driver = new FileIO();
+            return driver.readReviews();
+        }
+        public static ArrayList<CampAdmin> testReadCampAdmins() {
+            FileIO driver = new FileIO();
+            return driver.readAdmins();
+        }
+        public static ArrayList<Guardian> testReadGuardians() {
+            FileIO driver = new FileIO();
+            return driver.readGuardians();
         }
     }
 }

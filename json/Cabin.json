@@ -1,24 +1,19 @@
 [
 {
-  "camperCapacity": 8,
+  "camperCapacity": 1,
   "coordinatorCapacity": 1,
   "campers": [
     {
-      "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd0"
+      "id": "bd7e294d-2aa8-414b-9f3e-b5bea25420f9"
     }
   ],
-  "coordinators": [],
-  "name": "cabin0",
-  "upperAgeBound": 15,
-  "lowerAgeBound": 11
-},
-{
-  "camperCapacity": 8,
-  "coordinatorCapacity": 1,
-  "campers": [],
-  "coordinators": [],
-  "name": "cabin2",
-  "upperAgeBound": 14,
-  "lowerAgeBound": 11
+  "coordinators": [
+    {
+      "id": "8ac76fdd-d20a-406f-a049-be070d8a0876"
+    }
+  ],
+  "name": "test name",
+  "upperAgeBound": 18,
+  "lowerAgeBound": 0
 }
 ]

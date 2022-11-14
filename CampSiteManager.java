@@ -44,6 +44,14 @@ public class CampSiteManager{
     this.startMonth = startMonth;
     this.themeManager=themeManager;
   }
+  public boolean isEqual(CampSiteManager c) {
+    if(!c.getName().equals(this.name)) return false;
+    if(!c.getAddress().equals(this.address)) return false;
+    if(c.getYear() != (this.year)) return false;
+    if(!c.getStartMonth().equals(this.startMonth)) return false;
+    
+    return true;
+  }
   /**
    * Creates instance of CampSiteManager
    * @return CampSiteManager

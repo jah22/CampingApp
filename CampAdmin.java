@@ -47,4 +47,13 @@ public class CampAdmin extends Person{
     public String getPersonType(){
         return "CampAdmin";
     }
+    public boolean isEqual(CampAdmin cA) {
+        if(!cA.getFirstName().equals(this.firstName)) return false;
+        if(!cA.getLastName().equals(this.lastName)) return false;
+        if(!cA.getBirthDate().equals(this.birthDate)) return false;
+        if(!cA.getAddress().equals(this.address)) return false;
+        if(!cA.getId().equals(this.id)) return false;
+        
+        return true;
+    }
 }

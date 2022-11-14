@@ -107,6 +107,15 @@ public class Dependent extends Person{
         this.medicalNotes = medNotes;
         this.emergencyContacts = emergencyContacts;
     }
+    public boolean isEqual(Dependent d) {
+        if(!d.getFirstName().equals(this.firstName)) return false;
+        if(!d.getLastName().equals(this.lastName)) return false;
+        if(!d.getBirthDate().equals(this.birthDate)) return false;
+        if(!d.getAddress().equals(this.address)) return false;
+        if(d.getIsCoordinator() != (this.isCoordinator)) return false;
+        if(!d.getId().equals(this.id)) return false;
+        return true;
+    }
 
     /*
      * @return ArrayList<String> representing medical notes of the user

@@ -1,19 +1,11 @@
 [
 {
-  "firstName": "Neil",
-  "lastName": "Davis",
-  "address": "address",
-  "id": "dc364c63-0a7d-452e-b1f3-f2df11092d24",
-  "birthDate": "1950-11-11",
-  "relation": "father"
-},
-{
-  "firstName": "emfirst",
-  "lastName": "emlast",
-  "address": "address",
-  "phoneNumber": "phone",
-  "id": "55604ad7-dc03-4460-a27a-98d15c5f6178",
-  "birthDate": "2001-11-11",
-  "relation": "relation"
+  "firstName": "John",
+  "lastName": "Doe",
+  "address": "123 Main St.",
+  "phoneNumber": "830-555-5555",
+  "id": "dc7ce234-7854-4929-8a30-74604bf1fb02",
+  "birthDate": "01-01-1990",
+  "relation": "Father"
 }
 ]

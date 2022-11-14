@@ -21,7 +21,13 @@ public class Review {
         this.body = body;
         this.title = title;
     }
-
+    public boolean isEqual(Review r) {
+        if(!r.getAuthor().equals(this.author)) return false;
+        if(r.getRating() != this.rating) return false;
+        if(!r.getTitle().equals(this.title)) return false;
+        if(!r.getbody().equals(this.body)) return false;
+        return true;
+    }
     /**
      * to get the title
      * @return the title of the review

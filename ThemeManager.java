@@ -7,6 +7,8 @@
 import java.util.ArrayList;
 import java.util.UUID;
 
+import org.hamcrest.core.IsEqual;
+
 public class ThemeManager {
     private ArrayList<Theme> themes = new ArrayList<Theme>(); 
     private UUID id;
@@ -27,7 +29,7 @@ public class ThemeManager {
      * Defualt constructor for ThemeManager
      * @param themes, an ArrayList of Themes
      */
-    public void ThemeManager(ArrayList<Theme> themes){
+    public ThemeManager(ArrayList<Theme> themes){
         this.themes = themes;
         this.id = UUID.randomUUID();
     }
@@ -80,5 +82,12 @@ public class ThemeManager {
         ArrayList<ThemeManager> tmList = new ArrayList<ThemeManager>();
         tmList.add(this);
         FileIO.writeTheme(tmList);
+    }
+    public boolean IsEqual(ThemeManager t) {
+        for(int i = 0; i < this.themes.size(); i++) {
+            if(!t.getThemes().get(i).isEqual(this.themes.get(i))) return false;
+        }
+        if(!t.getId().equals(this.id)) return false;
+        return true;
     }
 }

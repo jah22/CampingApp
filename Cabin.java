@@ -67,7 +67,24 @@ public class Cabin {
         this.lowerAgeBound = lowerAgeBound;
         this.upperAgeBound = upperAgeBound;
     }
+    public boolean isEqual(Cabin c) {
+        if(!c.getCabinName().equals(this.name)) return false;
+        for(int i=0; i < this.coordinators.size(); i++) {
+            if(!c.getCoordinators().get(i).isEqual(this.coordinators.get(i))) return false;
+        }
+        for(int i=0; i < this.campers.size(); i++) {
+            if(!c.getCampers().get(i).isEqual(this.campers.get(i))) return false;
+        }
+        for(int i=0; i < this.schedules.size(); i++) {
+            if(!c.getSchedules().get(i).isEqual(this.schedules.get(i))) return false;
+        }
+        if(c.getCamperCapacity() != (this.camperCapacity)) return false;
+        if(c.getCoordinatorCapacity() != (this.coordinatorCapacity)) return false;
+        if(c.getLowerAgeBound() != (this.lowerAgeBound)) return false;
+        if(c.getUpperAgeBound() != (this.upperAgeBound)) return false;
 
+        return true;
+    }
     /**
      * to get the name of the cabin
      * @return the name of the cabin

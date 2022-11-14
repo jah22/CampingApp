@@ -37,6 +37,12 @@ public class Schedule {
         this.cabinName = cabinName;
         this.id = UUID.randomUUID();
     }
+    public boolean isEqual(Schedule s) {
+        if(!s.getScheduleID().equals(this.id)) return false;
+        if(s.getSessionNumber() != (this.sessionNumber)) return false;
+        if(!s.getCabinName().equals(this.cabinName)) return false;
+        return true;
+    }
     /**
      * Creates a new HashMap of scheduled activities using ActivityManager
      * @param day, a day of the week that you wish to create the activity list for

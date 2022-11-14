@@ -63,6 +63,14 @@ public class Guardian extends Person {
         PriorityBehavior behavior = new PriorityBehavior(username,password,phone,email);
         this.setAuthBehavior(behavior);
     }
+    public boolean isEqual(Guardian g) {
+        if(!g.getFirstName().equals(this.firstName)) return false;
+        if(!g.getLastName().equals(this.lastName)) return false;
+        if(!g.getAddress().equals(this.address)) return false;
+        if(!g.getId().equals(this.id)) return false;
+
+        return true;
+    }
     /*
      * Set the authority behavior of person
      * @param behavior: AuthBehavior to be set

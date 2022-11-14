@@ -60,4 +60,14 @@ public class EmergencyContact extends Person {
         out += "Relation: " + this.getRelation() +"\n";
         return out;
     }
+    public boolean isEqual(EmergencyContact e) {
+        if(!e.getFirstName().equals(this.firstName)) return false;
+        if(!e.getAddress().equals(this.address)) return false;
+        if(!e.getPhone().equals(this.phone)) return false;
+        if(!e.getBirthDate().equals(this.birthDate)) return false;
+        if(!e.getLastName().equals(this.lastName)) return false;
+        if(!e.getRelation().equals(this.relation)) return false;
+        if(!e.getId().equals(this.id)) return false;
+        return true;
+    }
 }

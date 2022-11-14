@@ -44,4 +44,10 @@ public class Theme {
     public String toString(){
         return "Week: " + this.weekNumber + " -- Theme: " + this.name + "\nDescription: " + this.description;
     }
+    public boolean isEqual(Theme t) {
+        if(!t.getName().equals(this.name)) return false;
+        if(!t.getDescription().equals(this.description)) return false;
+        if(t.getWeekNumber() != (this.weekNumber)) return false;
+        return true;
+    }
 }

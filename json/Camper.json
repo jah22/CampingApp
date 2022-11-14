@@ -11,22 +11,5 @@
     "med2"
   ],
   "birthDate": "2007-11-11"
-},
-{
-  "firstName": "depfirst",
-  "lastName": "deplast",
-  "isCoordinator": false,
-  "address": "same",
-  "emergencyContacts": [
-    {
-      "id": "55604ad7-dc03-4460-a27a-98d15c5f6178"
-    }
-  ],
-  "id": "ad24e010-c725-4fab-9148-21887caaf6bc",
-  "medicalNotes": [
-    "med1",
-    "med2"
-  ],
-  "birthDate": "2011-11-11"
 }
 ]

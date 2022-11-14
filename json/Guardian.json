@@ -1,20 +1,14 @@
 [
 {
-  "firstName": "Levaeh",
-  "lastName": "Davis",
-  "password": "password",
-  "address": "address",
-  "registeredDependents": [
-    {
-      "id": "24f72791-fa08-4dd6-980a-d9958f3a4fd0"
-    },
-    {
-      "id": "ad24e010-c725-4fab-9148-21887caaf6bc"
-    }
-  ],
-  "id": "76be6aea-5f38-4824-b53b-a356c0263f63",
-  "birthDate": "2011-11-11",
-  "email": "email",
-  "username": "username"
+  "firstName": "first",
+  "lastName": "last",
+  "password": "124",
+  "address": "123 Main St.",
+  "phoneNumber": "830-555-5555",
+  "registeredDependents": [],
+  "id": "dc78b7e4-6c83-42c2-ae1f-5ada504f9981",
+  "birthDate": "1990-10-10",
+  "email": "admin@gmail.com",
+  "username": "admin"
 }
 ]

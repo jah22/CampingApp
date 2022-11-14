@@ -1,12 +1,13 @@
 [
 {
-  "firstName": "adminFirst",
-  "lastName": "adminLast",
-  "password": "password",
-  "address": "address",
-  "id": "8a2b1551-7142-4fc1-94f3-179f32edd66c",
-  "birthDate": "2011-11-11",
-  "email": "email",
-  "username": "username"
+  "firstName": "first",
+  "lastName": "last",
+  "password": "124",
+  "address": "123 Main St.",
+  "phoneNumber": "830-555-5555",
+  "id": "df7615ad-7397-4b99-a3ce-99bba2601c5d",
+  "birthDate": "1990-10-10",
+  "email": "admin@gmail.com",
+  "username": "admin"
 }
 ]
